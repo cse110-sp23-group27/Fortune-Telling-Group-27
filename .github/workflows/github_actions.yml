@@ -9,7 +9,5 @@ jobs:
       - uses: actions/setup-node@v3
       - name: Install modules
         run: yarn
-      - name: Install ESLint
-        run: npm init eslint
       - name: Run ESLint
         run: npm run lint -- --fix
