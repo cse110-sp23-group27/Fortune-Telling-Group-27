@@ -3,6 +3,10 @@
     "description": "…",
     "version": "1.0.0",
     "scripts": {
-      "lint": "npx eslint --fix --ext .js"
+        "test": "jest",
+        "lint": "npx eslint --fix --ext .js"
+    },
+    "devDependencies": {
+        "jest": "^29.5.0"
     }
-  }
+}
