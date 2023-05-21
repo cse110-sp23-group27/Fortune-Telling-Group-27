@@ -3,6 +3,6 @@
     "description": "…",
     "version": "1.0.0",
     "scripts": {
-      "lint": "npx eslint --ext .js"
+      "lint": "npx eslint --fix --ext .js"
     }
   }
