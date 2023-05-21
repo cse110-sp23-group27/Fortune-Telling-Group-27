@@ -1,8 +1,8 @@
 {
-    "name": "your-package",
-    "description": "…",
-    "version": "1.0.0",
-    "scripts": {
-      "lint": "npx eslint --fix --ext .js"
-    }
+  "name": "your-package",
+  "description": "…",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest"
   }
+}

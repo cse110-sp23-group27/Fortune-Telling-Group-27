@@ -1,13 +1,3 @@
-// test file for checking ESLINT
-
-const name = "James";
-
-const person = {first: name};
-
-console.log(person);
-
-const sayHelloLinting = (fName) => {
-    console.log(`Hello linting, ${fName}`);
-};
-
-sayHelloLinting();
+test('1+1=2', () => {
+    expect(1+1).toBe(2);
+});
