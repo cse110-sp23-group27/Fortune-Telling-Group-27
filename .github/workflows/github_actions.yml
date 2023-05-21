@@ -5,13 +5,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
       - name: Install modules
         run: yarn
       - name: Run ESLint
-        run: npm run lint -- --fix
-      - name: Committing ESLint fixes
-        run: git commit -m "fixed ESLint issues"
-      - name: Pushing fixes to current PR branch
-        run: git push
+        run: eslint . --ext .js,.jsx,.ts,.tsx
