@@ -10,4 +10,4 @@ jobs:
       - name: Install modules
         run: yarn
       - name: Run ESLint
-        run: yarn eslint
+        run: npx eslint --fix --ext .js,.jsx,.ts,.tsx
