@@ -1,6 +1,7 @@
 name: CICDPipeline
 run-name: ${{ github.actor }} is running Github Actions
 on: [push]
+permissions: write-all
 jobs:
   build:
     runs-on: ubuntu-latest
