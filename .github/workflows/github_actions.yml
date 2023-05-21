@@ -1,23 +1,34 @@
 name: CICDPipeline
 run-name: ${{ github.actor }} is running Github Actions
 on: [push]
+branches:    
+      - !main   # excludes main branch
+permissions: write-all
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+
       - name: Install modules
         run: yarn
+
       - name: Run ESLint
-        run: npm run lint -- --fix
-      - name: Setting Github user.email
-        run: git config --global user.email ejoa@ucsd.edu
-      - name: Setting Github user.name
-        run: git config --global user.name "Elvis Joa"
-      - name: Adding fixes for committing
-        run: git add .
-      - name: Committing ESLint changes
-        run: git commit -m "fixed ESLint issues"
-      - name: Pushing fixes to current PR branch
+        run: npx eslint . --ext .js --fix
+        
+      - name: Check if there are any changes
+        id: verify_diff
+        run: |
+          git diff --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
+        
+      - name: Commit if changes are made
+        if: steps.verify_diff.outputs.changed == 'true'
+        run: |
+          git config --global user.email "danielhlee02@gmail.com"
+          git config --global user.name "daniel-lee-user"
+          git add .
+          git commit -m "fixed ESLint issues"
+
+      - name: Pushing fixes to current branch
+        if: steps.verify_diff.outputs.changed == 'true'
         run: git push
