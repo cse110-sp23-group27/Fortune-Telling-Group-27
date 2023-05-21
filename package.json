@@ -3,6 +3,6 @@
     "description": "…",
     "version": "1.0.0",
     "scripts": {
-      "lint": "eslint --ext .js"
+      "lint": "npm run eslint --ext .js"
     }
   }
