@@ -1,4 +1,6 @@
-        const name = 'James'
+// test file for checking ESLINT
+
+                const name = 'James'
 
 const person = {first: name}
 
