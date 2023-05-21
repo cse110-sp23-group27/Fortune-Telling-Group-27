@@ -11,6 +11,12 @@ jobs:
         run: yarn
       - name: Run ESLint
         run: npm run lint -- --fix
+      - name: Setting Github user.email
+        run: git config --global user.email "ejoa@ucsd.edu"
+      - name: Setting Github user.name
+        run: git config --global user.name "ejoa27"
+      - name: Adding fixes for committing
+        run: git add .
       - name: Committing ESLint fixes
         run: git commit -m "fixed ESLint issues"
       - name: Pushing fixes to current PR branch
