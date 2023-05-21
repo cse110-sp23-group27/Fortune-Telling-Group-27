@@ -12,7 +12,7 @@ jobs:
       - name: Run ESLint
         run: npm run lint -- --fix
       - name: Setting Github user.email
-        run: git config --global user.email "ejoa@ucsd.edu"
+        run: git config --global user.email ejoa@ucsd.edu
       - name: Setting Github user.name
         run: git config --global user.name "ejoa27"
       - name: Adding fixes for committing
