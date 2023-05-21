@@ -10,4 +10,5 @@ jobs:
       - name: Install modules
         run: yarn
       - name: Run ESLint
+        run: npm init eslint
         run: npx eslint --fix test.js
