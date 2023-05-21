@@ -1,6 +1,0 @@
-{
-    "name": "my-package",
-    "scripts": {
-      "eslint": "eslint . --ext .js,.jsx"
-    }
-}
