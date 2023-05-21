@@ -28,4 +28,7 @@ module.exports = {
             "always"
         ]
     }
+    "env": {
+        "jest/globals": true
+    }
 };
