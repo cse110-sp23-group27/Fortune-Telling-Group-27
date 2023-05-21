@@ -1,13 +1,23 @@
 name: CICDPipeline
 run-name: ${{ github.actor }} is running Github Actions
 on: [push]
+permissions: write-all
 jobs:
-  check-bats-version:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx --fix
+      - name: Setting Github user.email
+        run: git config --global user.email "danielhlee02@gmail.com"
+      - name: Setting Github user.name
+        run: git config --global user.name "daniel-lee-user"
+      - name: Adding fixes for committing
+        run: git add .
+      - name: Committing ESLint fixes
+        run: git commit -m "fixed ESLint issues"
+      - name: Pushing fixes to current branch
+        run: git push
