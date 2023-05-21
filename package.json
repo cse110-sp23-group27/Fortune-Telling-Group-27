@@ -1,7 +1,6 @@
 {
     "name": "my-package",
     "scripts": {
-      "eslint": " . --ext .js,.jsx",
-      "preslint": "eslint"
+      "eslint": "eslint . --ext .js,.jsx"
     }
 }
