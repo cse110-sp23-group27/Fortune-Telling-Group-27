@@ -15,7 +15,7 @@ function bind_home_page_btns(){
                     const boneBtn = document.getElementById("toBoneTossing")
     tarotCardBtn.addEventListener('click', () => {
         console.log(FORTUNETYPES.tarotCard)
-                     display_general_UI_elements(FORTUNETYPES.tarotCard);
+                   display_general_UI_elements(FORTUNETYPES.tarotCard);
         document.getElementById("center-text").textContent = FORTUNETYPES.tarotCard;
     });
 
