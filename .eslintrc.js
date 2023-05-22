@@ -1,5 +1,3 @@
-// DO NOT CHANGE ESLINT PERMISSIONS
-
 module.exports = {
     "env": {
         "commonjs": true,
