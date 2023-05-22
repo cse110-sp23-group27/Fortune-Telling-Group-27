@@ -1,5 +1,4 @@
 import * as consts from "./consts";
-
 /**
  * Binds the home page buttons to change the type of consts.FORTUNE telling that is displayed
  * @author Elvis Joa
