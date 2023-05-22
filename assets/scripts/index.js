@@ -58,7 +58,7 @@ function display_general_UI_elements(fortuneType =null) {
         const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
         optionsBtn.hidden = true;
     }
-    if (FORTUNEType != null) {
+    if (fortuneType != null) {
         const optionsBtn = document.getElementById(fortuneType + "Options");
         optionsBtn.hidden = false;
     }
