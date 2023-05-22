@@ -1,4 +1,4 @@
-import * as consts from "./consts";
+import * as consts from "./consts.js";
 /**
  * Binds the home page buttons to change the type of consts.FORTUNE telling that is displayed
  * @author Elvis Joa
