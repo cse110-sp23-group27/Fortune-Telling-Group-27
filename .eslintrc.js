@@ -3,11 +3,14 @@ module.exports = {
         "commonjs": true,
         "es6": true,
         "node": true,
-        "jest": true
+        "jest": true,
+        "browser": true,
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
     },
     "rules": {
         "indent": [
