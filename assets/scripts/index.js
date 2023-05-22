@@ -20,10 +20,10 @@ function bind_home_page_btns(){
         document.getElementById("center-text").textContent = FORTUNETYPES.tarotCard;
     });
 
-    eggBtn.addEventListener('click', () => {
+    eggBtn.addEventListener("click", () => {
         console.log(FORTUNETYPES.egg);
-        display_general_UI_elements(FORTUNETYPES.egg)
-        document.getElementById('center-text').textContent = FORTUNETYPES.egg;
+        display_general_UI_elements(FORTUNETYPES.egg);
+        document.getElementById("center-text").textContent = FORTUNETYPES.egg
     });
 
     boneBtn.addEventListener("click", () => {
