@@ -4,7 +4,7 @@ const person = {first: name};
 
 console.log(person);
 
-console.log("hello");
+console.log("hi");
 
 const sayHelloLinting = (fName) => {
     console.log(`Hello linting, ${fName}`);
