@@ -11,19 +11,19 @@ const FORTUNELIST = ["tarot", "egg", "bone"];
  * @date 5/21/2023
  */
 function bind_home_page_btns(){
-                const tarotCardBtn = document.getElementById("toTarotCard");
-                            const eggBtn = document.getElementById("toEgg")
-                    const boneBtn = document.getElementById("toBoneTossing")
-    tarotCardBtn.addEventListener('click', () => {
-        console.log(FORTUNETYPES.tarotCard)
-         display_general_UI_elements(FORTUNETYPES.tarotCard);
+    const tarotCardBtn = document.getElementById("toTarotCard");
+    const eggBtn = document.getElementById("toEgg");
+    const boneBtn = document.getElementById("toBoneTossing");
+    tarotCardBtn.addEventListener("click", () => {
+        console.log(FORTUNETYPES.tarotCard);
+        display_general_UI_elements(FORTUNETYPES.tarotCard);
         document.getElementById("center-text").textContent = FORTUNETYPES.tarotCard;
     });
 
     eggBtn.addEventListener("click", () => {
         console.log(FORTUNETYPES.egg);
         display_general_UI_elements(FORTUNETYPES.egg);
-        document.getElementById("center-text").textContent = FORTUNETYPES.egg
+        document.getElementById("center-text").textContent = FORTUNETYPES.egg;
     });
 
     boneBtn.addEventListener("click", () => {
