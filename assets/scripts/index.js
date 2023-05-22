@@ -1,5 +1,9 @@
-import * as consts from "./consts.js";
-
+const FORTUNETYPES = {
+    tarotCard: "tarot",
+    egg: "egg",
+    bone: "bone"
+};
+const FORTUNELIST = ["tarot", "egg", "bone"];
 /**
  * Binds the home page buttons to change the type of fortune telling that is displayed
  * @author Elvis Joa
@@ -10,21 +14,21 @@ function bind_home_page_btns(){
                             const eggBtn = document.getElementById("toEgg")
                     const boneBtn = document.getElementById("toBoneTossing")
     tarotCardBtn.addEventListener('click', () => {
-        console.log(consts.FORTUNETYPES.tarotCard)
-                        display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
-        document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
+        console.log(FORTUNETYPES.tarotCard)
+                        display_general_UI_elements(FORTUNETYPES.tarotCard);
+        document.getElementById("center-text").textContent = FORTUNETYPES.tarotCard;
     });
 
     eggBtn.addEventListener('click', () => {
-        console.log(consts.FORTUNETYPES.egg);
-        display_general_UI_elements(consts.FORTUNETYPES.egg);
-        document.getElementById('center-text').textContent = consts.FORTUNETYPES.egg;
+        console.log(FORTUNETYPES.egg);
+        display_general_UI_elements(FORTUNETYPES.egg);
+        document.getElementById('center-text').textContent = FORTUNETYPES.egg;
     });
 
     boneBtn.addEventListener("click", () => {
-        console.log(consts.FORTUNETYPES.bone);
-        display_general_UI_elements(consts.FORTUNETYPES.bone);
-        document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
+        console.log(FORTUNETYPES.bone);
+        display_general_UI_elements(FORTUNETYPES.bone);
+        document.getElementById("center-text").textContent = FORTUNETYPES.bone;
     });
 }
 
@@ -56,7 +60,7 @@ function display_general_UI_elements(fortuneType=null) {
 
     //Hides/Displays the option button that is needed if any
     for (let i = 0; i <= 2; i++) {
-        const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
+        const optionsBtn = document.getElementById(FORTUNELIST[i]+"Options");
         optionsBtn.hidden = true;
     }
     if (fortuneType != null) {
