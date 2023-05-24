@@ -17,7 +17,19 @@ class Animator{
     }
     
     whenAnimationInterval(){
-        // what happens every animation interval
+        // what happens every animation interval, run backwards so we can splice items out of it
+        for (let i = this.animationObjs.length - 1; i >= 0; i--) {
+            //increment the timer inside the animation
+            animationObj.timeSinceStart += this.animationIntervalDelay;
+            const animationObj = this.animationObjs[i];
+            // process the animation object
+            const nextValue = ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
+            animationObj.setter(nextValue);
+            if(animationObj.timeSinceStart > animationObj.time){
+                // remove this animation as it ran its full time
+                this.animationObjs.splice(i, 1); // remove obj from list
+            }
+        }
     }
 
     // add a new animation object that will take the animation from `from` value to the `to` value
