@@ -15,7 +15,7 @@ class Animator{
         this.animationInterval = null;
     }
 
-    startAnimationInterval(){
+    #startAnimationInterval(){
         // clear interval if there is already one
         if(this.animationInterval !== null){
             clearInterval(this.animationInterval);
@@ -24,7 +24,7 @@ class Animator{
         this.animationInterval = setInterval(this.whenAnimationInterval, this.animationIntervalDelay);
     }
     
-    whenAnimationInterval(){
+    #whenAnimationInterval(){
         // what happens every animation interval, run backwards so we can splice items out of it
         for (let i = this.animationObjs.length - 1; i >= 0; i--) {
             //increment the timer inside the animation
@@ -54,4 +54,5 @@ class Animator{
     }
 }
 
+// instantiate a singleton instance
 new Animator();
