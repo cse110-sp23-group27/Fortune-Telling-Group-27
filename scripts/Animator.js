@@ -1,5 +1,13 @@
 class Animator{    
+    static instance = null;
     constructor(){
+        if(instance === null){
+            instance = this;
+        }
+        else{
+            console.error("DON'T CREATE ANIMATOR OBJECTS YOURSELF!!! Use Animator.instance to access the Animator object!!!");
+        }
+
         this.animationObjs = [];
         
         // set up interval
@@ -45,3 +53,5 @@ class Animator{
         this.animationObjs.push(animationObj);
     }
 }
+
+new Animator();
