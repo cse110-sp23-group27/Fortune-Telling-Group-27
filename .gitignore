@@ -1,2 +1,4 @@
-*.lock
 .vscode/
+.github/
+specs/
+node_modules/

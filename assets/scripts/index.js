@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import * as consts from "./consts.js";
 /**
  * Binds the home page buttons to change the type of consts.FORTUNE telling that is displayed
@@ -8,7 +9,7 @@ function bind_home_page_btns(){
     const tarotCardBtn = document.getElementById("toTarotCard");
     const eggBtn = document.getElementById("toEgg");
     const boneBtn = document.getElementById("toBoneTossing");
-    tarotCardBtn.addEventListener("click", () => {
+    tarotCardBtn.addEventListener("click", () => { 
         console.log(consts.FORTUNETYPES.tarotCard);
         display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
