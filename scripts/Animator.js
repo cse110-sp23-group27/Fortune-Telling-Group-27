@@ -19,4 +19,17 @@ class Animator{
     whenAnimationInterval(){
         // what happens every animation interval
     }
+
+    // add a new animation object that will take the animation from `from` value to the `to` value
+    addAnimation(from, to, getter, setter, time){
+        const animationObj = {
+            from: from,
+            to: to,
+            getter: getter,
+            setter: setter,
+            time: time,
+            timeSinceStart: 0
+        }
+        this.animationObjs.push(animationObj);
+    }
 }
