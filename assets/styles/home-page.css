@@ -5,11 +5,20 @@
     height: 100vh; /* Optional: Set container height to fit the viewport */
   }
   
-  .button-wrapper {
-    display: flex;
-    justify-content: center;
-  }
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
   
-  button {
-    margin: 5px;
-  }
+button {
+  margin: 5px;
+}
+
+.response {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  bottom: 15%;
+  font-size: 40px;
+  transform: translateX(-50%);
+}
