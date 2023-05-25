@@ -4,10 +4,31 @@ html, body {
 }
 
 body {
-background: #000;
-background: rgba(0, 0, 0, 1);
-overflow-x: hidden; 
+    background: #000;
+    background: rgba(0, 0, 0, 1);
+    overflow-x: hidden; 
+    color: white;
 }
+
+.on-hover-glow:hover{
+    box-shadow: 0 0 10px 5px #fff;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Optional: Set container height to fit the viewport */
+  }
+  
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+    margin: 5px;
+  }
 
 /* ---------- Fog ---------- */
 .fogwrapper {

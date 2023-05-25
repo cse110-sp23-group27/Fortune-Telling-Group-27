@@ -12,6 +12,7 @@ function bind_home_page_btns(){
         console.log(consts.FORTUNETYPES.tarotCard);
         display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
+        change_css("assets/styles/tarot-page.css")
     });
 
     eggBtn.addEventListener("click", () => {
@@ -27,6 +28,30 @@ function bind_home_page_btns(){
     });
 }
 
+
+/**
+ * Removes all current css files loaded in and then loads in a the css file 
+ * that is passed in as a parameter. This is used for loading in new pages
+ * @author Sean Fuhrman
+ * @date 5/25/2023
+ * @param {string} css_filepath - path to css file to be loaded in
+ */
+function change_css(css_filepath) {
+    const old_css = document.querySelectorAll("link[rel=stylesheet]");
+    for (let i = 0; i < old_css.length; i++) {
+        console.log(`removing css${old_css[i]}`)
+        old_css[i].parentNode.removeChild(old_css[i]);
+    }
+
+    const head = document.getElementsByTagName("head")[0];
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = css_filepath;
+    link.media = "all";
+    head.appendChild(link);
+}
+
 /**
  * Binds the buttons that appear at the top left for all consts.FORTUNE telling,
  * more specifically the home, options, and GitHub buttons.
@@ -38,6 +63,7 @@ function bind_general_buttons(){
     homeBtn.addEventListener("click", () => {
         display_general_UI_elements();
         document.getElementById("center-text").textContent = "";
+        change_css("assets/styles/home-page.css");
     });
 }
 
