@@ -23,12 +23,12 @@ jobs:
         run: |
           git diff --quiet . ':!node_modules/' ':!specs/' ':!.github/' || echo "changed=true" >> $GITHUB_OUTPUT
         
-      - name: Commit if changes are made
+      - name: Commit if changes are made  
         if: steps.verify_diff.outputs.changed == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -- . ':!node_modules/' ':!specs/' ':!.github/'
+          git add -- . ':!.github/'
           git commit -m "fixed ESLint issues"
 
       - name: Pushing fixes to current branch
