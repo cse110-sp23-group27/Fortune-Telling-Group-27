@@ -92,8 +92,7 @@ function change_css(css_filepath) {
 function bind_general_buttons(){
     const homeBtn = document.getElementById("toHome");
     homeBtn.addEventListener("click", () => {
-        display_general_UI_elements();
-        document.getElementById("center-text").textContent = "";
+        load_page("home-page-template", "assets/styles/home-page.css");
     });
 }
 
