@@ -28,7 +28,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -- . ':!.github/'
+          git add -- . ':!.github/' ':!node_modules/' ':!specs/'
           git commit -m "fixed ESLint issues"
 
       - name: Pushing fixes to current branch
