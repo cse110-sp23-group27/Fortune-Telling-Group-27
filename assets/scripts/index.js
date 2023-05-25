@@ -12,7 +12,7 @@ function bind_home_page_btns(){
         console.log(consts.FORTUNETYPES.tarotCard);
         display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
-        change_css("assets/styles/tarot-page.css")
+        change_css("assets/styles/tarot-page.css");
     });
 
     eggBtn.addEventListener("click", () => {
@@ -39,7 +39,7 @@ function bind_home_page_btns(){
 function change_css(css_filepath) {
     const old_css = document.querySelectorAll("link[rel=stylesheet]");
     for (let i = 0; i < old_css.length; i++) {
-        console.log(`removing css${old_css[i]}`)
+        console.log(`removing css${old_css[i]}`);
         old_css[i].parentNode.removeChild(old_css[i]);
     }
 
