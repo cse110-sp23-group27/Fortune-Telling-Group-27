@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import * as consts from "./consts.js";
 /**
  * Binds the home page buttons to change the type of consts.FORTUNE telling that is displayed
@@ -8,22 +9,25 @@ function bind_home_page_btns(){
     const tarotCardBtn = document.getElementById("toTarotCard");
     const eggBtn = document.getElementById("toEgg");
     const boneBtn = document.getElementById("toBoneTossing");
-    tarotCardBtn.addEventListener("click", () => {
+    tarotCardBtn.addEventListener("click", () => { 
         console.log(consts.FORTUNETYPES.tarotCard);
         display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
+        document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE TAROT CARD";
     });
 
     eggBtn.addEventListener("click", () => {
         console.log(consts.FORTUNETYPES.egg);
         display_general_UI_elements(consts.FORTUNETYPES.egg);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.egg;
+        document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE EGG";
     });
 
     boneBtn.addEventListener("click", () => {
         console.log(consts.FORTUNETYPES.bone);
         display_general_UI_elements(consts.FORTUNETYPES.bone);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
+        document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE BONE TOSSING";
     });
 }
 
@@ -38,6 +42,7 @@ function bind_general_buttons(){
     homeBtn.addEventListener("click", () => {
         display_general_UI_elements();
         document.getElementById("center-text").textContent = "";
+        document.getElementsByClassName("response")[0].textContent = "";
     });
 }
 
