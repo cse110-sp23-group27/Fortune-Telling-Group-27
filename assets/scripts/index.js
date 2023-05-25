@@ -68,13 +68,18 @@ function load_page(templateID, css_filepath) {
  * @param {string} css_filepath - path to css file to be loaded in
  */
 function change_css(css_filepath) {
+    //remove any current style sheets
     const old_css = document.querySelectorAll("link[rel=stylesheet]");
     for (let i = 0; i < old_css.length; i++) {
         old_css[i].parentNode.removeChild(old_css[i]);
     }
 
+<<<<<<< HEAD
     console.log(`loading ${css_filepath}`);
 
+=======
+    //create new link element for css_path and append it to the head
+>>>>>>> cdea467 (comments)
     const head = document.getElementsByTagName("head")[0];
     const link = document.createElement("link");
     link.rel = "stylesheet";
