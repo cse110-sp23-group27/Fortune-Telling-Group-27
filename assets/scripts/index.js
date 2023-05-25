@@ -9,11 +9,29 @@ function bind_home_page_btns(){
     const tarotCardBtn = document.getElementById("toTarotCard");
     const eggBtn = document.getElementById("toEgg");
     const boneBtn = document.getElementById("toBoneTossing");
+
+    /**
+     * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
+     * @author Kevin Wong
+     * @date 5/24/2023
+     */
+    function changeBackgroundColor(color) {
+        document.body.style.backgroundColor = color;
+    }
+
     tarotCardBtn.addEventListener("click", () => { 
         console.log(consts.FORTUNETYPES.tarotCard);
         display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
         document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE TAROT CARD";
+    });
+
+    tarotCardBtn.addEventListener("mouseover", () => {
+        changeBackgroundColor("red");
+    });
+
+    tarotCardBtn.addEventListener("mouseout", () => {
+        changeBackgroundColor("white");
     });
 
     eggBtn.addEventListener("click", () => {
@@ -23,11 +41,28 @@ function bind_home_page_btns(){
         document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE EGG";
     });
 
+    eggBtn.addEventListener("mouseover", () => {
+        changeBackgroundColor("blue");
+    });
+
+    eggBtn.addEventListener("mouseout", () => {
+        changeBackgroundColor("white");
+    });
+
     boneBtn.addEventListener("click", () => {
         console.log(consts.FORTUNETYPES.bone);
         display_general_UI_elements(consts.FORTUNETYPES.bone);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
         document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE BONE TOSSING";
+    });
+
+
+    boneBtn.addEventListener("mouseover", () => {
+        changeBackgroundColor("green");
+    });
+
+    boneBtn.addEventListener("mouseout", () => {
+        changeBackgroundColor("white");
     });
 }
 

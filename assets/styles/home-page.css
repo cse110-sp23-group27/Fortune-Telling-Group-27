@@ -22,3 +22,9 @@ button {
   font-size: 40px;
   transform: translateX(-50%);
 }
+
+/* For the on hover effect in js script, this is the base change for the background */
+/* More detailed background modification will be added later. */
+body {
+  transition: background-color 0.5s ease; /* Adjust the duration and easing function to suit your needs */
+}
