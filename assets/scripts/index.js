@@ -10,28 +10,9 @@ function bind_home_page_btns(){
     const eggBtn = document.getElementById("toEgg");
     const boneBtn = document.getElementById("toBoneTossing");
 
-    /**
-     * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
-     * @author Kevin Wong
-     * @date 5/24/2023
-     */
-    function changeBackgroundColor(color) {
-        document.body.style.backgroundColor = color;
-    }
-
     tarotCardBtn.addEventListener("click", () => { 
         console.log(consts.FORTUNETYPES.tarotCard);
-        display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
-        document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
-        document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE TAROT CARD";
-    });
-
-    tarotCardBtn.addEventListener("mouseover", () => {
-        changeBackgroundColor("red");
-    });
-
-    tarotCardBtn.addEventListener("mouseout", () => {
-        changeBackgroundColor("white");
+        load_page("tarot-card-template", "assets/styles/tarot-page.css");
     });
 
     eggBtn.addEventListener("click", () => {
@@ -39,14 +20,7 @@ function bind_home_page_btns(){
         display_general_UI_elements(consts.FORTUNETYPES.egg);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.egg;
         document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE EGG";
-    });
-
-    eggBtn.addEventListener("mouseover", () => {
-        changeBackgroundColor("blue");
-    });
-
-    eggBtn.addEventListener("mouseout", () => {
-        changeBackgroundColor("white");
+        bind_general_buttons();
     });
 
     boneBtn.addEventListener("click", () => {
@@ -54,16 +28,58 @@ function bind_home_page_btns(){
         display_general_UI_elements(consts.FORTUNETYPES.bone);
         document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
         document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE BONE TOSSING";
+        bind_general_buttons();
     });
+}
+
+/**
+ * Loads in page using templates, removes the current page and loads in the new page
+ * @author Sean Fuhrman
+ * @date 5/25/2023
+ * @param {string} templateID - id of the template to be loaded in
+ * @param {string} css_filepath - path to css file to be loaded in
+ */
+function load_page(templateID, css_filepath) {
+    //remove current page
+    console.log(`loading ${templateID}`);
+    const main = document.querySelector("main");
+    main.parentNode.removeChild(main);
+
+    const template = document.getElementById(templateID);
+    const templateContent = template.content;
+    const node = document.importNode(templateContent, true);
+    document.body.appendChild(node);
+
+    //this is hacky and should probably not be permanent
+    if(templateID != "home-page-template") {
+        bind_general_buttons();
+    } else {
+        bind_home_page_btns();
+    }
+
+    change_css(css_filepath);
+}
 
 
-    boneBtn.addEventListener("mouseover", () => {
-        changeBackgroundColor("green");
-    });
+/**
+ * Loads in new css file for new page. Also removes old css
+ * @author Sean Fuhrman
+ * @date 5/25/2023
+ * @param {string} css_filepath - path to css file to be loaded in
+ */
+function change_css(css_filepath) {
+    const old_css = document.querySelectorAll("link[rel=stylesheet]");
+    for (let i = 0; i < old_css.length; i++) {
+        old_css[i].parentNode.removeChild(old_css[i]);
+    }
 
-    boneBtn.addEventListener("mouseout", () => {
-        changeBackgroundColor("white");
-    });
+    console.log(`loading ${css_filepath}`);
+
+    const head = document.getElementsByTagName("head")[0];
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = css_filepath;
+    head.appendChild(link);
 }
 
 /**
@@ -75,9 +91,7 @@ function bind_home_page_btns(){
 function bind_general_buttons(){
     const homeBtn = document.getElementById("toHome");
     homeBtn.addEventListener("click", () => {
-        display_general_UI_elements();
-        document.getElementById("center-text").textContent = "";
-        document.getElementsByClassName("response")[0].textContent = "";
+        load_page("home-page-template", "assets/styles/home-page.css");
     });
 }
 
@@ -111,8 +125,10 @@ function display_general_UI_elements(fortuneType =null) {
 }
 
 function init() {
+    console.log("init");
+    load_page("home-page-template", "assets/styles/home-page.css");
     bind_home_page_btns();
-    bind_general_buttons();
+    // bind_general_buttons();
 }
 
 init();

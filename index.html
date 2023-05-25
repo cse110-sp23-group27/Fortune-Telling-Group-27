@@ -5,21 +5,55 @@
 </head>
 <body>
     <main>
-      <button class = "general" id = "toHome" hidden = true>Home</button>
-      <button class = "general" id = "tarotOptions" hidden = true>Tarot Options</button>
-      <button class = "general" id = "eggOptions" hidden = true>Egg Options</button>
-      <button class = "general" id = "boneOptions" hidden = true>Bone Options</button>
-      <button class = "general" id = "toGitHub" hidden = true>GitHub</button>
-        <div class="container">
-          <div class="button-wrapper">
-            <button class = "home-page" id = "toTarotCard">Tarot Card</button>
-            <button class = "home-page" id = "toEgg">Egg</button>
-            <button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
-          </div>
-          <font size =50><p id="center-text"></p></font>
-        </div>
-        <p class="response"></p>
+      <noscript>Please enable Javascript</noscript>
     </main>
 </body>
+
+
+<template id="home-page-template">
+  <main>
+    <button class = "general" id = "toHome" hidden = true>Home</button>
+    <button class = "general" id = "tarotOptions" hidden = true>Tarot Options</button>
+    <button class = "general" id = "eggOptions" hidden = true>Egg Options</button>
+    <button class = "general" id = "boneOptions" hidden = true>Bone Options</button>
+    <button class = "general" id = "toGitHub" hidden = true>GitHub</button>
+    <div class="container">
+      <div class="button-wrapper">
+        <button class = "home-page" id = "toTarotCard">Tarot Card</button>
+        <button class = "home-page" id = "toEgg">Egg</button>
+        <button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
+
+      </div>
+      <font size =50><p id="center-text"></p></font>
+    </div>
+    <p class="response"></p>
+  </main>
+</template>
+<template id="tarot-card-template">
+  <main>
+    <button class = "general" id = "toHome">Home</button>
+    <button class = "general" id = "tarotOptions">Tarot Options</button>
+    <button class = "general" id = "toGitHub" >GitHub</button>
+    <div id="container">
+      <p class="on-hover-glow">Tarot</p>
+      <div class="fogwrapper">
+        <div id="foglayer_01" class="fog">
+          <div class="image01"></div>
+          <div class="image02"></div>
+        </div>
+        <div id="foglayer_02" class="fog">
+          <div class="image01"></div>
+          <div class="image02"></div>
+        </div>
+        <div id="foglayer_03" class="fog">
+          <div class="image01"></div>
+          <div class="image02"></div>
+        </div>
+      </div>
+
+    </div>
+   
+  </main>
+</template>
 <script src="assets/scripts/index.js" type="module"></script>
 </html>
