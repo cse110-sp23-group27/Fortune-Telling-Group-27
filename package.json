@@ -3,7 +3,7 @@
     "description": "…",
     "version": "1.0.0",
     "scripts": {
-        "test": "jest",
+        "test": "jest --silent",
         "lint": "npx eslint ./assets/scripts ./jest_tests --fix --ext .js  -c ./.eslintrc.js",
         "doc": "jsdoc -c jsdoc.json"
     },
@@ -13,7 +13,7 @@
         "babel-jest": "^27.3.1",
         "jest": "^27.3.1",
         "jest-puppeteer": "^6.0.0",
-        "puppeteer": "^11.0.0",
+        "puppeteer": "^19.4.0",
         "eslint": "^8.41.0",
         "eslint-config-google": "^0.14.0",
         "jsdoc": "^4.0.2"

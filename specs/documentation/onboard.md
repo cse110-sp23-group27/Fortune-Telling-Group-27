@@ -9,7 +9,7 @@
 4. There are multiple commands in the package.json file that you can run.
    1. ```npm run lint``` runs ESLint on the assets directory and the jest_tests directory
    2. ```npm run docs``` runs JSDocs on the assets/scripts directory and the jest_tests directory, and generates documentation in specs/documentation/generated.(Don't run locally)
-   3. ```npm run test --silent``` runs all Jest unit tests and hopefully soon E2E tests (silent tag ignores warnings)
+   3. ```npm run --silent test``` runs all Jest unit tests and hopefully soon E2E tests (silent tag ignores warnings)
    4. More commands TBA
 
 ## Notes:
@@ -30,12 +30,12 @@ Please refer to the code style [document](/specs/documentation/codestyle.md) whe
 4. Add unit tests if necessary for your code (at your own discretion), as well as necessary inline comments
 5. Push to the repo
    1. If the build run by GitHub Actions fails, try to fix it in your local repo and restart this process again.
+   2. Make sure to pull from your branch as well in case GitHub Actions made any changes to your repo (regarding documentation or syntax)
 6. Create a pull request to merge into the main branch 
    1. Assign the pull request to the issue it resolves
-   2. Make sure to pull from your branch as well in case GitHub Actions made any changes to your repo (regarding documentation or syntax)
-   3. Code climate stuff (not added yet)
-   4. Assign reviewer to your code (either Victor or Elvis)
-   5. Resolve merge issues with main (maybe assign this to reviewers?)
+   2. Code climate stuff (not added yet)
+   3. Assign reviewer to your code (either Victor or Elvis)
+   4. Resolve merge issues with main (maybe assign this to reviewers?)
 7. Reviewers will review code and merge if it's good, otherwise they will let you know what doesn't work and restart this pipeline process when the issue is fixed
 8. Deployment (TBD)
-9. Remove the working branch that was merged with main (pruning)
+9.  Remove the working branch that was merged with main (pruning)
