@@ -13,22 +13,22 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install modules
-        run: yarn
+        run: npm install
 
       - name: Run ESLint
-        run: npx eslint . --ext .js --fix
+        run: npm run lint
         
       - name: Check if there are any changes
         id: verify_diff
         run: |
-          git diff --quiet . ':!node_modules/' ':!specs/' ':!.github/' || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet . ':!specs/' ':!.github/' || echo "changed=true" >> $GITHUB_OUTPUT
         
       - name: Commit if changes are made
         if: steps.verify_diff.outputs.changed == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -- .
+          git add -- . ':!specs/' ':!.github/'
           git commit -m "fixed ESLint issues"
           
 
