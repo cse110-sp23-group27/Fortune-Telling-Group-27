@@ -13,6 +13,7 @@ class Animator{
         // set up interval
         this.animationIntervalDelay = 10; // ms
         this.animationInterval = null;
+        this.#startAnimationInterval();
     }
 
     #startAnimationInterval(){
@@ -21,15 +22,15 @@ class Animator{
             clearInterval(this.animationInterval);
         }
         // make new interval
-        this.animationInterval = setInterval(this.whenAnimationInterval, this.animationIntervalDelay);
+        this.animationInterval = setInterval(()=>this.#whenAnimationInterval(), this.animationIntervalDelay);
     }
     
     #whenAnimationInterval(){
         // what happens every animation interval, run backwards so we can splice items out of it
         for (let i = this.animationObjs.length - 1; i >= 0; i--) {
+            const animationObj = this.animationObjs[i];
             //increment the timer inside the animation
             animationObj.timeSinceStart += this.animationIntervalDelay;
-            const animationObj = this.animationObjs[i];
             // process the animation object
             const nextValue = ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
             animationObj.setter(nextValue);
