@@ -10,7 +10,7 @@ class TarotCard{
      * @param time Time in milliseconds it takes for the object to move from
      * pointA to pointB
      */
-    move() {
+    move(pointA, pointB, time) {
         //
     }
 
@@ -21,7 +21,7 @@ class TarotCard{
      * @param pointA The object's starting point
      * @param pointB The object's ending point
      */
-    moveInstantly() {
+    moveInstantly(pointA, pointB) {
         //
     }
 
@@ -32,7 +32,7 @@ class TarotCard{
      * @param time Time in milliseconds it takes for the object to complete the 
      * rotation
      */
-    rotate() {
+    rotate(degrees, time) {
         // 
     }
 
@@ -41,7 +41,7 @@ class TarotCard{
      *
      * @param degrees Number of degrees to rotate object
      */
-    rotateInstantly() {
+    rotateInstantly(degrees) {
         //
     }
 
@@ -57,7 +57,7 @@ class TarotCard{
      *
      * @param time Time in milliseconds before the flip function is performed
      */
-    setFlip() {
+    setFlip(time) {
         //
     }
 }
