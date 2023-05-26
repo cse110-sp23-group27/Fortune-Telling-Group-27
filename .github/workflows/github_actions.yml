@@ -1,0 +1,36 @@
+name: CICDPipeline
+run-name: ${{ github.actor }} is running Github Actions
+on:
+  push:
+    branches:
+          - '**'        # matches every branch
+          - '!main'     # excludes main branch
+permissions: write-all
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install modules
+        run: yarn
+
+      - name: Run ESLint
+        run: npx eslint . --ext .js --fix
+        
+      - name: Check if there are any changes
+        id: verify_diff
+        run: |
+          git diff --quiet . ':!node_modules/' ':!specs/' ':!.github/' || echo "changed=true" >> $GITHUB_OUTPUT
+        
+      - name: Commit if changes are made
+        if: steps.verify_diff.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -- . ':!node_modules/' ':!specs/' ':!.github/'
+          git commit -m "fixed ESLint issues"
+
+      - name: Pushing fixes to current branch
+        if: steps.verify_diff.outputs.changed == 'true'
+        run: git push
