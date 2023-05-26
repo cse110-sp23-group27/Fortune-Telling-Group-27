@@ -6,7 +6,7 @@
    2. To update the current repo you are on with the main branch try: ```git fetch``` and then ```git rebase origin/main```
 3. In the root directory, run ```npm ci``` in the terminal to install all required dependencies. (DO NOT RUN NPM INSTALL unless `npm ci` does not work)
    1. Optionally, also run ```npm ci --save-dev eslint eslint-config-google``` to install the required google config (only if google config not recognized)
-   2. If ```npm ci``` does not work, you can try running npm install, but do not push the changes made in package-lock.json or package.json
+   2. If ```npm ci``` does not work, you can try running `npm install`, but do not push the changes made in package-lock.json or package.json
 4. There are multiple commands in the package.json file that you can run.
    1. ```npm run lint``` runs ESLint on the assets directory and the jest_tests directory
    2. ```npm run docs``` runs JSDocs on the assets/scripts directory and the jest_tests directory, and generates documentation in specs/documentation/generated.(Don't run locally)
