@@ -20,7 +20,17 @@
         </div>
         <p class="response"></p>
     </main>
+  
+  <div id="testTarot" style="position: absolute; left: 0; top: 0">
+        <h1>Test label</h1>
+    </div>
 </body>
 <script src="assets/scripts/index.js" type="module"></script>
+<script src="./scripts/Animator.js"></script>
 <script src="./scripts/TarotCard.js"></script>
+<script>
+    // test the animator method
+    let testDiv = document.getElementById('testTarot');
+    Animator.instance.addAnimation(0, 100, ()=>testDiv.style.left, (val)=>testDiv.style.left = `${val}px`, 5000);
+</script>
 </html>
