@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TarotCard animation</title>
-    <script src="./scripts/Animator.js"></script>
-    <script src="./scripts/TarotCard.js"></script>
-    <div id="testTarot" style="position: absolute; left: 0; top: 0">
-        <h1>Test label</h1>
-    </div>
-
-    <script>
-        // test the animator method
-        let testDiv = document.getElementById('testTarot');
-        Animator.instance.addAnimation(0, 100, ()=>testDiv.style.left, (val)=>testDiv.style.left = `${val}px`, 5000);
-    </script>
+  <link rel="stylesheet" href="assets/styles/home-page.css">
 </head>
 <body>
-    
+    <main>
+      <button class = "general" id = "toHome" hidden = true>Home</button>
+      <button class = "general" id = "tarotOptions" hidden = true>Tarot Options</button>
+      <button class = "general" id = "eggOptions" hidden = true>Egg Options</button>
+      <button class = "general" id = "boneOptions" hidden = true>Bone Options</button>
+      <button class = "general" id = "toGitHub" hidden = true>GitHub</button>
+        <div class="container">
+          <div class="button-wrapper">
+            <button class = "home-page" id = "toTarotCard">Tarot Card</button>
+            <button class = "home-page" id = "toEgg">Egg</button>
+            <button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
+          </div>
+          <font size =50><p id="center-text"></p></font>
+        </div>
+        <p class="response"></p>
+    </main>
+  
+  <div id="testTarot" style="position: absolute; left: 0; top: 0">
+        <h1>Test label</h1>
+    </div>
 </body>
+<script src="assets/scripts/index.js" type="module"></script>
+<script src="./scripts/Animator.js"></script>
+<script src="./scripts/TarotCard.js"></script>
+<script>
+    // test the animator method
+    let testDiv = document.getElementById('testTarot');
+    Animator.instance.addAnimation(0, 100, ()=>testDiv.style.left, (val)=>testDiv.style.left = `${val}px`, 5000);
+</script>
 </html>
