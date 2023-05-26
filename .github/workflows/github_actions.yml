@@ -1,4 +1,4 @@
-name: CICDPipeline
+name: CIPipeline
 run-name: ${{ github.actor }} is running Github Actions
 on:
   push:
@@ -7,7 +7,7 @@ on:
           - '!main'     # excludes main branch
 permissions: write-all
 jobs:
-  build:
+  ESLint checker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
