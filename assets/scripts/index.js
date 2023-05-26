@@ -5,65 +5,65 @@ import * as consts from "./consts.js";
  * @author Elvis Joa
  * @date 5/21/2023
  */
-function bind_home_page_btns(){
-    const tarotCardBtn = document.getElementById("toTarotCard");
-    const eggBtn = document.getElementById("toEgg");
-    const boneBtn = document.getElementById("toBoneTossing");
+function bind_home_page_btns() {
+	const tarotCardBtn = document.getElementById("toTarotCard");
+	const eggBtn = document.getElementById("toEgg");
+	const boneBtn = document.getElementById("toBoneTossing");
 
-    /**
+	/**
      * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
      * @author Kevin Wong
      * @date 5/24/2023
      */
-    function changeBackgroundColor(color) {
-        document.body.style.backgroundColor = color;
-    }
+	function changeBackgroundColor(color) {
+		document.body.style.backgroundColor = color;
+	}
 
-    tarotCardBtn.addEventListener("click", () => { 
-        console.log(consts.FORTUNETYPES.tarotCard);
-        display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
-        document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
-        document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE TAROT CARD";
-    });
+	tarotCardBtn.addEventListener("click", () => {
+		console.log(consts.FORTUNETYPES.tarotCard);
+		display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
+		document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
+		document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE TAROT CARD";
+	});
 
-    tarotCardBtn.addEventListener("mouseover", () => {
-        changeBackgroundColor("red");
-    });
+	tarotCardBtn.addEventListener("mouseover", () => {
+		changeBackgroundColor("red");
+	});
 
-    tarotCardBtn.addEventListener("mouseout", () => {
-        changeBackgroundColor("white");
-    });
+	tarotCardBtn.addEventListener("mouseout", () => {
+		changeBackgroundColor("white");
+	});
 
-    eggBtn.addEventListener("click", () => {
-        console.log(consts.FORTUNETYPES.egg);
-        display_general_UI_elements(consts.FORTUNETYPES.egg);
-        document.getElementById("center-text").textContent = consts.FORTUNETYPES.egg;
-        document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE EGG";
-    });
+	eggBtn.addEventListener("click", () => {
+		console.log(consts.FORTUNETYPES.egg);
+		display_general_UI_elements(consts.FORTUNETYPES.egg);
+		document.getElementById("center-text").textContent = consts.FORTUNETYPES.egg;
+		document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE EGG";
+	});
 
-    eggBtn.addEventListener("mouseover", () => {
-        changeBackgroundColor("blue");
-    });
+	eggBtn.addEventListener("mouseover", () => {
+		changeBackgroundColor("blue");
+	});
 
-    eggBtn.addEventListener("mouseout", () => {
-        changeBackgroundColor("white");
-    });
+	eggBtn.addEventListener("mouseout", () => {
+		changeBackgroundColor("white");
+	});
 
-    boneBtn.addEventListener("click", () => {
-        console.log(consts.FORTUNETYPES.bone);
-        display_general_UI_elements(consts.FORTUNETYPES.bone);
-        document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
-        document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE BONE TOSSING";
-    });
+	boneBtn.addEventListener("click", () => {
+		console.log(consts.FORTUNETYPES.bone);
+		display_general_UI_elements(consts.FORTUNETYPES.bone);
+		document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
+		document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE BONE TOSSING";
+	});
 
 
-    boneBtn.addEventListener("mouseover", () => {
-        changeBackgroundColor("green");
-    });
+	boneBtn.addEventListener("mouseover", () => {
+		changeBackgroundColor("green");
+	});
 
-    boneBtn.addEventListener("mouseout", () => {
-        changeBackgroundColor("white");
-    });
+	boneBtn.addEventListener("mouseout", () => {
+		changeBackgroundColor("white");
+	});
 }
 
 /**
@@ -72,13 +72,13 @@ function bind_home_page_btns(){
  * @author Elvis Joa
  * @date 5/21/2023
  */
-function bind_general_buttons(){
-    const homeBtn = document.getElementById("toHome");
-    homeBtn.addEventListener("click", () => {
-        display_general_UI_elements();
-        document.getElementById("center-text").textContent = "";
-        document.getElementsByClassName("response")[0].textContent = "";
-    });
+function bind_general_buttons() {
+	const homeBtn = document.getElementById("toHome");
+	homeBtn.addEventListener("click", () => {
+		display_general_UI_elements();
+		document.getElementById("center-text").textContent = "";
+		document.getElementsByClassName("response")[0].textContent = "";
+	});
 }
 
 /**
@@ -87,32 +87,32 @@ function bind_general_buttons(){
  * @date 5/21/2023
  */
 function display_general_UI_elements(fortuneType =null) {
-    // Changes the general buttons (home, options, GitHub)
-    const generalBtns = document.getElementsByClassName("general");
-    for (let i = 0; i < generalBtns.length; i++) {
-        generalBtns[i].hidden = !generalBtns[i].hidden;
-    }
+	// Changes the general buttons (home, options, GitHub)
+	const generalBtns = document.getElementsByClassName("general");
+	for (let i = 0; i < generalBtns.length; i++) {
+		generalBtns[i].hidden = !generalBtns[i].hidden;
+	}
 
-    //Hides/Displays the option button that is needed if any
-    for (let i = 0; i <= 2; i++) {
-        const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
-        optionsBtn.hidden = true;
-    }
-    if (fortuneType != null) {
-        const optionsBtn = document.getElementById(fortuneType + "Options");
-        optionsBtn.hidden = false;
-    }
+	// Hides/Displays the option button that is needed if any
+	for (let i = 0; i <= 2; i++) {
+		const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
+		optionsBtn.hidden = true;
+	}
+	if (fortuneType != null) {
+		const optionsBtn = document.getElementById(fortuneType + "Options");
+		optionsBtn.hidden = false;
+	}
 
-    //Hides/Displays the home page buttons as needed
-    const homeBtns = document.getElementsByClassName("home-page");
-    for (let i = 0; i < homeBtns.length; i++) {
-        homeBtns[i].hidden = !homeBtns[i].hidden;
-    }
+	// Hides/Displays the home page buttons as needed
+	const homeBtns = document.getElementsByClassName("home-page");
+	for (let i = 0; i < homeBtns.length; i++) {
+		homeBtns[i].hidden = !homeBtns[i].hidden;
+	}
 }
 
 function init() {
-    bind_home_page_btns();
-    bind_general_buttons();
+	bind_home_page_btns();
+	bind_general_buttons();
 }
 
 init();
