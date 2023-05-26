@@ -35,7 +35,7 @@ Please refer to the code style [document](/specs/documentation/codestyle.md) whe
    1. Assign the pull request to the issue it resolves
    2. Code climate stuff (not added yet)
    3. Assign reviewer to your code (either Victor or Elvis)
-   4. Resolve merge issues with main (maybe assign this to reviewers?)
+   4. Resolve merge issues with main if needed (maybe assign this to reviewers?)
 7. Reviewers will review code and merge if it's good, otherwise they will let you know what doesn't work and restart this pipeline process when the issue is fixed
 8. Deployment (TBD)
 9.  Remove the working branch that was merged with main (pruning)
