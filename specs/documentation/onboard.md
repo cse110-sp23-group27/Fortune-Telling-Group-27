@@ -20,6 +20,8 @@ When adding JSLint code, please add code only in the /assets directory or the /s
 
 Please refer to the code style [document](/specs/documentation/codestyle.md) when styling code
 
+Try not to change package-lock.json or package.lock unless you are working on pipeline.
+
 # Pipeline steps
 ## This process should be run when you are finished with code that resolves an issue defined in GitHub issues
 
