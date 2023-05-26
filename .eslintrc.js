@@ -1,12 +1,14 @@
 module.exports = {
     "env": {
         "commonjs": true,
-        "es6": true,
-        "node": true,
+        "es2022": true,
         "jest": true,
         "browser": true,
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "google"
+    ],
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module",
@@ -14,12 +16,12 @@ module.exports = {
     },
     "rules": {
         "indent": [
-            "error",
-            4
+            "error", 
+            "tab"
         ],
         "linebreak-style": [
             "error",
-            "windows"
+            "unix"
         ],
         "quotes": [
             "error",
@@ -28,7 +30,31 @@ module.exports = {
         "semi": [
             "error",
             "always"
+        ],
+        "camelcase": [
+            "error"
+        ],
+        "no-duplicate-imports": [
+            "error"
+        ],
+        "no-unused-vars":[
+            "warn"
+        ],
+        "brace-style":[
+            "error",
+            "1tbs", { "allowSingleLine": true },
+        ],
+        "no-tabs": 0,
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "eol-last": [
+            "error",
+            "never"
         ]
     },
     "ignorePatterns": ['/node_modules/', '/specs/', './github/']
 };
+
+

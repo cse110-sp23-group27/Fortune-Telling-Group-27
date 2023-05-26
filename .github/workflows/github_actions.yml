@@ -17,21 +17,26 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+      
+      - name: Run JSDocs
+        run: npm run docs
+
+      - name: Running Tests
+        run: npm run test -- silent
         
       - name: Check if there are any changes
         id: verify_diff
         run: |
-          git diff --quiet . ':!specs/' ':!.github/' || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet . ':!.github/' ':!node_modules/' || echo "changed=true" >> $GITHUB_OUTPUT
         
       - name: Commit if changes are made
         if: steps.verify_diff.outputs.changed == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -- . ':!specs/' ':!.github/'
-          git commit -m "fixed ESLint issues"
+          git add -- . ':!.github/'
+          git commit -m "Added Pipeline Changes Automatically"
           
-
       - name: Pushing fixes to current branch
         if: steps.verify_diff.outputs.changed == 'true'
         run: git push
