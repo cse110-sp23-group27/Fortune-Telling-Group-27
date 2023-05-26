@@ -11,7 +11,7 @@
 }
   
 button {
-  margin: 5px;
+  margin: 70px;
 }
 
 .response {
@@ -21,4 +21,65 @@ button {
   bottom: 15%;
   font-size: 40px;
   transform: translateX(-50%);
+}
+
+#toTarotCard {
+  background: url('../images/tarot-card.png') no-repeat center;
+  background-size: cover;
+  width: 300px;
+  height: 400px;
+  border: 2px solid red;
+  font-size: 40px;
+  color: transparent;
+  transition: background 0.2s, color 0.2s;
+} 
+
+ #toTarotCard:active {
+  transform: scale(0.9);
+}
+
+#toTarotCard:hover {
+  opacity: 0.6;
+  color: white;
+}
+
+#toEgg {
+  background-color: red;
+  background: url('../images/egg.png') no-repeat center;
+  background-size: cover; 
+  width: 300px; 
+  height: 400px;  
+  border: 2px solid red;
+  font-size: 40px;
+  color: transparent; 
+  transition: background 0.2s, color 0.2s;
+}
+
+#toEgg:active {
+  transform: scale(0.9); 
+} 
+
+#toEgg:hover {
+  opacity: 0.6;
+  color: white;
+}
+
+#toBoneTossing {
+  background: url('../images/bone-tossing-1.png') no-repeat center;
+  background-size: cover; 
+  width: 300px;
+  height: 400px;
+  border: 2px solid red;
+  font-size: 40px;
+  color: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+
+#toBoneTossing:active {
+  transform: scale(0.9);
+}
+
+#toBoneTossing:hover {
+  opacity: 0.6;
+  color: white; 
 }
