@@ -10,6 +10,10 @@
   justify-content: center;
 }
   
+.tarot-button {
+  font-family: 'Cinzel Decorative', cursive;
+}
+
 button {
   margin: 70px;
 }

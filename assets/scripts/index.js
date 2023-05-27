@@ -2,6 +2,7 @@
 import * as consts from "./consts.js";
 /**
  * Binds the home page buttons to change the type of
+ *
  * consts.FORTUNE telling that is displayed
  * @author Elvis Joa
  * @date 5/21/2023
