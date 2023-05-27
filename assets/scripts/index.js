@@ -81,3 +81,8 @@ function init() {
 }
 
 init();
+
+document.querySelector(".nav-toggle").addEventListener("click", () => {
+    const navLinks = document.querySelector(".nav-links");
+    navLinks.hidden = !navLinks.hidden; });
+  
