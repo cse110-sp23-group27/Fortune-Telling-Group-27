@@ -1,6 +1,6 @@
 {
     "source": {
-        "include": ["./assets/scripts", "./jest_tests", "./scripts"],
+        "include": ["./assets/scripts", "./jest_tests"],
         "includePattern": ".js",
         "exclude": ["(node_modules)"],
         "excludePattern": "(^|\\/|\\\\)_"
