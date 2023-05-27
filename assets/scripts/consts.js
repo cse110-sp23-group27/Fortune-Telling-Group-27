@@ -12,6 +12,7 @@ export const CARDS = ["The Fool", "The Magician", "The High Priestess", "The Emp
 					  "The Hanged Man", "Death", "Temperance", "The Tower",
 					  "The Star", "The Moon", "The Sun", "Judgement", "The World"];
 
+export const cardBack = "\"./assets/images/tarot-cards/card-back.png\"";
 
 export const CARDSJSON = [
 	{
@@ -169,5 +170,3 @@ export const CARDSJSON = [
 		"futureDescription": "The future holds a time of expansion and integration on a higher level. The World card signifies that you will embark on a new phase of your journey, where you will have the opportunity to integrate your experiences and expand your horizons. Embrace new opportunities and embrace the interconnectedness of all aspects of your life. As you move forward, remember that you have the wisdom and resources to navigate any challenges that may arise."
 	}
 ];
-
-export const cardBack = "../assets/images/tarot-cards/card-back.png";

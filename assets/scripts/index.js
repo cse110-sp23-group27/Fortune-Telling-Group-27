@@ -190,7 +190,8 @@ function createShuffleCards() {
 		button.hidden = true;
 		button.className = "tarotCardsPreShuffle";
 		button.innerHTML =
-			"<img class = \"tarotCardsImagesPreShuffle\"src=\""+consts.cardBack +"/>";
+			"<img class = \"tarotCardsImagesPreShuffle\"src="+consts.cardBack +"/>";
+		console.log(consts.cardBack);
 		button.style.backgroundColor = "white";
 		button.setAttribute("clicked", false);
 		button.addEventListener("click", () =>{
