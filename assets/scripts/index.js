@@ -1,11 +1,12 @@
 /* eslint-disable linebreak-style */
 import * as consts from "./consts.js";
 /**
- * Binds the home page buttons to change the type of consts.FORTUNE telling that is displayed
+ * Binds the home page buttons to change the type of
+ * consts.FORTUNE telling that is displayed
  * @author Elvis Joa
  * @date 5/21/2023
  */
-function bind_home_page_btns() {
+function bindHomePageBtns() {
 	const tarotCardBtn = document.getElementById("toTarotCard");
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
@@ -21,9 +22,11 @@ function bind_home_page_btns() {
 
 	tarotCardBtn.addEventListener("click", () => {
 		console.log(consts.FORTUNETYPES.tarotCard);
-		display_general_UI_elements(consts.FORTUNETYPES.tarotCard);
-		document.getElementById("center-text").textContent = consts.FORTUNETYPES.tarotCard;
-		document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE TAROT CARD";
+		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
+		document.getElementById("center-text").textContent =
+            consts.FORTUNETYPES.tarotCard;
+		document.getElementsByClassName("response")[0].textContent =
+            "RESPONSE FOR THE TAROT CARD";
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -36,9 +39,10 @@ function bind_home_page_btns() {
 
 	eggBtn.addEventListener("click", () => {
 		console.log(consts.FORTUNETYPES.egg);
-		display_general_UI_elements(consts.FORTUNETYPES.egg);
-		document.getElementById("center-text").textContent = consts.FORTUNETYPES.egg;
-		document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE EGG";
+		displayGeneralUIElements(consts.FORTUNETYPES.egg);
+	    document.getElementById("center-text").textContent = consts.FORTUNETYPES.egg;
+		document.getElementsByClassName("response")[0].textContent =
+            "RESPONSE FOR THE EGG";
 	});
 
 	eggBtn.addEventListener("mouseover", () => {
@@ -51,9 +55,10 @@ function bind_home_page_btns() {
 
 	boneBtn.addEventListener("click", () => {
 		console.log(consts.FORTUNETYPES.bone);
-		display_general_UI_elements(consts.FORTUNETYPES.bone);
+		displayGeneralUIElements(consts.FORTUNETYPES.bone);
 		document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
-		document.getElementsByClassName("response")[0].textContent = "THIS IS THE RESPONSE FOR THE BONE TOSSING";
+		document.getElementsByClassName("response")[0].textContent =
+            "RESPONSE FOR THE BONE TOSSING";
 	});
 
 
@@ -72,10 +77,10 @@ function bind_home_page_btns() {
  * @author Elvis Joa
  * @date 5/21/2023
  */
-function bind_general_buttons() {
+function bindGeneralButtons() {
 	const homeBtn = document.getElementById("toHome");
 	homeBtn.addEventListener("click", () => {
-		display_general_UI_elements();
+		displayGeneralUIElements();
 		document.getElementById("center-text").textContent = "";
 		document.getElementsByClassName("response")[0].textContent = "";
 	});
@@ -86,7 +91,7 @@ function bind_general_buttons() {
  * @author Elvis Joa
  * @date 5/21/2023
  */
-function display_general_UI_elements(fortuneType =null) {
+function displayGeneralUIElements(fortuneType =null) {
 	// Changes the general buttons (home, options, GitHub)
 	const generalBtns = document.getElementsByClassName("general");
 	for (let i = 0; i < generalBtns.length; i++) {
@@ -111,8 +116,8 @@ function display_general_UI_elements(fortuneType =null) {
 }
 
 function init() {
-	bind_home_page_btns();
-	bind_general_buttons();
+	bindHomePageBtns();
+	bindGeneralButtons();
 }
 
 init();
