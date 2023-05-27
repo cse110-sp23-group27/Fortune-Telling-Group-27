@@ -2,6 +2,7 @@
 import * as consts from "./consts.js";
 /**
  * Binds the home page buttons to change the type of
+ *
  * consts.FORTUNE telling that is displayed
  * @author Elvis Joa
  * @date 5/21/2023
@@ -15,6 +16,8 @@ function bindHomePageBtns() {
      * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
      * @author Kevin Wong
      * @date 5/24/2023
+     * @param {string} color - A parameter for what color the background
+     * should be.
      */
 	function changeBackgroundColor(color) {
 		document.body.style.backgroundColor = color;
@@ -26,7 +29,7 @@ function bindHomePageBtns() {
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.tarotCard;
 		document.getElementsByClassName("response")[0].textContent =
-            "RESPONSE FOR THE TAROT CARD";
+            "THIS IS THE RESPONSE FOR THE TAROT CARD";
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -40,9 +43,10 @@ function bindHomePageBtns() {
 	eggBtn.addEventListener("click", () => {
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
-	    document.getElementById("center-text").textContent = consts.FORTUNETYPES.egg;
+		document.getElementById("center-text").textContent =
+            consts.FORTUNETYPES.egg;
 		document.getElementsByClassName("response")[0].textContent =
-            "RESPONSE FOR THE EGG";
+            "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
 	eggBtn.addEventListener("mouseover", () => {
@@ -56,9 +60,10 @@ function bindHomePageBtns() {
 	boneBtn.addEventListener("click", () => {
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
-		document.getElementById("center-text").textContent = consts.FORTUNETYPES.bone;
+		document.getElementById("center-text").textContent =
+            consts.FORTUNETYPES.bone;
 		document.getElementsByClassName("response")[0].textContent =
-            "RESPONSE FOR THE BONE TOSSING";
+            "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
 
 
@@ -72,7 +77,8 @@ function bindHomePageBtns() {
 }
 
 /**
- * Binds the buttons that appear at the top left for all consts.FORTUNE telling,
+ * Binds the buttons that appear at the top left for
+ * all consts.FORTUNE telling,
  * more specifically the home, options, and GitHub buttons.
  * @author Elvis Joa
  * @date 5/21/2023
@@ -90,6 +96,7 @@ function bindGeneralButtons() {
  * Displays the UI elements that are needed and wanted
  * @author Elvis Joa
  * @date 5/21/2023
+ * @param {string} fortuneType - Displays elements for this fortune type
  */
 function displayGeneralUIElements(fortuneType =null) {
 	// Changes the general buttons (home, options, GitHub)
@@ -115,9 +122,17 @@ function displayGeneralUIElements(fortuneType =null) {
 	}
 }
 
+/**
+ * Initializes home page
+ */
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
 }
 
 init();
+
+document.querySelector(".nav-toggle").addEventListener("click", () => {
+	const navLinks = document.querySelector(".nav-links");
+	navLinks.hidden = !navLinks.hidden;
+});
