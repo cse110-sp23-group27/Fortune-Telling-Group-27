@@ -1,4 +1,4 @@
-name: CICDPipeline
+name: CIPipeline
 run-name: ${{ github.actor }} is running Github Actions
 on:
   push:
@@ -11,26 +11,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          node-version: '18.16.0'
 
       - name: Install modules
-        run: yarn
+        run: npm ci
 
       - name: Run ESLint
-        run: npx eslint . --ext .js --fix
+        run: npm run lint
+      
+      - name: Run JSDocs
+        run: npm run docs
+
+      - name: Running Tests
+        if: success() || failure()
+        run: npm run --silent test
         
       - name: Check if there are any changes
+        if: success() || failure()
         id: verify_diff
         run: |
-          git diff --quiet . ':!node_modules/' ':!specs/' ':!.github/' || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet . ':!.github/' ':!node_modules/' || echo "changed=true" >> $GITHUB_OUTPUT
         
       - name: Commit if changes are made
-        if: steps.verify_diff.outputs.changed == 'true'
+        if: steps.verify_diff.outputs.changed == 'true' && (success() || failure())
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -- . ':!node_modules/' ':!specs/' ':!.github/'
-          git commit -m "fixed ESLint issues"
-
+          git add -- . ':!.github/' ':!package-lock.json'
+          git commit -m "Added Pipeline Changes Automatically"
+          
       - name: Pushing fixes to current branch
-        if: steps.verify_diff.outputs.changed == 'true'
+        if: steps.verify_diff.outputs.changed == 'true' && (success() || failure())
         run: git push

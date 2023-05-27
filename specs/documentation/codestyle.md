@@ -164,6 +164,19 @@ function foo()
 
 To be handled with autoformatter or Eslint.
 
+Our ESLint configuration file uses the imported google JS standards.
+
+Some other exceptions to google's rules include:
+* Comma dangling, which is disallowed
+* No-tabs, which is disallowed (tabs are allowed)
+* Ignoring comments when counting line length
+* Using double quotes instead of single quotes
+* Using unix line endings
+* No new lines at the end of a file
+* Requiring proper JSDoc comments at the start of functions
+
+The specific rules that we have detailed above take precedence over existing google standards.
+
 ## JSDoc generation
 
 To install JSDoc:
