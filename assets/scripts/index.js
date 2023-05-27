@@ -1,9 +1,8 @@
-/* eslint-disable linebreak-style */
 import * as consts from "./consts.js";
+
 /**
  * Binds the home page buttons to change the type of
- *
- * consts.FORTUNE telling that is displayed
+ * consts.FORTUNETYPE that is displayed
  * @author Elvis Joa
  * @date 5/21/2023
  */
@@ -26,10 +25,22 @@ function bindHomePageBtns() {
 	tarotCardBtn.addEventListener("click", () => {
 		console.log(consts.FORTUNETYPES.tarotCard);
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
+		/*
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.tarotCard;
 		document.getElementsByClassName("response")[0].textContent =
-            "THIS IS THE RESPONSE FOR THE TAROT CARD";
+            "THIS IS THE RESPONSE FOR THE TAROT CARD";*/
+
+		const shuffleBtn = document.getElementsByClassName("tarotSpecific")[0];
+		shuffleBtn.hidden = false;
+
+		const tarotSpecific =
+			document.getElementsByClassName("tarotCardsPreShuffle");
+		for (let i = 0; i < tarotSpecific.length; i++) {
+			tarotSpecific[i].hidden = false;
+		}
+		createShuffleCards();
+		hideShuffleCards();
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -123,11 +134,112 @@ function displayGeneralUIElements(fortuneType =null) {
 }
 
 /**
+ * Binds tarot card page buttons
+ */
+function bindTarotPageBtns() {
+	const shuffleBtn = document.createElement("button");
+	shuffleBtn.className = "tarotSpecific";
+	shuffleBtn.id = "tarotShuffle";
+	shuffleBtn.textContent = "SHUFFLE CARDS";
+	shuffleBtn.addEventListener("click", () => {
+		shuffleBtn.hidden = true;
+		showShuffleCards();
+	});
+	const tarotOptions = document.getElementById("tarotCardsSelection");
+	tarotOptions.append(shuffleBtn);
+}
+
+/**
+ * After shuffle and selecting cards, shows cards
+ */
+function displayThreeOptions() {
+	const cardsSelected = []
+	while (cardsSelected.length < 3) {
+		const card = Math.floor(Math.random()*21);
+		if (cardsSelected.indexOf(card) === -1) {
+			cardsSelected.push(card);
+		}
+	}
+	const description = ["past", "present", "future"];
+	hideShuffleCards();
+	console.log(cardsSelected);
+	for (let i = 1; i <= 3; i++) {
+		const cardOption = document.getElementById("Card " + i);
+		const imageSrc = (consts.CARDSJSON[cardsSelected[i - 1]])["img"];
+		cardOption.innerHTML =
+			"<img class = \"tarotCardsImagesPreShuffle\"src=\"" +imageSrc+"\"/>";
+		cardOption.hidden = false;
+		cardOption.value=
+			consts.CARDSJSON[cardsSelected[i-1]][description[i-1] + "Description"];
+		cardOption.addEventListener("click", () =>{
+			const response = document.getElementsByClassName("response")[0];
+			response.textContent = cardOption.value;
+		});
+	}
+}
+
+/**
+ * Creates shuffle cards
+ */
+function createShuffleCards() {
+	const tarotOptions = document.getElementById("tarotCardsSelection");
+	let counter = 0;
+	for (let i = 1; i < 23; i++) {
+		const button = document.createElement("button");
+		button.id = "Option " + i;
+		button.hidden = true;
+		button.className = "tarotCardsPreShuffle";
+		button.innerHTML =
+			"<img class = \"tarotCardsImagesPreShuffle\"src=\""+consts.cardBack +"/>";
+		button.style.backgroundColor = "white";
+		button.setAttribute("clicked", false);
+		button.addEventListener("click", () =>{
+			if (button.getAttribute("clicked") === "true") {
+				button.setAttribute("clicked", false);
+				button.style.backgroundColor = "white";
+				counter--;
+			} else {
+				button.setAttribute("clicked", true);
+				counter++;
+				button.style.backgroundColor = "black";
+				console.log(button.getAttribute("clicked"));
+			}
+
+			if (counter == 3) {
+				displayThreeOptions();
+			}
+		});
+		tarotOptions.appendChild(button);
+	}
+}
+
+/**
+ * Hide shuffle cards
+ */
+function hideShuffleCards() {
+	const cards = document.getElementsByClassName("tarotCardsPreShuffle");
+	for (let i = 0; i < cards.length; i++) {
+		cards[i].hidden = true;
+	}
+}
+
+/**
+ * Show shuffle cards
+ */
+function showShuffleCards() {
+	const cards = document.getElementsByClassName("tarotCardsPreShuffle");
+	for (let i = 0; i < cards.length; i++) {
+		cards[i].hidden = !cards[i].hidden;
+	}
+}
+
+/**
  * Initializes home page
  */
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
+	bindTarotPageBtns();
 }
 
 init();
