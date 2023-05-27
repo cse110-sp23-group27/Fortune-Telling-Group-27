@@ -1,4 +1,32 @@
-import * as consts from "./consts.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: assets/scripts/index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: assets/scripts/index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import * as consts from "./consts.js";
 
 /**
  * Binds the home page buttons to change the type of
@@ -36,7 +64,7 @@ function bindHomePageBtns() {
 
 		const tarotSpecific =
 			document.getElementsByClassName("tarotCardsPreShuffle");
-		for (let i = 0; i < tarotSpecific.length; i++) {
+		for (let i = 0; i &lt; tarotSpecific.length; i++) {
 			tarotSpecific[i].hidden = false;
 		}
 		createShuffleCards();
@@ -112,12 +140,12 @@ function bindGeneralButtons() {
 function displayGeneralUIElements(fortuneType =null) {
 	// Changes the general buttons (home, options, GitHub)
 	const generalBtns = document.getElementsByClassName("general");
-	for (let i = 0; i < generalBtns.length; i++) {
+	for (let i = 0; i &lt; generalBtns.length; i++) {
 		generalBtns[i].hidden = !generalBtns[i].hidden;
 	}
 
 	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i <= 2; i++) {
+	for (let i = 0; i &lt;= 2; i++) {
 		const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
 	}
@@ -128,7 +156,7 @@ function displayGeneralUIElements(fortuneType =null) {
 
 	// Hides/Displays the home page buttons as needed
 	const homeBtns = document.getElementsByClassName("home-page");
-	for (let i = 0; i < homeBtns.length; i++) {
+	for (let i = 0; i &lt; homeBtns.length; i++) {
 		homeBtns[i].hidden = !homeBtns[i].hidden;
 	}
 }
@@ -154,7 +182,7 @@ function bindTarotPageBtns() {
  */
 function displayThreeOptions() {
 	const cardsSelected = [];
-	while (cardsSelected.length < 3) {
+	while (cardsSelected.length &lt; 3) {
 		const card = Math.floor(Math.random()*21);
 		if (cardsSelected.indexOf(card) === -1) {
 			cardsSelected.push(card);
@@ -163,11 +191,11 @@ function displayThreeOptions() {
 	const description = ["past", "present", "future"];
 	hideShuffleCards();
 	console.log(cardsSelected);
-	for (let i = 1; i <= 3; i++) {
+	for (let i = 1; i &lt;= 3; i++) {
 		const cardOption = document.getElementById("Card " + i);
 		const imageSrc = (consts.CARDSJSON[cardsSelected[i - 1]])["img"];
 		cardOption.innerHTML =
-			"<img class = \"tarotCardsImagesPreShuffle\"src=\"" +imageSrc+"\"/>";
+			"&lt;img class = \"tarotCardsImagesPreShuffle\"src=\"" +imageSrc+"\"/>";
 		cardOption.hidden = false;
 		cardOption.value=
 			consts.CARDSJSON[cardsSelected[i-1]][description[i-1] + "Description"];
@@ -184,13 +212,13 @@ function displayThreeOptions() {
 function createShuffleCards() {
 	const tarotOptions = document.getElementById("tarotCardsSelection");
 	let counter = 0;
-	for (let i = 1; i < 23; i++) {
+	for (let i = 1; i &lt; 23; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
 		button.hidden = true;
 		button.className = "tarotCardsPreShuffle";
 		button.innerHTML =
-			"<img class = \"tarotCardsImagesPreShuffle\"src=\""+consts.cardBack +"/>";
+			"&lt;img class = \"tarotCardsImagesPreShuffle\"src=\""+consts.cardBack +"/>";
 		button.style.backgroundColor = "white";
 		button.setAttribute("clicked", false);
 		button.addEventListener("click", () =>{
@@ -218,7 +246,7 @@ function createShuffleCards() {
  */
 function hideShuffleCards() {
 	const cards = document.getElementsByClassName("tarotCardsPreShuffle");
-	for (let i = 0; i < cards.length; i++) {
+	for (let i = 0; i &lt; cards.length; i++) {
 		cards[i].hidden = true;
 	}
 }
@@ -228,7 +256,7 @@ function hideShuffleCards() {
  */
 function showShuffleCards() {
 	const cards = document.getElementsByClassName("tarotCardsPreShuffle");
-	for (let i = 0; i < cards.length; i++) {
+	for (let i = 0; i &lt; cards.length; i++) {
 		cards[i].hidden = !cards[i].hidden;
 	}
 }
@@ -247,4 +275,26 @@ init();
 document.querySelector(".nav-toggle").addEventListener("click", () => {
 	const navLinks = document.querySelector(".nav-links");
 	navLinks.hidden = !navLinks.hidden;
-});
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#bindTarotPageBtns">bindTarotPageBtns</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#hideShuffleCards">hideShuffleCards</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#showShuffleCards">showShuffleCards</a></li><li><a href="global.html#sum">sum</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat May 27 2023 23:37:35 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
