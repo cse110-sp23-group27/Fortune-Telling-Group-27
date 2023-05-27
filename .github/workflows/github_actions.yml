@@ -28,4 +28,4 @@ jobs:
         run: npm run --silent test
         
       - name: Check if there are any changes
-      - uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v4
