@@ -1,5 +1,7 @@
 import * as consts from "./consts.js";
 
+// Div that contains all tarot card page elements
+const tarotDiv = document.getElementById("tarotDiv");
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -23,24 +25,10 @@ function bindHomePageBtns() {
 	}
 
 	tarotCardBtn.addEventListener("click", () => {
-		console.log(consts.FORTUNETYPES.tarotCard);
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
-		/*
-		document.getElementById("center-text").textContent =
-            consts.FORTUNETYPES.tarotCard;
-		document.getElementsByClassName("response")[0].textContent =
-            "THIS IS THE RESPONSE FOR THE TAROT CARD";*/
-
-		const shuffleBtn = document.getElementsByClassName("tarotSpecific")[0];
-		shuffleBtn.hidden = false;
-
-		const tarotSpecific =
-			document.getElementsByClassName("tarotCardsPreShuffle");
-		for (let i = 0; i < tarotSpecific.length; i++) {
-			tarotSpecific[i].hidden = false;
-		}
-		createShuffleCards();
-		hideShuffleCards();
+		tarotDiv.innerHTML = "";
+		tarotDiv.hidden = !tarotDiv.hidden;
+		createShuffleBtn();
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -101,6 +89,11 @@ function bindGeneralButtons() {
 		document.getElementById("center-text").textContent = "";
 		document.getElementsByClassName("response")[0].textContent = "";
 	});
+
+	const githubBtn = document.getElementById("toGitHub");
+	githubBtn.addEventListener("click", () => {
+		navigator.clipboard.writeText("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
+	});
 }
 
 /**
@@ -123,7 +116,7 @@ function displayGeneralUIElements(fortuneType =null) {
 	}
 	if (fortuneType != null) {
 		const optionsBtn = document.getElementById(fortuneType + "Options");
-		optionsBtn.hidden = false;
+		optionsBtn.hidden = !optionsBtn.hidden;
 	}
 
 	// Hides/Displays the home page buttons as needed
@@ -134,66 +127,40 @@ function displayGeneralUIElements(fortuneType =null) {
 }
 
 /**
- * Binds tarot card page buttons
+ * Creates and displays the shuffle button that should trigger the animation
+ * for the tarot cards.
+ * @authors Elvis Joa, Daniel Lee, and Kevin Wong
+ * @date 5/27/2023
  */
-function bindTarotPageBtns() {
+function createShuffleBtn() {
 	const shuffleBtn = document.createElement("button");
 	shuffleBtn.className = "tarotSpecific";
 	shuffleBtn.id = "tarotShuffle";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", () => {
-		shuffleBtn.hidden = true;
-		showShuffleCards();
+		tarotDiv.innerHTML = "";
+		createShuffleCards();
 	});
-	const tarotOptions = document.getElementById("tarotCardsSelection");
-	tarotOptions.append(shuffleBtn);
+	tarotDiv.append(shuffleBtn);
 }
 
 /**
- * After shuffle and selecting cards, shows cards
- */
-function displayThreeOptions() {
-	const cardsSelected = [];
-	while (cardsSelected.length < 3) {
-		const card = Math.floor(Math.random()*21);
-		if (cardsSelected.indexOf(card) === -1) {
-			cardsSelected.push(card);
-		}
-	}
-	const description = ["past", "present", "future"];
-	hideShuffleCards();
-	console.log(cardsSelected);
-	for (let i = 1; i <= 3; i++) {
-		const cardOption = document.getElementById("Card " + i);
-		const imageSrc = (consts.CARDSJSON[cardsSelected[i - 1]])["img"];
-		cardOption.innerHTML =
-			"<img class = \"tarotCardsImagesPreShuffle\"src=\"" +imageSrc+"\"/>";
-		cardOption.hidden = false;
-		cardOption.value=
-			consts.CARDSJSON[cardsSelected[i-1]][description[i-1] + "Description"];
-		cardOption.addEventListener("click", () =>{
-			const response = document.getElementsByClassName("response")[0];
-			response.textContent = cardOption.value;
-		});
-	}
-}
-
-/**
- * Creates shuffle cards
+ * Creates and displays the tarot cards that are selected. Cards will change
+ * in appearance if they are selected. 3 cards have to be selected.
+ * @authors Elvis Joa, Daniel Lee, and Kevin Wong
+ * @date 5/27/2023
  */
 function createShuffleCards() {
-	const tarotOptions = document.getElementById("tarotCardsSelection");
 	let counter = 0;
 	for (let i = 1; i < 23; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
-		button.hidden = true;
-		button.className = "tarotCardsPreShuffle";
+		button.className = "cardsBtnPreShuffle";
 		button.innerHTML =
-			"<img class = \"tarotCardsImagesPreShuffle\"src="+consts.cardBack +"/>";
-		console.log(consts.cardBack);
+			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +"/>";
 		button.style.backgroundColor = "white";
 		button.setAttribute("clicked", false);
+		// Change appearance when clicked
 		button.addEventListener("click", () =>{
 			if (button.getAttribute("clicked") === "true") {
 				button.setAttribute("clicked", false);
@@ -203,35 +170,59 @@ function createShuffleCards() {
 				button.setAttribute("clicked", true);
 				counter++;
 				button.style.backgroundColor = "black";
-				console.log(button.getAttribute("clicked"));
 			}
 
 			if (counter == 3) {
 				displayThreeOptions();
 			}
 		});
-		tarotOptions.appendChild(button);
+		tarotDiv.appendChild(button);
 	}
 }
 
 /**
- * Hide shuffle cards
+ * After selecting three cards, 3 cards will appear, and from left to right,
+ * the cards represent the past, present and future descriptions.
+ * @authors Elvis Joa, Daniel Lee, and Kevin Wong
+ * @date 5/27/2023
  */
-function hideShuffleCards() {
-	const cards = document.getElementsByClassName("tarotCardsPreShuffle");
-	for (let i = 0; i < cards.length; i++) {
-		cards[i].hidden = true;
+function displayThreeOptions() {
+	tarotDiv.innerHTML = "";
+	const cardsSelected = [];
+	while (cardsSelected.length < 3) {
+		const card = Math.floor(Math.random()*21);
+		if (cardsSelected.indexOf(card) === -1) {
+			cardsSelected.push(card);
+		}
+	}
+	const description = ["past", "present", "future"];
+	console.log(cardsSelected);
+	for (let i = 1; i <= 3; i++) {
+		const cardOption = document.createElement("button");
+		cardOption.id = "Card" + i;
+		const imageSrc = (consts.CARDSJSON[cardsSelected[i - 1]])["img"];
+		cardOption.innerHTML =
+			"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
+		cardOption.value=
+			consts.CARDSJSON[cardsSelected[i-1]][description[i-1] + "Description"];
+		cardOption.addEventListener("click", () =>{
+			const response = document.getElementById("response");
+			response.textContent = cardOption.value;
+		});
+		tarotDiv.appendChild(cardOption);
 	}
 }
 
 /**
- * Show shuffle cards
+ * Binds functionality to the burger bar.
+ * @author Jason Bui
+ * @date 5/26/2023
  */
-function showShuffleCards() {
-	const cards = document.getElementsByClassName("tarotCardsPreShuffle");
-	for (let i = 0; i < cards.length; i++) {
-		cards[i].hidden = !cards[i].hidden;
-	}
+function bindBurgerBar() {
+	document.querySelector(".nav-toggle").addEventListener("click", () => {
+		const navLinks = document.querySelector(".nav-links");
+		navLinks.hidden = !navLinks.hidden;
+	});
 }
 
 /**
@@ -240,12 +231,7 @@ function showShuffleCards() {
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	bindTarotPageBtns();
+	bindBurgerBar();
 }
 
 init();
-
-document.querySelector(".nav-toggle").addEventListener("click", () => {
-	const navLinks = document.querySelector(".nav-links");
-	navLinks.hidden = !navLinks.hidden;
-});

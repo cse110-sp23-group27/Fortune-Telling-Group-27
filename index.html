@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="assets/styles/home-page.css">
+  <link rel="stylesheet" href="assets/styles/tarot-page.css">
   <nav class="mobile-nav">
     <button class="nav-toggle">☰</button>
     <ul class="nav-links" hidden>
@@ -16,11 +17,11 @@
 </head>
 <body>
     <main>
-      <button class = "general" id = "toHome" hidden = true>Home</button>
-      <button class = "general" id = "tarotOptions" hidden = true>Tarot Options</button>
-      <button class = "general" id = "eggOptions" hidden = true>Egg Options</button>
-      <button class = "general" id = "boneOptions" hidden = true>Bone Options</button>
-      <button class = "general" id = "toGitHub" hidden = true>GitHub</button>
+      <button class = "general" id = "toHome" hidden>Home</button>
+      <button class = "general" id = "tarotOptions" hidden>Tarot Options</button>
+      <button class = "general" id = "eggOptions" hidden>Egg Options</button>
+      <button class = "general" id = "boneOptions" hidden>Bone Options</button>
+      <button class = "general" id = "toGitHub" hidden>GitHub</button>
         <div class="container">
           <div class="button-wrapper">
             <button class = "home-page tarot-button" id = "toTarotCard">Tarot Card</button>
@@ -28,14 +29,11 @@
             <button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
           </div>
 
-          <div class="tarotSpecific" id="tarotCardsSelection" hidden>
-            <button id = "Card 1" hidden>Card 1</button>
-            <button id = "Card 2" hidden>Card 2</button>
-            <button id = "Card 3" hidden>Card 3</button>
+          <div class="tarotSpecific" id="tarotDiv" hidden>
           </div>
-          <font size =50><p id="center-text"></p></font>
+          <font size = 50><p id="center-text"></p></font>
         </div>
-        <p class="response"></p>
+        <p id="response"></p>
     </main>
 </body>
 <script src="assets/scripts/index.js" type="module"></script>

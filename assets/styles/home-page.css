@@ -2,26 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh; /* Optional: Set container height to fit the viewport */
+    height: 40vh; /* Optional: Set container height to fit the viewport */
   }
   
 .button-wrapper {
   display: flex;
   justify-content: center;
-}
-
-#tarotCardsSelection {
-  justify-content: center;
-}
-
-.tarotCardsPreShuffle{
-  margin:10px;
-}
-
-.tarotCardsImagesPreShuffle {
-  height: 13.5vmin;
-  margin: 5px;
-  width: 10vmin;
+  height: 40vh;
 }
 
 .tarot-button {
@@ -32,7 +19,7 @@ button {
   margin: 70px;
 }
 
-.response {
+#response {
   position: relative;
   left: 50%;
   bottom: 20%;
