@@ -1,5 +1,5 @@
-class TarotCard{
-    constructor(){
-        
-    }
+class TarotCard {
+	constructor() {
+
+	}
 }
