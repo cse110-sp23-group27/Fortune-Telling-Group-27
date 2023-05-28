@@ -1,0 +1,21 @@
+{
+    "source": {
+        "include": ["./assets/scripts", "./jest_tests"],
+        "includePattern": ".js",
+        "exclude": ["(node_modules)"],
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "sourceType": "module",
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    },
+    "opts": {
+        "destination": "./specs/documentation/generated/",
+        "recurse": true
+    }
+}
