@@ -1,12 +1,28 @@
 {
-    "name": "your-package",
+    "name": "fortunetelling27",
     "description": "…",
     "version": "1.0.0",
     "scripts": {
-        "test": "jest",
-        "lint": "npx eslint --fix --ext .js"
+        "test": "jest --silent",
+        "lint": "npx eslint ./assets/scripts ./jest_tests --fix --ext .js  -c ./.eslintrc.js",
+        "doc": "jsdoc -c jsdoc.json"
     },
     "devDependencies": {
-        "jest": "^29.5.0"
+        "@babel/core": "^7.16.0",
+        "@babel/preset-env": "^7.16.0",
+        "babel-jest": "^27.3.1",
+        "eslint": "^8.41.0",
+        "eslint-config-google": "^0.14.0",
+        "jest": "^27.3.1",
+        "jest-puppeteer": "^6.0.0",
+        "jsdoc": "^4.0.2",
+        "puppeteer": "^19.4.0"
+    },
+    "jest": {
+        "preset": "jest-puppeteer",
+        "verbose": true
+    },
+    "dependencies": {
+        "latest-version": "^7.0.0"
     }
 }
