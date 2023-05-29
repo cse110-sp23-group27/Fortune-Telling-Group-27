@@ -32,26 +32,45 @@ class Animator{
             //increment the timer inside the animation
             animationObj.timeSinceStart += this.animationIntervalDelay;
             // process the animation object
-            const nextValue = animationObj.to + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
+            const nextValue = Math.min(animationObj.from + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart, animationObj.to);
             animationObj.setter(nextValue);
             if(animationObj.timeSinceStart > animationObj.time){
                 // remove this animation as it ran its full time
+                // if has callback, call it
+                if(this.animationObjs[i].callback){
+                    this.animationObjs[i].callback();
+                }
                 this.animationObjs.splice(i, 1); // remove obj from list
             }
         }
     }
 
     // add a new animation object that will take the animation from `from` value to the `to` value
-    addAnimation(from, to, getter, setter, time){
+    addAnimation(from, to, getter, setter, time, callback){
         const animationObj = {
             from: from,
             to: to,
             getter: getter,
             setter: setter,
             time: time,
+            callback: callback,
             timeSinceStart: 0
         }
         this.animationObjs.push(animationObj);
+        return animationObj;
+    }
+
+    deteleAnimation(animationObj, runCallback){
+        // TODO this runs in O(n), restructure to a map probably to make this O(1)
+        const animationIndex = this.animationObjs.findIndex(animationObj);
+
+        // if asked to still run the callback
+        if(runCallback && this.animationObjs[animationIndex].callback){
+            this.animationObjs[animationIndex].callback();
+        }
+
+        // remove this object from the animation list early
+        this.animationObjs.splice(animationIndex, 1);
     }
 }
 
