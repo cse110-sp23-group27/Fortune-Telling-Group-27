@@ -36,19 +36,24 @@ class Animator{
             animationObj.setter(nextValue);
             if(animationObj.timeSinceStart > animationObj.time){
                 // remove this animation as it ran its full time
+                // if has callback, call it
+                if(this.animationObjs.callback){
+                    this.animationObjs.callback();
+                }
                 this.animationObjs.splice(i, 1); // remove obj from list
             }
         }
     }
 
     // add a new animation object that will take the animation from `from` value to the `to` value
-    addAnimation(from, to, getter, setter, time){
+    addAnimation(from, to, getter, setter, time, callback){
         const animationObj = {
             from: from,
             to: to,
             getter: getter,
             setter: setter,
             time: time,
+            callback: callback,
             timeSinceStart: 0
         }
         this.animationObjs.push(animationObj);
