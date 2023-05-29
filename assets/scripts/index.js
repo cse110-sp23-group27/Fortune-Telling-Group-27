@@ -2,6 +2,8 @@ import * as consts from "./consts.js";
 
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
+// Response texts
+const response = document.getElementById("response");
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -26,9 +28,8 @@ function bindHomePageBtns() {
 
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
-		tarotDiv.innerHTML = "";
-		tarotDiv.hidden = !tarotDiv.hidden;
-		createShuffleBtn();
+		tarotDiv.hidden = false;
+		document.getElementById("tarotShuffleBtn").hidden = false;
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -87,7 +88,12 @@ function bindGeneralButtons() {
 	homeBtn.addEventListener("click", () => {
 		displayGeneralUIElements();
 		document.getElementById("center-text").textContent = "";
-		document.getElementsByClassName("response")[0].textContent = "";
+		document.getElementById("response").textContent = "";
+		const responseCards = document.getElementsByClassName("responseCards");
+		while (responseCards.length > 0) {
+			tarotDiv.removeChild(responseCards[0]);
+		}
+		tarotDiv.hidden = true;
 	});
 
 	const githubBtn = document.getElementById("toGitHub");
@@ -124,6 +130,7 @@ function displayGeneralUIElements(fortuneType =null) {
 	for (let i = 0; i < homeBtns.length; i++) {
 		homeBtns[i].hidden = !homeBtns[i].hidden;
 	}
+	response.textContent = "";
 }
 
 /**
@@ -134,12 +141,14 @@ function displayGeneralUIElements(fortuneType =null) {
  */
 function createShuffleBtn() {
 	const shuffleBtn = document.createElement("button");
-	shuffleBtn.className = "tarotSpecific";
-	shuffleBtn.id = "tarotShuffle";
+	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", () => {
-		tarotDiv.innerHTML = "";
-		createShuffleCards();
+		shuffleBtn.hidden = true;
+		for (let card = 1; card < 23; card++) {
+			const cardOption = document.getElementById("Option " + card);
+			cardOption.hidden = false;
+		}
 	});
 	tarotDiv.append(shuffleBtn);
 }
@@ -151,28 +160,36 @@ function createShuffleBtn() {
  * @date 5/27/2023
  */
 function createShuffleCards() {
-	let counter = 0;
+	let cardCounter = 0;
 	for (let i = 1; i < 23; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
+		button.hidden = true;
 		button.innerHTML =
 			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +"/>";
 		button.style.backgroundColor = "white";
-		button.setAttribute("clicked", false);
-		// Change appearance when clicked
+		button.setAttribute("selected", false);
+		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
-			if (button.getAttribute("clicked") === "true") {
-				button.setAttribute("clicked", false);
+			if (button.getAttribute("selected") === "true") {
+				button.setAttribute("selected", false);
 				button.style.backgroundColor = "white";
-				counter--;
+				cardCounter--;
 			} else {
-				button.setAttribute("clicked", true);
-				counter++;
+				button.setAttribute("selected", true);
 				button.style.backgroundColor = "black";
+				cardCounter++;
 			}
 
-			if (counter == 3) {
+			if (cardCounter == 3) {
+				cardCounter = 0;
+				for (let card = 1; card < 23; card++) {
+					const cardOption = document.getElementById("Option " + card);
+					cardOption.setAttribute("selected", false);
+					cardOption.style.backgroundColor = "white";
+					cardOption.hidden = true;
+				}
 				displayThreeOptions();
 			}
 		});
@@ -187,7 +204,6 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
-	tarotDiv.innerHTML = "";
 	const cardsSelected = [];
 	while (cardsSelected.length < 3) {
 		const card = Math.floor(Math.random()*21);
@@ -195,18 +211,27 @@ function displayThreeOptions() {
 			cardsSelected.push(card);
 		}
 	}
-	const description = ["past", "present", "future"];
-	console.log(cardsSelected);
+
 	for (let i = 1; i <= 3; i++) {
 		const cardOption = document.createElement("button");
 		cardOption.id = "Card" + i;
-		const imageSrc = (consts.CARDSJSON[cardsSelected[i - 1]])["img"];
+		cardOption.className = "responseCards";
+		const tarotCard = consts.CARDSJSON[cardsSelected[i - 1]];
+		const imageSrc = tarotCard["img"];
 		cardOption.innerHTML =
 			"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
-		cardOption.value=
-			consts.CARDSJSON[cardsSelected[i-1]][description[i-1] + "Description"];
+		switch (i) {
+		case 1:
+			cardOption.value = tarotCard["pastDescription"];
+			break;
+		case 2:
+			cardOption.value = tarotCard["presentDescription"];
+			break;
+		default:
+			cardOption.value = tarotCard["futureDescription"];
+		}
+
 		cardOption.addEventListener("click", () =>{
-			const response = document.getElementById("response");
 			response.textContent = cardOption.value;
 		});
 		tarotDiv.appendChild(cardOption);
@@ -232,6 +257,8 @@ function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
 	bindBurgerBar();
+	createShuffleBtn();
+	createShuffleCards();
 }
 
 init();

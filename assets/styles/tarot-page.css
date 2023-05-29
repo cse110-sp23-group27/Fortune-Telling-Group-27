@@ -1,9 +1,10 @@
 #tarotDiv {
     justify-content: center;
+    margin: 10vmin;
 }
   
 .cardsBtnPreShuffle{
-    margin:10px;
+    margin: 10px;
 }
   
 .imagesPreShuffle {
