@@ -37,8 +37,8 @@ class Animator{
             if(animationObj.timeSinceStart > animationObj.time){
                 // remove this animation as it ran its full time
                 // if has callback, call it
-                if(this.animationObjs.callback){
-                    this.animationObjs.callback();
+                if(this.animationObjs[i].callback){
+                    this.animationObjs[i].callback();
                 }
                 this.animationObjs.splice(i, 1); // remove obj from list
             }
