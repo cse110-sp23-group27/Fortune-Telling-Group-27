@@ -47,8 +47,12 @@ class TarotCard{
 
     /**
      * Flips object over
+     * 
+     * @param faceUp Determines whether the card is face up or not
+     * @param time Time in milliseconds it takes for the object to complete the 
+     * flip
      */
-    flip() {
+    setFlip(faceUp, time) {
         // 
     }
 
@@ -57,7 +61,7 @@ class TarotCard{
      *
      * @param time Time in milliseconds before the flip function is performed
      */
-    setFlip(time) {
+    setFlipInstantly() {
         //
     }
 }
