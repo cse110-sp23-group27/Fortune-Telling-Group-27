@@ -1,7 +1,7 @@
 class TarotCard {
 	constructor(cardElement) {
-          this.cardElement = cardElement;
-          cardElement.style.position = "absolute";
+		this.cardElement = cardElement;
+		cardElement.style.position = "absolute";
 	}
 	/**
      * Moves object from one point to another over a duration of time
@@ -13,8 +13,8 @@ class TarotCard {
      */
 	move(pointA, pointB, time) {
 		Animator.instance.addAnimation(pointA.x, pointB.x, ()=>this.cardElement.style.left, (val)=>this.cardElement.style.left = `${val}vw`, time);
-          Animator.instance.addAnimation(pointA.y, pointB.y, ()=>this.cardElement.style.top, (val)=>this.cardElement.style.top = `${val}vh`, time);
-     }
+		Animator.instance.addAnimation(pointA.y, pointB.y, ()=>this.cardElement.style.top, (val)=>this.cardElement.style.top = `${val}vh`, time);
+	}
 
 
 	/**
@@ -24,7 +24,7 @@ class TarotCard {
      */
 	moveInstantly(point) {
 		cardElement.style.left = point.x;
-          cardElement.style.top = point.y;
+		cardElement.style.top = point.y;
 	}
 
 	/**
