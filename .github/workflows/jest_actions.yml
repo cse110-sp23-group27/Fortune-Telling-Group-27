@@ -1,12 +1,19 @@
 name: JestTesting
 run-name: ${{ github.actor }} is running Github Actions
-on: push
+on:
+  push:
+    branches:
+          - main     # Only runs on main
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        node-version: '18.16.0'
+
     - name: Install modules
-      run: yarn
+      run: npm ci
+      
     - name: Run tests
-      run: yarn test
+      run: npm run --silent test
