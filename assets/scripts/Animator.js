@@ -60,10 +60,17 @@ class Animator{
         return animationObj;
     }
 
-    deteleAnimation(animationObj){
+    deteleAnimation(animationObj, runCallback){
         // TODO this runs in O(n), restructure to a map probably to make this O(1)
+        const animationIndex = this.animationObjs.findIndex(animationObj);
+
+        // if asked to still run the callback
+        if(runCallback && this.animationObjs[animationIndex].callback){
+            this.animationObjs[animationIndex].callback();
+        }
+
         // remove this object from the animation list early
-        this.animationObjs.splice(this.animationObjs.findIndex(animationObj), 1);
+        this.animationObjs.splice(animationIndex, 1);
     }
 }
 
