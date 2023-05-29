@@ -57,6 +57,13 @@ class Animator{
             timeSinceStart: 0
         }
         this.animationObjs.push(animationObj);
+        return animationObj;
+    }
+
+    deteleAnimation(animationObj){
+        // TODO this runs in O(n), restructure to a map probably to make this O(1)
+        // remove this object from the animation list early
+        this.animationObjs.splice(this.animationObjs.findIndex(animationObj), 1);
     }
 }
 
