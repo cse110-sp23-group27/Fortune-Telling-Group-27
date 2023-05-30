@@ -186,8 +186,7 @@ function playShuffleAnimation(callback) {
 				shuffleCount++;
 				if (shuffleCount < 3) {
 					shuffleSequence(callback);
-				}
-				else{
+				} else {
 					callback();
 				}
 			});
@@ -204,15 +203,15 @@ function playShuffleAnimation(callback) {
  * @date 5/29/2023 - 10:18:49 PM
  * @param callback a callback function for end of animation
  */
-function playCardSpreadAnimation(callback){
+function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
 	let cardsFinished = 0;
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x:50, y: 50}, {x:20 + (60/tCard.getAllCards().length)*cardXoffset, y:50}, 300, ()=>{
+		tCard.move({x: 50, y: 50}, {x: 20 + (60/tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
 			tCard.setClickable(true);
-			if(cardsFinished >= tCards.length){
+			if (cardsFinished >= tCards.length) {
 				callback();
 			}
 			cardsFinished++;
