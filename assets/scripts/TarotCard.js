@@ -68,7 +68,7 @@ class TarotCard {
 		//
 	}
 
-     /**
+	/**
      * Performs the flip function after a duration of time
      *
      * @param zIndex z index of the card
@@ -76,6 +76,4 @@ class TarotCard {
 	setZIndex(zIndex) {
 		this.cardElement.style.zIndex = zIndex;
 	}
-
-     
 }
