@@ -284,16 +284,16 @@ function displayThreeOptions() {
 
 	let selectedCardsFound = 0;
 	let cardsMoved = 0;
-	TarotCard.getAllCards().forEach(card => {
-		if(selectedHTMLCards.includes(card.cardElement)){
+	TarotCard.getAllCards().forEach((card) => {
+		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(), {x: 20+(selectedCardsFound*20), y: 50}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
-			card.move(curPos, {x:curPos.x, y:-100}, 350, ()=>{
+			card.move(curPos, {x: curPos.x, y: -100}, 350, ()=>{
 				cardsMoved++;
-				if(cardsMoved < 3){
+				if (cardsMoved < 3) {
 					return;
 				}
 				const cardsTypeSelected = [];
@@ -303,7 +303,7 @@ function displayThreeOptions() {
 						cardsTypeSelected.push(card);
 					}
 				}
-			
+
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
 					cardOption.className = "responseCards";
@@ -321,7 +321,7 @@ function displayThreeOptions() {
 					default:
 						cardOption.value = tarotCard["futureDescription"];
 					}
-			
+
 					// TODO Find a better way to do this, apparently this can cause a memory leak but don't have time to make a better solution rn
 					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
 					// remove old on click events
@@ -331,7 +331,7 @@ function displayThreeOptions() {
 					cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
 					// tempCardOption.remove();
 					cardOption.hidden = false;
-			
+
 					cardOption.addEventListener("click", () =>{
 						response.textContent = cardOption.value;
 					});
