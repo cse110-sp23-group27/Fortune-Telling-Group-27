@@ -274,24 +274,23 @@ function createShuffleCards() {
 function displayThreeOptions() {
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
-	for(let i = 1; i < 23; i++){
+	for (let i = 1; i < 23; i++) {
 		const button = document.getElementById(`Option ${i}`);
-		if(button.getAttribute("selected") === "true"){
+		if (button.getAttribute("selected") === "true") {
 			selectedHTMLCards.push(button);
 			button.setAttribute("selected", false);
 		}
 	}
 
 	let selectedCardsFound = 0;
-	TarotCard.getAllCards().forEach(card => {
-		if(selectedHTMLCards.includes(card.cardElement)){
+	TarotCard.getAllCards().forEach((card) => {
+		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
-			card.move(card.getPositionPoint(), {x:20+(selectedCardsFound*20), y:50}, 350);
+			card.move(card.getPositionPoint(), {x: 20+(selectedCardsFound*20), y: 50}, 350);
 			selectedCardsFound++;
-		}
-		else{
+		} else {
 			const curPos = card.getPositionPoint();
-			card.move(curPos, {x:curPos.x, y:-100}, 350);
+			card.move(curPos, {x: curPos.x, y: -100}, 350);
 		}
 	});
 
