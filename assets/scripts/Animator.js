@@ -42,7 +42,7 @@ class Animator{
             let nextValue = animationObj.from + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
             // make sure that the next value never overshoots the "to" value
             nextValue = (animationObj.from - animationObj.to < 0) ? 
-                    Math.max(nextValue, animationObj.to) : Math.min(nextValue, animationObj.to);
+                    Math.min(nextValue, animationObj.to) : Math.max(nextValue, animationObj.to);
 
             animationObj.setter(nextValue);
             if(animationObj.timeSinceStart > animationObj.time){
