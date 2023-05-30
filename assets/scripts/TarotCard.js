@@ -1,6 +1,7 @@
 class TarotCard {
-	constructor() {
-
+	constructor(cardElement) {
+		this.cardElement = cardElement;
+		this.cardElement.style.position = "absolute";
 	}
 	/**
      * Moves object from one point to another over a duration of time
@@ -11,29 +12,31 @@ class TarotCard {
      * pointA to pointB
      */
 	move(pointA, pointB, time) {
-		//
+		Animator.instance.addAnimation(pointA.x, pointB.x, ()=>this.cardElement.style.left, (val)=>this.cardElement.style.left = `${val}vw`, time);
+		Animator.instance.addAnimation(pointA.y, pointB.y, ()=>this.cardElement.style.top, (val)=>this.cardElement.style.top = `${val}vh`, time);
 	}
 
 
 	/**
      * Moves object from one point to another instantly
      *
-     * @param pointA The object's starting point
-     * @param pointB The object's ending point
+     * @param point The object's ending point
      */
-	moveInstantly(pointA, pointB) {
-		//
+	moveInstantly(point) {
+		this.cardElement.style.left = point.x;
+		this.cardElement.style.top = point.y;
 	}
 
 	/**
      * Rotates object some number of degrees over a duration of time
      *
-     * @param degrees Number of degrees to rotate object
+     * @param degreesA Original orientation of object
+     * @param degreesB Number of degrees to rotate object
      * @param time Time in milliseconds it takes for the object to complete the
      * rotation
      */
-	rotate(degrees, time) {
-		//
+	rotate(degreesA, degreesB, time) {
+		Animator.instance.addAnimation(degreesA, degreesB, ()=>this.cardElement.style.transform, this.rotateInstantly, time);
 	}
 
 	/**
@@ -42,7 +45,7 @@ class TarotCard {
      * @param degrees Number of degrees to rotate object
      */
 	rotateInstantly(degrees) {
-		//
+		this.cardElement.style.transform = `rotate(${degrees}deg)`;
 	}
 
 	/**
@@ -63,5 +66,14 @@ class TarotCard {
      */
 	setFlipInstantly() {
 		//
+	}
+
+	/**
+     * Performs the flip function after a duration of time
+     *
+     * @param zIndex z index of the card
+     */
+	setZIndex(zIndex) {
+		this.cardElement.style.zIndex = zIndex;
 	}
 }
