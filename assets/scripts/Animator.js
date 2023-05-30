@@ -1,3 +1,10 @@
+/**
+ * Animator class that handles animation objects and callbacks
+ * @date 5/29/2023 - 6:26:28 PM
+ *
+ * @class Animator
+ * @typedef {Animator}
+ */
 class Animator{    
     static instance = null;
     constructor(){
@@ -45,7 +52,18 @@ class Animator{
         }
     }
 
-    // add a new animation object that will take the animation from `from` value to the `to` value
+    /**
+     * Add a new animation object that will take the animation from `from` value to the `to` value
+     * @date 5/29/2023 - 6:24:34 PM
+     *
+     * @param {float} from starting value of the animation
+     * @param {float} to ending value of animation
+     * @param {Function} getter function to get current value of the animated prop
+     * @param {Function} setter function to set new current value of the animated prop
+     * @param {float} time time to complete the animation
+     * @param {Function} callback callback after the animation is done
+     * @returns {{ from: any; to: any; getter: any; setter: any; time: any; callback: any; timeSinceStart: number; }}
+     */
     addAnimation(from, to, getter, setter, time, callback){
         const animationObj = {
             from: from,
