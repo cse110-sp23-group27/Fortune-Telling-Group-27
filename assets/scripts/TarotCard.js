@@ -13,6 +13,26 @@ class TarotCard {
 	}
 
      /**
+      * Set the card element to allow/disallow clicks
+      * @date 5/29/2023 - 9:26:19 PM
+      *
+      * @param {Boolean} isClickable
+      */
+     setClickable(isClickable){
+          this.cardElement.style.pointerEvents = isClickable?'auto':'none';
+     }
+
+     /**
+      * Returns a list of all TarotCards
+      * @date 5/29/2023 - 6:40:32 PM
+      *
+      * @returns {[]}
+      */
+     static getAllCards(){
+          return TarotCard.#allCards;
+     }
+
+     /**
       * Returns a list of all TarotCards
       * @date 5/29/2023 - 6:40:32 PM
       *

@@ -149,12 +149,19 @@ function createShuffleBtn() {
 			const cardOption = document.getElementById("Option " + card);
 			cardOption.hidden = false;
 		}
-		playShuffleAnimation();
+		playShuffleAnimation(()=>{
+			playCardSpreadAnimation();
+		});
 	});
 	tarotDiv.append(shuffleBtn);
 }
 
-function playShuffleAnimation() {
+/**
+ * Will play the shuffle animation for the current cards
+ * @date 5/29/2023 - 9:20:17 PM
+ * @param callback a callback function for end of animation
+ */
+function playShuffleAnimation(callback) {
 	const tCards = [];
 	// get all of the cards and make them into the TarotCard classes
 	for (let card = 1; card < 23; card++) {
@@ -163,12 +170,14 @@ function playShuffleAnimation() {
 	}
 	// Move all to center
 	tCards.forEach((tCard) => {
+		// block clicks too
+		tCard.setClickable(false);
 		tCard.moveInstantly({x: 50, y: 50});
 	});
 
 	// make 3 shuffles
 	let shuffleCount = 0;
-	const shuffleSequence = ()=>{
+	const shuffleSequence = (callback)=>{
 		// pick random card
 		const randCard = tCards[Math.floor(tCards.length * Math.random())];
 		// move away
@@ -176,13 +185,40 @@ function playShuffleAnimation() {
 			randCard.move({x: 52, y: 50}, {x: 50, y: 50}, 350, ()=>{
 				shuffleCount++;
 				if (shuffleCount < 3) {
-					console.log(shuffleCount);
-					shuffleSequence();
+					shuffleSequence(callback);
+				}
+				else{
+					callback();
 				}
 			});
 		});
 	};
-	shuffleSequence();
+	shuffleSequence(()=>{
+		// finished shuffling
+		callback();
+	});
+}
+
+/**
+ * Plays the card spread animation
+ * @date 5/29/2023 - 10:18:49 PM
+ * @param callback a callback function for end of animation
+ */
+function playCardSpreadAnimation(callback){
+	const tCards = TarotCard.getAllCards();
+	let cardXoffset = 0;
+	let cardsFinished = 0;
+	tCards.forEach((tCard) => {
+		tCard.setClickable(true);
+		tCard.move({x:50, y: 50}, {x:20 + (60/tCard.getAllCards().length)*cardXoffset, y:50}, 300, ()=>{
+			tCard.setClickable(true);
+			if(cardsFinished >= tCards.length){
+				callback();
+			}
+			cardsFinished++;
+		});
+		cardXoffset++;
+	});
 }
 
 /**
