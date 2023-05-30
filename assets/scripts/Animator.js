@@ -39,7 +39,11 @@ class Animator{
             //increment the timer inside the animation
             animationObj.timeSinceStart += this.animationIntervalDelay;
             // process the animation object
-            const nextValue = Math.min(animationObj.from + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart, animationObj.to);
+            let nextValue = animationObj.from + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
+            // make sure that the next value never overshoots the "to" value
+            nextValue = (animationObj.from - animationObj.to < 0) ? 
+                    Math.max(nextValue, animationObj.to) : Math.min(nextValue, animationObj.to);
+
             animationObj.setter(nextValue);
             if(animationObj.timeSinceStart > animationObj.time){
                 // remove this animation as it ran its full time
