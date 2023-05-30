@@ -265,6 +265,7 @@ function resetCards() {
  * @date 5/26/2023
  */
 /* function bindBurgerBar() {
+/* function bindBurgerBar() {
 	document.querySelector(".nav-toggle").addEventListener("click", () => {
 		const navLinks = document.querySelector(".nav-links");
 		navLinks.hidden = !navLinks.hidden;
