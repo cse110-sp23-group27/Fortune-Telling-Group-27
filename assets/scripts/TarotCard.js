@@ -16,7 +16,7 @@ class TarotCard {
       * Returns a list of all TarotCards
       * @date 5/29/2023 - 6:40:32 PM
       *
-      * @returns {{}}
+      * @returns {[]}
       */
      getAllCards(){
           return TarotCard.#allCards;
@@ -79,7 +79,7 @@ class TarotCard {
      * @param callback End of animation callback
      * flip
      */
-	setFlip(faceUp, time callback) {
+	setFlip(faceUp, time, callback) {
 		//
 	}
 
