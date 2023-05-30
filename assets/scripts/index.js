@@ -252,12 +252,13 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
-				for (let card = 1; card < 23; card++) {
-					const cardOption = document.getElementById("Option " + card);
-					cardOption.setAttribute("selected", false);
-					cardOption.style.backgroundColor = "white";
-					cardOption.hidden = true;
-				}
+				// for (let card = 1; card < 23; card++) {
+				// 	// when 3 cards selected
+				// 	const cardOption = document.getElementById("Option " + card);
+				// 	cardOption.setAttribute("selected", false);
+				// 	cardOption.style.backgroundColor = "white";
+				// 	cardOption.hidden = true;
+				// }
 				displayThreeOptions();
 			}
 		});
@@ -272,23 +273,46 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
-	const cardsSelected = [];
-	while (cardsSelected.length < 3) {
-		const card = Math.floor(Math.random()*21);
-		if (cardsSelected.indexOf(card) === -1) {
-			cardsSelected.push(card);
+	// get html elements of selected cards
+	const selectedHTMLCards = [];
+	for(let i = 1; i < 23; i++){
+		const button = document.getElementById(`Option ${i}`);
+		if(button.getAttribute("selected") === "true"){
+			selectedHTMLCards.push(button);
+			button.setAttribute("selected", false);
 		}
 	}
 
-	for (let i = 1; i <= 3; i++) {
-		const cardOption = document.createElement("button");
-		cardOption.id = "Card" + i;
+	let selectedCardsFound = 0;
+	TarotCard.getAllCards().forEach(card => {
+		if(selectedHTMLCards.includes(card.cardElement)){
+			console.log(card.getPositionPoint());
+			card.move(card.getPositionPoint(), {x:20+(selectedCardsFound*20), y:50}, 350);
+			selectedCardsFound++;
+		}
+		else{
+			const curPos = card.getPositionPoint();
+			card.move(curPos, {x:curPos.x, y:-100}, 350);
+		}
+	});
+
+
+	const cardsTypeSelected = [];
+	while (cardsTypeSelected.length < 3) {
+		const card = Math.floor(Math.random()*21);
+		if (cardsTypeSelected.indexOf(card) === -1) {
+			cardsTypeSelected.push(card);
+		}
+	}
+
+	for (let i = 2; i >= 0; i--) {
+		const cardOption = selectedHTMLCards[i];
 		cardOption.className = "responseCards";
-		const tarotCard = consts.CARDSJSON[cardsSelected[i - 1]];
+		const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 		const imageSrc = tarotCard["img"];
 		cardOption.innerHTML =
 			"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
-		switch (i) {
+		switch (i + 1) {
 		case 1:
 			cardOption.value = tarotCard["pastDescription"];
 			break;
@@ -298,6 +322,16 @@ function displayThreeOptions() {
 		default:
 			cardOption.value = tarotCard["futureDescription"];
 		}
+
+		// TODO Find a better way to do this, apparently this can cause a memory leak but don't have time to make a better solution rn
+		// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
+		// remove old on click events
+		cardOption.hidden = true;
+		const clonedCardOption = cardOption.cloneNode(true);
+		// const tempCardOption = cardOption;
+		cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
+		// tempCardOption.remove();
+		cardOption.hidden = false;
 
 		cardOption.addEventListener("click", () =>{
 			response.textContent = cardOption.value;

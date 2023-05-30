@@ -69,6 +69,16 @@ class TarotCard {
 		this.cardElement.style.top = `${point.y}vh`;
 	}
 
+     /**
+      * Get the positional point of the card
+      * @date 5/29/2023 - 11:19:13 PM
+      *
+      * @returns {{ x: Float; y: Float; }}
+      */
+     getPositionPoint(){
+          return {x: parseFloat(this.cardElement.style.left.replace("vw", "")), y: parseFloat(this.cardElement.style.top.replace("vh", ""))};
+     }
+
 	/**
      * Rotates object some number of degrees over a duration of time
      *
