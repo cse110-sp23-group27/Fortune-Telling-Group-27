@@ -154,39 +154,38 @@ function createShuffleBtn() {
 	tarotDiv.append(shuffleBtn);
 }
 
-function playShuffleAnimation(){
+function playShuffleAnimation() {
 	const tCards = [];
 	// get all of the cards and make them into the TarotCard classes
 	for (let card = 1; card < 23; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		tCards.push(new TarotCard(cardOption));
 	}
-	//Move all to center
-	tCards.forEach(tCard => {
-		tCard.moveInstantly({x:50, y:50});
+	// Move all to center
+	tCards.forEach((tCard) => {
+		tCard.moveInstantly({x: 50, y: 50});
 	});
 
 	// make 3 shuffles
 	let shuffleCount = 0;
-	let shuffleSequence = ()=>{
+	const shuffleSequence = ()=>{
 		console.log(shuffleCount);
 		// pick random card
 		const randCard = tCards[Math.floor(tCards.length * Math.random())];
 		// move away
-		randCard.move({x:50, y:50}, {x:52, y:50}, 350, ()=>{
+		randCard.move({x: 50, y: 50}, {x: 52, y: 50}, 350, ()=>{
 			alert("asd");
-			randCard.move({x:52, y:50}, {x:50, y:50}, 350, ()=>{
+			randCard.move({x: 52, y: 50}, {x: 50, y: 50}, 350, ()=>{
 				shuffleCount++;
 				console.log(shuffleCount);
-				if(shuffleCount < 3){
+				if (shuffleCount < 3) {
 					console.log(shuffleCount);
 					shuffleSequence();
 				}
 			});
 		});
-	}
+	};
 	shuffleSequence();
-	
 }
 
 /**
