@@ -6,7 +6,7 @@ class TarotCard {
       * @constructor
       * @param {HTMLElement} cardElement html element that represents the card
       */
-     constructor(cardElement) {
+	constructor(cardElement) {
 		this.cardElement = cardElement;
 		this.cardElement.style.position = "absolute";
 	}
