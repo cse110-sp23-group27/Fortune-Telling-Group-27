@@ -1,7 +1,7 @@
 class TarotCard {
 	constructor(cardElement) {
 		this.cardElement = cardElement;
-		cardElement.style.position = "absolute";
+		this.cardElement.style.position = "absolute";
 	}
 	/**
      * Moves object from one point to another over a duration of time
@@ -23,8 +23,8 @@ class TarotCard {
      * @param point The object's ending point
      */
 	moveInstantly(point) {
-		cardElement.style.left = point.x;
-		cardElement.style.top = point.y;
+		this.cardElement.style.left = point.x;
+		this.cardElement.style.top = point.y;
 	}
 
 	/**
@@ -45,7 +45,7 @@ class TarotCard {
      * @param degrees Number of degrees to rotate object
      */
 	rotateInstantly(degrees) {
-		cardElement.style.transform = `rotate(${degrees}deg)`;
+		this.cardElement.style.transform = `rotate(${degrees}deg)`;
 	}
 
 	/**
@@ -67,4 +67,15 @@ class TarotCard {
 	setFlipInstantly() {
 		//
 	}
+
+     /**
+     * Performs the flip function after a duration of time
+     *
+     * @param zIndex z index of the card
+     */
+	setZIndex(zIndex) {
+		this.cardElement.style.zIndex = zIndex;
+	}
+
+     
 }
