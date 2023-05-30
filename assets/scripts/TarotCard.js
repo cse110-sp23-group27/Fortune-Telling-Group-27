@@ -45,8 +45,8 @@ class TarotCard {
      * @param point The object's ending point
      */
 	moveInstantly(point) {
-		this.cardElement.style.left = point.x;
-		this.cardElement.style.top = point.y;
+		this.cardElement.style.left = `${point.x}vw`;
+		this.cardElement.style.top = `${point.y}vh`;
 	}
 
 	/**
