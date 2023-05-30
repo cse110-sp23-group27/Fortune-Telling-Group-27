@@ -1,5 +1,12 @@
 class TarotCard {
-	constructor(cardElement) {
+	/**
+      * Creates an instance of TarotCard.
+      * @date 5/29/2023 - 6:27:55 PM
+      *
+      * @constructor
+      * @param {HTMLElement} cardElement html element that represents the card
+      */
+     constructor(cardElement) {
 		this.cardElement = cardElement;
 		this.cardElement.style.position = "absolute";
 	}
@@ -62,9 +69,9 @@ class TarotCard {
 	/**
      * Performs the flip function after a duration of time
      *
-     * @param time Time in milliseconds before the flip function is performed
+     * @param faceUp Determines whether the card is face up or not
      */
-	setFlipInstantly() {
+	setFlipInstantly(faceUp) {
 		//
 	}
 
