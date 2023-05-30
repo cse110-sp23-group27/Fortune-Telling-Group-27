@@ -5,7 +5,7 @@ const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
 const response = document.getElementById("response");
 // Global cardCounter variable, moved because couldn't reset the cards. DANGER!
-let cardCounter = 0; 
+let cardCounter = 0;
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -87,7 +87,8 @@ function bindHomePageBtns() {
  */
 function bindGeneralButtons() {
 	const homeBtn = document.getElementById("toHome");
-    homeBtn.addEventListener("click", resetCards); //Added to reset cards on click
+	// Added to reset cards on click
+	homeBtn.addEventListener("click", resetCards);
 	homeBtn.addEventListener("click", () => {
 		displayGeneralUIElements();
 		document.getElementById("center-text").textContent = "";
@@ -163,7 +164,6 @@ function createShuffleBtn() {
  * @date 5/27/2023
  */
 function createShuffleCards() {
-	//let cardCounter = 0;
 	for (let i = 1; i < 23; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
@@ -242,30 +242,29 @@ function displayThreeOptions() {
 }
 
 /**
- * Function to reset cards on home page press, goes through each card and resets it to 
- * default values
+ * Function to reset cards on home page press, goes through each
+ * card and resets it to default values
  * @authors Kevin Wong
  * @date 5/29/2023
  */
 function resetCards() {
-    for (let card = 1; card < 23; card++) {
-      const cardOption = document.getElementById("Option " + card);
-      if (cardOption) {
-        cardOption.setAttribute("selected", false);
-        cardOption.style.backgroundColor = "white";
-        
-        cardOption.hidden = true;
-      }
-    }
-    cardCounter = 0; // reset the cardCounter when resetting cards
-  }
+	for (let card = 1; card < 23; card++) {
+		const cardOption = document.getElementById("Option " + card);
+		if (cardOption) {
+			cardOption.setAttribute("selected", false);
+			cardOption.style.backgroundColor = "white";
+			cardOption.hidden = true;
+		}
+	}
+	cardCounter = 0; // reset the cardCounter when resetting cards
+}
 
 /**
  * Binds functionality to the burger bar.
  * @author Jason Bui
  * @date 5/26/2023
  */
-/*function bindBurgerBar() {
+/* function bindBurgerBar() {
 	document.querySelector(".nav-toggle").addEventListener("click", () => {
 		const navLinks = document.querySelector(".nav-links");
 		navLinks.hidden = !navLinks.hidden;
@@ -278,7 +277,7 @@ function resetCards() {
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	//bindBurgerBar();
+	// bindBurgerBar();
 	createShuffleBtn();
 	createShuffleCards();
 }
