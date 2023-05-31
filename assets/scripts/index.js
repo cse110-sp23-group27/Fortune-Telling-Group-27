@@ -153,8 +153,75 @@ function createShuffleBtn() {
 			const cardOption = document.getElementById("Option " + card);
 			cardOption.hidden = false;
 		}
+		playShuffleAnimation(()=>{
+			playCardSpreadAnimation();
+		});
 	});
 	tarotDiv.append(shuffleBtn);
+}
+
+/**
+ * Will play the shuffle animation for the current cards
+ * @date 5/29/2023 - 9:20:17 PM
+ * @param callback a callback function for end of animation
+ */
+function playShuffleAnimation(callback) {
+	const tCards = [];
+	// get all of the cards and make them into the TarotCard classes
+	for (let card = 1; card < 23; card++) {
+		const cardOption = document.getElementById("Option " + card);
+		tCards.push(new TarotCard(cardOption));
+	}
+	// Move all to center
+	tCards.forEach((tCard) => {
+		// block clicks too
+		tCard.setClickable(false);
+		tCard.moveInstantly({x: 50, y: 50});
+	});
+
+	// make 3 shuffles
+	let shuffleCount = 0;
+	const shuffleSequence = (callback)=>{
+		// pick random card
+		const randCard = tCards[Math.floor(tCards.length * Math.random())];
+		// move away
+		randCard.move({x: 50, y: 50}, {x: 52, y: 50}, 350, ()=>{
+			randCard.move({x: 52, y: 50}, {x: 50, y: 50}, 350, ()=>{
+				shuffleCount++;
+				if (shuffleCount < 3) {
+					shuffleSequence(callback);
+				} else {
+					callback();
+				}
+			});
+		});
+	};
+	shuffleSequence(()=>{
+		// finished shuffling
+		callback();
+	});
+}
+
+/**
+ * Plays the card spread animation
+ * @date 5/29/2023 - 10:18:49 PM
+ * @param callback a callback function for end of animation
+ */
+function playCardSpreadAnimation(callback) {
+	const tCards = TarotCard.getAllCards();
+	let cardXoffset = 0;
+	let cardsFinished = 0;
+	tCards.forEach((tCard) => {
+		tCard.setClickable(true);
+		tCard.move({x: 50, y: 50}, {x: 20 + (60/tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
+			tCard.setClickable(true);
+			if (cardsFinished >= tCards.length) {
+				callback();
+			}
+			cardsFinished++;
+		});
+		cardXoffset++;
+	});
 }
 
 /**
@@ -187,12 +254,13 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
-				for (let card = 1; card < 23; card++) {
-					const cardOption = document.getElementById("Option " + card);
-					cardOption.setAttribute("selected", false);
-					cardOption.style.backgroundColor = "white";
-					cardOption.hidden = true;
-				}
+				// for (let card = 1; card < 23; card++) {
+				// 	// when 3 cards selected
+				// 	const cardOption = document.getElementById("Option " + card);
+				// 	cardOption.setAttribute("selected", false);
+				// 	cardOption.style.backgroundColor = "white";
+				// 	cardOption.hidden = true;
+				// }
 				displayThreeOptions();
 			}
 		});
@@ -207,38 +275,74 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
-	const cardsSelected = [];
-	while (cardsSelected.length < 3) {
-		const card = Math.floor(Math.random()*21);
-		if (cardsSelected.indexOf(card) === -1) {
-			cardsSelected.push(card);
+	// get html elements of selected cards
+	const selectedHTMLCards = [];
+	for (let i = 1; i < 23; i++) {
+		const button = document.getElementById(`Option ${i}`);
+		if (button.getAttribute("selected") === "true") {
+			selectedHTMLCards.push(button);
+			button.setAttribute("selected", false);
 		}
 	}
 
-	for (let i = 1; i <= 3; i++) {
-		const cardOption = document.createElement("button");
-		cardOption.id = "Card" + i;
-		cardOption.className = "responseCards";
-		const tarotCard = consts.CARDSJSON[cardsSelected[i - 1]];
-		const imageSrc = tarotCard["img"];
-		cardOption.innerHTML =
-			"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
-		switch (i) {
-		case 1:
-			cardOption.value = tarotCard["pastDescription"];
-			break;
-		case 2:
-			cardOption.value = tarotCard["presentDescription"];
-			break;
-		default:
-			cardOption.value = tarotCard["futureDescription"];
-		}
+	let selectedCardsFound = 0;
+	let cardsMoved = 0;
+	TarotCard.getAllCards().forEach((card) => {
+		if (selectedHTMLCards.includes(card.cardElement)) {
+			console.log(card.getPositionPoint());
+			card.move(card.getPositionPoint(), {x: 20+(selectedCardsFound*20), y: 50}, 350);
+			selectedCardsFound++;
+		} else {
+			const curPos = card.getPositionPoint();
+			card.move(curPos, {x: curPos.x, y: -100}, 350, ()=>{
+				cardsMoved++;
+				if (cardsMoved < 3) {
+					return;
+				}
+				const cardsTypeSelected = [];
+				while (cardsTypeSelected.length < 3) {
+					const card = Math.floor(Math.random()*21);
+					if (cardsTypeSelected.indexOf(card) === -1) {
+						cardsTypeSelected.push(card);
+					}
+				}
 
-		cardOption.addEventListener("click", () =>{
-			response.textContent = cardOption.value;
-		});
-		tarotDiv.appendChild(cardOption);
-	}
+				for (let i = 2; i >= 0; i--) {
+					const cardOption = selectedHTMLCards[i];
+					cardOption.className = "responseCards";
+					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
+					const imageSrc = tarotCard["img"];
+					cardOption.innerHTML =
+						"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
+					switch (i + 1) {
+					case 1:
+						cardOption.value = tarotCard["pastDescription"];
+						break;
+					case 2:
+						cardOption.value = tarotCard["presentDescription"];
+						break;
+					default:
+						cardOption.value = tarotCard["futureDescription"];
+					}
+
+					// TODO Find a better way to do this, apparently this can cause a memory leak but don't have time to make a better solution rn
+					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
+					// remove old on click events
+					cardOption.hidden = true;
+					const clonedCardOption = cardOption.cloneNode(true);
+					// const tempCardOption = cardOption;
+					cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
+					// tempCardOption.remove();
+					cardOption.hidden = false;
+
+					cardOption.addEventListener("click", () =>{
+						response.textContent = cardOption.value;
+					});
+					tarotDiv.appendChild(cardOption);
+				}
+			});
+		}
+	});
 }
 
 /**

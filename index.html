@@ -54,13 +54,6 @@
         </div>
         <p id="response"></p>
     </main>
-  
-  <div id="testTarot" style="position: absolute; left: 0; top: 0">
-        <h1>Test label</h1>
-    </div>
-  <div id="cardElement">
-        <h1>some card</h1>
-  </div>
 </body>
 
 
@@ -112,14 +105,4 @@
 <script src="assets/scripts/index.js" type="module"></script>
 <script src="./assets/scripts/Animator.js"></script>
 <script src="./assets/scripts/TarotCard.js"></script>
-<script>
-    // test the animator method
-    let testDiv = document.getElementById('testTarot');
-    Animator.instance.addAnimation(0, 100, ()=>testDiv.style.left, (val)=>testDiv.style.left = `${val}px`, 5000);
-
-    let cardElement = document.getElementById("cardElement");
-    let testMove = new TarotCard(cardElement);
-    testMove.move({x:0, y:0}, {x:50, y:50}, 2000);  
-    
-</script>
 </html>
