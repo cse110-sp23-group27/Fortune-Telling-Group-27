@@ -2,3 +2,5 @@
 .github/
 specs/
 node_modules/
+assets/scripts/consts.js
+.eslintrc.js
