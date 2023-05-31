@@ -10,9 +10,11 @@ module.exports = {
         "google"
     ],
     "parserOptions": {
-        "ecmaVersion": 2018,
+        "parser": "@babel/eslint-parser",
+        requireConfigFile: false,
+        "ecmaVersion": 2022,
         "sourceType": "module",
-        "allowImportExportEverywhere": true
+        "allowImportExportEverywhere": true,
     },
     "rules": {
         "indent": [
@@ -52,7 +54,10 @@ module.exports = {
         "eol-last": [
             "error",
             "never"
-        ]
+        ],
+    },
+    "globals": {
+        "Animator": "writeable"
     },
     "ignorePatterns": ['/node_modules/', '/specs/', './github/']
 };

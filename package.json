@@ -5,10 +5,11 @@
     "scripts": {
         "test": "jest --silent",
         "lint": "npx eslint ./assets/scripts ./jest_tests --fix --ext .js  -c ./.eslintrc.js",
-        "doc": "jsdoc -c jsdoc.json"
+        "doc": "jsdoc -c ./conf.json"
     },
     "devDependencies": {
         "@babel/core": "^7.16.0",
+        "@babel/eslint-parser": "^7.21.8",
         "@babel/preset-env": "^7.16.0",
         "babel-jest": "^27.3.1",
         "eslint": "^8.41.0",
