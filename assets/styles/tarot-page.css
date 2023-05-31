@@ -1,3 +1,24 @@
+#tarotDiv {
+    justify-content: center;
+    margin: 10vmin;
+}
+  
+.cardsBtnPreShuffle{
+    margin: 10px;
+}
+  
+.imagesPreShuffle {
+    height: 13.5vmin;
+    width: 10vmin;
+    margin: 5px;
+}
+
+.chosenCards {
+    height: 26vmin;
+    width: 19.25vmin;
+    margin: 5px;
+}
+
 html, body {
     margin: 0;
     padding: 0;

@@ -2,11 +2,46 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="assets/styles/home-page.css">
+  <link rel="stylesheet" href="assets/styles/tarot-page.css">
+  <nav class="mobile-nav">
+    <button class="nav-toggle">☰</button>
+    <ul class="nav-links" hidden>
+      <li><button class="nav-link" id="nav-toInfo">Info</button></li>
+      <li><button class="nav-link" id="nav-toGitHub">GitHub</button></li>
+    </ul>
+  </nav>
+  <!--For Cinzel Decorative Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
-      <noscript>Please enable Javascript</noscript>
+      <button class = "general" id = "toHome" hidden>Home</button>
+      <button class = "general" id = "tarotOptions" hidden>Tarot Options</button>
+      <button class = "general" id = "eggOptions" hidden>Egg Options</button>
+      <button class = "general" id = "boneOptions" hidden>Bone Options</button>
+      <button class = "general" id = "toGitHub" hidden>GitHub</button>
+        <div class="container">
+          <div class="button-wrapper">
+            <button class = "home-page tarot-button" id = "toTarotCard">Tarot Card</button>
+            <button class = "home-page" id = "toEgg">Egg</button>
+            <button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
+          </div>
+
+          <div class="tarotSpecific" id="tarotDiv" hidden>
+          </div>
+          <font size = 50><p id="center-text"></p></font>
+        </div>
+        <p id="response"></p>
     </main>
+  
+  <div id="testTarot" style="position: absolute; left: 0; top: 0">
+        <h1>Test label</h1>
+    </div>
+  <div id="cardElement">
+        <h1>some card</h1>
+  </div>
 </body>
 
 
@@ -56,4 +91,16 @@
   </main>
 </template>
 <script src="assets/scripts/index.js" type="module"></script>
+<script src="./assets/scripts/Animator.js"></script>
+<script src="./assets/scripts/TarotCard.js"></script>
+<script>
+    // test the animator method
+    let testDiv = document.getElementById('testTarot');
+    Animator.instance.addAnimation(0, 100, ()=>testDiv.style.left, (val)=>testDiv.style.left = `${val}px`, 5000);
+
+    let cardElement = document.getElementById("cardElement");
+    let testMove = new TarotCard(cardElement);
+    testMove.move({x:0, y:0}, {x:50, y:50}, 2000);  
+    
+</script>
 </html>
