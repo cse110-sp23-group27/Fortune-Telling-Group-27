@@ -9,40 +9,40 @@ class TarotCard {
 	constructor(cardElement) {
 		this.cardElement = cardElement;
 		this.cardElement.style.position = "absolute";
-          TarotCard.#allCards.push(this);
+		TarotCard.#allCards.push(this);
 	}
 
-     /**
+	/**
       * Set the card element to allow/disallow clicks
       * @date 5/29/2023 - 9:26:19 PM
       *
       * @param {Boolean} isClickable
       */
-     setClickable(isClickable){
-          this.cardElement.style.pointerEvents = isClickable?'auto':'none';
-     }
+	setClickable(isClickable) {
+		this.cardElement.style.pointerEvents = isClickable?"auto":"none";
+	}
 
-     /**
+	/**
       * Returns a list of all TarotCards
       * @date 5/29/2023 - 6:40:32 PM
       *
-      * @returns {[]}
+      * @return {[]}
       */
-     static getAllCards(){
-          return TarotCard.#allCards;
-     }
+	static getAllCards() {
+		return TarotCard.#allCards;
+	}
 
-     /**
+	/**
       * Returns a list of all TarotCards
       * @date 5/29/2023 - 6:40:32 PM
       *
-      * @returns {[]}
+      * @return {[]}
       */
-     getAllCards(){
-          return TarotCard.#allCards;
-     }
+	getAllCards() {
+		return TarotCard.#allCards;
+	}
 
-     static #allCards = [];
+	static #allCards = [];
 
 	/**
      * Moves object from one point to another over a duration of time
@@ -69,15 +69,15 @@ class TarotCard {
 		this.cardElement.style.top = `${point.y}vh`;
 	}
 
-     /**
+	/**
       * Get the positional point of the card
       * @date 5/29/2023 - 11:19:13 PM
       *
       * @returns {{ x: Float; y: Float; }}
       */
-     getPositionPoint(){
-          return {x: parseFloat(this.cardElement.style.left.replace("vw", "")), y: parseFloat(this.cardElement.style.top.replace("vh", ""))};
-     }
+	getPositionPoint() {
+		return {x: parseFloat(this.cardElement.style.left.replace("vw", "")), y: parseFloat(this.cardElement.style.top.replace("vh", ""))};
+	}
 
 	/**
      * Rotates object some number of degrees over a duration of time

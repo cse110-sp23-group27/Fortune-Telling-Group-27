@@ -33,6 +33,7 @@ button {
   left: 50%;
   bottom: 20%;
   font-size: 20px;
+  color: black;
   transform: translateX(-50%);
 }
 
