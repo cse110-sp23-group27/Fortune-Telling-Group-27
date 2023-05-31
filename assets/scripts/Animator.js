@@ -30,29 +30,29 @@ class Animator {
 		this.animationInterval = setInterval(()=>this.#whenAnimationInterval(), this.animationIntervalDelay);
 	}
 
-	#whenAnimationInterval(){
-        // what happens every animation interval, run backwards so we can splice items out of it
-        for (let i = this.animationObjs.length - 1; i >= 0; i--) {
-            const animationObj = this.animationObjs[i];
-            //increment the timer inside the animation
-            animationObj.timeSinceStart += this.animationIntervalDelay;
-            // process the animation object
-            let nextValue = animationObj.from + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
-            // make sure that the next value never overshoots the "to" value
-            nextValue = (animationObj.from - animationObj.to < 0) ? 
-                    Math.min(nextValue, animationObj.to) : Math.max(nextValue, animationObj.to);
+	#whenAnimationInterval() {
+		// what happens every animation interval, run backwards so we can splice items out of it
+		for (let i = this.animationObjs.length - 1; i >= 0; i--) {
+			const animationObj = this.animationObjs[i];
+			// increment the timer inside the animation
+			animationObj.timeSinceStart += this.animationIntervalDelay;
+			// process the animation object
+			let nextValue = animationObj.from + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
+			// make sure that the next value never overshoots the "to" value
+			nextValue = (animationObj.from - animationObj.to < 0) ?
+				Math.min(nextValue, animationObj.to) : Math.max(nextValue, animationObj.to);
 
-            animationObj.setter(nextValue);
-            if(animationObj.timeSinceStart > animationObj.time){
-                // remove this animation as it ran its full time
-                // if has callback, call it
-                if(this.animationObjs[i].callback){
-                    this.animationObjs[i].callback();
-                }
-                this.animationObjs.splice(i, 1); // remove obj from list
-            }
-        }
-    }
+			animationObj.setter(nextValue);
+			if (animationObj.timeSinceStart > animationObj.time) {
+				// remove this animation as it ran its full time
+				// if has callback, call it
+				if (this.animationObjs[i].callback) {
+					this.animationObjs[i].callback();
+				}
+				this.animationObjs.splice(i, 1); // remove obj from list
+			}
+		}
+	}
 
 	/**
      * Add a new animation object that will take the animation from `from` value to the `to` value
