@@ -393,9 +393,9 @@ function addFogBackground() {
  */
 function removeFogBackground() {
 	const fogWrapper = document.getElementsByClassName("fogwrapper")[0];
-    if (fogWrapper){
+	if (fogWrapper) {
 	    fogWrapper.remove();
-    }
+	}
 }
 
 /**
@@ -424,13 +424,13 @@ function init() {
 init();
 
 document.addEventListener("DOMContentLoaded", function() {
-    const menuToggle = document.querySelector("#menu__toggle");
-    if (menuToggle) {
-      menuToggle.addEventListener("change", () => {
-        const menuItems = document.querySelectorAll(".menu__item");
-        menuItems.forEach(item => {
-          item.hidden = !item.hidden;
-        });
-      });
-    }
-  });
+	const menuToggle = document.querySelector("#menu__toggle");
+	if (menuToggle) {
+		menuToggle.addEventListener("change", () => {
+			const menuItems = document.querySelectorAll(".menu__item");
+			menuItems.forEach((item) => {
+				item.hidden = !item.hidden;
+			});
+		});
+	}
+});
