@@ -6,6 +6,9 @@ const tarotDiv = document.getElementById("tarotDiv");
 const response = document.getElementById("response");
 // Global cardCounter variable, moved because couldn't reset the cards. DANGER!
 let cardCounter = 0;
+// Global variable that shows if 3 cards have been selected
+let cardsSelected = false;
+
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -244,6 +247,11 @@ function createShuffleCards() {
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
+			if (cardsSelected) {
+				response.textContent = button.value;
+				return;
+			}
+
 			if (button.getAttribute("selected") === "true") {
 				button.setAttribute("selected", false);
 				button.style.backgroundColor = "white";
@@ -286,6 +294,7 @@ function displayThreeOptions() {
 			button.setAttribute("selected", false);
 		}
 	}
+	cardsSelected = true;
 
 	let selectedCardsFound = 0;
 	let cardsMoved = 0;
