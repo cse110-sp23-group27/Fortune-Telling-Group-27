@@ -140,5 +140,6 @@ class TarotCard {
 }
 
 if (typeof module === "object") {
+	// for using tarot card in unit tests
 	module.exports = TarotCard;
 }

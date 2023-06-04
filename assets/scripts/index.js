@@ -176,7 +176,7 @@ function createShuffleBtn() {
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
- * @param callback a callback function for end of animation
+ * @param {*} callback a callback function for end of animation
  */
 function playShuffleAnimation(callback) {
 	const tCards = [];
@@ -218,7 +218,7 @@ function playShuffleAnimation(callback) {
 /**
  * Plays the card spread animation
  * @date 5/29/2023 - 10:18:49 PM
- * @param callback a callback function for end of animation
+ * @param {*} callback a callback function for end of animation
  */
 function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
