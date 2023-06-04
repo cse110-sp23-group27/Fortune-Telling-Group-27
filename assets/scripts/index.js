@@ -394,7 +394,7 @@ function addFogBackground() {
 function removeFogBackground() {
 	const fogWrapper = document.getElementsByClassName("fogwrapper")[0];
 	if (fogWrapper) {
-	    fogWrapper.remove();
+		fogWrapper.remove();
 	}
 }
 
