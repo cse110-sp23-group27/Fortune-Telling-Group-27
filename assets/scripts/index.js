@@ -6,6 +6,9 @@ const tarotDiv = document.getElementById("tarotDiv");
 const response = document.getElementById("response");
 // Global cardCounter variable, moved because couldn't reset the cards. DANGER!
 let cardCounter = 0;
+// Global variable that shows if 3 cards have been selected
+let cardsSelected = false;
+
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
 /**
@@ -223,7 +226,8 @@ function playCardSpreadAnimation(callback) {
 	let cardsFinished = 0;
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50}, {x: 20 + (60/tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
+		tCard.move({x: 50, y: 50}, {x: 20 + (60/
+            tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
 			tCard.setClickable(true);
 			if (cardsFinished >= tCards.length) {
 				callback();
@@ -252,6 +256,11 @@ function createShuffleCards() {
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
+			if (cardsSelected) {
+				response.textContent = button.value;
+				return;
+			}
+
 			if (button.getAttribute("selected") === "true") {
 				button.setAttribute("selected", false);
 				button.style.backgroundColor = "white";
@@ -294,13 +303,15 @@ function displayThreeOptions() {
 			button.setAttribute("selected", false);
 		}
 	}
+	cardsSelected = true;
 
 	let selectedCardsFound = 0;
 	let cardsMoved = 0;
 	TarotCard.getAllCards().forEach((card) => {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
-			card.move(card.getPositionPoint(), {x: 20+(selectedCardsFound*20), y: 50}, 350);
+			card.move(card.getPositionPoint(),
+				{x: 20+(selectedCardsFound*20), y: 50}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
@@ -335,8 +346,10 @@ function displayThreeOptions() {
 						cardOption.value = tarotCard["futureDescription"];
 					}
 
-					// TODO Find a better way to do this, apparently this can cause a memory leak but don't have time to make a better solution rn
-					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
+					// TODO Find a better way to do this, apparently this can
+					// cause a memory leak but don't have time to make a better
+					// solution rn https://stackoverflow.com/questions/9251837/
+					// how-to-remove-all-listeners-in-an-element
 					// remove old on click events
 					cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
@@ -430,3 +443,15 @@ function init() {
 }
 
 init();
+
+document.addEventListener("DOMContentLoaded", function() {
+	const menuToggle = document.querySelector("#menu__toggle");
+	if (menuToggle) {
+		menuToggle.addEventListener("change", () => {
+			const menuItems = document.querySelectorAll(".menu__item");
+			menuItems.forEach((item) => {
+				item.hidden = !item.hidden;
+			});
+		});
+	}
+});

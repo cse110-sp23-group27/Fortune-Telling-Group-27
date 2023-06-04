@@ -54,8 +54,12 @@ class TarotCard {
      * pointA to pointB
      */
 	move(pointA, pointB, time, callback) {
-		Animator.instance.addAnimation(pointA.x, pointB.x, ()=>this.cardElement.style.left, (val)=>this.cardElement.style.left = `${val}vw`, time);
-		Animator.instance.addAnimation(pointA.y, pointB.y, ()=>this.cardElement.style.top, (val)=>this.cardElement.style.top = `${val}vh`, time, callback);
+		Animator.instance.addAnimation(pointA.x, pointB.x,
+			()=>this.cardElement.style.left,
+			(val)=>this.cardElement.style.left = `${val}vw`, time);
+		Animator.instance.addAnimation(pointA.y,
+			pointB.y, ()=>this.cardElement.style.top,
+			(val)=>this.cardElement.style.top = `${val}vh`, time, callback);
 	}
 
 
@@ -76,7 +80,8 @@ class TarotCard {
       * @returns {{ x: Float; y: Float; }}
       */
 	getPositionPoint() {
-		return {x: parseFloat(this.cardElement.style.left.replace("vw", "")), y: parseFloat(this.cardElement.style.top.replace("vh", ""))};
+		return {x: parseFloat(this.cardElement.style.left.replace("vw", "")),
+			y: parseFloat(this.cardElement.style.top.replace("vh", ""))};
 	}
 
 	/**
@@ -89,7 +94,9 @@ class TarotCard {
      * rotation
      */
 	rotate(degreesA, degreesB, time, callback) {
-		Animator.instance.addAnimation(degreesA, degreesB, ()=>this.cardElement.style.transform, this.rotateInstantly, time, callback);
+		Animator.instance.addAnimation(degreesA, degreesB,
+			()=>this.cardElement.style.transform,
+			this.rotateInstantly, time, callback);
 	}
 
 	/**
