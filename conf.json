@@ -3,7 +3,7 @@
         "include": ["./assets/scripts", "./jest_tests"],
         "includePattern": ".js",
         "exclude": ["(node_modules)"],
-        "excludePattern": "(^|\\/|\\\\)_"
+        "excludePattern": "(^|\\/|\\\\)_|.json"
     },
     "sourceType": "module",
     "tags": {
