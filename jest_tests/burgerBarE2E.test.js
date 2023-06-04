@@ -8,13 +8,13 @@ describe("Testing Burger Bar Itself", () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
 	});
 	it("Clicking on Burger Bar Checkbox", async () => {
-		// Query select all of the homepage button elements
-		// and return the length of that array
+		// Query select all of the homepage button elements and return the length of that array
 		const burgerBarCheckbox = await page.$("#menu__toggle");
 		const leftVal = await page.evaluate(() => {
 			const elem =document.querySelector(".menu__box");
-			const val =
-        parseInt(window.getComputedStyle(elem, null).getPropertyValue("left"), 10);
+			const leftVal =
+        window.getComputedStyle(elem, null).getPropertyValue("left");
+			const val = parseInt(leftVal, 10);
 			return val;
 		});
 		expect(leftVal).toBeLessThan(0);
@@ -47,10 +47,10 @@ describe("Testing Burger Bar Buttons", () => {
 		// Start as true, if any don't have text values, swap to false
 		let allArePopulated = true;
 		// Query select all of the home page elements
-		const burgerBtns = await page.$$(".menu__item");
-		for (let i = 0; i < burgerBtns.length; i++) {
+		const bBtns = await page.$$(".menu__item");
+		for (let i = 0; i < bBtns.length; i++) {
 			// console.log(`Checking button ${i}/${burgerBtns.length}`);
-			const data = await page.evaluate((el) => el.textContent, burgerBtns[i]);
+			const data = await page.evaluate((el) => el.textContent, bBtns[i]);
 			// Make the text in the buttons exist
 			if (data.length === 0) {
 				allArePopulated = false;

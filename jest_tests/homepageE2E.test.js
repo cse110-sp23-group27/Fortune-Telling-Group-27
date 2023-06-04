@@ -29,7 +29,8 @@ describe("Testing Homepage Buttons", () => {
 		const homePageBtns = await page.$$(".home-page");
 		for (let i = 0; i < homePageBtns.length; i++) {
 			// console.log(`Checking home page button ${i}/${homePageBtns.length}`);
-			const data = await page.evaluate((el) => el.textContent, homePageBtns[i]);
+			const data = await page.evaluate((el) => el.textContent,
+				homePageBtns[i]);
 			// Make the text in the buttons exist
 			if (data.length === 0) {
 				allArePopulated = false;

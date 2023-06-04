@@ -17,6 +17,11 @@ module.exports = {
         "allowImportExportEverywhere": true,
     },
     "rules": {
+        "max-len": [
+            "error", {
+                "ignoreComments": true
+            }
+        ],
         "indent": [
             "error", 
             "tab"

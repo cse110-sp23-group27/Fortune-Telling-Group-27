@@ -103,7 +103,8 @@ function bindGeneralButtons() {
 			displayGeneralUIElements();
 			document.getElementById("center-text").textContent = "";
 			document.getElementById("response").textContent = "";
-			const responseCards = document.getElementsByClassName("responseCards");
+			const responseCards = document.getElementsByClassName(
+				"responseCards");
 			while (responseCards.length > 0) {
 				tarotDiv.removeChild(responseCards[0]);
 			}
@@ -115,7 +116,8 @@ function bindGeneralButtons() {
 
 	const githubBtn = document.getElementById("toGitHub");
 	githubBtn.addEventListener("click", () => {
-		navigator.clipboard.writeText("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
+		navigator.clipboard.writeText(
+			"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
 	});
 }
 
@@ -134,7 +136,8 @@ function displayGeneralUIElements(fortuneType =null) {
 
 	// Hides/Displays the option button that is needed if any
 	for (let i = 0; i <= 2; i++) {
-		const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
+		const optionsBtn = document.getElementById(
+			consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
 	}
 	if (fortuneType != null) {
@@ -354,7 +357,8 @@ function displayThreeOptions() {
 					cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
 					// const tempCardOption = cardOption;
-					cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
+					cardOption.parentNode.replaceChild(
+						clonedCardOption, cardOption);
 					// tempCardOption.remove();
 					cardOption.hidden = false;
 
