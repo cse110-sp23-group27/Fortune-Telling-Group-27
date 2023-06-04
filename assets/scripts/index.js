@@ -165,7 +165,7 @@ function createShuffleBtn() {
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
- * @param callback a callback function for end of animation
+ * @param {a} callback - a callback function for end of animation
  */
 function playShuffleAnimation(callback) {
 	const tCards = [];
@@ -238,8 +238,7 @@ function createShuffleCards() {
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
-		button.innerHTML =
-			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +"/>";
+		button.innerHTML = "<img class = \"chosenCards\"src=\"" +consts.cardBack+"\"/>";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
