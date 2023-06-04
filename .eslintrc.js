@@ -57,7 +57,9 @@ module.exports = {
         ],
     },
     "globals": {
-        "Animator": "writeable"
+        "Animator": "writeable",
+        "TarotCard": "writeable",
+        "page": "readable"
     },
     "ignorePatterns": ['/node_modules/', '/specs/', './github/']
 };

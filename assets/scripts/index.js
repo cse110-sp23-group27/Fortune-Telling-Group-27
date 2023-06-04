@@ -6,6 +6,8 @@ const tarotDiv = document.getElementById("tarotDiv");
 const response = document.getElementById("response");
 // Global cardCounter variable, moved because couldn't reset the cards. DANGER!
 let cardCounter = 0;
+// Global homepage varible for checking if on homepage
+let homePageBool = true;
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -33,6 +35,7 @@ function bindHomePageBtns() {
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
 		addFogBackground();
+		homePageBool = false;
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -40,15 +43,16 @@ function bindHomePageBtns() {
 	});
 
 	tarotCardBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	eggBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.egg;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
@@ -57,15 +61,16 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	boneBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.bone;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
 
@@ -75,7 +80,7 @@ function bindHomePageBtns() {
 	});
 
 	boneBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 }
 
@@ -91,15 +96,18 @@ function bindGeneralButtons() {
 	// Added to reset cards on click
 	homeBtn.addEventListener("click", resetCards);
 	homeBtn.addEventListener("click", () => {
-		displayGeneralUIElements();
-		document.getElementById("center-text").textContent = "";
-		document.getElementById("response").textContent = "";
-		const responseCards = document.getElementsByClassName("responseCards");
-		while (responseCards.length > 0) {
-			tarotDiv.removeChild(responseCards[0]);
+		if (!homePageBool) {
+			displayGeneralUIElements();
+			document.getElementById("center-text").textContent = "";
+			document.getElementById("response").textContent = "";
+			const responseCards = document.getElementsByClassName("responseCards");
+			while (responseCards.length > 0) {
+				tarotDiv.removeChild(responseCards[0]);
+			}
+			tarotDiv.hidden = true;
+			homePageBool = true;
+			removeFogBackground();
 		}
-		tarotDiv.hidden = true;
-		removeFogBackground();
 	});
 
 	const githubBtn = document.getElementById("toGitHub");
@@ -393,7 +401,9 @@ function addFogBackground() {
  */
 function removeFogBackground() {
 	const fogWrapper = document.getElementsByClassName("fogwrapper")[0];
-	fogWrapper.remove();
+	if (fogWrapper) {
+		fogWrapper.remove();
+	}
 }
 
 /**

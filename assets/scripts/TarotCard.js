@@ -131,3 +131,7 @@ class TarotCard {
 		this.cardElement.style.zIndex = zIndex;
 	}
 }
+
+if (typeof module === "object") {
+	module.exports = TarotCard;
+}
