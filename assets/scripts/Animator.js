@@ -8,7 +8,7 @@
 class Animator {
 	static instance = null;
 	/**
-	 * 
+	 *
 	 */
 	constructor() {
 		if (Animator.instance === null) {
@@ -25,7 +25,7 @@ class Animator {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	#startAnimationInterval() {
 		// clear interval if there is already one
@@ -37,7 +37,7 @@ class Animator {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	#whenAnimationInterval() {
 		// what happens every animation interval, run backwards so we can splice items out of it
@@ -91,9 +91,9 @@ class Animator {
 	}
 
 	/**
-	 * 
-	 * @param {*} animationObj 
-	 * @param {*} runCallback 
+	 *
+	 * @param {*} animationObj
+	 * @param {*} runCallback
 	 */
 	deteleAnimation(animationObj, runCallback) {
 		// TODO this runs in O(n), restructure to a map probably to make this O(1)
