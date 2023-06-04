@@ -218,7 +218,8 @@ function playCardSpreadAnimation(callback) {
 	let cardsFinished = 0;
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50}, {x: 20 + (60/tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
+		tCard.move({x: 50, y: 50}, {x: 20 + (60/
+            tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
 			tCard.setClickable(true);
 			if (cardsFinished >= tCards.length) {
 				callback();
@@ -301,7 +302,8 @@ function displayThreeOptions() {
 	TarotCard.getAllCards().forEach((card) => {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
-			card.move(card.getPositionPoint(), {x: 20+(selectedCardsFound*20), y: 50}, 350);
+			card.move(card.getPositionPoint(),
+				{x: 20+(selectedCardsFound*20), y: 50}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
@@ -336,8 +338,10 @@ function displayThreeOptions() {
 						cardOption.value = tarotCard["futureDescription"];
 					}
 
-					// TODO Find a better way to do this, apparently this can cause a memory leak but don't have time to make a better solution rn
-					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
+					// TODO Find a better way to do this, apparently this can
+					// cause a memory leak but don't have time to make a better
+					// solution rn https://stackoverflow.com/questions/9251837/
+					// how-to-remove-all-listeners-in-an-element
 					// remove old on click events
 					cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
