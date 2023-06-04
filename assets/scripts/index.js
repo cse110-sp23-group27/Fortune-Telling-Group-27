@@ -425,3 +425,6 @@ document.querySelector(".nav-toggle").addEventListener("click", () => {
 	const navLinks = document.querySelector(".nav-links");
 	navLinks.hidden = !navLinks.hidden;
 });
+	const navLinks = document.querySelector(".nav-links");
+	navLinks.hidden = !navLinks.hidden;
+});
