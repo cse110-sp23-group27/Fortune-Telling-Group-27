@@ -33,6 +33,8 @@ function bindHomePageBtns() {
 
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
+		createShuffleBtn();
+		createShuffleCards();
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
 		addFogBackground();
@@ -43,7 +45,7 @@ function bindHomePageBtns() {
 	});
 
 	tarotCardBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	eggBtn.addEventListener("click", () => {
@@ -60,7 +62,7 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	boneBtn.addEventListener("click", () => {
@@ -78,7 +80,7 @@ function bindHomePageBtns() {
 	});
 
 	boneBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 }
 
@@ -97,9 +99,10 @@ function bindGeneralButtons() {
 		displayGeneralUIElements();
 		document.getElementById("center-text").textContent = "";
 		document.getElementById("response").textContent = "";
-		const responseCards = document.getElementsByClassName("responseCards");
-		while (responseCards.length > 0) {
-			tarotDiv.removeChild(responseCards[0]);
+		const responseCards = document.getElementById("tarotDiv");
+		console.log(responseCards);
+		while (responseCards.childNodes.length > 0 ) {
+			tarotDiv.removeChild(responseCards.firstChild);
 		}
 		tarotDiv.hidden = true;
 		removeFogBackground();
@@ -154,8 +157,10 @@ function createShuffleBtn() {
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", () => {
 		shuffleBtn.hidden = true;
-		for (let card = 1; card < 23; card++) {
-			const cardOption = document.getElementById("Option " + card);
+		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+		for (let card = 0; card < cards.length; card++) {
+			console.log(card);
+			const cardOption = cards[card];
 			cardOption.hidden = false;
 		}
 		playShuffleAnimation(()=>{
@@ -247,6 +252,7 @@ function createShuffleCards() {
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
+			console.log(cardsSelected);
 			if (cardsSelected) {
 				response.textContent = button.value;
 				return;
@@ -264,13 +270,6 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
-				// for (let card = 1; card < 23; card++) {
-				// 	// when 3 cards selected
-				// 	const cardOption = document.getElementById("Option " + card);
-				// 	cardOption.setAttribute("selected", false);
-				// 	cardOption.style.backgroundColor = "white";
-				// 	cardOption.hidden = true;
-				// }
 				displayThreeOptions();
 			}
 		});
@@ -320,7 +319,6 @@ function displayThreeOptions() {
 
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
-					cardOption.className = "responseCards";
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					const imageSrc = tarotCard["img"];
 					cardOption.innerHTML =
@@ -341,14 +339,11 @@ function displayThreeOptions() {
 					// remove old on click events
 					cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
+					clonedCardOption.className = "responseCards";
 					// const tempCardOption = cardOption;
 					cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
 					// tempCardOption.remove();
 					cardOption.hidden = false;
-
-					cardOption.addEventListener("click", () =>{
-						response.textContent = cardOption.value;
-					});
 					tarotDiv.appendChild(cardOption);
 				}
 			});
@@ -365,6 +360,8 @@ function displayThreeOptions() {
 function resetCards() {
 	for (let card = 1; card < 23; card++) {
 		const cardOption = document.getElementById("Option " + card);
+		cardOption.innerHTML =
+			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +"/>";
 		if (cardOption) {
 			cardOption.setAttribute("selected", false);
 			cardOption.style.backgroundColor = "white";
@@ -372,6 +369,7 @@ function resetCards() {
 		}
 	}
 	cardCounter = 0; // reset the cardCounter when resetting cards
+	cardsSelected = false;
 }
 /**
  * Adds a fog background to the tarot card page
@@ -426,8 +424,6 @@ function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
 	// bindBurgerBar();
-	createShuffleBtn();
-	createShuffleCards();
 }
 
 init();

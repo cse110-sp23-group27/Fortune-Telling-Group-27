@@ -7,6 +7,9 @@
  */
 class Animator {
 	static instance = null;
+	/**
+	 * 
+	 */
 	constructor() {
 		if (Animator.instance === null) {
 			Animator.instance = this;
@@ -21,6 +24,9 @@ class Animator {
 		this.#startAnimationInterval();
 	}
 
+	/**
+	 * 
+	 */
 	#startAnimationInterval() {
 		// clear interval if there is already one
 		if (this.animationInterval !== null) {
@@ -30,6 +36,9 @@ class Animator {
 		this.animationInterval = setInterval(()=>this.#whenAnimationInterval(), this.animationIntervalDelay);
 	}
 
+	/**
+	 * 
+	 */
 	#whenAnimationInterval() {
 		// what happens every animation interval, run backwards so we can splice items out of it
 		for (let i = this.animationObjs.length - 1; i >= 0; i--) {
@@ -81,6 +90,11 @@ class Animator {
 		return animationObj;
 	}
 
+	/**
+	 * 
+	 * @param {*} animationObj 
+	 * @param {*} runCallback 
+	 */
 	deteleAnimation(animationObj, runCallback) {
 		// TODO this runs in O(n), restructure to a map probably to make this O(1)
 		const animationIndex = this.animationObjs.findIndex(animationObj);
