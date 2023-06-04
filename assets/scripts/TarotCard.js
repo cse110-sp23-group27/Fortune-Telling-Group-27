@@ -138,3 +138,8 @@ class TarotCard {
 		this.cardElement.style.zIndex = zIndex;
 	}
 }
+
+if (typeof module === "object") {
+	// for using tarot card in unit tests
+	module.exports = TarotCard;
+}

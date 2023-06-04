@@ -9,6 +9,8 @@ let cardCounter = 0;
 // Global variable that shows if 3 cards have been selected
 let cardsSelected = false;
 
+// Global homepage varible for checking if on homepage
+let homePageBool = true;
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -36,6 +38,7 @@ function bindHomePageBtns() {
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
 		addFogBackground();
+		homePageBool = false;
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -43,15 +46,16 @@ function bindHomePageBtns() {
 	});
 
 	tarotCardBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	eggBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.egg;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
@@ -60,15 +64,16 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	boneBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.bone;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
 
@@ -78,7 +83,7 @@ function bindHomePageBtns() {
 	});
 
 	boneBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 }
 
@@ -94,20 +99,25 @@ function bindGeneralButtons() {
 	// Added to reset cards on click
 	homeBtn.addEventListener("click", resetCards);
 	homeBtn.addEventListener("click", () => {
-		displayGeneralUIElements();
-		document.getElementById("center-text").textContent = "";
-		document.getElementById("response").textContent = "";
-		const responseCards = document.getElementsByClassName("responseCards");
-		while (responseCards.length > 0) {
-			tarotDiv.removeChild(responseCards[0]);
+		if (!homePageBool) {
+			displayGeneralUIElements();
+			document.getElementById("center-text").textContent = "";
+			document.getElementById("response").textContent = "";
+			const responseCards = document.getElementsByClassName(
+				"responseCards");
+			while (responseCards.length > 0) {
+				tarotDiv.removeChild(responseCards[0]);
+			}
+			tarotDiv.hidden = true;
+			homePageBool = true;
+			removeFogBackground();
 		}
-		tarotDiv.hidden = true;
-		removeFogBackground();
 	});
 
 	const githubBtn = document.getElementById("toGitHub");
 	githubBtn.addEventListener("click", () => {
-		navigator.clipboard.writeText("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
+		navigator.clipboard.writeText(
+			"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
 	});
 }
 
@@ -126,7 +136,8 @@ function displayGeneralUIElements(fortuneType =null) {
 
 	// Hides/Displays the option button that is needed if any
 	for (let i = 0; i <= 2; i++) {
-		const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
+		const optionsBtn = document.getElementById(
+			consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
 	}
 	if (fortuneType != null) {
@@ -168,7 +179,7 @@ function createShuffleBtn() {
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
- * @param callback a callback function for end of animation
+ * @param {*} callback a callback function for end of animation
  */
 function playShuffleAnimation(callback) {
 	const tCards = [];
@@ -210,7 +221,7 @@ function playShuffleAnimation(callback) {
 /**
  * Plays the card spread animation
  * @date 5/29/2023 - 10:18:49 PM
- * @param callback a callback function for end of animation
+ * @param {*} callback a callback function for end of animation
  */
 function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
@@ -346,7 +357,8 @@ function displayThreeOptions() {
 					cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
 					// const tempCardOption = cardOption;
-					cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
+					cardOption.parentNode.replaceChild(
+						clonedCardOption, cardOption);
 					// tempCardOption.remove();
 					cardOption.hidden = false;
 
