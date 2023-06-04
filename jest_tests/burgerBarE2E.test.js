@@ -1,7 +1,6 @@
 /**
  * @jest-environment puppeteer
  */
-const puppeteer = require("puppeteer");
 
 describe("Testing Burger Bar Itself", () => {
 	// visit the fortune telling website
@@ -15,7 +14,7 @@ describe("Testing Burger Bar Itself", () => {
 		const leftVal = await page.evaluate(() => {
 			const elem =document.querySelector(".menu__box");
 			const val =
-        parseInt(window.getComputedStyle(elem, null).getPropertyValue("left"));
+        parseInt(window.getComputedStyle(elem, null).getPropertyValue("left"), 10);
 			return val;
 		});
 		expect(leftVal).toBeLessThan(0);
@@ -53,7 +52,7 @@ describe("Testing Burger Bar Buttons", () => {
 			// console.log(`Checking button ${i}/${burgerBtns.length}`);
 			const data = await page.evaluate((el) => el.textContent, burgerBtns[i]);
 			// Make the text in the buttons exist
-			if (data.length == 0) {
+			if (data.length === 0) {
 				allArePopulated = false;
 			}
 			// Expect allArePopulated to still be true

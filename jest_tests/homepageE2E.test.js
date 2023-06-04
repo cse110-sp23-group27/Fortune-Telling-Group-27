@@ -2,8 +2,6 @@
  * @jest-environment puppeteer
  */
 
-const TarotCard = require("../assets/scripts/TarotCard");
-
 describe("Testing Homepage Buttons", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
@@ -33,7 +31,7 @@ describe("Testing Homepage Buttons", () => {
 			// console.log(`Checking home page button ${i}/${homePageBtns.length}`);
 			const data = await page.evaluate((el) => el.textContent, homePageBtns[i]);
 			// Make the text in the buttons exist
-			if (data.length == 0) {
+			if (data.length === 0) {
 				allArePopulated = false;
 			}
 			// Expect allArePopulated to still be true
