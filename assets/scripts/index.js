@@ -330,8 +330,8 @@ function displayThreeOptions() {
 					}
 
 					// TODO Find a better way to do this, apparently this can
-					// cause a memory leak but don't have time to make a better 
-                    // solution rn https://stackoverflow.com/questions/9251837/
+					// cause a memory leak but don't have time to make a better
+					// solution rn https://stackoverflow.com/questions/9251837/
 					// how-to-remove-all-listeners-in-an-element
 					// remove old on click events
 					cardOption.hidden = true;
