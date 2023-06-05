@@ -19,8 +19,7 @@ describe("Testing Burger Bar and Buttons", () => {
 			console.log(elem);
 			const style = window.getComputedStyle(elem, null);
 			const leftVal = style.getPropertyValue("left");
-			const val = parseInt(leftVal, 10);
-			return val;
+			return parseInt(leftVal, 10);
 		});
 		expect(leftVal).toBeLessThan(0);
 		const checkedValBefore = await burgerBarCheckbox.getProperty("checked");
