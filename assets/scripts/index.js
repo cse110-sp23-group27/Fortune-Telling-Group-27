@@ -102,7 +102,8 @@ function bindGeneralButtons() {
 			displayGeneralUIElements();
 			document.getElementById("center-text").textContent = "";
 			document.getElementById("response").textContent = "";
-			const responseCards = document.getElementsByClassName("responseCards");
+			const responseCards =
+				document.getElementsByClassName("responseCards");
 			while (responseCards.length > 0) {
 				tarotDiv.removeChild(responseCards[0]);
 			}
