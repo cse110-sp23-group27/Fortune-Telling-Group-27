@@ -1,4 +1,6 @@
 import * as consts from "./consts.js";
+import TarotCard from "./TarotCard.js";
+
 
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
@@ -179,7 +181,11 @@ function createShuffleBtn() {
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
+<<<<<<< HEAD
  * @param {*} callback a callback function for end of animation
+=======
+ * @param {Function} callback a callback function for end of animation
+>>>>>>> d811295 (Updated JSDocs formatting to fix linter errors)
  */
 function playShuffleAnimation(callback) {
 	const tCards = [];
@@ -221,7 +227,7 @@ function playShuffleAnimation(callback) {
 /**
  * Plays the card spread animation
  * @date 5/29/2023 - 10:18:49 PM
- * @param {*} callback a callback function for end of animation
+ * @param {Function} callback a callback function for end of animation
  */
 function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
@@ -230,13 +236,15 @@ function playCardSpreadAnimation(callback) {
 	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50}, {x: 20 + (60/22)*cardXoffset, y: 50}, 300, ()=>{
-			tCard.setClickable(true);
-			if (cardsFinished >= tCards.length) {
-				callback();
-			}
-			cardsFinished++;
-		});
+		tCard.move({x: 50, y: 50},
+			{x: 20 + (60/tCard.getAllCards().length)*cardXoffset, y: 50}
+			, 300, ()=>{
+				tCard.setClickable(true);
+				if (cardsFinished >= tCards.length) {
+					callback();
+				}
+				cardsFinished++;
+			});
 		cardXoffset++;
 	});
 }
@@ -347,10 +355,10 @@ function displayThreeOptions() {
 						cardOption.value = tarotCard["futureDescription"];
 					}
 
-					// TODO Find a better way to do this, apparently this can
-					// cause a memory leak but don't have time to make a better
-					// solution rn https://stackoverflow.com/questions/9251837/
-					// how-to-remove-all-listeners-in-an-element
+					// TODO: Find a better way to do this,
+					// apparently this can cause a memory leak
+					// but don't have time to make a better solution rn
+					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
 					// remove old on click events
 					/* cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
