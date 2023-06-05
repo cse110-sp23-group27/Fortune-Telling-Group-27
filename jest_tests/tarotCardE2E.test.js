@@ -1,11 +1,11 @@
 /**
  * @jest-environment puppeteer
  */
-describe("Testing Shuffle", () => {    
-    beforeAll(async () => {
+describe("Testing Shuffle", () => {
+	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
 	});
-    it("Click on shuffle", async () => {
+	it("Click on shuffle", async () => {
 		// console.log("Checking for 3 Main Buttons...");
 		// Query select all of the homepage button elements
 		// and return the length of that array
