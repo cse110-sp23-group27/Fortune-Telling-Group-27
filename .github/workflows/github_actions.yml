@@ -7,13 +7,24 @@ on:
           - '!main'     # excludes main branch
 permissions: write-all
 jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container: lironavon/docker-puppeteer-container:14.16.0
+    env: 
+      CI: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Installing modules
+        run: npm ci
+      - name: Running Tests
+        run: npm test
+
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           node-version: '18.16.0'
-
       - name: Install modules
         run: npm ci
 
@@ -22,10 +33,6 @@ jobs:
       
       - name: Run JSDocs
         run: npm run doc
-
-      - name: Running Tests
-        if: success() || failure()
-        run: npm run --silent test
         
       - name: Check if there are any changes
         if: success() || failure()
