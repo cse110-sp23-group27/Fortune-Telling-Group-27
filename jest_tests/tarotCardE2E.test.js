@@ -3,18 +3,17 @@
  */
 
 async function isLocatorReady(element, page) {
-    const isVisibleHandle = await page.evaluateHandle((e) => 
-  {
-      const style = window.getComputedStyle(e);
-      return (style && style.display !== 'none' && 
-      style.visibility !== 'hidden' && style.opacity !== '0');
-   }, element);
-    var visible = await isVisibleHandle.jsonValue();
-    const box = await element.boxModel();
-    if (visible && box) {
-      return true;
-    }
-    return false;
+	const isVisibleHandle = await page.evaluateHandle((e) => {
+		const style = window.getComputedStyle(e);
+		return (style && style.display !== "none" &&
+      style.visibility !== "hidden" && style.opacity !== "0");
+	}, element);
+	const visible = await isVisibleHandle.jsonValue();
+	const box = await element.boxModel();
+	if (visible && box) {
+		return true;
+	}
+	return false;
 }
 
 describe("Testing Tarot Card Page", () => {
@@ -30,15 +29,15 @@ describe("Testing Tarot Card Page", () => {
 		const numButtons = await page.$$eval(".home-page", (homePageBtns) => {
 			return homePageBtns.length;
 		});
-        const homePageBtnz =  await page.$$(".home-page");
+		const homePageBtnz = await page.$$(".home-page");
 		// Expect there that array from earlier to be of length 3
 		// meaning 3 homepage buttons were found
 		expect(numButtons).toBe(3);
-        const tarotCardButton = await page.$("#toTarotCard");
-        await tarotCardButton.click();
-        const homeBtns =  await page.$$(".home-page");
-        for(let i = 0; i < homeBtns.length; i++) {
-            expect(await isLocatorReady(homeBtns[i],page)).toBeFalsy();
-        }
+		const tarotCardButton = await page.$("#toTarotCard");
+		await tarotCardButton.click();
+		const homeBtns = await page.$$(".home-page");
+		for (let i = 0; i < homeBtns.length; i++) {
+			expect(await isLocatorReady(homeBtns[i], page)).toBeFalsy();
+		}
 	});
 });
