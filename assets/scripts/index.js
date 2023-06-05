@@ -183,7 +183,11 @@ const cardX = 45;
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
+<<<<<<< HEAD
+ * @param {*} callback a callback function for end of animation
+=======
  * @param {Function} callback a callback function for end of animation
+>>>>>>> d811295 (Updated JSDocs formatting to fix linter errors)
  */
 function playShuffleAnimation(callback) {
 	const tCards = [];
