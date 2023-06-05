@@ -13,7 +13,7 @@ jobs:
     env: 
       CI: true
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Installing modules
         run: npm install
       - name: Running Tests
