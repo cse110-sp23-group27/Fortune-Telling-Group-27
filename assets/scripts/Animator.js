@@ -14,7 +14,8 @@ class Animator {
 		if (Animator.instance === null) {
 			Animator.instance = this;
 		} else {
-			console.error("DON'T CREATE ANIMATOR OBJECTS YOURSELF!!! Use Animator.instance to access the Animator object!!!");
+			console.error("DON'T CREATE ANIMATOR OBJECTS YOURSELF!!!" +
+				"Use Animator.instance to access the Animator object!!!");
 		}
 
 		this.animationObjs = [];
@@ -33,23 +34,28 @@ class Animator {
 			clearInterval(this.animationInterval);
 		}
 		// make new interval
-		this.animationInterval = setInterval(()=>this.#whenAnimationInterval(), this.animationIntervalDelay);
+		this.animationInterval = setInterval(()=>
+			this.#whenAnimationInterval(), this.animationIntervalDelay);
 	}
 
 	/**
 	 *
 	 */
 	#whenAnimationInterval() {
-		// what happens every animation interval, run backwards so we can splice items out of it
+		// what happens every animation interval,
+		// run backwards so we can splice items out of it
 		for (let i = this.animationObjs.length - 1; i >= 0; i--) {
 			const animationObj = this.animationObjs[i];
 			// increment the timer inside the animation
 			animationObj.timeSinceStart += this.animationIntervalDelay;
 			// process the animation object
-			let nextValue = animationObj.from + ((animationObj.to - animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
+			let nextValue = animationObj.from +
+				((animationObj.to - animationObj.from)/animationObj.time) *
+					animationObj.timeSinceStart;
 			// make sure that the next value never overshoots the "to" value
 			nextValue = (animationObj.from - animationObj.to < 0) ?
-				Math.min(nextValue, animationObj.to) : Math.max(nextValue, animationObj.to);
+				Math.min(nextValue, animationObj.to) :
+				Math.max(nextValue, animationObj.to);
 
 			animationObj.setter(nextValue);
 			if (animationObj.timeSinceStart > animationObj.time) {
@@ -64,16 +70,20 @@ class Animator {
 	}
 
 	/**
-     * Add a new animation object that will take the animation from `from` value to the `to` value
+     * Add a new animation object that will take
+	 * the animation from `from` value to the `to` value
      * @date 5/29/2023 - 6:24:34 PM
      *
      * @param {float} from starting value of the animation
      * @param {float} to ending value of animation
-     * @param {Function} getter function to get current value of the animated prop
-     * @param {Function} setter function to set new current value of the animated prop
+     * @param {Function} getter function to get current
+	 * value of the animated prop
+     * @param {Function} setter function to
+	 * set new current value of the animated prop
      * @param {float} time time to complete the animation
      * @param {Function} callback callback after the animation is done
-     * @return {animationObj} from: any; to: any; getter: any; setter: any; time: any;
+     * @return {animationObj} from: any; to: any; getter:
+	 * any; setter: any; time: any;
      *  callback: any; timeSinceStart: number;
      */
 	addAnimation(from, to, getter, setter, time, callback) {

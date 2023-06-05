@@ -11,6 +11,8 @@ let cardsSelected = false;
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
 
+// Global homepage varible for checking if on homepage
+let homePageBool = true;
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -50,11 +52,12 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.egg;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
@@ -67,11 +70,12 @@ function bindHomePageBtns() {
 	});
 
 	boneBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.bone;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
 
@@ -113,7 +117,8 @@ function bindGeneralButtons() {
 
 	const githubBtn = document.getElementById("toGitHub");
 	githubBtn.addEventListener("click", () => {
-		navigator.clipboard.writeText("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
+		navigator.clipboard.writeText(
+			"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
 	});
 }
 
@@ -132,7 +137,8 @@ function displayGeneralUIElements(fortuneType =null) {
 
 	// Hides/Displays the option button that is needed if any
 	for (let i = 0; i <= 2; i++) {
-		const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
+		const optionsBtn = document.getElementById(
+			consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
 	}
 	if (fortuneType != null) {
@@ -175,7 +181,7 @@ function createShuffleBtn() {
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
- * @param callback a callback function for end of animation
+ * @param {*} callback a callback function for end of animation
  */
 function playShuffleAnimation(callback) {
 	const tCards = [];
@@ -217,7 +223,7 @@ function playShuffleAnimation(callback) {
 /**
  * Plays the card spread animation
  * @date 5/29/2023 - 10:18:49 PM
- * @param callback a callback function for end of animation
+ * @param {*} callback a callback function for end of animation
  */
 function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
@@ -309,7 +315,8 @@ function displayThreeOptions() {
 	TarotCard.getAllCards().forEach((card) => {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
-			card.move(card.getPositionPoint(), {x: 20+(selectedCardsFound*20), y: 50}, 350);
+			card.move(card.getPositionPoint(),
+				{x: 20+(selectedCardsFound*20), y: 50}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
@@ -343,14 +350,17 @@ function displayThreeOptions() {
 						cardOption.value = tarotCard["futureDescription"];
 					}
 
-					// TODO Find a better way to do this, apparently this can cause a memory leak but don't have time to make a better solution rn
-					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
+					// TODO Find a better way to do this, apparently this can
+					// cause a memory leak but don't have time to make a better
+					// solution rn https://stackoverflow.com/questions/9251837/
+					// how-to-remove-all-listeners-in-an-element
 					// remove old on click events
 					/* cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
 					clonedCardOption.className = "responseCards21";
 					// const tempCardOption = cardOption;
-					cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
+					cardOption.parentNode.replaceChild(
+						clonedCardOption, cardOption);
 					// tempCardOption.remove();
 					cardOption.hidden = false;
 					tarotDiv.appendChild(cardOption);*/
