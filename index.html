@@ -10,6 +10,7 @@
 </head>
 <body>
   <header>
+    <!--temporary header for styling, will change later-->
     <div class="hamburger-menu">
       <input id="menu__toggle" type="checkbox" />
       <label class="menu__btn" for="menu__toggle">
@@ -26,24 +27,24 @@
       </ul>
     </div>
   </header>
-  
-  <main>
-      <div class="container">
-        <div class="button-wrapper">
-          <button class = "home-page" id = "toTarotCard">Tarot Card</button>
-          <button class = "home-page" id = "toEgg">Egg</button>
-          <button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
-        </div>
 
-        <div class="tarotSpecific" id="tarotDiv" hidden>
+    <main>
+        <div class="container">
+          <div class="button-wrapper">
+            <button class = "home-page" id = "toTarotCard">Tarot Card</button>
+            <button class = "home-page" id = "toEgg">Egg</button>
+            <button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
+          </div>
+
+          <div class="tarotSpecific" id="tarotDiv" hidden>
+          </div>
+          <font size = 50><p id="center-text"></p></font>
         </div>
-        <font size = 50><p id="center-text"></p></font>
-      </div>
-      <p id="response"></p>
-  </main>
+        <p id="response"></p>
+    </main>
 </body>
 <script src="assets/scripts/index.js" type="module"></script>
-<script src="./assets/scripts/Animator.js"></script>
-<script src="./assets/scripts/TarotCard.js"></script>
+<script src="./assets/scripts/Animator.js" type="module"></script>
+<script src="./assets/scripts/TarotCard.js" type="module"></script>
 <script src="assets/scripts/service-worker.js" type="module"></script>
 </html>

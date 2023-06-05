@@ -178,14 +178,12 @@ function createShuffleBtn() {
 	tarotDiv.append(shuffleBtn);
 }
 
+const cardY = 30;
+const cardX = 45;
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
-<<<<<<< HEAD
- * @param {*} callback a callback function for end of animation
-=======
  * @param {Function} callback a callback function for end of animation
->>>>>>> d811295 (Updated JSDocs formatting to fix linter errors)
  */
 function playShuffleAnimation(callback) {
 	const tCards = [];
@@ -198,7 +196,7 @@ function playShuffleAnimation(callback) {
 	tCards.forEach((tCard) => {
 		// block clicks too
 		tCard.setClickable(false);
-		tCard.moveInstantly({x: 50, y: 50});
+		tCard.moveInstantly({x: cardX, y: cardY});
 	});
 
 	// make 3 shuffles
@@ -207,8 +205,8 @@ function playShuffleAnimation(callback) {
 		// pick random card
 		const randCard = tCards[Math.floor(22 * Math.random())];
 		// move away
-		randCard.move({x: 50, y: 50}, {x: 52, y: 50}, 350, ()=>{
-			randCard.move({x: 52, y: 50}, {x: 50, y: 50}, 350, ()=>{
+		randCard.move({x: cardX, y: cardY}, {x: cardX+2, y: cardY}, 350, ()=>{
+			randCard.move({x: cardX+2, y: cardY}, {x: cardX, y: cardY}, 350, ()=>{
 				shuffleCount++;
 				if (shuffleCount < 3) {
 					shuffleSequence(callback);
@@ -236,8 +234,8 @@ function playCardSpreadAnimation(callback) {
 	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50},
-			{x: 20 + (60/tCard.getAllCards().length)*cardXoffset, y: 50}
+		tCard.move({x: cardX, y: cardY},
+			{x: 13 + (60/tCard.getAllCards().length)*cardXoffset, y: cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
 				if (cardsFinished >= tCards.length) {
@@ -321,7 +319,7 @@ function displayThreeOptions() {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(),
-				{x: 20+(selectedCardsFound*20), y: 50}, 350);
+				{x: 20+(selectedCardsFound*20), y: cardY}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();

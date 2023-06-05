@@ -126,3 +126,4 @@ class Animator {
 
 // instantiate a singleton instance
 new Animator();
+export default Animator;

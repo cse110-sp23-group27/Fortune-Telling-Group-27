@@ -1,3 +1,5 @@
+import Animator from "./Animator.js";
+
 /**
  * Tarot Card class that defines and creates Tarot Card objects
  * @date 5/29/2023
@@ -147,3 +149,5 @@ if (typeof module === "object") {
 	// for using tarot card in unit tests
 	module.exports = TarotCard;
 }
+
+export default TarotCard;
