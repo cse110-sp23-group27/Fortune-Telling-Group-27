@@ -31,7 +31,7 @@ const tarotCardsImgs = [
 ];
 
 // Run the init() function when the page has loaded
-// window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("DOMContentLoaded", init);
 
 /**
  *
