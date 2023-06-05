@@ -6,6 +6,9 @@ export const FORTUNETYPES = {
 
 export const FORTUNELIST = ["tarot", "egg", "bone"];
 
+export const cardY = 30;
+export const cardX = 45;
+
 export const CARDS = ["The Fool", "The Magician", "The High Priestess", "The Empress",
 					  "The Emperor", "The Hierophant", "The Lovers", "The Chariot",
 					  "Strength", "The Hermit", "The Wheel of Fortune", "Justice",

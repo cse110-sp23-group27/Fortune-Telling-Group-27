@@ -26,25 +26,9 @@
 }
   
 .imagesPreShuffle {
-    height: 30vmin;
-    width: 20vmin;
-    margin: 5px;
-    height: 27vmin;
+    height: 26vmin;
     width: 16vmin;
 
-    justify-content: center;
-
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-
-
-}
-
-.chosenCards {
-    height: 35vmin;
-    width: 25vmin;
     margin: 5px;
 
     justify-content: center;
@@ -56,7 +40,6 @@
 
 
 }
-
 .chosenCards {
     height: 30vmin;
     width: 17vmin;

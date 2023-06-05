@@ -178,8 +178,7 @@ function createShuffleBtn() {
 	tarotDiv.append(shuffleBtn);
 }
 
-const cardY = 30;
-const cardX = 45;
+
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
@@ -196,7 +195,7 @@ function playShuffleAnimation(callback) {
 	tCards.forEach((tCard) => {
 		// block clicks too
 		tCard.setClickable(false);
-		tCard.moveInstantly({x: cardX, y: cardY});
+		tCard.moveInstantly({x: consts.cardX, y: consts.cardY});
 	});
 
 	// make 3 shuffles
@@ -205,8 +204,8 @@ function playShuffleAnimation(callback) {
 		// pick random card
 		const randCard = tCards[Math.floor(22 * Math.random())];
 		// move away
-		randCard.move({x: cardX, y: cardY}, {x: cardX+2, y: cardY}, 350, ()=>{
-			randCard.move({x: cardX+2, y: cardY}, {x: cardX, y: cardY}, 350, ()=>{
+		randCard.move({x: consts.cardX, y: consts.cardY}, {x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
+			randCard.move({x: consts.cardX+2, y: consts.cardY}, {x: consts.cardX, y: consts.cardY}, 350, ()=>{
 				shuffleCount++;
 				if (shuffleCount < 3) {
 					shuffleSequence(callback);
@@ -234,8 +233,8 @@ function playCardSpreadAnimation(callback) {
 	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: cardX, y: cardY},
-			{x: 13 + (60/22)*cardXoffset, y: cardY}
+		tCard.move({x: consts.cardX, y: consts.cardY},
+			{x: 13 + (60/22)*cardXoffset, y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
 				if (cardsFinished >= tCards.length) {
@@ -319,7 +318,7 @@ function displayThreeOptions() {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(),
-				{x: 20+(selectedCardsFound*20), y: cardY}, 350);
+				{x: 20+(selectedCardsFound*25), y: consts.cardY}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
