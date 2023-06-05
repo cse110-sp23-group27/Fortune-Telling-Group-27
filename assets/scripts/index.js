@@ -253,7 +253,7 @@ function createShuffleCards() {
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
-		button.innerHTML = "<img class = \"chosenCards\"src=\"" +consts.cardBack+"\"/>";
+		button.innerHTML = "<img class = \"chosenCards\"src=\"" +consts.cardBack+"\">";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
