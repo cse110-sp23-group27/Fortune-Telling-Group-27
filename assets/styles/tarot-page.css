@@ -5,18 +5,52 @@
   
 .cardsBtnPreShuffle{
     margin: 10px;
+    border-color: #fff;
+    background-color: #fff;
+    
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: -10 px;
+    padding-left: 0px;
+
+    border-radius: 5%;
 }
   
 .imagesPreShuffle {
-    height: 26vmin;
+    height: 27vmin;
     width: 16vmin;
-    margin: 5px;
+
+    justify-content: center;
+
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+
+
 }
 
 .chosenCards {
     height: 30vmin;
     width: 17vmin;
-    margin: 5px;
+    margin: 3px;
+
+    border-width: 2px;
+    border-radius: 5%;
+    background-color: blanchedalmond;
+}
+
+.responseCards {
+    margin: 10px;
+    border-color: #fff;
+    background-color: #fff;
+    
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: -10 px;
+    padding-left: 0px;
+
+    border-radius: 5%;
 }
 
 html, body {
