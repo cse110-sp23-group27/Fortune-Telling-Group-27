@@ -13,11 +13,11 @@ jobs:
     env: 
       CI: true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Installing modules
         run: npm install
       - name: Running Tests
-        run: npm test
+        run: npm run test
 
   build:
     runs-on: ubuntu-latest

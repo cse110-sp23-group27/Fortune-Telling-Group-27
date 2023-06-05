@@ -5,15 +5,14 @@ on:
     branches:
           - main     # Only runs on main
 jobs:
-  build:
+  testing:
     runs-on: ubuntu-latest
+    container: lironavon/docker-puppeteer-container:14.16.0
+    env: 
+      CI: true
     steps:
-    - uses: actions/checkout@v3
-      with:
-        node-version: '18.16.0'
-
-    - name: Install modules
-      run: npm ci
-      
-    - name: Run tests
-      run: npm run --silent test
+      - uses: actions/checkout@v3
+      - name: Installing modules
+        run: npm install
+      - name: Running Tests
+        run: npm test
