@@ -29,16 +29,18 @@ button {
 }
 
 #response {
-  position: relative;
+  position: absolute;
   left: 50%;
-  bottom: 20%;
+  bottom: 10%;
+  inline-size: 60%;
   font-size: 20px;
-  color: black;
+  text-align: center;
+  color: white;
   transform: translateX(-50%);
 }
 
 #toTarotCard {
-  background: url('../images/tarot-card.png') no-repeat center;
+  background: url('https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-card.png') no-repeat center;
   background-size: cover;
   width: 300px;
   height: 400px;
@@ -59,7 +61,7 @@ button {
 
 #toEgg {
   background-color: red;
-  background: url('../images/egg.png') no-repeat center;
+  background: url('https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/egg.png') no-repeat center;
   background-size: cover; 
   width: 300px; 
   height: 400px;  
@@ -79,7 +81,7 @@ button {
 }
 
 #toBoneTossing {
-  background: url('../images/bone-tossing-1.png') no-repeat center;
+  background: url('https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/bone-tossing-1.png') no-repeat center;
   background-size: cover; 
   width: 300px;
   height: 400px;
@@ -129,7 +131,7 @@ button {
   width: 26px;
   height: 26px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 151;
 }
 /* used to make whole menu clickable, but too much bottom padding */
 /* TODO: Fix bottom padding */
@@ -173,6 +175,7 @@ button {
   background-color: #ECEFF1;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
   transition-duration: .25s;
+  z-index: 150;
 }
 .menu__item {
   display: block;

@@ -42,14 +42,14 @@ body {
     height: 100vh; /* Optional: Set container height to fit the viewport */
   }
   
-  .button-wrapper {
+.button-wrapper {
     display: flex;
     justify-content: center;
-  }
+}
   
-  button {
+button {
     margin: 5px;
-  }
+}
 
 /* ---------- Fog ---------- */
 .fogwrapper {

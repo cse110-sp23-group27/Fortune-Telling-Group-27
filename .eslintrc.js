@@ -17,6 +17,11 @@ module.exports = {
         "allowImportExportEverywhere": true,
     },
     "rules": {
+        "max-len": [
+            "error", {
+                "ignoreComments": true
+            }
+        ],
         "indent": [
             "error", 
             "tab"
@@ -57,7 +62,9 @@ module.exports = {
         ],
     },
     "globals": {
-        "Animator": "writeable"
+        "Animator": "writeable",
+        "TarotCard": "writeable",
+        "page": "readable"
     },
     "ignorePatterns": ['/node_modules/', '/specs/', './github/']
 };
