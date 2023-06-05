@@ -159,7 +159,7 @@ export const CARDSJSON = [
 		"name": "Judgement",
 		"img": "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/judgement.png",
 		"pastDescription": "In the past, you experienced a powerful awakening or a significant realization that prompted you to reassess your life's direction. The Judgment card indicates that you underwent a transformative period of self-reflection and made choices that aligned with your higher self.",
-		"presentDescription": "Currently, you are in a phase of self-evaluation and accountability. The Judgment card suggests that you are being called to review past actions, make amends if necessary, and",
+		"presentDescription": "Currently, you are in a phase of self-evaluation and accountability. The Judgment card suggests that you are being called to review past actions, make amends if necessary, and embrace a fresh start. It is a powerful card that symbolizes a spiritual awakening and the need for personal transformation. The presence of the Judgment card indicates that you are being given an opportunity to reflect on your choices and their consequences.",
 		"futureDescription": "The future holds a time of profound transformation, renewal, and awakening. The Judgment card signifies that you will be called to embrace a higher purpose and make choices that align with your authentic self. This is a period of spiritual growth and self-evaluation, where you will have the opportunity to let go of past judgments and embrace forgiveness and healing. Embrace the call to rise above old patterns and awaken to a higher truth. Through this process, you will experience a profound rebirth and a renewed sense of purpose."
 	},
 	{

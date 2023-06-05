@@ -131,7 +131,7 @@ button {
   width: 26px;
   height: 26px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 151;
 }
 /* used to make whole menu clickable, but too much bottom padding */
 /* TODO: Fix bottom padding */
@@ -175,6 +175,7 @@ button {
   background-color: #ECEFF1;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
   transition-duration: .25s;
+  z-index: 150;
 }
 .menu__item {
   display: block;
