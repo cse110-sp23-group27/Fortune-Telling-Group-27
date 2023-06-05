@@ -457,6 +457,15 @@ function init() {
 
 init();
 
+/**
+ * Hamburger bar closes when you hover off of it
+ * @author Kyle Ng
+ * @date 6/5/2023
+ */
+document.querySelector('.menu__box').addEventListener('mouseleave', function() {
+	document.querySelector('#menu__toggle').checked = false;
+});
+
 document.addEventListener("DOMContentLoaded", function() {
 	const menuToggle = document.querySelector("#menu__toggle");
 	if (menuToggle) {
