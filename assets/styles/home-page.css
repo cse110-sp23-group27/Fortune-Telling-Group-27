@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh; /* Optional: Set container height to fit the viewport */
+    height: 100vh; /* Optional: Set container height to fit the viewport */
   }
   
 .button-wrapper {
