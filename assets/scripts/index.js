@@ -104,7 +104,8 @@ function bindGeneralButtons() {
 			displayGeneralUIElements();
 			document.getElementById("center-text").textContent = "";
 			document.getElementById("response").textContent = "";
-			const responseCards = document.getElementsByClassName("responseCards");
+			const responseCards =
+				document.getElementsByClassName("responseCards");
 			while (responseCards.length > 0) {
 				tarotDiv.removeChild(responseCards[0]);
 			}
@@ -204,16 +205,18 @@ function playShuffleAnimation(callback) {
 		// pick random card
 		const randCard = tCards[Math.floor(22 * Math.random())];
 		// move away
-		randCard.move({x: consts.cardX, y: consts.cardY}, {x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
-			randCard.move({x: consts.cardX+2, y: consts.cardY}, {x: consts.cardX, y: consts.cardY}, 350, ()=>{
-				shuffleCount++;
-				if (shuffleCount < 3) {
-					shuffleSequence(callback);
-				} else {
-					callback();
-				}
+		randCard.move({x: consts.cardX, y: consts.cardY},
+			{x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
+				randCard.move({x: consts.cardX+2, y: consts.cardY},
+					{x: consts.cardX, y: consts.cardY}, 350, ()=>{
+						shuffleCount++;
+						if (shuffleCount < 3) {
+							shuffleSequence(callback);
+						} else {
+							callback();
+						}
+					});
 			});
-		});
 	};
 	shuffleSequence(()=>{
 		// finished shuffling
@@ -258,7 +261,8 @@ function createShuffleCards() {
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
-		button.innerHTML = "<img class = \"chosenCards\"src=\"" +consts.cardBack+"\">";
+		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
+			consts.cardBack+"\">";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
