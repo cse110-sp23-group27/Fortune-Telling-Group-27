@@ -1,4 +1,6 @@
 import * as consts from "./consts.js";
+import TarotCard from "./TarotCard.js";
+
 
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
@@ -177,10 +179,11 @@ function createShuffleBtn() {
 	tarotDiv.append(shuffleBtn);
 }
 
+
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
- * @param {*} callback a callback function for end of animation
+ * @param {Function} callback a callback function for end of animation
  */
 function playShuffleAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
@@ -188,7 +191,7 @@ function playShuffleAnimation(callback) {
 	tCards.forEach((tCard) => {
 		// block clicks too
 		tCard.setClickable(false);
-		tCard.moveInstantly({x: 50, y: 50});
+		tCard.moveInstantly({x: consts.cardX, y: consts.cardY});
 	});
 
 	// make 3 shuffles
@@ -197,16 +200,18 @@ function playShuffleAnimation(callback) {
 		// pick random card
 		const randCard = tCards[Math.floor(22 * Math.random())];
 		// move away
-		randCard.move({x: 50, y: 50}, {x: 52, y: 50}, 350, ()=>{
-			randCard.move({x: 52, y: 50}, {x: 50, y: 50}, 350, ()=>{
-				shuffleCount++;
-				if (shuffleCount < 3) {
-					shuffleSequence(callback);
-				} else {
-					callback();
-				}
+		randCard.move({x: consts.cardX, y: consts.cardY},
+			{x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
+				randCard.move({x: consts.cardX+2, y: consts.cardY},
+					{x: consts.cardX, y: consts.cardY}, 350, ()=>{
+						shuffleCount++;
+						if (shuffleCount < 3) {
+							shuffleSequence(callback);
+						} else {
+							callback();
+						}
+					});
 			});
-		});
 	};
 	shuffleSequence(()=>{
 		// finished shuffling
@@ -217,7 +222,7 @@ function playShuffleAnimation(callback) {
 /**
  * Plays the card spread animation
  * @date 5/29/2023 - 10:18:49 PM
- * @param {*} callback a callback function for end of animation
+ * @param {Function} callback a callback function for end of animation
  */
 function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
@@ -226,14 +231,16 @@ function playCardSpreadAnimation(callback) {
 	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50}, {x: 20 + (60/tCards.length)*cardXoffset,
-			y: 50}, 300, ()=>{
-			tCard.setClickable(true);
-			if (cardsFinished >= tCards.length) {
-				callback();
-			}
-			cardsFinished++;
-		});
+		tCard.move({x: consts.cardX, y: consts.cardY},
+			{x: 15 + (60/tCards.length)*cardXoffset,
+				y: consts.cardY}
+			, 300, ()=>{
+				tCard.setClickable(true);
+				if (cardsFinished >= tCards.length) {
+					callback();
+				}
+				cardsFinished++;
+			});
 		cardXoffset++;
 	});
 }
@@ -250,7 +257,8 @@ function createShuffleCards() {
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
-		button.innerHTML = "<img class = \"chosenCards\"src=\"" +consts.cardBack+"\">";
+		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
+			consts.cardBack+"\">";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
@@ -316,7 +324,7 @@ function displayThreeOptions() {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(),
-				{x: 20+(selectedCardsFound*20), y: 50}, 350);
+				{x: 20+(selectedCardsFound*25), y: consts.cardY}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
@@ -350,10 +358,10 @@ function displayThreeOptions() {
 						cardOption.value = tarotCard["futureDescription"];
 					}
 
-					// TODO Find a better way to do this, apparently this can
-					// cause a memory leak but don't have time to make a better
-					// solution rn https://stackoverflow.com/questions/9251837/
-					// how-to-remove-all-listeners-in-an-element
+					// TODO: Find a better way to do this,
+					// apparently this can cause a memory leak
+					// but don't have time to make a better solution rn
+					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
 					// remove old on click events
 					/* cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);

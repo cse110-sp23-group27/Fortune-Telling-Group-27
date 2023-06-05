@@ -3,35 +3,31 @@
 <head>
   <link rel="stylesheet" href="assets/styles/home-page.css">
   <link rel="stylesheet" href="assets/styles/tarot-page.css">
-
-  <!--temporary header for styling, will change later-->
-  <div class="header">
-    <h1>110 Wanton Wontons</h1>
-    <p>Fortune Telling Group 27</p>
-  </div>
-
-  <div class="hamburger-menu">
-    <input id="menu__toggle" type="checkbox" />
-    <label class="menu__btn" for="menu__toggle">
-      <span></span>
-    </label>
-
-    <ul class="menu__box">
-      <li><button class = "menu__item" id = "toHome" hidden>Home</button></li>
-      <li><a class="menu__item" href="#">Info</a></li>
-      <li><button class = "menu__item" id = "toGitHub" hidden>GitHub</button></li>
-      <li><button class = "menu__item" id = "tarotOptions" hidden>Tarot Options</button></li>
-      <li><button class = "menu__item" id = "eggOptions" hidden>Egg Options</button></li>
-      <li><button class = "menu__item" id = "boneOptions" hidden>Bone Options</button></li>
-    </ul>
-  </div>
-  
   <!--For Cinzel Decorative Fonts-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header>
+    <!--temporary header for styling, will change later-->
+    <div class="hamburger-menu">
+      <input id="menu__toggle" type="checkbox" />
+      <label class="menu__btn" for="menu__toggle">
+        <span></span>
+      </label>
+
+      <ul class="menu__box">
+        <li><button class = "menu__item" id = "toHome" hidden>Home</button></li>
+        <li><a class="menu__item" href="#">Info</a></li>
+        <li><button class = "menu__item" id = "toGitHub" hidden>GitHub</button></li>
+        <li><button class = "menu__item" id = "tarotOptions" hidden>Tarot Options</button></li>
+        <li><button class = "menu__item" id = "eggOptions" hidden>Egg Options</button></li>
+        <li><button class = "menu__item" id = "boneOptions" hidden>Bone Options</button></li>
+      </ul>
+    </div>
+  </header>
+
     <main>
         <div class="container">
           <div class="button-wrapper">
@@ -48,7 +44,7 @@
     </main>
 </body>
 <script src="assets/scripts/index.js" type="module"></script>
-<script src="./assets/scripts/Animator.js"></script>
-<script src="./assets/scripts/TarotCard.js"></script>
+<script src="./assets/scripts/Animator.js" type="module"></script>
+<script src="./assets/scripts/TarotCard.js" type="module"></script>
 <script src="assets/scripts/service-worker.js" type="module"></script>
 </html>

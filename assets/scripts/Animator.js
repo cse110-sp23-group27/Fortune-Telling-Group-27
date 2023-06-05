@@ -7,64 +7,70 @@
  */
 class Animator {
 	static instance = null;
+
 	/**
-	 *
-	 */
+     * Contructor for the Animator class
+     * @date 5/29/2023
+     * @constructor
+     */
 	constructor() {
 		if (Animator.instance === null) {
 			Animator.instance = this;
 		} else {
-			console.error("DON'T CREATE ANIMATOR OBJECTS YOURSELF!!!" +
-				"Use Animator.instance to access the Animator object!!!");
+			console.error("[ERROR] Use Animator.instance.");
 		}
 
 		this.animationObjs = [];
-		// set up interval
+		// Set up interval
 		this.animationIntervalDelay = 10; // ms
 		this.animationInterval = null;
 		this.#startAnimationInterval();
 	}
 
 	/**
-	 *
-	 */
+     * Create a new interval for Animation
+     * @date 5/29/2023
+     */
 	#startAnimationInterval() {
-		// clear interval if there is already one
+		// Clear interval if there is already one
 		if (this.animationInterval !== null) {
 			clearInterval(this.animationInterval);
 		}
-		// make new interval
-		this.animationInterval = setInterval(()=>
-			this.#whenAnimationInterval(), this.animationIntervalDelay);
+		// Make new interval
+		this.animationInterval = setInterval(()=>this.#whenAnimationInterval(),
+			this.animationIntervalDelay);
 	}
 
 	/**
-	 *
-	 */
+     * Process animation interval for new animation
+     * @date 5/29/2023
+     */
 	#whenAnimationInterval() {
-		// what happens every animation interval,
+		// What happens every animation interval,
 		// run backwards so we can splice items out of it
 		for (let i = this.animationObjs.length - 1; i >= 0; i--) {
 			const animationObj = this.animationObjs[i];
-			// increment the timer inside the animation
+			// Increment the timer inside the animation
 			animationObj.timeSinceStart += this.animationIntervalDelay;
-			// process the animation object
+			// Process the animation object
 			let nextValue = animationObj.from +
-				((animationObj.to - animationObj.from)/animationObj.time) *
-					animationObj.timeSinceStart;
-			// make sure that the next value never overshoots the "to" value
+			((animationObj.to - animationObj.from)/animationObj.time) *
+			animationObj.timeSinceStart;
+
+			// Make sure that the next value never overshoots the "to" value
 			nextValue = (animationObj.from - animationObj.to < 0) ?
 				Math.min(nextValue, animationObj.to) :
 				Math.max(nextValue, animationObj.to);
 
 			animationObj.setter(nextValue);
 			if (animationObj.timeSinceStart > animationObj.time) {
-				// remove this animation as it ran its full time
+				// Remove this animation as it ran its full time,
 				// if has callback, call it
 				if (this.animationObjs[i].callback) {
 					this.animationObjs[i].callback();
 				}
-				this.animationObjs.splice(i, 1); // remove obj from list
+				// Remove obj from list
+				this.animationObjs.splice(i, 1);
 			}
 		}
 	}
@@ -76,15 +82,13 @@ class Animator {
      *
      * @param {float} from starting value of the animation
      * @param {float} to ending value of animation
-     * @param {Function} getter function to get current
-	 * value of the animated prop
-     * @param {Function} setter function to
-	 * set new current value of the animated prop
+     * @param {Function} getter to get current value of animated prop
+     * @param {Function} setter to set new current value of animated prop
      * @param {float} time time to complete the animation
      * @param {Function} callback callback after the animation is done
-     * @return {animationObj} from: any; to: any; getter:
-	 * any; setter: any; time: any;
-     *  callback: any; timeSinceStart: number;
+     * @return {animationObj} from: any; to: any; getter: any;
+	 *                        setter: any; time: any;
+     *                        callback: any; timeSinceStart: number;
      */
 	addAnimation(from, to, getter, setter, time, callback) {
 		const animationObj = {
@@ -101,23 +105,26 @@ class Animator {
 	}
 
 	/**
-	 *
-	 * @param {*} animationObj
-	 * @param {*} runCallback
-	 */
+     * Delete the given animation object
+     * @date 5/29/2023
+     *
+     * @param {Animator} animationObj - The Animation object to delete
+     * @param {Function} runCallback callback
+     */
 	deteleAnimation(animationObj, runCallback) {
 		// TODO this runs in O(n), restructure to a map probably to make this O(1)
 		const animationIndex = this.animationObjs.findIndex(animationObj);
 
-		// if asked to still run the callback
+		// If asked to still run the callback
 		if (runCallback && this.animationObjs[animationIndex].callback) {
 			this.animationObjs[animationIndex].callback();
 		}
 
-		// remove this object from the animation list early
+		// Remove this object from the animation list early
 		this.animationObjs.splice(animationIndex, 1);
 	}
 }
 
 // instantiate a singleton instance
 new Animator();
+export default Animator;
