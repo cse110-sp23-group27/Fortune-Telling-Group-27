@@ -284,7 +284,7 @@ function createShuffleCards() {
 		});
 		tarotDiv.appendChild(button);
 	}
-	
+
 	// get all of the cards and make them into the TarotCard classes
 	for (let card = 1; card < 23; card++) {
 		const cardOption = document.getElementById("Option " + card);
