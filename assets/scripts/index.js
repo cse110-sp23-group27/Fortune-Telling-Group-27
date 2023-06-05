@@ -8,6 +8,8 @@ const response = document.getElementById("response");
 let cardCounter = 0;
 // Global variable that shows if 3 cards have been selected
 let cardsSelected = false;
+// Global homepage varible for checking if on homepage
+let homePageBool = true;
 
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
@@ -97,19 +99,18 @@ function bindHomePageBtns() {
 function bindGeneralButtons() {
 	const homeBtn = document.getElementById("toHome");
 	// Added to reset cards on click
-	homeBtn.addEventListener("click", resetCards);
 	homeBtn.addEventListener("click", () => {
 		if (!homePageBool) {
 			displayGeneralUIElements();
 			document.getElementById("center-text").textContent = "";
 			document.getElementById("response").textContent = "";
-			const responseCards = document.getElementsByClassName(
-				"responseCards");
+			const responseCards = document.getElementsByClassName("responseCards");
 			while (responseCards.length > 0) {
 				tarotDiv.removeChild(responseCards[0]);
 			}
 			tarotDiv.hidden = true;
 			homePageBool = true;
+			resetCards();
 			removeFogBackground();
 		}
 	});
@@ -165,8 +166,9 @@ function createShuffleBtn() {
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", () => {
 		shuffleBtn.hidden = true;
-		for (let card = 1; card < 23; card++) {
-			const cardOption = document.getElementById("Option " + card);
+		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+		for (let card = 0; card < cards.length; card++) {
+			const cardOption = cards[card];
 			cardOption.hidden = false;
 		}
 		playShuffleAnimation(()=>{
@@ -199,7 +201,7 @@ function playShuffleAnimation(callback) {
 	let shuffleCount = 0;
 	const shuffleSequence = (callback)=>{
 		// pick random card
-		const randCard = tCards[Math.floor(tCards.length * Math.random())];
+		const randCard = tCards[Math.floor(22 * Math.random())];
 		// move away
 		randCard.move({x: 50, y: 50}, {x: 52, y: 50}, 350, ()=>{
 			randCard.move({x: 52, y: 50}, {x: 50, y: 50}, 350, ()=>{
@@ -227,10 +229,10 @@ function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
 	let cardsFinished = 0;
+	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50}, {x: 20 + (60/
-            tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
+		tCard.move({x: 50, y: 50}, {x: 20 + (60/22)*cardXoffset, y: 50}, 300, ()=>{
 			tCard.setClickable(true);
 			if (cardsFinished >= tCards.length) {
 				callback();
@@ -333,7 +335,6 @@ function displayThreeOptions() {
 
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
-					cardOption.className = "responseCards";
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					const imageSrc = tarotCard["img"];
 					cardOption.innerHTML =
@@ -354,18 +355,15 @@ function displayThreeOptions() {
 					// solution rn https://stackoverflow.com/questions/9251837/
 					// how-to-remove-all-listeners-in-an-element
 					// remove old on click events
-					cardOption.hidden = true;
+					/* cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
+					clonedCardOption.className = "responseCards21";
 					// const tempCardOption = cardOption;
 					cardOption.parentNode.replaceChild(
 						clonedCardOption, cardOption);
 					// tempCardOption.remove();
 					cardOption.hidden = false;
-
-					cardOption.addEventListener("click", () =>{
-						response.textContent = cardOption.value;
-					});
-					tarotDiv.appendChild(cardOption);
+					tarotDiv.appendChild(cardOption);*/
 				}
 			});
 		}
@@ -381,6 +379,8 @@ function displayThreeOptions() {
 function resetCards() {
 	for (let card = 1; card < 23; card++) {
 		const cardOption = document.getElementById("Option " + card);
+		cardOption.innerHTML =
+			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +"/>";
 		if (cardOption) {
 			cardOption.setAttribute("selected", false);
 			cardOption.style.backgroundColor = "white";
@@ -388,6 +388,7 @@ function resetCards() {
 		}
 	}
 	cardCounter = 0; // reset the cardCounter when resetting cards
+	cardsSelected = false;
 }
 /**
  * Adds a fog background to the tarot card page

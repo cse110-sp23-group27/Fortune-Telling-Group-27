@@ -1,3 +1,6 @@
+/**
+ *
+ */
 class TarotCard {
 	/**
       * Creates an instance of TarotCard.
