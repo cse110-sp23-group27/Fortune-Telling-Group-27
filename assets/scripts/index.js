@@ -186,12 +186,7 @@ function createShuffleBtn() {
  * @param {Function} callback a callback function for end of animation
  */
 function playShuffleAnimation(callback) {
-	const tCards = [];
-	// get all of the cards and make them into the TarotCard classes
-	for (let card = 1; card < 23; card++) {
-		const cardOption = document.getElementById("Option " + card);
-		tCards.push(new TarotCard(cardOption));
-	}
+	const tCards = TarotCard.getAllCards();
 	// Move all to center
 	tCards.forEach((tCard) => {
 		// block clicks too
@@ -237,7 +232,8 @@ function playCardSpreadAnimation(callback) {
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
 		tCard.move({x: consts.cardX, y: consts.cardY},
-			{x: 15 + (60/22)*cardXoffset, y: consts.cardY}
+			{x: 15 + (60/tCards.length)*cardXoffset,
+       y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
 				if (cardsFinished >= tCards.length) {
@@ -295,6 +291,12 @@ function createShuffleCards() {
 			}
 		});
 		tarotDiv.appendChild(button);
+	}
+
+	// get all of the cards and make them into the TarotCard classes
+	for (let card = 1; card < 23; card++) {
+		const cardOption = document.getElementById("Option " + card);
+		new TarotCard(cardOption);
 	}
 }
 
