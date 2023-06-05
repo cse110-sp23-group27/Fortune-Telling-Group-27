@@ -8,6 +8,8 @@ const response = document.getElementById("response");
 let cardCounter = 0;
 // Global variable that shows if 3 cards have been selected
 let cardsSelected = false;
+// Global homepage varible for checking if on homepage
+let homePageBool = true;
 
 /**
  * Binds the home page buttons to change the type of
@@ -33,11 +35,10 @@ function bindHomePageBtns() {
 
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
-		createShuffleBtn();
-		createShuffleCards();
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
 		addFogBackground();
+		homePageBool = false;
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -94,18 +95,20 @@ function bindHomePageBtns() {
 function bindGeneralButtons() {
 	const homeBtn = document.getElementById("toHome");
 	// Added to reset cards on click
-	homeBtn.addEventListener("click", resetCards);
 	homeBtn.addEventListener("click", () => {
-		displayGeneralUIElements();
-		document.getElementById("center-text").textContent = "";
-		document.getElementById("response").textContent = "";
-		const responseCards = document.getElementById("tarotDiv");
-		console.log(responseCards);
-		while (responseCards.childNodes.length > 0 ) {
-			tarotDiv.removeChild(responseCards.firstChild);
+		if (!homePageBool) {
+			displayGeneralUIElements();
+			document.getElementById("center-text").textContent = "";
+			document.getElementById("response").textContent = "";
+			const responseCards = document.getElementsByClassName("responseCards");
+			while (responseCards.length > 0) {
+				tarotDiv.removeChild(responseCards[0]);
+			}
+			tarotDiv.hidden = true;
+			homePageBool = true;
+			resetCards();
+			removeFogBackground();
 		}
-		tarotDiv.hidden = true;
-		removeFogBackground();
 	});
 
 	const githubBtn = document.getElementById("toGitHub");
@@ -159,7 +162,6 @@ function createShuffleBtn() {
 		shuffleBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
 		for (let card = 0; card < cards.length; card++) {
-			console.log(card);
 			const cardOption = cards[card];
 			cardOption.hidden = false;
 		}
@@ -193,7 +195,7 @@ function playShuffleAnimation(callback) {
 	let shuffleCount = 0;
 	const shuffleSequence = (callback)=>{
 		// pick random card
-		const randCard = tCards[Math.floor(tCards.length * Math.random())];
+		const randCard = tCards[Math.floor(22 * Math.random())];
 		// move away
 		randCard.move({x: 50, y: 50}, {x: 52, y: 50}, 350, ()=>{
 			randCard.move({x: 52, y: 50}, {x: 50, y: 50}, 350, ()=>{
@@ -221,9 +223,10 @@ function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
 	let cardsFinished = 0;
+	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50}, {x: 20 + (60/tCard.getAllCards().length)*cardXoffset, y: 50}, 300, ()=>{
+		tCard.move({x: 50, y: 50}, {x: 20 + (60/22)*cardXoffset, y: 50}, 300, ()=>{
 			tCard.setClickable(true);
 			if (cardsFinished >= tCards.length) {
 				callback();
@@ -252,7 +255,6 @@ function createShuffleCards() {
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
-			console.log(cardsSelected);
 			if (cardsSelected) {
 				response.textContent = button.value;
 				return;
@@ -270,6 +272,13 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
+				// for (let card = 1; card < 23; card++) {
+				// 	// when 3 cards selected
+				// 	const cardOption = document.getElementById("Option " + card);
+				// 	cardOption.setAttribute("selected", false);
+				// 	cardOption.style.backgroundColor = "white";
+				// 	cardOption.hidden = true;
+				// }
 				displayThreeOptions();
 			}
 		});
@@ -337,14 +346,14 @@ function displayThreeOptions() {
 					// TODO Find a better way to do this, apparently this can cause a memory leak but don't have time to make a better solution rn
 					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
 					// remove old on click events
-					cardOption.hidden = true;
+					/*cardOption.hidden = true;
 					const clonedCardOption = cardOption.cloneNode(true);
-					clonedCardOption.className = "responseCards";
+					clonedCardOption.className = "responseCards21";
 					// const tempCardOption = cardOption;
 					cardOption.parentNode.replaceChild(clonedCardOption, cardOption);
 					// tempCardOption.remove();
 					cardOption.hidden = false;
-					tarotDiv.appendChild(cardOption);
+					tarotDiv.appendChild(cardOption);*/
 				}
 			});
 		}
@@ -424,6 +433,8 @@ function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
 	// bindBurgerBar();
+	createShuffleBtn();
+	createShuffleCards();
 }
 
 init();
