@@ -233,7 +233,7 @@ function playCardSpreadAnimation(callback) {
 		tCard.setClickable(true);
 		tCard.move({x: consts.cardX, y: consts.cardY},
 			{x: 15 + (60/tCards.length)*cardXoffset,
-       y: consts.cardY}
+				y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
 				if (cardsFinished >= tCards.length) {
