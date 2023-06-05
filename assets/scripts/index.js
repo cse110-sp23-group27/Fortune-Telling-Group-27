@@ -102,7 +102,8 @@ function bindGeneralButtons() {
 			displayGeneralUIElements();
 			document.getElementById("center-text").textContent = "";
 			document.getElementById("response").textContent = "";
-			const responseCards = document.getElementsByClassName("responseCards");
+			const responseCards =
+				document.getElementsByClassName("responseCards");
 			while (responseCards.length > 0) {
 				tarotDiv.removeChild(responseCards[0]);
 			}
@@ -230,7 +231,8 @@ function playCardSpreadAnimation(callback) {
 	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move({x: 50, y: 50}, {x: 20 + (60/22)*cardXoffset, y: 50}, 300, ()=>{
+		tCard.move({x: 50, y: 50}, {x: 20 +
+				(60/22)*cardXoffset, y: 50}, 300, ()=>{
 			tCard.setClickable(true);
 			if (cardsFinished >= tCards.length) {
 				callback();
@@ -253,7 +255,8 @@ function createShuffleCards() {
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
-		button.innerHTML = "<img class = \"chosenCards\"src=\"" +consts.cardBack+"\">";
+		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
+			consts.cardBack+"\">";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected

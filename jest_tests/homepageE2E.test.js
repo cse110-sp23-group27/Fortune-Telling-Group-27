@@ -6,6 +6,10 @@ describe("Testing Homepage Buttons", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
+		await page.evaluate(() => {
+			localStorage.clear();
+		});
+		await page.reload();
 	});
 
 	it("Initial Home Page - Check for 3 Buttons", async () => {

@@ -2,18 +2,23 @@
  * @jest-environment puppeteer
  */
 
-describe("Testing Burger Bar Itself", () => {
+describe("Testing Burger Bar and Buttons", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
+		await page.evaluate(() => {
+			localStorage.clear();
+		});
+		await page.reload();
 	});
 	it("Clicking on Burger Bar Checkbox", async () => {
 		// Query select all of the homepage button elements and return the length of that array
 		const burgerBarCheckbox = await page.$("#menu__toggle");
 		const leftVal = await page.evaluate(() => {
-			const elem =document.querySelector(".menu__box");
-			const leftVal =
-        window.getComputedStyle(elem, null).getPropertyValue("left");
+			const elem = document.querySelector(".menu__box");
+			console.log(elem);
+			const style = window.getComputedStyle(elem, null);
+			const leftVal = style.getPropertyValue("left");
 			const val = parseInt(leftVal, 10);
 			return val;
 		});
@@ -24,12 +29,6 @@ describe("Testing Burger Bar Itself", () => {
 		const checkedVal = await burgerBarCheckbox.getProperty("checked");
 		(await burgerBarCheckbox.getProperty("checked")).jsonValue();
 		expect(await checkedVal.jsonValue()).toBe(true);
-	});
-});
-
-describe("Testing Burger Bar Buttons", () => {
-	beforeAll(async () => {
-		await page.goto("http://127.0.0.1:5500/index.html");
 	});
 	it("Initial Burger Bar - Check for 6 Burger Bar Buttons", async () => {
 		// console.log("Checking for 6 Burger Bar Buttons...");
@@ -43,7 +42,7 @@ describe("Testing Burger Bar Buttons", () => {
 		expect(numButtons).toBe(6);
 	});
 	it("Make sure Burger Bar button elements have text values", async () => {
-		console.log("Checking to make sure buttons have text values...");
+		// console.log("Checking to make sure buttons have text values...");
 		// Start as true, if any don't have text values, swap to false
 		let allArePopulated = true;
 		// Query select all of the home page elements

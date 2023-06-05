@@ -2,6 +2,13 @@
  * @jest-environment puppeteer
  */
 
+/**
+ * Checks if the html element is visible or not given element and the page
+ * @param {HTMLElement} element - HTML element that is either visible or not
+ * @param {page} page - page variable used for puppeteer
+ *
+ * @return {boolean} - returns true if visible and false otherwise.
+ */
 async function isLocatorReady(element, page) {
 	const isVisibleHandle = await page.evaluateHandle((e) => {
 		const style = window.getComputedStyle(e);
@@ -20,6 +27,10 @@ describe("Testing Tarot Card Page", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
+		await page.evaluate(() => {
+			localStorage.clear();
+		});
+		await page.reload();
 	});
 
 	it("Initial Home Page - Check for 3 Buttons", async () => {
@@ -29,7 +40,6 @@ describe("Testing Tarot Card Page", () => {
 		const numButtons = await page.$$eval(".home-page", (homePageBtns) => {
 			return homePageBtns.length;
 		});
-		const homePageBtnz = await page.$$(".home-page");
 		// Expect there that array from earlier to be of length 3
 		// meaning 3 homepage buttons were found
 		expect(numButtons).toBe(3);
