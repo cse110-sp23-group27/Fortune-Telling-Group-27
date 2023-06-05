@@ -53,8 +53,9 @@ class Animator {
 			// Increment the timer inside the animation
 			animationObj.timeSinceStart += this.animationIntervalDelay;
 			// Process the animation object
-			let nextValue = animationObj.from + ((animationObj.to -
-				animationObj.from)/animationObj.time) * animationObj.timeSinceStart;
+			let nextValue = animationObj.from +
+			((animationObj.to - animationObj.from)/animationObj.time) *
+			animationObj.timeSinceStart;
 
 			// Make sure that the next value never overshoots the "to" value
 			nextValue = (animationObj.from - animationObj.to < 0) ?

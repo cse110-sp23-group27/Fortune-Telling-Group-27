@@ -103,7 +103,8 @@ class TarotCard {
      */
 	rotate(degreesA, degreesB, time, callback) {
 		Animator.instance.addAnimation(degreesA, degreesB, ()=>
-			this.cardElement.style.transform, this.rotateInstantly, time, callback);
+			this.cardElement.style.transform,
+		this.rotateInstantly, time, callback);
 	}
 
 	/**
