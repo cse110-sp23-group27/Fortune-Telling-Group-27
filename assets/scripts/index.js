@@ -11,8 +11,6 @@ let cardsSelected = false;
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
 
-// Global homepage varible for checking if on homepage
-let homePageBool = true;
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
