@@ -182,6 +182,9 @@ function bindStartButton() {
 	const startBtn = document.getElementById("tarotStartBtn");
 	startBtn.addEventListener("click", async ()=>{
 		const cards = TarotCard.getAllCards();
+		cards.forEach(card => {
+			card.cardElement.hidden = false;
+		});
 		// move all cards and wait for last one
 		for (let i = 0; i < cards.length - 1; i++) {
 			cards[i].movePromise(cards[i].getPositionPoint(), consts.preThrow_card_pos, 200);
@@ -328,13 +331,10 @@ function createShuffleCards() {
 			}
 		});
 		tarotDiv.appendChild(button);
+		// get all of the cards and make them into the TarotCard classes
+		new TarotCard(button);
 	}
 
-	// get all of the cards and make them into the TarotCard classes
-	for (let card = 0; card < 22; card++) {
-		const cardOption = document.getElementById("Option " + card);
-		new TarotCard(cardOption);
-	}
 }
 
 /**
