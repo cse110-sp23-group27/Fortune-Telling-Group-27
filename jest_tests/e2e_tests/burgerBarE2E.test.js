@@ -2,8 +2,11 @@
  * @jest-environment puppeteer
  */
 
+const { Browser } = require("puppeteer");
+
 const HOMEPAGE = ".home-page";
 const HOMEBTN = "#toHome";
+const DOCS = "#toDocumentation";
 const GITHUB = "#toGitHub";
 const TAROTCARDBTN = "#toTarotCard";
 const BURGERBAR = "#menu__toggle";
@@ -64,6 +67,17 @@ function delay(time) {
 	});
 }
 
+/**
+ * 
+ * @param {Browser} browser the browser used to open the tab
+ * @returns {Promise} A new promise that will finish when the page opens
+ */
+function returnNewPromise(browser) {
+	return new Promise(resolve => 
+		browser.once("targetcreated", target => resolve(target.page()))
+	);
+}
+
 describe("Testing Burger Bar and Buttons", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
@@ -122,15 +136,34 @@ describe("Testing Burger Bar and Buttons", () => {
 		// Expect allArePopulated to still be true
 		expect(allArePopulated).toBe(true);
 	}, 10000);
+	it("Initial Burger Bar - Documentation Button Test", async () => {
+		const toDocs = await page.$(DOCS);
+		const newPagePromise = returnNewPromise(browser);
+		await toDocs.evaluate((b) => b.click()); // click docs button
+		// get new page
+		const newPage = await newPagePromise;
+		// check if last page opened is the docs
+		expect(newPage.url()).toBe(
+			"https://cse110-sp23-group27.github.io/" + 
+			"Fortune-Telling-Group-27/specs/documentation" +
+			"/generated/index.html");
+		await newPage.close();
+		await delay(1000);
+	}, 10000);
 	it("Initial Burger Bar - Github Button Test", async () => {
 		const homeBtns = await page.$$(HOMEPAGE);
 		const toGit = await page.$(GITHUB);
-		await toGit.evaluate((b) => b.click()); // click home button
-		// check if home buttons are hidden (should not be hidden)
-		expect(await allHidden(homeBtns)).toBe(false);
-		// maybe add a test checking if github opens a new tab eventually
-		// when that feature is implemented
-	}, 10000);
+		const newPagePromise = returnNewPromise(browser);
+		await toGit.evaluate((b) => b.click()); // click github button
+		// get new page
+		const newPage = await newPagePromise;
+		expect(newPage.url()).toBe(
+			"https://github.com/" + 
+			"cse110-sp23-group27/Fortune-Telling-Group-27"+
+			"/tree/main");
+		await newPage.close();
+		await delay(1000);
+	}, 50000);
 	it("Initial Burger Bar - Home button test", async () => {
 		const toHome = await page.$(HOMEBTN);
 		const toTarot = await page.$(TAROTCARDBTN);

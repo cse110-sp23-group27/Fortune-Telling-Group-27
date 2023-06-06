@@ -15,7 +15,3 @@ jobs:
 
       - name: Run JSDocs
         run: npm run doc
-        
-      - name: Check if there are any changes
-        if: success() || failure()
-        uses: stefanzweifel/git-auto-commit-action@v4
