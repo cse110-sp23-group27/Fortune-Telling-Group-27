@@ -137,7 +137,7 @@ function displayGeneralUIElements(fortuneType =null) {
 	}
 
 	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i <= 2; i++) {
+	for (let i = 0; i < 3; i++) {
 		const optionsBtn = document.getElementById(
 			consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
@@ -232,7 +232,7 @@ function playCardSpreadAnimation(callback) {
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
 		tCard.move({x: consts.cardX, y: consts.cardY},
-			{x: 15 + (60/tCards.length)*cardXoffset,
+			{x: 10 + (80/tCards.length)*cardXoffset,
 				y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
@@ -252,7 +252,7 @@ function playCardSpreadAnimation(callback) {
  * @date 5/27/2023
  */
 function createShuffleCards() {
-	for (let i = 1; i < 23; i++) {
+	for (let i = 0; i < 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
@@ -280,13 +280,6 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
-				// for (let card = 1; card < 23; card++) {
-				// 	// when 3 cards selected
-				// 	const cardOption = document.getElementById("Option " + card);
-				// 	cardOption.setAttribute("selected", false);
-				// 	cardOption.style.backgroundColor = "white";
-				// 	cardOption.hidden = true;
-				// }
 				displayThreeOptions();
 			}
 		});
@@ -294,7 +287,7 @@ function createShuffleCards() {
 	}
 
 	// get all of the cards and make them into the TarotCard classes
-	for (let card = 1; card < 23; card++) {
+	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		new TarotCard(cardOption);
 	}
@@ -309,7 +302,7 @@ function createShuffleCards() {
 function displayThreeOptions() {
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
-	for (let i = 1; i < 23; i++) {
+	for (let i = 0; i < 22; i++) {
 		const button = document.getElementById(`Option ${i}`);
 		if (button.getAttribute("selected") === "true") {
 			selectedHTMLCards.push(button);
@@ -324,7 +317,7 @@ function displayThreeOptions() {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(),
-				{x: 20+(selectedCardsFound*25), y: consts.cardY}, 350);
+				{x: 20+(selectedCardsFound*(60/2)), y: 10}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
@@ -385,7 +378,7 @@ function displayThreeOptions() {
  * @date 5/29/2023
  */
 function resetCards() {
-	for (let card = 1; card < 23; card++) {
+	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
 			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
