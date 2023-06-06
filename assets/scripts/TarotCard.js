@@ -195,7 +195,7 @@ class TarotCard {
       * @param {number} ms wait time
       * @returns {Promise}
       */
-     wait(ms){
+     static wait(ms){
           return new Promise(resolve => setTimeout(resolve, ms));
      } 
 

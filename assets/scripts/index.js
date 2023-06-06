@@ -187,7 +187,7 @@ function bindStartButton() {
 			cards[i].movePromise(cards[i].getPositionPoint(), consts.preThrow_card_pos, 200);
 		}
 		await cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), consts.preThrow_card_pos, 200);
-		await wait(100);
+		await TarotCard.wait(100);
 		// throw in random directions
 		for (let i = 0; i < cards.length - 1; i++) {
 			const pos = {
