@@ -178,6 +178,11 @@ function createShuffleBtn() {
 	tarotDiv.append(shuffleBtn);
 }
 
+/**
+ * Binds the start button
+ * @date 6/6/2023 - 1:59:27 PM
+ * @author Victor Kim
+ */
 function bindStartButton() {
 	const startBtn = document.getElementById("tarotStartBtn");
 	startBtn.addEventListener("click", async ()=>{
@@ -188,6 +193,11 @@ function bindStartButton() {
 	});
 }
 
+/**
+ * Binds the shuffle button
+ * @date 6/6/2023 - 1:58:55 PM
+ * @author Victor Kim
+ */
 function bindShuffleButton() {
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
 	shuffleBtn.addEventListener("click", ()=>{
@@ -200,6 +210,14 @@ function bindShuffleButton() {
 	});
 }
 
+/**
+ * Plays the card throw animation
+ * @date 6/6/2023 - 1:58:41 PM
+ * @author Victor Kim
+ *
+ * @async
+ * @returns {None}
+ */
 async function playCardThrowAnimation() {
 	const cards = TarotCard.getAllCards();
 	// unhide, move, and make unclickable
@@ -483,9 +501,7 @@ function init() {
 	createShuffleCards();
 	displayGeneralUIElements();
 	bindGeneralButtons();
-	bindShuffleButton();
 	bindStartButton();
-	// bindBurgerBar();
 }
 
 init();

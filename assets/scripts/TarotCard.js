@@ -169,6 +169,13 @@ class TarotCard {
 		this.cardElement.style.transform = `rotate(${degrees}deg)`;
 	}
 
+	/**
+	 * Get current rotation of card element
+	 * @date 6/6/2023 - 2:00:09 PM
+	 * @author Victor Kim
+	 *
+	 * @returns {*}
+	 */
 	getRotation() {
 		const transformString = this.cardElement.style.transform;
 		const rotationString = transformString.substring(transformString.indexOf("rotate("), transformString.indexOf("deg)"));
@@ -208,6 +215,13 @@ class TarotCard {
 		this.cardElement.style.zIndex = zIndex;
 	}
 
+	/**
+	 * Gives current zIndex of the card element
+	 * @date 6/6/2023 - 1:59:44 PM
+	 * @author Victor Kim
+	 *
+	 * @returns {int}
+	 */
 	getZIndex() {
 		return this.cardElement.style.zIndex;
 	}
