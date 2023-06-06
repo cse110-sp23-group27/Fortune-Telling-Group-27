@@ -181,7 +181,9 @@ function createShuffleBtn() {
 function bindStartButton(){
 	const startBtn = document.getElementById("tarotStartBtn");
 	startBtn.addEventListener("click", ()=>{
-
+		TarotCard.getAllCards().forEach(card => {
+			card.move(card.getPositionPoint(), consts.preThrow_card_pos, 200);
+		});
 	});
 }
 
@@ -462,12 +464,12 @@ function removeFogBackground() {
  * Initializes home page
  */
 function init() {
+	createShuffleCards();
+	displayGeneralUIElements();
 	bindGeneralButtons();
 	bindShuffleButton();
 	bindStartButton();
 	bindBurgerBar();
-	createShuffleCards();
-	displayGeneralUIElements();
 }
 
 init();

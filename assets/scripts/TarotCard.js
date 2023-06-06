@@ -71,6 +71,27 @@ class TarotCard {
 			this.cardElement.style.top = `${val}vh`, time, callback);
 	}
 
+     /**
+     * Same as move, but returns a promise that will resolve once the move is complete
+     * @date 6/6/2023 - 1:06:04 AM
+     *
+     * @param {float} pointA The object's starting point
+     * @param {float} pointB The object's ending point
+     * @param {float} time Time in milliseconds for the object to move from
+     * @param {Function} callback End animation callback
+     * @returns {Promise}
+     */
+     movePromise(pointA, pointB, time, callback){
+          return new Promise(
+               (resolve)=>{
+                    this.move(pointA, pointB, time, ()=>{
+                         resolve();
+                         callback();
+                    });
+               }
+          );
+     }
+
 	/**
      * Moves object from one point to another instantly
      *
@@ -101,11 +122,29 @@ class TarotCard {
      * @param {Function} callback End animation callback
      * rotation
      */
-	rotate(degreesA, degreesB, time, callback) {
-		Animator.instance.addAnimation(degreesA, degreesB, ()=>
-			this.cardElement.style.transform,
-		this.rotateInstantly, time, callback);
+    rotate(degreesA, degreesB, time, callback) {
+         Animator.instance.addAnimation(degreesA, degreesB, ()=>
+         this.cardElement.style.transform,
+         this.rotateInstantly, time, callback);
 	}
+     
+     /**
+     * Same as move, but returns a promise that will resolve once the move is complete
+     *
+     * @param {float} degreesA Original orientation of object
+     * @param {float} degreesB Number of degrees to rotate object
+     * @param {float} time Time in milliseconds for the object to complete
+     * @param {Function} callback End animation callback
+     * rotation
+     */
+     rotatePromise(degreesA, degreesB, time, callback) {
+          return new Promise((resolve)=>{
+               rotate(degreesA, degreesB, time, ()=>{
+                    callback();
+                    resolve();
+               });
+          });
+     }
 
 	/**
      * Rotates object some number of degrees instantly
