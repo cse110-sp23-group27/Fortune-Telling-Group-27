@@ -2,7 +2,7 @@
  * @jest-environment puppeteer
  */
 
-const { Browser } = require("puppeteer");
+const {Browser} = require("puppeteer");
 
 const HOMEPAGE = ".home-page";
 const HOMEBTN = "#toHome";
@@ -68,13 +68,13 @@ function delay(time) {
 }
 
 /**
- * 
+ *
  * @param {Browser} browser the browser used to open the tab
- * @returns {Promise} A new promise that will finish when the page opens
+ * @return {Promise} A new promise that will finish when the page opens
  */
 function returnNewPromise(browser) {
-	return new Promise(resolve => 
-		browser.once("targetcreated", target => resolve(target.page()))
+	return new Promise((resolve) =>
+		browser.once("targetcreated", (target) => resolve(target.page()))
 	);
 }
 
@@ -144,7 +144,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		const newPage = await newPagePromise;
 		// check if last page opened is the docs
 		expect(newPage.url()).toBe(
-			"https://cse110-sp23-group27.github.io/" + 
+			"https://cse110-sp23-group27.github.io/" +
 			"Fortune-Telling-Group-27/specs/documentation" +
 			"/generated/index.html");
 		await newPage.close();
@@ -158,7 +158,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		// get new page
 		const newPage = await newPagePromise;
 		expect(newPage.url()).toBe(
-			"https://github.com/" + 
+			"https://github.com/" +
 			"cse110-sp23-group27/Fortune-Telling-Group-27"+
 			"/tree/main");
 		await newPage.close();
