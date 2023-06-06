@@ -1,7 +1,6 @@
 import * as consts from "./consts.js";
 import TarotCard from "./TarotCard.js";
 
-
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
@@ -97,24 +96,24 @@ function bindHomePageBtns() {
  * @date 5/21/2023
  */
 function bindGeneralButtons() {
-	const homeBtn = document.getElementById("toHome");
-	// Added to reset cards on click
-	homeBtn.addEventListener("click", () => {
-		if (!homePageBool) {
-			displayGeneralUIElements();
-			document.getElementById("center-text").textContent = "";
-			document.getElementById("response").textContent = "";
-			const responseCards =
-				document.getElementsByClassName("responseCards");
-			while (responseCards.length > 0) {
-				tarotDiv.removeChild(responseCards[0]);
-			}
-			tarotDiv.hidden = true;
-			homePageBool = true;
-			resetCards();
-			removeFogBackground();
-		}
-	});
+	// const homeBtn = document.getElementById("toHome");
+	// // Added to reset cards on click
+	// homeBtn.addEventListener("click", () => {
+	// 	if (!homePageBool) {
+	// 		displayGeneralUIElements();
+	// 		document.getElementById("center-text").textContent = "";
+	// 		document.getElementById("response").textContent = "";
+	// 		const responseCards =
+	// 			document.getElementsByClassName("responseCards");
+	// 		while (responseCards.length > 0) {
+	// 			tarotDiv.removeChild(responseCards[0]);
+	// 		}
+	// 		tarotDiv.hidden = true;
+	// 		homePageBool = true;
+	// 		resetCards();
+	// 		removeFogBackground();
+	// 	}
+	// });
 
 	const githubBtn = document.getElementById("toGitHub");
 	githubBtn.addEventListener("click", () => {
@@ -177,6 +176,28 @@ function createShuffleBtn() {
 		});
 	});
 	tarotDiv.append(shuffleBtn);
+}
+
+function bindStartButton(){
+	const startBtn = document.getElementById("tarotStartBtn");
+	startBtn.addEventListener("click", ()=>{
+
+	});
+}
+
+function bindShuffleButton(){
+	const shuffleBtn = docoment.getElementById("tarotShuffleBtn");
+	shuffleBtn.addEventListener("click", ()=>{
+		shuffleBtn.hidden = true;
+		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+		for (let card = 0; card < cards.length; card++) {
+			const cardOption = cards[card];
+			cardOption.hidden = false;
+		}
+		playShuffleAnimation(()=>{
+			playCardSpreadAnimation();
+		});
+	});
 }
 
 
@@ -441,10 +462,10 @@ function removeFogBackground() {
  * Initializes home page
  */
 function init() {
-	// bindHomePageBtns();
 	bindGeneralButtons();
-	// bindBurgerBar();
-	createShuffleBtn();
+	bindShuffleButton();
+	bindStartButton();
+	bindBurgerBar();
 	createShuffleCards();
 	displayGeneralUIElements();
 }

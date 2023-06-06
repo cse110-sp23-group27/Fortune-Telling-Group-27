@@ -1,3 +1,11 @@
+main {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
 #centeredBtn{
     margin: 10px;
     border-color: #fff;

@@ -18,7 +18,6 @@
 			</label>
 
 			<ul class="menu__box">
-				<li><button class = "menu__item" id = "toHome" hidden>Home</button></li>
 				<li><a class="menu__item" href="#">Info</a></li>
 				<li><button class = "menu__item" id = "toGitHub" hidden>GitHub</button></li>
 				<li><button class = "menu__item" id = "tarotOptions" hidden>Tarot Options</button></li>
@@ -29,8 +28,11 @@
 	</header>
 
 		<main>
-      <div class="tarotSpecific" id="tarotDiv" hidden>
+      <div class="tarotSpecific" id="tarotDiv" >
+        
         <button id="tarotStartBtn" class="centeredBtn">Start</button>
+        <button id="tarotShuffleBtn" class="centeredBtn" onclick="onShuffleBtnClick()" hidden>Shuffle</button>
+
         <div id="fogwrapper" class="fogwrapper">
           <div id="foglayer_01" class="fog">
             <div class="image01"></div>
