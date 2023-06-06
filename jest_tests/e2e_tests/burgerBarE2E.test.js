@@ -151,7 +151,6 @@ describe("Testing Burger Bar and Buttons", () => {
 		await delay(1000);
 	}, 10000);
 	it("Initial Burger Bar - Github Button Test", async () => {
-		const homeBtns = await page.$$(HOMEPAGE);
 		const toGit = await page.$(GITHUB);
 		const newPagePromise = returnNewPromise(browser);
 		await toGit.evaluate((b) => b.click()); // click github button

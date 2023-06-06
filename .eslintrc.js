@@ -64,7 +64,8 @@ module.exports = {
 	"globals": {
 		"Animator": "writeable",
 		"TarotCard": "writeable",
-		"page": "readable"
+		"page": "readable",
+		"browser": "readable"
 	},
 	"ignorePatterns": ['/node_modules/', '/specs/', './github/']
 };
