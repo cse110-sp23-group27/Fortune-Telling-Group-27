@@ -2,12 +2,12 @@
  * @jest-environment jsdom
  */
 
-const TarotCard = require("../assets/scripts/TarotCard");
+import TarotCard from "../../assets/scripts/TarotCard.js";
 
 describe("Testing Creating a New Tarot Card Object", () => {
 	const testButton = document.createElement("button");
 	const testCard = new TarotCard(testButton);
-	
+
 	test("Before Modifying Tarot Card", () => {
 		expect(testCard.value).toBeUndefined();
 		expect(testCard.cardElement).toBe(testButton);
