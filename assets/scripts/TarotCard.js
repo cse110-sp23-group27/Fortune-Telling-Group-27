@@ -71,7 +71,7 @@ class TarotCard {
 			this.cardElement.style.top = `${val}vh`, time, callback);
 	}
 
-     /**
+	/**
      * Same as move, but returns a promise that will resolve once the move is complete
      * @date 6/6/2023 - 1:06:04 AM
      *
@@ -79,16 +79,14 @@ class TarotCard {
      * @param {float} pointB The object's ending point
      * @param {float} time Time in milliseconds for the object to move from
      * @param {Function} callback End animation callback
-     * @returns {Promise}
+     * @return {Promise}
      */
      movePromise(pointA, pointB, time, callback){
           return new Promise(
                (resolve)=>{
                     this.move(pointA, pointB, time, ()=>{
-                         if(callback){
-                              callback();
-                         }
                          resolve();
+                         callback();
                     });
                }
           );
@@ -124,13 +122,13 @@ class TarotCard {
      * @param {Function} callback End animation callback
      * rotation
      */
-    rotate(degreesA, degreesB, time, callback) {
-         Animator.instance.addAnimation(degreesA, degreesB, ()=>
-         this.cardElement.style.transform,
-         this.rotateInstantly, time, callback);
+	rotate(degreesA, degreesB, time, callback) {
+		Animator.instance.addAnimation(degreesA, degreesB, ()=>
+			this.cardElement.style.transform,
+		this.rotateInstantly, time, callback);
 	}
-     
-     /**
+
+	/**
      * Same as move, but returns a promise that will resolve once the move is complete
      *
      * @param {float} degreesA Original orientation of object
@@ -142,9 +140,7 @@ class TarotCard {
      rotatePromise(degreesA, degreesB, time, callback) {
           return new Promise((resolve)=>{
                rotate(degreesA, degreesB, time, ()=>{
-                    if(callback){
-                         callback();
-                    }
+                    callback();
                     resolve();
                });
           });
