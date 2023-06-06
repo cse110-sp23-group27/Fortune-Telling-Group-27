@@ -114,7 +114,7 @@ async function checkHomePageVisible() {
 	const tarotButton = await checkIfVisible("#toTarotCard", page);
 	const eggButton = await checkIfVisible("#eggButton", page);
 	const boneButton = await checkIfVisible("#boneButton", page);
-	return tarotButton && eggButton && boneButton
+	return tarotButton && eggButton && boneButton;
 }
 describe("Testing Burger Bar and Buttons", () => {
 	// visit the fortune telling website
