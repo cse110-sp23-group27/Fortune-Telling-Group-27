@@ -53,14 +53,12 @@ class Animator {
 			// Increment the timer inside the animation
 			animationObj.timeSinceStart += this.animationIntervalDelay;
 			// Process the animation object
-			let nextValue = animationObj.from +
-			((animationObj.to - animationObj.from)/animationObj.time) *
-			animationObj.timeSinceStart;
+			let nextValue = animationObj.to - animationObj.from;
 
-			// Make sure that the next value never overshoots the "to" value
-			nextValue = (animationObj.from - animationObj.to < 0) ?
-				Math.min(nextValue, animationObj.to) :
-				Math.max(nextValue, animationObj.to);
+			// apply ease in out animation curve and clamp to not go over
+			nextValue *= Math.min(this.easeInOutSine(animationObj.timeSinceStart / animationObj.time), 1);
+
+			nextValue += animationObj.from;
 
 			animationObj.setter(nextValue);
 			if (animationObj.timeSinceStart > animationObj.time) {
@@ -122,6 +120,9 @@ class Animator {
 
 		// Remove this object from the animation list early
 		this.animationObjs.splice(animationIndex, 1);
+	}
+	easeInOutSine(x) {
+	return -(Math.cos(Math.PI * x) - 1) / 2;
 	}
 }
 
