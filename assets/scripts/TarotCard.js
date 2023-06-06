@@ -85,8 +85,10 @@ class TarotCard {
           return new Promise(
                (resolve)=>{
                     this.move(pointA, pointB, time, ()=>{
+                         if(callback){
+                              callback();
+                         }
                          resolve();
-                         callback();
                     });
                }
           );
@@ -140,7 +142,9 @@ class TarotCard {
      rotatePromise(degreesA, degreesB, time, callback) {
           return new Promise((resolve)=>{
                rotate(degreesA, degreesB, time, ()=>{
-                    callback();
+                    if(callback){
+                         callback();
+                    }
                     resolve();
                });
           });
@@ -183,6 +187,18 @@ class TarotCard {
 	setZIndex(zIndex) {
 		this.cardElement.style.zIndex = zIndex;
 	}
+
+     /**
+      * Gives a promise which will resolve in ms miliseconds
+      * @date 6/6/2023 - 1:14:03 AM
+      *
+      * @param {number} ms wait time
+      * @returns {Promise}
+      */
+     wait(ms){
+          return new Promise(resolve => setTimeout(resolve, ms));
+     } 
+
 }
 
 if (typeof module === "object") {

@@ -180,15 +180,36 @@ function createShuffleBtn() {
 
 function bindStartButton() {
 	const startBtn = document.getElementById("tarotStartBtn");
-	startBtn.addEventListener("click", ()=>{
-		TarotCard.getAllCards().forEach(card => {
-			card.move(card.getPositionPoint(), consts.preThrow_card_pos, 200);
-		});
+	startBtn.addEventListener("click", async ()=>{
+		const cards = TarotCard.getAllCards();
+		// move all cards and wait for last one
+		for (let i = 0; i < cards.length - 1; i++) {
+			cards[i].movePromise(cards[i].getPositionPoint(), consts.preThrow_card_pos, 200);
+		}
+		await cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), consts.preThrow_card_pos, 200);
+		await wait(100);
+		// throw in random directions
+		for (let i = 0; i < cards.length - 1; i++) {
+			const pos = {
+				x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
+				y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
+			};
+			const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max
+			cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
+			cards[i].rotatePromise(0, rot, 230);
+		}
+		const pos = {
+			x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
+			y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
+		};
+		const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max
+		cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), pos, 200);
+		await cards[cards.length - 1].rotatePromise(0, rot, 230);
 	});
 }
 
 function bindShuffleButton() {
-	const shuffleBtn = docoment.getElementById("tarotShuffleBtn");
+	const shuffleBtn = document.getElementById("tarotShuffleBtn");
 	shuffleBtn.addEventListener("click", ()=>{
 		shuffleBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
@@ -469,7 +490,7 @@ function init() {
 	bindGeneralButtons();
 	bindShuffleButton();
 	bindStartButton();
-	bindBurgerBar();
+	// bindBurgerBar();
 }
 
 init();
