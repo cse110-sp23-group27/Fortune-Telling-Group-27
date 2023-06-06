@@ -6,8 +6,26 @@ export const FORTUNETYPES = {
 
 export const FORTUNELIST = ["tarot", "egg", "bone"];
 
-export const cardY = 20;
-export const cardX = 45;
+
+// card animation consts
+
+// pre shuffle, pre throw
+export const preThrow_card_X = 95;
+export const preThrow_card_Y = 50;
+
+// pre shuffle, after throw
+export const afterThrow_card_X_min = 5;
+export const afterThrow_card_X_max = 95;
+export const afterThrow_card_Y_min = 10;
+export const afterThrow_card_Y_max = 80;
+export const afterThrow_card_Rotation_min = -180;
+export const afterThrow_card_Rotation_max = 180;
+
+// shuffle
+export const shuffle_deck_X = 30;
+export const shuffle_deck_Y = 20;
+export const shuffle_card_X = 60;
+export const shuffle_card_Y = 20;
 
 export const CARDS = ["The Fool", "The Magician", "The High Priestess", "The Empress",
 					  "The Emperor", "The Hierophant", "The Lovers", "The Chariot",
@@ -15,7 +33,7 @@ export const CARDS = ["The Fool", "The Magician", "The High Priestess", "The Emp
 					  "The Hanged Man", "Death", "Temperance", "The Tower",
 					  "The Star", "The Moon", "The Sun", "Judgement", "The World"];
 
-export const cardBack = "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/card-back.png";
+export const CARD_BACK = "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/card-back.png";
 
 export const CARDSJSON = [
 	{

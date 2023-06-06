@@ -258,7 +258,7 @@ function createShuffleCards() {
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
 		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
-			consts.cardBack+"\">";
+			consts.CARD_BACK+"\">";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
@@ -381,7 +381,7 @@ function resetCards() {
 	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
-			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
+			"<img class = \"imagesPreShuffle\"src="+consts.CARD_BACK +">";
 		if (cardOption) {
 			cardOption.setAttribute("selected", false);
 			cardOption.style.backgroundColor = "white";
