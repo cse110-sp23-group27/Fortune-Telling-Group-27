@@ -138,6 +138,15 @@ class Animator {
 	easeInOutSine(x) {
 		return -(Math.cos(Math.PI * x) - 1) / 2;
 	}
+
+	/**
+	 * Clears all animations without completing them
+	 * @date 6/6/2023 - 3:47:29 PM
+	 * @author Victor Kim
+	 */
+	clearAllAnimations(){
+		this.animationObjs = [];
+	}
 }
 
 // instantiate a singleton instance
