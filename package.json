@@ -1,36 +1,36 @@
 {
-    "name": "fortunetelling27",
-    "description": "…",
-    "version": "1.0.0",
-    "scripts": {
-        "test": "jest --detectOpenHandles",
-        "GHtest": "jest -c jest.unit.config.js --testPathPattern=jest_tests/unit_tests",
-        "lint": "eslint ./assets/scripts ./jest_tests --fix --ext .js  -c ./.eslintrc.js",
-        "doc": "jsdoc -c ./conf.json"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.16.0",
-        "@babel/eslint-parser": "^7.21.8",
-        "@babel/preset-env": "^7.22.4",
-        "@types/jest": "^29.2.3",
-        "@types/jest-environment-puppeteer": "^5.0.3",
-        "babel-jest": "^29.5.0",
-        "eslint": "^8.41.0",
-        "eslint-config-google": "^0.14.0",
-        "jest": "^29.5.0",
-        "jest-environment-jsdom": "^29.3.1",
-        "jest-puppeteer": "^6.1.1",
-        "jsdoc": "^4.0.2",
-        "jsdom": "^20.0.2",
-        "parcel": "^2.9.1",
-        "puppeteer": "^19.11.1"
-    },
-    "jest": {
-        "preset": "jest-puppeteer",
-        "verbose": true
-    },
-    "dependencies": {
-        "latest-version": "^7.0.0",
-        "ts-jest": "^29.1.0"
-    }
+	"name": "fortunetelling27",
+	"description": "…",
+	"version": "1.0.0",
+	"scripts": {
+		"test": "jest --detectOpenHandles",
+		"GHtest": "jest -c jest.unit.config.js --testPathPattern=jest_tests/unit_tests",
+		"lint": "eslint ./assets/scripts ./jest_tests --fix --ext .js  -c ./.eslintrc.js",
+		"doc": "jsdoc -c ./conf.json"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.16.0",
+		"@babel/eslint-parser": "^7.21.8",
+		"@babel/preset-env": "^7.22.4",
+		"@types/jest": "^29.2.3",
+		"@types/jest-environment-puppeteer": "^5.0.3",
+		"babel-jest": "^29.5.0",
+		"eslint": "^8.41.0",
+		"eslint-config-google": "^0.14.0",
+		"jest": "^29.5.0",
+		"jest-environment-jsdom": "^29.3.1",
+		"jest-puppeteer": "^6.1.1",
+		"jsdoc": "^4.0.2",
+		"jsdom": "^20.0.2",
+		"parcel": "^2.9.1",
+		"puppeteer": "^19.11.1"
+	},
+	"jest": {
+		"preset": "jest-puppeteer",
+		"verbose": true
+	},
+	"dependencies": {
+		"latest-version": "^7.0.0",
+		"ts-jest": "^29.1.0"
+	}
 }
