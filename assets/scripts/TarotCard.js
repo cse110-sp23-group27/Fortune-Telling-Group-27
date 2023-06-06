@@ -16,9 +16,6 @@ class TarotCard {
       * @param {HTMLElement} cardElement html element that represents the card
       */
 	constructor(cardElement) {
-		if (!cardElement) {
-			console.error("Null card element!");
-		}
 		this.cardElement = cardElement;
 		this.cardElement.style.position = "absolute";
 		TarotCard.#allCards.push(this);
@@ -75,29 +72,6 @@ class TarotCard {
 	}
 
 	/**
-     * Same as move, but returns a promise that will resolve once the move is complete
-     * @date 6/6/2023 - 1:06:04 AM
-     *
-     * @param {float} pointA The object's starting point
-     * @param {float} pointB The object's ending point
-     * @param {float} time Time in milliseconds for the object to move from
-     * @param {Function} callback End animation callback
-     * @return {Promise}
-     */
-	movePromise(pointA, pointB, time, callback) {
-		return new Promise(
-			(resolve)=>{
-				this.move(pointA, pointB, time, ()=>{
-					if (callback) {
-						callback();
-					}
-					resolve();
-				});
-			}
-		);
-	}
-
-	/**
      * Moves object from one point to another instantly
      *
      * @param {float} point The object's ending point
@@ -114,15 +88,8 @@ class TarotCard {
       * @return {{x: Float, y: Float}}
       */
 	getPositionPoint() {
-		let x = parseFloat(this.cardElement.style.left.replace("vw", ""));
-		let y = parseFloat(this.cardElement.style.top.replace("vh", ""));
-		if (isNaN(x)) {
-			x = 0;
-		}
-		if (isNaN(y)) {
-			y = 0;
-		}
-		return {x: x, y: y};
+		return {x: parseFloat(this.cardElement.style.left.replace("vw", "")),
+			y: parseFloat(this.cardElement.style.top.replace("vh", ""))};
 	}
 
 	/**
@@ -137,27 +104,7 @@ class TarotCard {
 	rotate(degreesA, degreesB, time, callback) {
 		Animator.instance.addAnimation(degreesA, degreesB, ()=>
 			this.cardElement.style.transform,
-		(val)=>this.rotateInstantly(val), time, callback);
-	}
-
-	/**
-     * Same as move, but returns a promise that will resolve once the move is complete
-     *
-     * @param {float} degreesA Original orientation of object
-     * @param {float} degreesB Number of degrees to rotate object
-     * @param {float} time Time in milliseconds for the object to complete
-     * @param {Function} callback End animation callback
-     * rotation
-     */
-	rotatePromise(degreesA, degreesB, time, callback) {
-		return new Promise((resolve)=>{
-			this.rotate(degreesA, degreesB, time, ()=>{
-				if (callback) {
-					callback();
-				}
-				resolve();
-			});
-		});
+		this.rotateInstantly, time, callback);
 	}
 
 	/**
@@ -167,23 +114,6 @@ class TarotCard {
      */
 	rotateInstantly(degrees) {
 		this.cardElement.style.transform = `rotate(${degrees}deg)`;
-	}
-
-	/**
-	 * Get current rotation of card element
-	 * @date 6/6/2023 - 2:00:09 PM
-	 * @author Victor Kim
-	 *
-	 * @return {*}
-	 */
-	getRotation() {
-		const transformString = this.cardElement.style.transform;
-		const rotationString = transformString.substring(transformString.indexOf("rotate("), transformString.indexOf("deg)"));
-		const rotation = parseFloat(rotationString);
-		if (isNaN(rotation)) {
-			return 0;
-		}
-		return rotation;
 	}
 
 	/**
@@ -213,28 +143,6 @@ class TarotCard {
      */
 	setZIndex(zIndex) {
 		this.cardElement.style.zIndex = zIndex;
-	}
-
-	/**
-	 * Gives current zIndex of the card element
-	 * @date 6/6/2023 - 1:59:44 PM
-	 * @author Victor Kim
-	 *
-	 * @return {int}
-	 */
-	getZIndex() {
-		return this.cardElement.style.zIndex;
-	}
-
-	/**
-      * Gives a promise which will resolve in ms miliseconds
-      * @date 6/6/2023 - 1:14:03 AM
-      *
-      * @param {number} ms wait time
-      * @return {Promise}
-      */
-	static wait(ms) {
-		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 }
 

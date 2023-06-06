@@ -1,6 +1,7 @@
 import * as consts from "./consts.js";
 import TarotCard from "./TarotCard.js";
 
+
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
@@ -38,7 +39,7 @@ function bindHomePageBtns() {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
-		// addFogBackground();
+		addFogBackground();
 		homePageBool = false;
 	});
 
@@ -96,24 +97,24 @@ function bindHomePageBtns() {
  * @date 5/21/2023
  */
 function bindGeneralButtons() {
-	// const homeBtn = document.getElementById("toHome");
-	// // Added to reset cards on click
-	// homeBtn.addEventListener("click", () => {
-	// 	if (!homePageBool) {
-	// 		displayGeneralUIElements();
-	// 		document.getElementById("center-text").textContent = "";
-	// 		document.getElementById("response").textContent = "";
-	// 		const responseCards =
-	// 			document.getElementsByClassName("responseCards");
-	// 		while (responseCards.length > 0) {
-	// 			tarotDiv.removeChild(responseCards[0]);
-	// 		}
-	// 		tarotDiv.hidden = true;
-	// 		homePageBool = true;
-	// 		resetCards();
-	// 		removeFogBackground();
-	// 	}
-	// });
+	const homeBtn = document.getElementById("toHome");
+	// Added to reset cards on click
+	homeBtn.addEventListener("click", () => {
+		if (!homePageBool) {
+			displayGeneralUIElements();
+			document.getElementById("center-text").textContent = "";
+			document.getElementById("response").textContent = "";
+			const responseCards =
+				document.getElementsByClassName("responseCards");
+			while (responseCards.length > 0) {
+				tarotDiv.removeChild(responseCards[0]);
+			}
+			tarotDiv.hidden = true;
+			homePageBool = true;
+			resetCards();
+			removeFogBackground();
+		}
+	});
 
 	const docBtn = document.getElementById("toDocumentation");
 	const githubBtn = document.getElementById("toGitHub");
@@ -193,112 +194,44 @@ function createShuffleBtn() {
 	tarotDiv.append(shuffleBtn);
 }
 
-/**
- * Binds the start button
- * @date 6/6/2023 - 1:59:27 PM
- * @author Victor Kim
- */
-function bindStartButton() {
-	const startBtn = document.getElementById("tarotStartBtn");
-	startBtn.addEventListener("click", async ()=>{
-		await playCardThrowAnimation();
-		await TarotCard.wait(100);
-		await playShuffleAnimation();
-		playCardSpreadAnimation();
-	});
-}
-
-/**
- * Binds the shuffle button
- * @date 6/6/2023 - 1:58:55 PM
- * @author Victor Kim
- */
-function bindShuffleButton() {
-	const shuffleBtn = document.getElementById("tarotShuffleBtn");
-	shuffleBtn.addEventListener("click", ()=>{
-		shuffleBtn.hidden = true;
-		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
-		for (let card = 0; card < cards.length; card++) {
-			const cardOption = cards[card];
-			cardOption.hidden = false;
-		}
-	});
-}
-
-/**
- * Plays the card throw animation
- * @date 6/6/2023 - 1:58:41 PM
- * @author Victor Kim
- *
- * @async
- * @return {None}
- */
-async function playCardThrowAnimation() {
-	const cards = TarotCard.getAllCards();
-	// unhide, move, and make unclickable
-	cards.forEach((card) => {
-		card.cardElement.hidden = false;
-		card.setClickable(false);
-		card.moveInstantly(consts.preThrow_card_pos);
-	});
-	await TarotCard.wait(200);
-	await cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), consts.preThrow_card_pos, 200);
-	await TarotCard.wait(100);
-	// throw in random directions
-	for (let i = 0; i < cards.length - 1; i++) {
-		const pos = {
-			x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
-			y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
-		};
-		const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
-		cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
-		cards[i].rotatePromise(0, rot, 230);
-		await TarotCard.wait(50);
-	}
-	const pos = {
-		x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
-		y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
-	};
-	const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
-	cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), pos, 200);
-	return cards[cards.length - 1].rotatePromise(0, rot, 230);
-}
 
 /**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
+ * @param {Function} callback a callback function for end of animation
  */
-async function playShuffleAnimation() {
-	const cards = TarotCard.getAllCards();
-	// Move all to center and rotate in to deck
-	for (let i = 0; i < cards.length - 1; i++) {
-		const card = cards[i];
-		card.move(card.getPositionPoint(), consts.shuffle_deck_pos, 200);
-		card.rotate(card.getRotation(), 0, 200);
-		await TarotCard.wait(50);
-	}
-	cards[cards.length - 1].move(cards[cards.length - 1].getPositionPoint(), consts.shuffle_deck_pos, 200);
-	await cards[cards.length - 1].rotatePromise(cards[cards.length - 1].getRotation(), 0, 200);
-
-	await TarotCard.wait(350);
+function playShuffleAnimation(callback) {
+	const tCards = TarotCard.getAllCards();
+	// Move all to center
+	tCards.forEach((tCard) => {
+		// block clicks too
+		tCard.setClickable(false);
+		tCard.moveInstantly({x: consts.cardX, y: consts.cardY});
+	});
 
 	// make 3 shuffles
-	for (let i = 0; i < 3; i++) {
+	let shuffleCount = 0;
+	const shuffleSequence = (callback)=>{
 		// pick random card
-		const randCard = cards[Math.floor(22 * Math.random())];
+		const randCard = tCards[Math.floor(22 * Math.random())];
 		// move away
-		await randCard.movePromise(consts.shuffle_deck_pos, consts.shuffle_card_pos, 350);
-		const startZIndex = randCard.getZIndex();
-		randCard.setZIndex(100 + i);
-		// pause
-		await TarotCard.wait(30);
-		// move back
-		await randCard.movePromise(consts.shuffle_card_pos, consts.shuffle_deck_pos, 350);
-		randCard.setZIndex(startZIndex);
-		// pause
-		await TarotCard.wait(50);
-	}
-	return TarotCard.wait(350);
+		randCard.move({x: consts.cardX, y: consts.cardY},
+			{x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
+				randCard.move({x: consts.cardX+2, y: consts.cardY},
+					{x: consts.cardX, y: consts.cardY}, 350, ()=>{
+						shuffleCount++;
+						if (shuffleCount < 3) {
+							shuffleSequence(callback);
+						} else {
+							callback();
+						}
+					});
+			});
+	};
+	shuffleSequence(()=>{
+		// finished shuffling
+		callback();
+	});
 }
 
 /**
@@ -306,16 +239,22 @@ async function playShuffleAnimation() {
  * @date 5/29/2023 - 10:18:49 PM
  * @param {Function} callback a callback function for end of animation
  */
-function playCardSpreadAnimation() {
+function playCardSpreadAnimation(callback) {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
+	let cardsFinished = 0;
+	console.log(tCards.length);
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
-		tCard.move(consts.shuffle_deck_pos,
+		tCard.move({x: consts.cardX, y: consts.cardY},
 			{x: 10 + (80/tCards.length)*cardXoffset,
 				y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
+				if (cardsFinished >= tCards.length) {
+					callback();
+				}
+				cardsFinished++;
 			});
 		cardXoffset++;
 	});
@@ -334,7 +273,7 @@ function createShuffleCards() {
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
 		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
-			consts.CARD_BACK+"\">";
+			consts.cardBack+"\">";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
@@ -360,8 +299,12 @@ function createShuffleCards() {
 			}
 		});
 		tarotDiv.appendChild(button);
-		// get all of the cards and make them into the TarotCard classes
-		new TarotCard(button);
+	}
+
+	// get all of the cards and make them into the TarotCard classes
+	for (let card = 0; card < 22; card++) {
+		const cardOption = document.getElementById("Option " + card);
+		new TarotCard(cardOption);
 	}
 }
 
@@ -453,7 +396,7 @@ function resetCards() {
 	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
-			"<img class = \"imagesPreShuffle\"src="+consts.CARD_BACK +">";
+			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
 		if (cardOption) {
 			cardOption.setAttribute("selected", false);
 			cardOption.style.backgroundColor = "white";
@@ -467,24 +410,24 @@ function resetCards() {
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
  */
-// function addFogBackground() {
-// 	const fog = document.createElement("div");
-// 	fog.className = "fogwrapper";
-// 	fog.innerHTML = `<div id="foglayer_01" class="fog">
-// 							<div class="image01"></div>
-// 							<div class="image02"></div>
-// 						</div>
-// 						<div id="foglayer_02" class="fog">
-// 							<div class="image01"></div>
-// 							<div class="image02"></div>
-// 						</div>
-// 						<div id="foglayer_03" class="fog">
-// 							<div class="image01"></div>
-// 							<div class="image02"></div>
-// 						</div>`;
-// 	tarotDiv.append(fog);
-// 	document.body.style.backgroundColor = "black";
-// }
+function addFogBackground() {
+	const fog = document.createElement("div");
+	fog.className = "fogwrapper";
+	fog.innerHTML = `<div id="foglayer_01" class="fog">
+							<div class="image01"></div>
+							<div class="image02"></div>
+						</div>
+						<div id="foglayer_02" class="fog">
+							<div class="image01"></div>
+							<div class="image02"></div>
+						</div>
+						<div id="foglayer_03" class="fog">
+							<div class="image01"></div>
+							<div class="image02"></div>
+						</div>`;
+	tarotDiv.append(fog);
+	document.body.style.backgroundColor = "black";
+}
 
 /**
  * Removes the fog background from the tarot card page
@@ -513,10 +456,11 @@ function removeFogBackground() {
  * Initializes home page
  */
 function init() {
-	createShuffleCards();
-	displayGeneralUIElements();
+	bindHomePageBtns();
 	bindGeneralButtons();
-	bindStartButton();
+	// bindBurgerBar();
+	createShuffleBtn();
+	createShuffleCards();
 }
 
 init();
