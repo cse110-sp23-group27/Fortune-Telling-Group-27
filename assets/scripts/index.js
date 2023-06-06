@@ -181,7 +181,7 @@ function createShuffleBtn() {
 function bindStartButton() {
 	const startBtn = document.getElementById("tarotStartBtn");
 	startBtn.addEventListener("click", ()=>{
-		TarotCard.getAllCards().forEach(card => {
+		TarotCard.getAllCards().forEach((card) => {
 			card.move(card.getPositionPoint(), consts.preThrow_card_pos, 200);
 		});
 	});
