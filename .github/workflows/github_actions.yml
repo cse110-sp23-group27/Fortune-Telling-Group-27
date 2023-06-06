@@ -9,15 +9,12 @@ permissions: write-all
 jobs:
   testing:
     runs-on: ubuntu-latest
-    container: lironavon/docker-puppeteer-container:14.16.0
-    env: 
-      CI: true
     steps:
       - uses: actions/checkout@v2
       - name: Installing modules
-        run: npm install
+        run: npm ci
       - name: Running Tests
-        run: npm run test
+        run: npm run GHtest
 
   build:
     runs-on: ubuntu-latest

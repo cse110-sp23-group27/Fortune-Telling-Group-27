@@ -2,6 +2,17 @@
  * @jest-environment puppeteer
  */
 
+/**
+ * Delays the execution for time amount of milliseconds
+ * @param {number} time amount of time in milliseconds to wait
+ * @return {Promise} returns a new promise when time is passed
+ */
+function delay(time) {
+	return new Promise(function(resolve) {
+		setTimeout(resolve, time);
+	});
+}
+
 describe("Testing Homepage Buttons", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
@@ -10,6 +21,7 @@ describe("Testing Homepage Buttons", () => {
 			localStorage.clear();
 		});
 		await page.reload();
+		await delay(1000);
 	});
 
 	it("Initial Home Page - Check for 3 Buttons", async () => {

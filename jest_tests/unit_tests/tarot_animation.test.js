@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const TarotCard = require("../assets/scripts/TarotCard");
+const TarotCard = require("../../assets/scripts/TarotCard");
 
 describe("Testing Creating a New Tarot Card Object", () => {
 	const testButton = document.createElement("button");
