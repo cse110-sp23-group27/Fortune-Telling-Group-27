@@ -209,19 +209,19 @@ function bindStartButton() {
 		resetFlag = false;
 		startBtn.hidden = true;
 		resetBtn.hidden = false;
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		await playCardThrowAnimation();
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		await TarotCard.wait(100);
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		await playShuffleAnimation();
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		playCardSpreadAnimation();
@@ -261,19 +261,19 @@ async function playCardThrowAnimation() {
 		card.setClickable(false);
 		card.moveInstantly(consts.preThrow_card_pos);
 	});
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	await TarotCard.wait(200);
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	await cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), consts.preThrow_card_pos, 200);
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	await TarotCard.wait(100);
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	// throw in random directions
@@ -285,12 +285,12 @@ async function playCardThrowAnimation() {
 		const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
 		cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
 		cards[i].rotatePromise(0, rot, 230);
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		await TarotCard.wait(50);
 	}
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	const pos = {
@@ -299,7 +299,7 @@ async function playCardThrowAnimation() {
 	};
 	const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
 	cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), pos, 200);
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	return cards[cards.length - 1].rotatePromise(0, rot, 230);
@@ -311,7 +311,7 @@ async function playCardThrowAnimation() {
  */
 async function playShuffleAnimation() {
 	const cards = TarotCard.getAllCards();
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	// Move all to center and rotate in to deck
@@ -320,18 +320,18 @@ async function playShuffleAnimation() {
 		card.move(card.getPositionPoint(), consts.shuffle_deck_pos, 200);
 		card.rotate(card.getRotation(), 0, 200);
 		await TarotCard.wait(50);
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 	}
 	cards[cards.length - 1].move(cards[cards.length - 1].getPositionPoint(), consts.shuffle_deck_pos, 200);
 	await cards[cards.length - 1].rotatePromise(cards[cards.length - 1].getRotation(), 0, 200);
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 
 	await TarotCard.wait(350);
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 
@@ -341,25 +341,25 @@ async function playShuffleAnimation() {
 		const randCard = cards[Math.floor(22 * Math.random())];
 		// move away
 		await randCard.movePromise(consts.shuffle_deck_pos, consts.shuffle_card_pos, 350);
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		const startZIndex = randCard.getZIndex();
 		randCard.setZIndex(100 + i);
 		// pause
 		await TarotCard.wait(30);
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		// move back
 		await randCard.movePromise(consts.shuffle_card_pos, consts.shuffle_deck_pos, 350);
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		randCard.setZIndex(startZIndex);
 		// pause
 		await TarotCard.wait(50);
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 	}
@@ -374,11 +374,11 @@ async function playShuffleAnimation() {
 function playCardSpreadAnimation() {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
-	if(resetFlag){
+	if (resetFlag) {
 		return;
 	}
 	tCards.forEach((tCard) => {
-		if(resetFlag){
+		if (resetFlag) {
 			return;
 		}
 		tCard.setClickable(true);
@@ -591,7 +591,7 @@ function init() {
 	bindResetButton();
 }
 
-function bindResetButton(){
+function bindResetButton() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	resetBtn.addEventListener("click", reset);
 }
@@ -601,8 +601,8 @@ function bindResetButton(){
  * @date 6/6/2023 - 3:42:41 PM
  * @author Victor Kim
  */
-function reset(){
-	//TODO make an animation for this
+function reset() {
+	// TODO make an animation for this
 	resetFlag = true;
 	// reset cards
 	resetCards();
@@ -615,7 +615,7 @@ function reset(){
 	Animator.instance.clearAllAnimations();
 	// hide cards
 	const cards = TarotCard.getAllCards();
-	cards.forEach(card => {
+	cards.forEach((card) => {
 		card.cardElement.hidden = true;
 	});
 }

@@ -144,7 +144,7 @@ class Animator {
 	 * @date 6/6/2023 - 3:47:29 PM
 	 * @author Victor Kim
 	 */
-	clearAllAnimations(){
+	clearAllAnimations() {
 		this.animationObjs = [];
 	}
 }
