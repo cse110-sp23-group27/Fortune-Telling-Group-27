@@ -12,6 +12,3 @@ jobs:
       
       - name: Installing modules
         run: npm ci
-
-      - name: Run JSDocs
-        run: npm run doc
