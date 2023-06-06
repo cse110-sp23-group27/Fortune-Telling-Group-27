@@ -1,9 +1,4 @@
-#tarotDiv {
-    justify-content: center;
-    margin: 10vmin;
-}
-  
-.cardsBtnPreShuffle{
+#centeredBtn{
     margin: 10px;
     border-color: #fff;
     background-color: #fff;
@@ -23,10 +18,14 @@
     padding-left: 0px;
 
     border-radius: 5%;
-
-    transform: translateX(-50%);
+    transform: translateX(-50%);    
 }
-  
+
+#tarotDiv {
+    justify-content: center;
+    margin: 10vmin;
+}
+
 .imagesPreShuffle {
     height: 45vmin;
     width: 25vmin;

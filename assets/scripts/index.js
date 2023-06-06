@@ -39,7 +39,7 @@ function bindHomePageBtns() {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
-		addFogBackground();
+		// addFogBackground();
 		homePageBool = false;
 	});
 
@@ -395,24 +395,24 @@ function resetCards() {
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
  */
-function addFogBackground() {
-	const fog = document.createElement("div");
-	fog.className = "fogwrapper";
-	fog.innerHTML = `<div id="foglayer_01" class="fog">
-							<div class="image01"></div>
-							<div class="image02"></div>
-						</div>
-						<div id="foglayer_02" class="fog">
-							<div class="image01"></div>
-							<div class="image02"></div>
-						</div>
-						<div id="foglayer_03" class="fog">
-							<div class="image01"></div>
-							<div class="image02"></div>
-						</div>`;
-	tarotDiv.append(fog);
-	document.body.style.backgroundColor = "black";
-}
+// function addFogBackground() {
+// 	const fog = document.createElement("div");
+// 	fog.className = "fogwrapper";
+// 	fog.innerHTML = `<div id="foglayer_01" class="fog">
+// 							<div class="image01"></div>
+// 							<div class="image02"></div>
+// 						</div>
+// 						<div id="foglayer_02" class="fog">
+// 							<div class="image01"></div>
+// 							<div class="image02"></div>
+// 						</div>
+// 						<div id="foglayer_03" class="fog">
+// 							<div class="image01"></div>
+// 							<div class="image02"></div>
+// 						</div>`;
+// 	tarotDiv.append(fog);
+// 	document.body.style.backgroundColor = "black";
+// }
 
 /**
  * Removes the fog background from the tarot card page
@@ -441,11 +441,12 @@ function removeFogBackground() {
  * Initializes home page
  */
 function init() {
-	bindHomePageBtns();
+	// bindHomePageBtns();
 	bindGeneralButtons();
 	// bindBurgerBar();
 	createShuffleBtn();
 	createShuffleCards();
+	displayGeneralUIElements();
 }
 
 init();
