@@ -64,58 +64,6 @@ function delay(time) {
 	});
 }
 
-
-/**
- * Checks if the html element is visible or not given element and the page
- * @param {HTMLElement} element - HTML element that is either visible or not
- * @param {page} page - page variable used for puppeteer
- *
- * @return {boolean} - returns true if visible and false otherwise.
- */
-async function isLocatorReady(element, page) {
-	const isVisibleHandle = await page.evaluateHandle((e) => {
-		const style = window.getComputedStyle(e);
-		return (style && style.display !== "none" &&
-      style.visibility !== "hidden" && style.opacity !== "0");
-	}, element);
-	const visible = await isVisibleHandle.jsonValue();
-	const box = await element.boxModel();
-	if (visible && box) {
-		return true;
-	}
-	return false;
-}
-
-/**
- * Expects all given elements in the page to be visible.
- * Returns true if all elements are visible, false otherwise
- *
- * @param {HTMLElement} selector - CSS selector
- * @param {page} page - page variable used for puppeteer
- * @return {boolean} returns true if visible, false otherwise
- *
- */
-async function checkIfVisible(selector, page) {
-	try {
-		await page.waitForSelector(selector, {visible: true, timeout: 10});
-	} catch (e) {
-		if (e instanceof puppeteer.TimeoutError) {
-			return false;
-		}
-	}
-	return true;
-}
-
-/**
- * checks if all home page buttons are visible
- * @return {boolean} true if all buttons are visible, false otherwise
- */
-async function checkHomePageVisible() {
-	const tarotButton = await checkIfVisible("#toTarotCard", page);
-	const eggButton = await checkIfVisible("#eggButton", page);
-	const boneButton = await checkIfVisible("#boneButton", page);
-	return tarotButton && eggButton && boneButton;
-}
 describe("Testing Burger Bar and Buttons", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
