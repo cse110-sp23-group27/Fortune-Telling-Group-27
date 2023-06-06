@@ -56,11 +56,11 @@ class Animator {
 			let nextValue = animationObj.to - animationObj.from;
 
 			// apply ease in out animation curve and clamp to not go over
-			nextValue *= 
+			nextValue *=
 				Math.min(
 					this.easeInOutSine(animationObj.timeSinceStart / animationObj.time),
 					1
-					);
+				);
 
 			nextValue += animationObj.from;
 
@@ -132,7 +132,7 @@ class Animator {
 	 * @date 6/5/2023 - 9:02:57 PM
 	 *
 	 * @param {*} x value between 0 and 1
-	 * @returns {number}
+	 * @return {number}
 	 */
 	easeInOutSine(x) {
 		return -(Math.cos(Math.PI * x) - 1) / 2;
