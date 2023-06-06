@@ -58,7 +58,8 @@ class Animator {
 			// apply ease in out animation curve and clamp to not go over
 			nextValue *=
 				Math.min(
-					this.easeInOutSine(animationObj.timeSinceStart / animationObj.time),
+					this.easeInOutSine(
+						animationObj.timeSinceStart / animationObj.time),
 					1
 				);
 
