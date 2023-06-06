@@ -23,6 +23,8 @@
     padding-left: 0px;
 
     border-radius: 5%;
+
+    transform: translateX(-50%);
 }
   
 .imagesPreShuffle {

@@ -137,7 +137,7 @@ function displayGeneralUIElements(fortuneType =null) {
 	}
 
 	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i <= 2; i++) {
+	for (let i = 0; i < 3; i++) {
 		const optionsBtn = document.getElementById(
 			consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
@@ -232,7 +232,7 @@ function playCardSpreadAnimation(callback) {
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
 		tCard.move({x: consts.cardX, y: consts.cardY},
-			{x: 15 + (60/tCards.length)*cardXoffset,
+			{x: 10 + (80/tCards.length)*cardXoffset,
 				y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
