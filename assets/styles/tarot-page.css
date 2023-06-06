@@ -1,9 +1,12 @@
-#tarotDiv {
-    justify-content: center;
-    margin: 10vmin;
+main {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
-  
-.cardsBtnPreShuffle{
+
+#centeredBtn{
     margin: 10px;
     border-color: #fff;
     background-color: #fff;
@@ -23,10 +26,14 @@
     padding-left: 0px;
 
     border-radius: 5%;
-
-    transform: translateX(-50%);
+    transform: translateX(-50%);    
 }
-  
+
+#tarotDiv {
+    justify-content: center;
+    margin: 10vmin;
+}
+
 .imagesPreShuffle {
     height: 45vmin;
     width: 25vmin;
@@ -39,8 +46,6 @@
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: 0px;
-
-
 }
 .chosenCards {
     height: 45vmin;
@@ -95,6 +100,10 @@ body {
     background: rgba(0, 0, 0, 1);
     overflow-x: hidden; 
     color: white;
+}
+
+.cardsBtnPreShuffle{
+    transform-origin: center;
 }
 
 .cardsBtnPreShuffle:hover{

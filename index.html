@@ -29,18 +29,28 @@
 	</header>
 
 		<main>
-				<div class="container">
-					<div class="button-wrapper">
-						<button class = "home-page" id = "toTarotCard">Tarot Card</button>
-						<button class = "home-page" id = "toEgg">Egg</button>
-						<button class = "home-page" id = "toBoneTossing">Bones Tossing</button>
-					</div>
+      <div class="tarotSpecific" id="tarotDiv" >
+        
+        <button id="tarotStartBtn" class="centeredBtn">Start</button>
+        <button id="tarotShuffleBtn" class="centeredBtn" hidden>Shuffle</button>
 
-					<div class="tarotSpecific" id="tarotDiv" hidden>
-					</div>
-					<font size = 50><p id="center-text"></p></font>
-				</div>
-				<p id="response"></p>
+        <div id="fogwrapper" class="fogwrapper">
+          <div id="foglayer_01" class="fog">
+            <div class="image01"></div>
+            <div class="image02"></div>
+          </div>
+          <div id="foglayer_02" class="fog">
+            <div class="image01"></div>
+            <div class="image02"></div>
+          </div>
+          <div id="foglayer_03" class="fog">
+            <div class="image01"></div>
+            <div class="image02"></div>
+          </div>`
+        </div>
+      </div>
+      <font size = 50><p id="center-text"></p></font>
+      <p id="response"></p>
 		</main>
 </body>
 <script src="assets/scripts/index.js" type="module"></script>
