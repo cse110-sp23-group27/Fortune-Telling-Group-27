@@ -81,16 +81,16 @@ class TarotCard {
      * @param {Function} callback End animation callback
      * @return {Promise}
      */
-     movePromise(pointA, pointB, time, callback){
-          return new Promise(
-               (resolve)=>{
-                    this.move(pointA, pointB, time, ()=>{
-                         resolve();
-                         callback();
-                    });
-               }
-          );
-     }
+	movePromise(pointA, pointB, time, callback) {
+		return new Promise(
+			(resolve)=>{
+				this.move(pointA, pointB, time, ()=>{
+					resolve();
+					callback();
+				});
+			}
+		);
+	}
 
 	/**
      * Moves object from one point to another instantly
@@ -137,14 +137,14 @@ class TarotCard {
      * @param {Function} callback End animation callback
      * rotation
      */
-     rotatePromise(degreesA, degreesB, time, callback) {
-          return new Promise((resolve)=>{
-               rotate(degreesA, degreesB, time, ()=>{
-                    callback();
-                    resolve();
-               });
-          });
-     }
+	rotatePromise(degreesA, degreesB, time, callback) {
+		return new Promise((resolve)=>{
+			rotate(degreesA, degreesB, time, ()=>{
+				callback();
+				resolve();
+			});
+		});
+	}
 
 	/**
      * Rotates object some number of degrees instantly
@@ -184,17 +184,16 @@ class TarotCard {
 		this.cardElement.style.zIndex = zIndex;
 	}
 
-     /**
+	/**
       * Gives a promise which will resolve in ms miliseconds
       * @date 6/6/2023 - 1:14:03 AM
       *
       * @param {number} ms wait time
-      * @returns {Promise}
+      * @return {Promise}
       */
-     static wait(ms){
-          return new Promise(resolve => setTimeout(resolve, ms));
-     } 
-
+	static wait(ms) {
+		return new Promise((resolve) => setTimeout(resolve, ms));
+	}
 }
 
 if (typeof module === "object") {

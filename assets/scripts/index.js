@@ -194,7 +194,7 @@ function bindStartButton() {
 				x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
 				y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
 			};
-			const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max
+			const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
 			cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
 			cards[i].rotatePromise(0, rot, 230);
 		}
@@ -202,7 +202,7 @@ function bindStartButton() {
 			x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
 			y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
 		};
-		const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max
+		const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
 		cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), pos, 200);
 		await cards[cards.length - 1].rotatePromise(0, rot, 230);
 	});
