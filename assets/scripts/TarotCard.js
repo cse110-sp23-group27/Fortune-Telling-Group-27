@@ -147,6 +147,7 @@ class TarotCard {
      * @param {float} degreesB Number of degrees to rotate object
      * @param {float} time Time in milliseconds for the object to complete
      * @param {Function} callback End animation callback
+	 * @return {Promise}
      * rotation
      */
 	rotatePromise(degreesA, degreesB, time, callback) {
@@ -178,7 +179,11 @@ class TarotCard {
 	 */
 	getRotation() {
 		const transformString = this.cardElement.style.transform;
-		const rotationString = transformString.substring(transformString.indexOf("rotate("), transformString.indexOf("deg)"));
+		const rotationString =
+					transformString.substring(
+						transformString.indexOf("rotate("),
+						transformString.indexOf("deg)")
+					);
 		const rotation = parseFloat(rotationString);
 		if (isNaN(rotation)) {
 			return 0;

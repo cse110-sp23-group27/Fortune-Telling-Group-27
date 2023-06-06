@@ -268,7 +268,11 @@ async function playCardThrowAnimation() {
 	if (resetFlag) {
 		return;
 	}
-	await cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), consts.preThrow_card_pos, 200);
+	await cards[cards.length - 1].movePromise(
+		cards[cards.length - 1].getPositionPoint(),
+		consts.preThrow_card_pos,
+		200
+	);
 	if (resetFlag) {
 		return;
 	}
@@ -279,10 +283,13 @@ async function playCardThrowAnimation() {
 	// throw in random directions
 	for (let i = 0; i < cards.length - 1; i++) {
 		const pos = {
-			x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
-			y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
+			x: consts.afterThrow_card_X_min +
+				Math.random()*consts.afterThrow_card_X_max,
+			y: consts.afterThrow_card_Y_min +
+				Math.random()*consts.afterThrow_card_Y_max
 		};
-		const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
+		const rot = consts.afterThrow_card_Rotation_min +
+						Math.random()*consts.afterThrow_card_Rotation_max;
 		cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
 		cards[i].rotatePromise(0, rot, 230);
 		if (resetFlag) {
@@ -294,11 +301,18 @@ async function playCardThrowAnimation() {
 		return;
 	}
 	const pos = {
-		x: consts.afterThrow_card_X_min + Math.random()*consts.afterThrow_card_X_max,
-		y: consts.afterThrow_card_Y_min + Math.random()*consts.afterThrow_card_Y_max
+		x: consts.afterThrow_card_X_min +
+			Math.random()*consts.afterThrow_card_X_max,
+		y: consts.afterThrow_card_Y_min +
+			Math.random()*consts.afterThrow_card_Y_max
 	};
-	const rot = consts.afterThrow_card_Rotation_min + Math.random()*consts.afterThrow_card_Rotation_max;
-	cards[cards.length - 1].movePromise(cards[cards.length - 1].getPositionPoint(), pos, 200);
+	const rot = consts.afterThrow_card_Rotation_min +
+					Math.random()*consts.afterThrow_card_Rotation_max;
+	cards[cards.length - 1].movePromise(
+		cards[cards.length - 1].getPositionPoint(),
+		pos,
+		200
+	);
 	if (resetFlag) {
 		return;
 	}
@@ -324,8 +338,16 @@ async function playShuffleAnimation() {
 			return;
 		}
 	}
-	cards[cards.length - 1].move(cards[cards.length - 1].getPositionPoint(), consts.shuffle_deck_pos, 200);
-	await cards[cards.length - 1].rotatePromise(cards[cards.length - 1].getRotation(), 0, 200);
+	cards[cards.length - 1].move(
+		cards[cards.length - 1].getPositionPoint(),
+		consts.shuffle_deck_pos,
+		200
+	);
+	await cards[cards.length - 1].rotatePromise(
+		cards[cards.length - 1].getRotation(),
+		0,
+		200
+	);
 	if (resetFlag) {
 		return;
 	}
@@ -340,7 +362,11 @@ async function playShuffleAnimation() {
 		// pick random card
 		const randCard = cards[Math.floor(22 * Math.random())];
 		// move away
-		await randCard.movePromise(consts.shuffle_deck_pos, consts.shuffle_card_pos, 350);
+		await randCard.movePromise(
+			consts.shuffle_deck_pos,
+			consts.shuffle_card_pos,
+			350
+		);
 		if (resetFlag) {
 			return;
 		}
@@ -352,7 +378,11 @@ async function playShuffleAnimation() {
 			return;
 		}
 		// move back
-		await randCard.movePromise(consts.shuffle_card_pos, consts.shuffle_deck_pos, 350);
+		await randCard.movePromise(
+			consts.shuffle_card_pos,
+			consts.shuffle_deck_pos,
+			350
+		);
 		if (resetFlag) {
 			return;
 		}
@@ -596,7 +626,7 @@ function init() {
  * @date 6/6/2023 - 3:57:05 PM
  * @author Victor Kim
  */
-function bindResetButton(){
+function bindResetButton() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	resetBtn.addEventListener("click", reset);
 }
