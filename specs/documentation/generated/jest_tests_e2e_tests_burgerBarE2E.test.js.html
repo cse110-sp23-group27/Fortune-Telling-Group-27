@@ -30,8 +30,11 @@
  * @jest-environment puppeteer
  */
 
+const {Browser} = require("puppeteer");
+
 const HOMEPAGE = ".home-page";
 const HOMEBTN = "#toHome";
+const DOCS = "#toDocumentation";
 const GITHUB = "#toGitHub";
 const TAROTCARDBTN = "#toTarotCard";
 const BURGERBAR = "#menu__toggle";
@@ -92,6 +95,17 @@ function delay(time) {
 	});
 }
 
+/**
+ *
+ * @param {Browser} browser the browser used to open the tab
+ * @return {Promise} A new promise that will finish when the page opens
+ */
+function returnNewPromise(browser) {
+	return new Promise((resolve) =>
+		browser.once("targetcreated", (target) => resolve(target.page()))
+	);
+}
+
 describe("Testing Burger Bar and Buttons", () => {
 	// visit the fortune telling website
 	beforeAll(async () => {
@@ -150,15 +164,33 @@ describe("Testing Burger Bar and Buttons", () => {
 		// Expect allArePopulated to still be true
 		expect(allArePopulated).toBe(true);
 	}, 10000);
-	it("Initial Burger Bar - Github Button Test", async () => {
-		const homeBtns = await page.$$(HOMEPAGE);
-		const toGit = await page.$(GITHUB);
-		await toGit.evaluate((b) => b.click()); // click home button
-		// check if home buttons are hidden (should not be hidden)
-		expect(await allHidden(homeBtns)).toBe(false);
-		// maybe add a test checking if github opens a new tab eventually
-		// when that feature is implemented
+	it("Initial Burger Bar - Documentation Button Test", async () => {
+		const toDocs = await page.$(DOCS);
+		const newPagePromise = returnNewPromise(browser);
+		await toDocs.evaluate((b) => b.click()); // click docs button
+		// get new page
+		const newPage = await newPagePromise;
+		// check if last page opened is the docs
+		expect(newPage.url()).toBe(
+			"https://cse110-sp23-group27.github.io/" +
+			"Fortune-Telling-Group-27/specs/documentation" +
+			"/generated/index.html");
+		await newPage.close();
+		await delay(1000);
 	}, 10000);
+	it("Initial Burger Bar - Github Button Test", async () => {
+		const toGit = await page.$(GITHUB);
+		const newPagePromise = returnNewPromise(browser);
+		await toGit.evaluate((b) => b.click()); // click github button
+		// get new page
+		const newPage = await newPagePromise;
+		expect(newPage.url()).toBe(
+			"https://github.com/" +
+			"cse110-sp23-group27/Fortune-Telling-Group-27"+
+			"/tree/main");
+		await newPage.close();
+		await delay(1000);
+	}, 50000);
 	it("Initial Burger Bar - Home button test", async () => {
 		const toHome = await page.$(HOMEBTN);
 		const toTarot = await page.$(TAROTCARDBTN);
@@ -187,13 +219,13 @@ describe("Testing Burger Bar and Buttons", () => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#HOMEPAGE">HOMEPAGE</a></li><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#createShuffleBtn">createShuffleBtn</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#createShuffleBtn">createShuffleBtn</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li><li><a href="global.html#returnNewPromise">returnNewPromise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jun 06 2023 07:13:40 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jun 06 2023 19:11:57 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
