@@ -596,7 +596,7 @@ function init() {
  * @date 6/6/2023 - 3:57:05 PM
  * @author Victor Kim
  */
-function bindResetButton(){
+function bindResetButton() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	resetBtn.addEventListener("click", reset);
 }
