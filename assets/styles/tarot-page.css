@@ -46,8 +46,6 @@ main {
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: 0px;
-
-
 }
 .chosenCards {
     height: 45vmin;
@@ -102,6 +100,10 @@ body {
     background: rgba(0, 0, 0, 1);
     overflow-x: hidden; 
     color: white;
+}
+
+.cardsBtnPreShuffle{
+    transform-origin: center;
 }
 
 .cardsBtnPreShuffle:hover{

@@ -10,19 +10,25 @@ export const FORTUNELIST = ["tarot", "egg", "bone"];
 // card animation consts
 
 // pre shuffle, pre throw
-export const preThrow_card_pos = {x: 95, y: 50};
+export const preThrow_card_pos = {x: 50, y: 95};
 
 // pre shuffle, after throw
 export const afterThrow_card_X_min = 5;
 export const afterThrow_card_X_max = 95;
-export const afterThrow_card_Y_min = 10;
-export const afterThrow_card_Y_max = 80;
+export const afterThrow_card_Y_min = 0;
+export const afterThrow_card_Y_max = 50;
 export const afterThrow_card_Rotation_min = -180;
 export const afterThrow_card_Rotation_max = 180;
 
 // shuffle
 export const shuffle_deck_pos = {x: 30, y: 20};
 export const shuffle_card_pos = {x: 60, y: 20};
+
+//spread
+export const spread_card_X_left = 20;
+export const spread_card_X_right = 80;
+export const spread_card_Y = 0;
+
 
 export const CARDS = ["The Fool", "The Magician", "The High Priestess", "The Empress",
 					  "The Emperor", "The Hierophant", "The Lovers", "The Chariot",

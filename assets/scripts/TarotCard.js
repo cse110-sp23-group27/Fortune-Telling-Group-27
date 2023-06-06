@@ -114,8 +114,15 @@ class TarotCard {
       * @return {{x: Float, y: Float}}
       */
 	getPositionPoint() {
-		return {x: parseFloat(this.cardElement.style.left.replace("vw", "")),
-			y: parseFloat(this.cardElement.style.top.replace("vh", ""))};
+          let x = parseFloat(this.cardElement.style.left.replace("vw", ""));
+          let y = parseFloat(this.cardElement.style.top.replace("vh", ""));
+          if(isNaN(x)){
+               x = 0;
+          }
+          if(isNaN(y)){
+               y = 0;
+          }
+		return {x: x, y: y};
 	}
 
 	/**
@@ -162,6 +169,16 @@ class TarotCard {
 		this.cardElement.style.transform = `rotate(${degrees}deg)`;
 	}
 
+     getRotation(){
+          const transformString = this.cardElement.style.transform;
+          const rotationString = transformString.substring(transformString.indexOf("rotate("), transformString.indexOf("deg)"));
+          const rotation = parseFloat(rotationString);
+          if(isNaN(rotation)){
+               return 0;
+          }
+          return rotation;
+     }
+
 	/**
      * Flips object over
      *
@@ -190,6 +207,10 @@ class TarotCard {
 	setZIndex(zIndex) {
 		this.cardElement.style.zIndex = zIndex;
 	}
+
+     getZIndex(){
+          return this.cardElement.style.zIndex;
+     }
 
      /**
       * Gives a promise which will resolve in ms miliseconds
