@@ -317,7 +317,7 @@ function displayThreeOptions() {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(),
-				{x: 20+(selectedCardsFound*25), y: consts.cardY}, 350);
+				{x: 20+(selectedCardsFound*(60/2)), y: 10}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
