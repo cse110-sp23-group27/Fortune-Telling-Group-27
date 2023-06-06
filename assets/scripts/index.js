@@ -280,13 +280,6 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
-				// for (let card = 1; card < 23; card++) {
-				// 	// when 3 cards selected
-				// 	const cardOption = document.getElementById("Option " + card);
-				// 	cardOption.setAttribute("selected", false);
-				// 	cardOption.style.backgroundColor = "white";
-				// 	cardOption.hidden = true;
-				// }
 				displayThreeOptions();
 			}
 		});
