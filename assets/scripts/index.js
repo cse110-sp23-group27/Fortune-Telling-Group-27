@@ -129,7 +129,6 @@ function bindGeneralButtons() {
 		window.open(
 			"https://github.com/cse110-sp23-group27/" +
 			"Fortune-Telling-Group-27/tree/main"
-		);
 	});
 
 	// githubBtn.addEventListener("click", () => {
