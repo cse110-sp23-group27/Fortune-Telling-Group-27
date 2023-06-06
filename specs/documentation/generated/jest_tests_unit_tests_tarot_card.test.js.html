@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: jest_tests/unit_tests/tarot_card.test.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,67 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: jest_tests/unit_tests/tarot_card.test.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @jest-environment jsdom
+ */
 
+const TarotCard = require("../../assets/scripts/TarotCard");
 
-    <h3> </h3>
+describe("Testing Creating a New Tarot Card Object", () => {
+	const testButton = document.createElement("button");
+	const testCard = new TarotCard(testButton);
 
+	test("Before Modifying Tarot Card", () => {
+		expect(testCard.value).toBeUndefined();
+		expect(testCard.cardElement).toBe(testButton);
+		expect(testCard.cardElement.style.position).toBe("absolute");
+		expect(testCard.cardElement.style.pointerEvents).toBe("");
+	});
 
+	test("After Modifying Tarot Card", () => {
+		testCard.value = "test_value";
+		testCard.setClickable(true);
+		expect(testCard.value).toBe("test_value");
+		expect(testCard.cardElement.style.pointerEvents).toBe("auto");
+		testCard.setClickable(false);
+		expect(testCard.cardElement.style.pointerEvents).toBe("none");
+	});
+});
 
+describe("Testing Moving and Rotating Tarot Card", () => {
+	const testButton = document.createElement("button");
+	const testCard = new TarotCard(testButton);
 
+	test("Before Moving Tarot Card", () => {
+		expect(testCard.getPositionPoint()).toStrictEqual({"x": NaN, "y": NaN});
+		expect(testCard.cardElement.style.zIndex).toBe("");
+	});
 
+	test("After Moving Tarot Card", () => {
+		testCard.moveInstantly({x: 90, y: 80});
+		expect(testCard.getPositionPoint()).toStrictEqual({"x": 90, "y": 80});
+		testCard.setZIndex(5);
+		expect(testCard.cardElement.style.zIndex).toBe("5");
+	});
 
+	test("Get all cards", () => {
+		expect(TarotCard.getAllCards().includes(testCard)).toBe(true);
+		expect(testCard.getAllCards().includes(testCard)).toBe(true);
+	});
 
-
-
-
-    
-
-
-
-
-
+	// Add more tests for the other methods
+});</code></pre>
+        </article>
+    </section>
 
 
 

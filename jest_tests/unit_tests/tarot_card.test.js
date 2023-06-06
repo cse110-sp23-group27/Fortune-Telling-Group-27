@@ -7,7 +7,7 @@ const TarotCard = require("../../assets/scripts/TarotCard");
 describe("Testing Creating a New Tarot Card Object", () => {
 	const testButton = document.createElement("button");
 	const testCard = new TarotCard(testButton);
-	
+
 	test("Before Modifying Tarot Card", () => {
 		expect(testCard.value).toBeUndefined();
 		expect(testCard.cardElement).toBe(testButton);
