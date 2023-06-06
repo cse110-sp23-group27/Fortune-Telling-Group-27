@@ -133,131 +133,134 @@ describe("Testing Tarot Card Page", () => {
 		await page.reload();
 		await delay(1000);
 	});
-	it("Initial  - Click on Tarot Card Button", async () => {
+	for (let i = 0; i &lt; 2; i++) {
+		it("Initial  - Click on Tarot Card Button", async () => {
 		// console.log("Checking for 3 Main Buttons...");
 		// Query select all of the homepage button elements
 		// and return the length of that array
-		const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
-			return homePageBtns.length;
-		});
-		// Expect there that array from earlier to be of length 3
-		// meaning 3 homepage buttons were found
-		expect(numButtons).toBe(3);
-		const tarotCardButton = await page.$(TOTAROTCARD);
-		const homePageBtns = await page.$$(HOMEPAGE);
-		const shuffle = await page.$$(SHUFFLEDCARDS);
-		expect(await allHidden(shuffle)).toBe(true);
-		// expect home page buttons to be visible
-		expect(await allHidden(homePageBtns)).toBe(false);
-		await tarotCardButton.click();
-		// after clicking on the tarot card button,
-		// expect home page buttons to be hidden
-		expect(await allHidden(homePageBtns)).toBe(true);
-	});
-	it("Click on shuffle button", async () => {
-		const shuffleBtn = await page.$(SHUFFLEBUTTON);
-		await shuffleBtn.evaluate((b) => b.click()); // click tarot card
-		await delay(4000); // change to promise use when animator gets updated
-		const shuffle = await page.$$(SHUFFLEDCARDS);
-		// expect cards to be visible
-		expect(await allHidden(shuffle)).toBe(false);
-	}, 10000);
-	it("Select and unselect card", async () => {
-		// select random card
-		const shuffle = await page.$$(SHUFFLEDCARDS);
-		const randNum = await getRandomInt(shuffle.length);
-		const selCard = shuffle[randNum];
-
-		// card should not be selected and have white bg color
-		expect(await getSelectedValue(selCard)).toBe("false");
-		expect(await getBGColor(selCard)).toBe("white");
-		await selCard.evaluate((b) => b.click()); // click tarot card
-
-		// card should be selected and have black bg color
-
-		expect(await getSelectedValue(selCard)).toBe("true");
-		expect(await getBGColor(selCard)).toBe("black");
-		await selCard.evaluate((b) => b.click()); // click tarot card
-
-		// card should not be selected and have white bg color
-
-		expect(await getSelectedValue(selCard)).toBe("false");
-		expect(await getBGColor(selCard)).toBe("white");
-		await delay(1000);
-	}, 10000);
-	it("Select 3 cards", async () => {
-		let cnt = 0;
-		const shuffle = await page.$$(SHUFFLEDCARDS);
-		for (const i of randNums) {
-			const selCard = shuffle[i];
-			// expect card to not be selected
-			expect(await getSelectedValue(selCard)).toBe("false");
-			await selCard.evaluate((b) => b.click()); // click tarot
-			if (cnt &lt; 2) {
-				expect(await getSelectedValue(selCard)).toBe("true");
-			} else { // Last card does not change selected value
-				expect(await getSelectedValue(selCard)).toBe("false");
-			}
-			cnt++;
-		}
-		await delay(500);
-	}, 10000);
-	it("Check if 3 cards in view", async () => {
-		const shuffle = await page.$$(SHUFFLEDCARDS);
-		let cardsInView = 0;
-		// sort random numbers in ascending order
-		const randSorted = randNums.sort(
-			function(a, b) {
-				return a - b;
+			const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
+				return homePageBtns.length;
 			});
-		for (let i = 0; i &lt; shuffle.length; i++) {
-			const selCard = shuffle[i];
-			// get top view value
-			const style = await selCard.getProperty("style");
-			const top = await style.getProperty("top");
-			const viewVal = await parseInt(await top.jsonValue(), 10);
+			// Expect there that array from earlier to be of length 3
+			// meaning 3 homepage buttons were found
+			expect(numButtons).toBe(3);
+			const tarotCardButton = await page.$(TOTAROTCARD);
+			const homePageBtns = await page.$$(HOMEPAGE);
+			const shuffle = await page.$$(SHUFFLEDCARDS);
+			expect(await allHidden(shuffle)).toBe(true);
+			// expect home page buttons to be visible
+			expect(await allHidden(homePageBtns)).toBe(false);
+			await tarotCardButton.click();
+			// after clicking on the tarot card button,
+			// expect home page buttons to be hidden
+			expect(await allHidden(homePageBtns)).toBe(true);
+		});
+		it("Click on shuffle button", async () => {
+			const shuffleBtn = await page.$(SHUFFLEBUTTON);
+			await shuffleBtn.evaluate((b) => b.click()); // click tarot card
+			await delay(4000); // change to promise use when animator gets updated
+			const shuffle = await page.$$(SHUFFLEDCARDS);
+			// expect cards to be visible
+			expect(await allHidden(shuffle)).toBe(false);
+		}, 10000);
+		it("Select and unselect card", async () => {
+		// select random card
+			const shuffle = await page.$$(SHUFFLEDCARDS);
+			const randNum = await getRandomInt(shuffle.length);
+			const selCard = shuffle[randNum];
 
-			if (viewVal > 0) {
-				// if greater than 0 then count as in view
-				expect(i).toBe(randSorted[cardsInView]);
-				cardsInView++;
+			// card should not be selected and have white bg color
+			expect(await getSelectedValue(selCard)).toBe("false");
+			expect(await getBGColor(selCard)).toBe("white");
+			await selCard.evaluate((b) => b.click()); // click tarot card
+
+			// card should be selected and have black bg color
+
+			expect(await getSelectedValue(selCard)).toBe("true");
+			expect(await getBGColor(selCard)).toBe("black");
+			await selCard.evaluate((b) => b.click()); // click tarot card
+
+			// card should not be selected and have white bg color
+
+			expect(await getSelectedValue(selCard)).toBe("false");
+			expect(await getBGColor(selCard)).toBe("white");
+			await delay(1000);
+		}, 10000);
+		it("Select 3 cards", async () => {
+			let cnt = 0;
+			const shuffle = await page.$$(SHUFFLEDCARDS);
+			for (const i of randNums) {
+				const selCard = shuffle[i];
+				// expect card to not be selected
+				expect(await getSelectedValue(selCard)).toBe("false");
+				await selCard.evaluate((b) => b.click()); // click tarot
+				if (cnt &lt; 2) {
+					expect(await getSelectedValue(selCard)).toBe("true");
+				} else { // Last card does not change selected value
+					expect(await getSelectedValue(selCard)).toBe("false");
+				}
+				cnt++;
 			}
-		}
-		expect(cardsInView).toBe(3);
-	}, 10000);
-	it("Click on cards in view", async () => {
-		const shuffle = await page.$$(SHUFFLEDCARDS);
-		// checking the response text val (should be "")
-		const p = await page.$(RESPONSE);
-		const pText = await p.getProperty("textContent");
-		let pTextVal = await pText.jsonValue();
-		expect(pTextVal).toBe("");
-		for (const i of randNums) {
-			await shuffle[i].evaluate((b) => b.click()); // click tarot
-			// check current text content of respones
-			const currText = await p.getProperty("textContent");
-			const currTextVal = await currText.jsonValue();
+			await delay(500);
+		}, 10000);
+		it("Check if 3 cards in view", async () => {
+			const shuffle = await page.$$(SHUFFLEDCARDS);
+			let cardsInView = 0;
+			// sort random numbers in ascending order
+			const randSorted = randNums.sort(
+				function(a, b) {
+					return a - b;
+				});
+			for (let i = 0; i &lt; shuffle.length; i++) {
+				const selCard = shuffle[i];
+				// get top view value
+				const style = await selCard.getProperty("style");
+				const top = await style.getProperty("top");
+				const viewVal = await parseInt(await top.jsonValue(), 10);
 
-			// should not be equal to previous text content
-			expect(currTextVal).not.toBe(pTextVal);
+				if (viewVal > 0) {
+				// if greater than 0 then count as in view
+					expect(i).toBe(randSorted[cardsInView]);
+					cardsInView++;
+				}
+			}
+			expect(cardsInView).toBe(3);
+		}, 10000);
+		it("Click on cards in view", async () => {
+			const shuffle = await page.$$(SHUFFLEDCARDS);
+			// checking the response text val (should be "")
+			const p = await page.$(RESPONSE);
+			const pText = await p.getProperty("textContent");
+			let pTextVal = await pText.jsonValue();
+			expect(pTextVal).toBe("");
+			for (const i of randNums) {
+				await shuffle[i].evaluate((b) => b.click()); // click tarot
+				// check current text content of respones
+				await delay(100);
+				const currText = await p.getProperty("textContent");
+				const currTextVal = await currText.jsonValue();
 
-			// print current text content
-			console.log("Current text: " + currTextVal);
-			pTextVal = currTextVal;
-		}
-		await delay(100);
-	}, 10000);
-	it("Go back home", async () => {
-		const homePageBtns = await page.$$(HOMEPAGE);
-		expect(await allHidden(homePageBtns)).toBe(true);
-		const toHome = await page.$(HOMEBTN);
-		// await toHome.click();
-		await toHome.evaluate((b) => b.click()); // click home page
-		// expect home page buttons to be visible
-		expect(await allHidden(homePageBtns)).toBe(false);
-		const shuffle = await page.$$(SHUFFLEDCARDS);
-		expect(await allHidden(shuffle)).toBe(true);
-	}, 10000);
+				// should not be equal to previous text content
+				expect(currTextVal).not.toBe(pTextVal);
+
+				// print current text content
+				console.log("Current text: " + currTextVal);
+				pTextVal = currTextVal;
+			}
+			await delay(100);
+		}, 10000);
+		it("Go back home", async () => {
+			const homePageBtns = await page.$$(HOMEPAGE);
+			expect(await allHidden(homePageBtns)).toBe(true);
+			const toHome = await page.$(HOMEBTN);
+			// await toHome.click();
+			await toHome.evaluate((b) => b.click()); // click home page
+			// expect home page buttons to be visible
+			expect(await allHidden(homePageBtns)).toBe(false);
+			const shuffle = await page.$$(SHUFFLEDCARDS);
+			expect(await allHidden(shuffle)).toBe(true);
+		}, 10000);
+	}
 });</code></pre>
         </article>
     </section>
@@ -274,7 +277,7 @@ describe("Testing Tarot Card Page", () => {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jun 06 2023 00:50:30 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jun 06 2023 01:16:31 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
