@@ -178,14 +178,14 @@ function createShuffleBtn() {
 	tarotDiv.append(shuffleBtn);
 }
 
-function bindStartButton(){
+function bindStartButton() {
 	const startBtn = document.getElementById("tarotStartBtn");
 	startBtn.addEventListener("click", ()=>{
 
 	});
 }
 
-function bindShuffleButton(){
+function bindShuffleButton() {
 	const shuffleBtn = docoment.getElementById("tarotShuffleBtn");
 	shuffleBtn.addEventListener("click", ()=>{
 		shuffleBtn.hidden = true;
