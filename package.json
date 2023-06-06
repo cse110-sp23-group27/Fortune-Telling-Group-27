@@ -4,8 +4,7 @@
     "version": "1.0.0",
     "scripts": {
         "test": "jest --detectOpenHandles",
-        "starting-server": "parcel index.html --port 5500",
-        "GHtest": "jest --testPathPattern=jest_tests/unit_tests --detectOpenHandles" ,
+        "GHtest": "jest -c jest.unit.config.js --testPathPattern=jest_tests/unit_tests" ,
         "lint": "eslint ./assets/scripts ./jest_tests --fix --ext .js  -c ./.eslintrc.js",
         "doc": "jsdoc -c ./conf.json"
     },
