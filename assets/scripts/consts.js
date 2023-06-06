@@ -6,6 +6,9 @@ export const FORTUNETYPES = {
 
 export const FORTUNELIST = ["tarot", "egg", "bone"];
 
+export const cardY = 20;
+export const cardX = 45;
+
 export const CARDS = ["The Fool", "The Magician", "The High Priestess", "The Empress",
 					  "The Emperor", "The Hierophant", "The Lovers", "The Chariot",
 					  "Strength", "The Hermit", "The Wheel of Fortune", "Justice",
@@ -61,8 +64,8 @@ export const CARDSJSON = [
 		"name": "The Lovers",
 		"img": "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/the-lovers.png",
 		"pastDescription": "In the past, you experienced significant relationships or choices that influenced your path. The Lovers card indicates a time of love, partnerships, and decisions that shaped your journey.",
-		"presentDescription": "Currently, you are facing choices related to love, relationships, and personal values. The Lovers card suggests that you weigh",
-		"futureDescription": "The future holds a time of profound choices and significant relationships. The Lovers card suggests that you will be presented with decisions that deeply impact your life's trajectory, particularly in matters of love, partnerships, and personal values. It signifies a period of alignment with your authentic self and the potential for deep emotional connections. Trust your intuition and make choices that align with your heart's true desires, as they will shape your future path and bring about harmony and fulfillment in your relationships."
+		"presentDescription": "Currently, you are facing choices related to love, relationships, and personal values. The Lovers card advises embracing embracing authentic connections, open communication, and exploring different aspects of yourself for personal growth",
+		"futureDescription": "The future holds a time of profound choices and significant relationships. The Lovers card suggests that you will be presented with decisions that deeply impact your life's trajectory, particularly in matters of love, partnerships, and personal values. Trust your intuition and make choices that align with your heart's true desires, as they will bring about harmony and fulfillment in your relationships."
 	},
 	{
 		"name": "The Chariot",
@@ -97,13 +100,13 @@ export const CARDSJSON = [
 		"img": "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/justice.png",
 		"pastDescription": "In the past, you experienced a period of seeking truth, fairness, and balance. The Justice card indicates that you made choices based on principles and moral values, seeking justice and equality in your actions. Your past decisions have contributed to the harmony and balance in your life today.",
 		"presentDescription": "Currently, you are in a phase of seeking truth, fairness, and balance in your life. The Justice card suggests that you are making decisions based on objective reasoning and fairness. You are called to act with integrity and consider the consequences of your actions. Embrace the principles of justice in all aspects of your life.",
-		"futureDescription": "The future holds a time of karmic balance and accountability. The Justice card signifies that the choices you make in the future will have consequences, both positive and negative. Embrace the need for fairness and balance as you move forward. Trust that justice will be served, and you will experience the consequences of your actions in due course."
+		"futureDescription": "The future holds a time of karmic balance and accountability. The Justice card signifies that the choices you make in the future will have consequences, both positive and negative. Trust that justice will be served, and you will experience the consequences of your actions in due course."
 	},
 	{
 		"name": "The Hanged Man",
 		"img": "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/the-hanged-man.png",
-		"pastDescription": "Present: Currently, you are in a phase of seeking truth, fairness, and balance in your life. The Justice card suggests that you are making decisions based on objective reasoning and fairness. You are called to act with integrity and consider the consequences of your actions. Embrace the principles of justice in all aspects of your life.",
-		"presentDescription": "Currently, you are in a phase of suspension or waiting. The Hanged Man card indicates that you are being asked to let go of resistance and surrender to the present moment. Through surrender, you will gain new insights and clarity that will ultimately guide you forward.",
+		"pastDescription": "In the past, you willingly let go of old patterns and gained new insights by adopting a different perspective. The Hanged Man card signifies a period of surrender and introspection. The transformative phase you went through allowed for spiritual growth and opened doors to new possibilities.",
+		"presentDescription": "Currently, you are in a phase of suspension or waiting. The Hanged Man card indicates that you are being asked to let go of resistance and to surrender to the present moment. Through surrender, you will gain new insights and clarity that will ultimately guide you forward.",
 		"futureDescription": "The future holds a time of profound transformation and spiritual enlightenment. The Hanged Man suggests that you will willingly sacrifice old beliefs and perspectives to embrace a higher truth. Embrace the necessary surrender and trust that it will lead to greater wisdom and personal evolution."
 	},
 	{
@@ -111,7 +114,7 @@ export const CARDSJSON = [
 		"img": "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/death.png",
 		"pastDescription": "In the past, you experienced a significant transformation or the ending of a major chapter in your life. The Death card suggests that this transition brought about profound change and personal growth, paving the way for a new beginning.",
 		"presentDescription": "Currently, you are in the midst of a transformation or facing an ending of some kind. The Death card signifies the need to release what no longer serves you, allowing space for new beginnings. Embrace the process of letting go and trust that from the ashes, something beautiful will emerge.",
-		"futureDescription": "The future holds a period of rebirth and renewal. The Death card signifies that significant transformations are on the horizon, bringing about positive change and new opportunities. Embrace the endings and embrace the new beginnings that await you."
+		"futureDescription": "The future holds a period of rebirth and renewal. The Death card signifies that significant transformations are on the horizon, bringing about positive change and new opportunities. Embrace the endings and the new beginnings that await you."
 	},
 	{
 		"name": "Temperance",
@@ -124,8 +127,8 @@ export const CARDSJSON = [
 		"name": "The Devil",
 		"img": "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/the-devil.png",
 		"pastDescription": "In the past, you encountered situations or patterns that kept you bound or restricted in some way. The Devil card indicates that you may have experienced limitations or addictive behaviors that you needed to break free from in order to grow.",
-		"presentDescription": "Currently, you may be grappling with attachments or negative patterns in your life. The Devil card suggests the need to confront and release these patterns that hold you back from true freedom and self-expression. Embrace self-awareness and make conscious choices to liberate yourself from",
-		"futureDescription": "The future holds a time of liberation and breaking free from the chains that have bound you. The Devil card signifies that you will confront and release the negative patterns, addictions, or limiting beliefs that have held you back. Embrace self-awareness and make conscious choices to break free from these constraints. Through your determination and inner strength, you will reclaim your personal power and experience a newfound sense of freedom and authenticity."
+		"presentDescription": "Currently, you may be grappling with attachments or negative patterns in your life. The Devil card suggests the need to confront and release these patterns that hold you back from true freedom and self-expression. Embrace self-awareness and make conscious choices to liberate yourself from these constraints.",
+		"futureDescription": "The future holds a time of liberation and breaking free from the chains that have bound you. The Devil card signifies that you will confront and release the negative patterns, addictions, or limiting beliefs that have held you back. Through your determination and inner strength, you will reclaim your personal power and experience a newfound sense of freedom and authenticity."
 	},
 	{
 		"name": "The Tower",
@@ -159,8 +162,8 @@ export const CARDSJSON = [
 		"name": "Judgement",
 		"img": "https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/judgement.png",
 		"pastDescription": "In the past, you experienced a powerful awakening or a significant realization that prompted you to reassess your life's direction. The Judgment card indicates that you underwent a transformative period of self-reflection and made choices that aligned with your higher self.",
-		"presentDescription": "Currently, you are in a phase of self-evaluation and accountability. The Judgment card suggests that you are being called to review past actions, make amends if necessary, and embrace a fresh start. It is a powerful card that symbolizes a spiritual awakening and the need for personal transformation. The presence of the Judgment card indicates that you are being given an opportunity to reflect on your choices and their consequences.",
-		"futureDescription": "The future holds a time of profound transformation, renewal, and awakening. The Judgment card signifies that you will be called to embrace a higher purpose and make choices that align with your authentic self. This is a period of spiritual growth and self-evaluation, where you will have the opportunity to let go of past judgments and embrace forgiveness and healing. Embrace the call to rise above old patterns and awaken to a higher truth. Through this process, you will experience a profound rebirth and a renewed sense of purpose."
+		"presentDescription": "Currently, you are in a phase of self-evaluation and accountability. The Judgment card suggests that you are being called to review past actions, make amends if necessary, and embrace a fresh start. It is a powerful card that symbolizes a spiritual awakening and the need for personal transformation.",
+		"futureDescription": "The future holds a time of profound transformation, renewal, and awakening. The Judgment card signifies that you will be called to embrace a higher purpose and make choices that align with your authentic self. This is a period of spiritual growth and self-evaluation, where you will have the opportunity to let go of past judgments and embrace forgiveness and healing. Through this process, you will experience a profound rebirth and a renewed sense of purpose."
 	},
 	{
 		"name": "The World",

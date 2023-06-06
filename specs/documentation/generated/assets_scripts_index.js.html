@@ -27,6 +27,8 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import * as consts from "./consts.js";
+import TarotCard from "./TarotCard.js";
+
 
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
@@ -34,6 +36,11 @@ const tarotDiv = document.getElementById("tarotDiv");
 const response = document.getElementById("response");
 // Global cardCounter variable, moved because couldn't reset the cards. DANGER!
 let cardCounter = 0;
+// Global variable that shows if 3 cards have been selected
+let cardsSelected = false;
+// Global homepage varible for checking if on homepage
+let homePageBool = true;
+
 /**
  * Binds the home page buttons to change the type of
  * consts.FORTUNETYPE that is displayed
@@ -60,6 +67,8 @@ function bindHomePageBtns() {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
+		addFogBackground();
+		homePageBool = false;
 	});
 
 	tarotCardBtn.addEventListener("mouseover", () => {
@@ -67,15 +76,16 @@ function bindHomePageBtns() {
 	});
 
 	tarotCardBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	eggBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.egg;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
@@ -84,15 +94,16 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 
 	boneBtn.addEventListener("click", () => {
+		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
 		document.getElementById("center-text").textContent =
             consts.FORTUNETYPES.bone;
-		document.getElementsByClassName("response")[0].textContent =
+		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
 
@@ -102,7 +113,7 @@ function bindHomePageBtns() {
 	});
 
 	boneBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("white");
+		changeBackgroundColor("black");
 	});
 }
 
@@ -116,21 +127,27 @@ function bindHomePageBtns() {
 function bindGeneralButtons() {
 	const homeBtn = document.getElementById("toHome");
 	// Added to reset cards on click
-	homeBtn.addEventListener("click", resetCards);
 	homeBtn.addEventListener("click", () => {
-		displayGeneralUIElements();
-		document.getElementById("center-text").textContent = "";
-		document.getElementById("response").textContent = "";
-		const responseCards = document.getElementsByClassName("responseCards");
-		while (responseCards.length > 0) {
-			tarotDiv.removeChild(responseCards[0]);
+		if (!homePageBool) {
+			displayGeneralUIElements();
+			document.getElementById("center-text").textContent = "";
+			document.getElementById("response").textContent = "";
+			const responseCards =
+				document.getElementsByClassName("responseCards");
+			while (responseCards.length > 0) {
+				tarotDiv.removeChild(responseCards[0]);
+			}
+			tarotDiv.hidden = true;
+			homePageBool = true;
+			resetCards();
+			removeFogBackground();
 		}
-		tarotDiv.hidden = true;
 	});
 
 	const githubBtn = document.getElementById("toGitHub");
 	githubBtn.addEventListener("click", () => {
-		navigator.clipboard.writeText("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
+		navigator.clipboard.writeText(
+			"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
 	});
 }
 
@@ -149,7 +166,8 @@ function displayGeneralUIElements(fortuneType =null) {
 
 	// Hides/Displays the option button that is needed if any
 	for (let i = 0; i &lt;= 2; i++) {
-		const optionsBtn = document.getElementById(consts.FORTUNELIST[i]+"Options");
+		const optionsBtn = document.getElementById(
+			consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
 	}
 	if (fortuneType != null) {
@@ -177,12 +195,82 @@ function createShuffleBtn() {
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", () => {
 		shuffleBtn.hidden = true;
-		for (let card = 1; card &lt; 23; card++) {
-			const cardOption = document.getElementById("Option " + card);
+		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+		for (let card = 0; card &lt; cards.length; card++) {
+			const cardOption = cards[card];
 			cardOption.hidden = false;
 		}
+		playShuffleAnimation(()=>{
+			playCardSpreadAnimation();
+		});
 	});
 	tarotDiv.append(shuffleBtn);
+}
+
+
+/**
+ * Will play the shuffle animation for the current cards
+ * @date 5/29/2023 - 9:20:17 PM
+ * @param {Function} callback a callback function for end of animation
+ */
+function playShuffleAnimation(callback) {
+	const tCards = TarotCard.getAllCards();
+	// Move all to center
+	tCards.forEach((tCard) => {
+		// block clicks too
+		tCard.setClickable(false);
+		tCard.moveInstantly({x: consts.cardX, y: consts.cardY});
+	});
+
+	// make 3 shuffles
+	let shuffleCount = 0;
+	const shuffleSequence = (callback)=>{
+		// pick random card
+		const randCard = tCards[Math.floor(22 * Math.random())];
+		// move away
+		randCard.move({x: consts.cardX, y: consts.cardY},
+			{x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
+				randCard.move({x: consts.cardX+2, y: consts.cardY},
+					{x: consts.cardX, y: consts.cardY}, 350, ()=>{
+						shuffleCount++;
+						if (shuffleCount &lt; 3) {
+							shuffleSequence(callback);
+						} else {
+							callback();
+						}
+					});
+			});
+	};
+	shuffleSequence(()=>{
+		// finished shuffling
+		callback();
+	});
+}
+
+/**
+ * Plays the card spread animation
+ * @date 5/29/2023 - 10:18:49 PM
+ * @param {Function} callback a callback function for end of animation
+ */
+function playCardSpreadAnimation(callback) {
+	const tCards = TarotCard.getAllCards();
+	let cardXoffset = 0;
+	let cardsFinished = 0;
+	console.log(tCards.length);
+	tCards.forEach((tCard) => {
+		tCard.setClickable(true);
+		tCard.move({x: consts.cardX, y: consts.cardY},
+			{x: 15 + (60/tCards.length)*cardXoffset,
+				y: consts.cardY}
+			, 300, ()=>{
+				tCard.setClickable(true);
+				if (cardsFinished >= tCards.length) {
+					callback();
+				}
+				cardsFinished++;
+			});
+		cardXoffset++;
+	});
 }
 
 /**
@@ -197,12 +285,17 @@ function createShuffleCards() {
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
-		button.innerHTML =
-			"&lt;img class = \"imagesPreShuffle\"src="+consts.cardBack +"/>";
+		button.innerHTML = "&lt;img class = \"chosenCards\"src=\"" +
+			consts.cardBack+"\">";
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
+			if (cardsSelected) {
+				response.textContent = button.value;
+				return;
+			}
+
 			if (button.getAttribute("selected") === "true") {
 				button.setAttribute("selected", false);
 				button.style.backgroundColor = "white";
@@ -215,16 +308,23 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
-				for (let card = 1; card &lt; 23; card++) {
-					const cardOption = document.getElementById("Option " + card);
-					cardOption.setAttribute("selected", false);
-					cardOption.style.backgroundColor = "white";
-					cardOption.hidden = true;
-				}
+				// for (let card = 1; card &lt; 23; card++) {
+				// 	// when 3 cards selected
+				// 	const cardOption = document.getElementById("Option " + card);
+				// 	cardOption.setAttribute("selected", false);
+				// 	cardOption.style.backgroundColor = "white";
+				// 	cardOption.hidden = true;
+				// }
 				displayThreeOptions();
 			}
 		});
 		tarotDiv.appendChild(button);
+	}
+
+	// get all of the cards and make them into the TarotCard classes
+	for (let card = 1; card &lt; 23; card++) {
+		const cardOption = document.getElementById("Option " + card);
+		new TarotCard(cardOption);
 	}
 }
 
@@ -235,38 +335,75 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
-	const cardsSelected = [];
-	while (cardsSelected.length &lt; 3) {
-		const card = Math.floor(Math.random()*21);
-		if (cardsSelected.indexOf(card) === -1) {
-			cardsSelected.push(card);
+	// get html elements of selected cards
+	const selectedHTMLCards = [];
+	for (let i = 1; i &lt; 23; i++) {
+		const button = document.getElementById(`Option ${i}`);
+		if (button.getAttribute("selected") === "true") {
+			selectedHTMLCards.push(button);
+			button.setAttribute("selected", false);
 		}
 	}
+	cardsSelected = true;
 
-	for (let i = 1; i &lt;= 3; i++) {
-		const cardOption = document.createElement("button");
-		cardOption.id = "Card" + i;
-		cardOption.className = "responseCards";
-		const tarotCard = consts.CARDSJSON[cardsSelected[i - 1]];
-		const imageSrc = tarotCard["img"];
-		cardOption.innerHTML =
-			"&lt;img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
-		switch (i) {
-		case 1:
-			cardOption.value = tarotCard["pastDescription"];
-			break;
-		case 2:
-			cardOption.value = tarotCard["presentDescription"];
-			break;
-		default:
-			cardOption.value = tarotCard["futureDescription"];
+	let selectedCardsFound = 0;
+	let cardsMoved = 0;
+	TarotCard.getAllCards().forEach((card) => {
+		if (selectedHTMLCards.includes(card.cardElement)) {
+			console.log(card.getPositionPoint());
+			card.move(card.getPositionPoint(),
+				{x: 20+(selectedCardsFound*25), y: consts.cardY}, 350);
+			selectedCardsFound++;
+		} else {
+			const curPos = card.getPositionPoint();
+			card.move(curPos, {x: curPos.x, y: -100}, 350, ()=>{
+				cardsMoved++;
+				if (cardsMoved &lt; 3) {
+					return;
+				}
+				const cardsTypeSelected = [];
+				while (cardsTypeSelected.length &lt; 3) {
+					const card = Math.floor(Math.random()*21);
+					if (cardsTypeSelected.indexOf(card) === -1) {
+						cardsTypeSelected.push(card);
+					}
+				}
+
+				for (let i = 2; i >= 0; i--) {
+					const cardOption = selectedHTMLCards[i];
+					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
+					const imageSrc = tarotCard["img"];
+					cardOption.innerHTML =
+						"&lt;img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
+					switch (i + 1) {
+					case 1:
+						cardOption.value = tarotCard["pastDescription"];
+						break;
+					case 2:
+						cardOption.value = tarotCard["presentDescription"];
+						break;
+					default:
+						cardOption.value = tarotCard["futureDescription"];
+					}
+
+					// TODO: Find a better way to do this,
+					// apparently this can cause a memory leak
+					// but don't have time to make a better solution rn
+					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
+					// remove old on click events
+					/* cardOption.hidden = true;
+					const clonedCardOption = cardOption.cloneNode(true);
+					clonedCardOption.className = "responseCards21";
+					// const tempCardOption = cardOption;
+					cardOption.parentNode.replaceChild(
+						clonedCardOption, cardOption);
+					// tempCardOption.remove();
+					cardOption.hidden = false;
+					tarotDiv.appendChild(cardOption);*/
+				}
+			});
 		}
-
-		cardOption.addEventListener("click", () =>{
-			response.textContent = cardOption.value;
-		});
-		tarotDiv.appendChild(cardOption);
-	}
+	});
 }
 
 /**
@@ -278,6 +415,8 @@ function displayThreeOptions() {
 function resetCards() {
 	for (let card = 1; card &lt; 23; card++) {
 		const cardOption = document.getElementById("Option " + card);
+		cardOption.innerHTML =
+			"&lt;img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
 		if (cardOption) {
 			cardOption.setAttribute("selected", false);
 			cardOption.style.backgroundColor = "white";
@@ -285,6 +424,40 @@ function resetCards() {
 		}
 	}
 	cardCounter = 0; // reset the cardCounter when resetting cards
+	cardsSelected = false;
+}
+/**
+ * Adds a fog background to the tarot card page
+ * @date 5/31/2023
+ */
+function addFogBackground() {
+	const fog = document.createElement("div");
+	fog.className = "fogwrapper";
+	fog.innerHTML = `&lt;div id="foglayer_01" class="fog">
+							&lt;div class="image01">&lt;/div>
+							&lt;div class="image02">&lt;/div>
+						&lt;/div>
+						&lt;div id="foglayer_02" class="fog">
+							&lt;div class="image01">&lt;/div>
+							&lt;div class="image02">&lt;/div>
+						&lt;/div>
+						&lt;div id="foglayer_03" class="fog">
+							&lt;div class="image01">&lt;/div>
+							&lt;div class="image02">&lt;/div>
+						&lt;/div>`;
+	tarotDiv.append(fog);
+	document.body.style.backgroundColor = "black";
+}
+
+/**
+ * Removes the fog background from the tarot card page
+ * @date 5/31/2023
+ */
+function removeFogBackground() {
+	const fogWrapper = document.getElementsByClassName("fogwrapper")[0];
+	if (fogWrapper) {
+		fogWrapper.remove();
+	}
 }
 
 /**
@@ -310,7 +483,28 @@ function init() {
 	createShuffleCards();
 }
 
-init();</code></pre>
+init();
+
+/**
+ * Hamburger bar closes when you hover off of it
+ * @author Kyle Ng
+ * @date 6/5/2023
+ */
+document.querySelector(".menu__box").addEventListener("mouseleave", function() {
+	document.querySelector("#menu__toggle").checked = false;
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+	const menuToggle = document.querySelector("#menu__toggle");
+	if (menuToggle) {
+		menuToggle.addEventListener("change", () => {
+			const menuItems = document.querySelectorAll(".menu__item");
+			menuItems.forEach((item) => {
+				item.hidden = !item.hidden;
+			});
+		});
+	}
+});</code></pre>
         </article>
     </section>
 
@@ -320,10 +514,16 @@ init();</code></pre>
 </div>
 
 <nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#createShuffleBtn">createShuffleBtn</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 04 2023 19:28:21 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jun 05 2023 23:29:13 GMT+0000 (Coordinated Universal Time)
 </footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
