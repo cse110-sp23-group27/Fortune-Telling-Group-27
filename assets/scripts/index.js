@@ -225,7 +225,7 @@ function bindShuffleButton() {
  * @author Victor Kim
  *
  * @async
- * @returns {None}
+ * @return {None}
  */
 async function playCardThrowAnimation() {
 	const cards = TarotCard.getAllCards();

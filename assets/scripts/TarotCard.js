@@ -174,7 +174,7 @@ class TarotCard {
 	 * @date 6/6/2023 - 2:00:09 PM
 	 * @author Victor Kim
 	 *
-	 * @returns {*}
+	 * @return {*}
 	 */
 	getRotation() {
 		const transformString = this.cardElement.style.transform;
@@ -220,7 +220,7 @@ class TarotCard {
 	 * @date 6/6/2023 - 1:59:44 PM
 	 * @author Victor Kim
 	 *
-	 * @returns {int}
+	 * @return {int}
 	 */
 	getZIndex() {
 		return this.cardElement.style.zIndex;
