@@ -13,18 +13,18 @@ const RESPONSE = "#response";
 /**
  * Returns the selected value of the card
  * @param {ElementHandle} card the elementhandle of the card
- * @returns {String} the selected value, either "true" or "false"
+ * @return {String} the selected value, either "true" or "false"
  */
 async function getSelectedValue(card) {
-	const val =  await page.evaluate(
-		el => el.getAttribute("selected"), card);
+	const val = await page.evaluate(
+		(el) => el.getAttribute("selected"), card);
 	return val;
 }
 
 /**
  * Returns the background color of the card
  * @param {ElementHandle} card the elementhandle of the card
- * @returns {String} the color value (as a string)
+ * @return {String} the color value (as a string)
  */
 async function getBGColor(card) {
 	const style = await card.getProperty("style");
@@ -36,7 +36,7 @@ async function getBGColor(card) {
 /**
  * Returns the hidden attribute of the element
  * @param {ElementHandle} element the elementhandle in question
- * @returns {boolean} the hidden value, either true or false
+ * @return {boolean} the hidden value, either true or false
  */
 async function getHiddenVal(element) {
 	const hidden = await element.getProperty("hidden");
@@ -47,11 +47,11 @@ async function getHiddenVal(element) {
 /**
  * Returns if all elements are hidden or not
  * @param {ElementHandle[]} elements A list of ElementHandles.
- * @returns {boolean} True if all elements are hidden, false otherwise
+ * @return {boolean} True if all elements are hidden, false otherwise
  */
 async function allHidden(elements) {
-	for(let i = 0; i < elements.length; i++) {
-		if((await getHiddenVal(elements[i])) === false) {
+	for (let i = 0; i < elements.length; i++) {
+		if ((await getHiddenVal(elements[i])) === false) {
 			return false;
 		}
 	}
@@ -72,7 +72,7 @@ function delay(time) {
 /**
  * Generate a random integer between 0 (inclusive) and max (exclusive)
  * @param {number} max the max integer (exclusive)
- * @returns {number} a random number between 0 and max - 1
+ * @return {number} a random number between 0 and max - 1
  */
 function getRandomInt(max) {
 	return Math.floor(Math.random() * max);
@@ -83,13 +83,13 @@ function getRandomInt(max) {
  * and max (exclusive)
  * @param {number} num number of random numbers to be generated
  * @param {number} max the max integer (exclusive)
- * @returns {number[]} array of random numbers from 0 to max with length num
+ * @return {number[]} array of random numbers from 0 to max with length num
  */
 function getMultipleInts(num, max) {
-	var arr = [];
-	while(arr.length < num){
-		var r = getRandomInt(max)
-		if(arr.indexOf(r) === -1) arr.push(r);
+	const arr = [];
+	while (arr.length < num) {
+		const r = getRandomInt(max);
+		if (arr.indexOf(r) === -1) arr.push(r);
 	}
 	return arr;
 }
@@ -139,7 +139,7 @@ describe("Testing Tarot Card Page", () => {
 		const shuffle = await page.$$(SHUFFLEDCARDS);
 		const randNum = await getRandomInt(shuffle.length);
 		const selCard = shuffle[randNum];
-		
+
 		// card should not be selected and have white bg color
 		expect(await getSelectedValue(selCard)).toBe("false");
 		expect(await getBGColor(selCard)).toBe("white");
@@ -155,17 +155,17 @@ describe("Testing Tarot Card Page", () => {
 
 		expect(await getSelectedValue(selCard)).toBe("false");
 		expect(await getBGColor(selCard)).toBe("white");
-		await delay(100);
+		await delay(1000);
 	}, 10000);
 	it("Select 3 cards", async () => {
 		let cnt = 0;
 		const shuffle = await page.$$(SHUFFLEDCARDS);
-		for(const i of randNums) {
+		for (const i of randNums) {
 			const selCard = shuffle[i];
 			// expect card to not be selected
 			expect(await getSelectedValue(selCard)).toBe("false");
 			await selCard.evaluate((b) => b.click()); // click tarot
-			if(cnt < 2) {
+			if (cnt < 2) {
 				expect(await getSelectedValue(selCard)).toBe("true");
 			} else { // Last card does not change selected value
 				expect(await getSelectedValue(selCard)).toBe("false");
@@ -179,17 +179,17 @@ describe("Testing Tarot Card Page", () => {
 		let cardsInView = 0;
 		// sort random numbers in ascending order
 		const randSorted = randNums.sort(
-			function (a, b) {
+			function(a, b) {
 				return a - b;
 			});
-		for(let i = 0; i < shuffle.length; i++) {
-			const selCard = shuffle[i]
+		for (let i = 0; i < shuffle.length; i++) {
+			const selCard = shuffle[i];
 			// get top view value
 			const style = await selCard.getProperty("style");
 			const top = await style.getProperty("top");
 			const viewVal = await parseInt(await top.jsonValue(), 10);
 
-			if(viewVal > 0) {
+			if (viewVal > 0) {
 				// if greater than 0 then count as in view
 				expect(i).toBe(randSorted[cardsInView]);
 				cardsInView++;
@@ -201,10 +201,10 @@ describe("Testing Tarot Card Page", () => {
 		const shuffle = await page.$$(SHUFFLEDCARDS);
 		// checking the response text val (should be "")
 		const p = await page.$(RESPONSE);
-		let pText = await p.getProperty("textContent");
+		const pText = await p.getProperty("textContent");
 		let pTextVal = await pText.jsonValue();
 		expect(pTextVal).toBe("");
-		for(const i of randNums) {
+		for (const i of randNums) {
 			await shuffle[i].evaluate((b) => b.click()); // click tarot
 			// check current text content of respones
 			const currText = await p.getProperty("textContent");
@@ -223,7 +223,7 @@ describe("Testing Tarot Card Page", () => {
 		const homePageBtns = await page.$$(HOMEPAGE);
 		expect(await allHidden(homePageBtns)).toBe(true);
 		const toHome = await page.$(HOMEBTN);
-		//await toHome.click();
+		// await toHome.click();
 		await toHome.evaluate((b) => b.click()); // click home page
 		// expect home page buttons to be visible
 		expect(await allHidden(homePageBtns)).toBe(false);

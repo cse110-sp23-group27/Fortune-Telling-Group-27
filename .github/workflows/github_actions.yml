@@ -7,15 +7,6 @@ on:
           - '!main'     # excludes main branch
 permissions: write-all
 jobs:
-  testing:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Installing modules
-        run: npm ci
-      - name: Running Tests
-        run: npm run GHtest
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -24,6 +15,9 @@ jobs:
           node-version: '18.16.0'
       - name: Install modules
         run: npm ci
+
+      - name: Running Tests
+        run: npm run GHtest
 
       - name: Run ESLint
         run: npm run lint
