@@ -252,7 +252,7 @@ function playCardSpreadAnimation(callback) {
  * @date 5/27/2023
  */
 function createShuffleCards() {
-	for (let i = 1; i < 23; i++) {
+	for (let i = 0; i < 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
@@ -294,7 +294,7 @@ function createShuffleCards() {
 	}
 
 	// get all of the cards and make them into the TarotCard classes
-	for (let card = 1; card < 23; card++) {
+	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		new TarotCard(cardOption);
 	}
@@ -309,7 +309,7 @@ function createShuffleCards() {
 function displayThreeOptions() {
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
-	for (let i = 1; i < 23; i++) {
+	for (let i = 0; i < 22; i++) {
 		const button = document.getElementById(`Option ${i}`);
 		if (button.getAttribute("selected") === "true") {
 			selectedHTMLCards.push(button);
@@ -385,7 +385,7 @@ function displayThreeOptions() {
  * @date 5/29/2023
  */
 function resetCards() {
-	for (let card = 1; card < 23; card++) {
+	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
 			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
