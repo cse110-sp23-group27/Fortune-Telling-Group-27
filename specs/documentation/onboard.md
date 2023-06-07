@@ -26,6 +26,8 @@ Please refer to the code style [document](/specs/documentation/codestyle.md) whe
 
 Do not push changes in package-lock.json or package.json unless you are working on pipeline.
 
+MAKE SURE THE LIVESERVER PORT IS SET TO 5500, OTHERWISE THE E2E TESTS WILL NOT WORK UNLESS YOU REPLACE THE URL.
+
 ## Regarding config files in root
 
 .eslintignore is the equivalent of .gitignore but for ESLint, so ESLint ignores those directories
