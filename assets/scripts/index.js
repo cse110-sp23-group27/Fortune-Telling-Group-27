@@ -241,35 +241,47 @@ async function playCardThrowAnimation() {
 	await TarotCard.wait(100);
 	// throw in random directions
 	for (let i = 0; i < cards.length - 1; i++) {
-		const pos = {
-			x: consts.afterThrow_card_X_min +
-				Math.random()*consts.afterThrow_card_X_max,
-			y: consts.afterThrow_card_Y_min +
-				Math.random()*consts.afterThrow_card_Y_max
-		};
-		const rot = consts.afterThrow_card_Rotation_min +
-						Math.random()*consts.afterThrow_card_Rotation_max;
-		cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
-		cards[i].rotatePromise(0, rot, 230);
+		cards[i].movePromise(cards[i].getPositionPoint(), cardThrowRandomPos(), 200);
+		cards[i].rotatePromise(0, cardThrowRandomRot(), 230);
 
 		await TarotCard.wait(50);
 	}
+	cards[cards.length - 1].movePromise(
+		cards[cards.length - 1].getPositionPoint(),
+		cardThrowRandomPos(),
+		200
+	);
 
-	const pos = {
+	return cards[cards.length - 1].rotatePromise(0, cardThrowRandomRot(), 230);
+}
+
+
+/**
+ * Givs random rotation acording to card throw animation constants
+ * @date 6/6/2023 - 7:51:33 PM
+ * @author Victor Kim
+ *
+ * @returns {*}
+ */
+function cardThrowRandomRot(){
+	return consts.afterThrow_card_Rotation_min +
+	Math.random()*consts.afterThrow_card_Rotation_max;
+}
+
+/**
+ * Givs random position acording to card throw animation constants
+ * @date 6/6/2023 - 7:51:57 PM
+ * @author Victor Kim
+ *
+ * @returns {{ x: any; y: any; }}
+ */
+function cardThrowRandomPos(){
+	return {
 		x: consts.afterThrow_card_X_min +
 			Math.random()*consts.afterThrow_card_X_max,
 		y: consts.afterThrow_card_Y_min +
 			Math.random()*consts.afterThrow_card_Y_max
 	};
-	const rot = consts.afterThrow_card_Rotation_min +
-					Math.random()*consts.afterThrow_card_Rotation_max;
-	cards[cards.length - 1].movePromise(
-		cards[cards.length - 1].getPositionPoint(),
-		pos,
-		200
-	);
-
-	return cards[cards.length - 1].rotatePromise(0, rot, 230);
 }
 
 /**
