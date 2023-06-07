@@ -152,7 +152,7 @@ button {
   width: 100%;
   height: 2px;
   background-color: #616161;
-  transition-duration: .25s;
+  transition-duration: .3s;
 }
 .menu__btn > span::before {
   content: '';
@@ -174,7 +174,7 @@ button {
   list-style: none;
   background-color: #ECEFF1;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
-  transition-duration: .25s;
+  transition-duration: .4s;
   z-index: 150;
 }
 .menu__item {
@@ -190,34 +190,9 @@ button {
 .menu__item:hover {
   background-color: #CFD8DC;
 }
-/*end of copy*/
-
-/*
-.mobile-nav {
-  display: grid;
-  justify-content: space-between;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-}
-
-.nav-toggle {
-  font-size: 2em;
-}
-
-.nav-links {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link {
-  margin: 10px 0;
-}
-*/
 
 /* For the on hover effect in js script, this is the base change for the background */
 /* More detailed background modification will be added later. */
 body {
-  transition: background-color 0.5s ease; /* Adjust the duration and easing function to suit your needs */
+  transition: background-color 0.5s ease; 
 }

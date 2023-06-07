@@ -366,7 +366,7 @@ the animation from `from` value to the `to` value
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_Animator.js.html">assets/scripts/Animator.js</a>, <a href="assets_scripts_Animator.js.html#line93">line 93</a>
+        <a href="assets_scripts_Animator.js.html">assets/scripts/Animator.js</a>, <a href="assets_scripts_Animator.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -550,7 +550,7 @@ the animation from `from` value to the `to` value
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_Animator.js.html">assets/scripts/Animator.js</a>, <a href="assets_scripts_Animator.js.html#line114">line 114</a>
+        <a href="assets_scripts_Animator.js.html">assets/scripts/Animator.js</a>, <a href="assets_scripts_Animator.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -581,6 +581,162 @@ the animation from `from` value to the `to` value
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="easeInOutSine"><span class="type-signature"></span>easeInOutSine<span class="signature">(x)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ease in out equation that leads to a nice curve between values of 0 and 1
+Taken from https://easings.net/#easeInOutSine
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">value between 0 and 1</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_Animator.js.html">assets/scripts/Animator.js</a>, <a href="assets_scripts_Animator.js.html#line138">line 138</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -596,13 +752,13 @@ the animation from `from` value to the `to` value
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#createShuffleBtn">createShuffleBtn</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#createShuffleBtn">createShuffleBtn</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li><li><a href="global.html#returnNewPromise">returnNewPromise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jun 05 2023 23:18:10 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Jun 07 2023 00:31:42 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

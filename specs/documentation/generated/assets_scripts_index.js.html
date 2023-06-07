@@ -144,11 +144,22 @@ function bindGeneralButtons() {
 		}
 	});
 
+	const docBtn = document.getElementById("toDocumentation");
 	const githubBtn = document.getElementById("toGitHub");
-	githubBtn.addEventListener("click", () => {
-		navigator.clipboard.writeText(
-			"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
+
+	docBtn.addEventListener("click", () => {
+		window.open("https://cse110-sp23-group27.github.io/" +
+		"Fortune-Telling-Group-27/specs/documentation/generated/index.html");
 	});
+	githubBtn.addEventListener("click", () => {
+		window.open("https://github.com/cse110-sp23-group27/" +
+		"Fortune-Telling-Group-27/tree/main");
+	});
+
+	// githubBtn.addEventListener("click", () => {
+	// 	navigator.clipboard.writeText(
+	// 		"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
+	// });
 }
 
 /**
@@ -165,7 +176,7 @@ function displayGeneralUIElements(fortuneType =null) {
 	}
 
 	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i &lt;= 2; i++) {
+	for (let i = 0; i &lt; 3; i++) {
 		const optionsBtn = document.getElementById(
 			consts.FORTUNELIST[i]+"Options");
 		optionsBtn.hidden = true;
@@ -260,7 +271,7 @@ function playCardSpreadAnimation(callback) {
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
 		tCard.move({x: consts.cardX, y: consts.cardY},
-			{x: 15 + (60/tCards.length)*cardXoffset,
+			{x: 10 + (80/tCards.length)*cardXoffset,
 				y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
@@ -280,7 +291,7 @@ function playCardSpreadAnimation(callback) {
  * @date 5/27/2023
  */
 function createShuffleCards() {
-	for (let i = 1; i &lt; 23; i++) {
+	for (let i = 0; i &lt; 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
@@ -308,13 +319,6 @@ function createShuffleCards() {
 
 			if (cardCounter == 3) {
 				cardCounter = 0;
-				// for (let card = 1; card &lt; 23; card++) {
-				// 	// when 3 cards selected
-				// 	const cardOption = document.getElementById("Option " + card);
-				// 	cardOption.setAttribute("selected", false);
-				// 	cardOption.style.backgroundColor = "white";
-				// 	cardOption.hidden = true;
-				// }
 				displayThreeOptions();
 			}
 		});
@@ -322,7 +326,7 @@ function createShuffleCards() {
 	}
 
 	// get all of the cards and make them into the TarotCard classes
-	for (let card = 1; card &lt; 23; card++) {
+	for (let card = 0; card &lt; 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		new TarotCard(cardOption);
 	}
@@ -337,7 +341,7 @@ function createShuffleCards() {
 function displayThreeOptions() {
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
-	for (let i = 1; i &lt; 23; i++) {
+	for (let i = 0; i &lt; 22; i++) {
 		const button = document.getElementById(`Option ${i}`);
 		if (button.getAttribute("selected") === "true") {
 			selectedHTMLCards.push(button);
@@ -352,7 +356,7 @@ function displayThreeOptions() {
 		if (selectedHTMLCards.includes(card.cardElement)) {
 			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(),
-				{x: 20+(selectedCardsFound*25), y: consts.cardY}, 350);
+				{x: 20+(selectedCardsFound*(60/2)), y: 10}, 350);
 			selectedCardsFound++;
 		} else {
 			const curPos = card.getPositionPoint();
@@ -413,7 +417,7 @@ function displayThreeOptions() {
  * @date 5/29/2023
  */
 function resetCards() {
-	for (let card = 1; card &lt; 23; card++) {
+	for (let card = 0; card &lt; 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
 			"&lt;img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
@@ -485,6 +489,15 @@ function init() {
 
 init();
 
+/**
+ * Hamburger bar closes when you hover off of it
+ * @author Kyle Ng
+ * @date 6/5/2023
+ */
+document.querySelector(".menu__box").addEventListener("mouseleave", function() {
+	document.querySelector("#menu__toggle").checked = false;
+});
+
 document.addEventListener("DOMContentLoaded", function() {
 	const menuToggle = document.querySelector("#menu__toggle");
 	if (menuToggle) {
@@ -505,13 +518,13 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#createShuffleBtn">createShuffleBtn</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#createShuffleBtn">createShuffleBtn</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li><li><a href="global.html#returnNewPromise">returnNewPromise</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jun 05 2023 23:18:10 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Jun 07 2023 00:31:42 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
