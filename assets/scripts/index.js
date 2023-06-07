@@ -183,48 +183,15 @@ function createShuffleBtn() {
 			const cardOption = cards[card];
 			cardOption.hidden = false;
 		}
+
+		startBtn.hidden = true;
+		resetBtn.hidden = false;
+		await playCardThrowAnimation();
+		await TarotCard.wait(100);
+		await playShuffleAnimation();
+		playCardSpreadAnimation();
 	});
 	tarotDiv.append(shuffleBtn);
-}
-
-
-/**
- * Will play the shuffle animation for the current cards
- * @date 5/29/2023 - 9:20:17 PM
- * @param {Function} callback a callback function for end of animation
- */
-function playShuffleAnimation(callback) {
-	const tCards = TarotCard.getAllCards();
-	// Move all to center
-	tCards.forEach((tCard) => {
-		// block clicks too
-		tCard.setClickable(false);
-		tCard.moveInstantly({x: consts.cardX, y: consts.cardY});
-	});
-
-	// make 3 shuffles
-	let shuffleCount = 0;
-	const shuffleSequence = (callback)=>{
-		// pick random card
-		const randCard = tCards[Math.floor(22 * Math.random())];
-		// move away
-		randCard.move({x: consts.cardX, y: consts.cardY},
-			{x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
-				randCard.move({x: consts.cardX+2, y: consts.cardY},
-					{x: consts.cardX, y: consts.cardY}, 350, ()=>{
-						shuffleCount++;
-						if (shuffleCount < 3) {
-							shuffleSequence(callback);
-						} else {
-							callback();
-						}
-					});
-			});
-	};
-	shuffleSequence(()=>{
-		// finished shuffling
-		callback();
-	});
 }
 
 
