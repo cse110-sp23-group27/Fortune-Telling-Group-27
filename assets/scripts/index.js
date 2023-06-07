@@ -215,7 +215,6 @@ function createShuffleAndResetBtn() {
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
 		toHomeButtonClick();
-		resetBtn.hidden = true;
 	}
 	);
 
