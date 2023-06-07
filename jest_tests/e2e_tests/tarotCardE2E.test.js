@@ -228,7 +228,7 @@ describe("Testing Tarot Card Page", () => {
 			const reset = await page.$(RESETBTN);
 			// await toHome.click();
 			await reset.click();
-			//await reset.evaluate((b) => b.click()); // click reset button
+			// await reset.evaluate((b) => b.click()); // click reset button
 			// expect home page buttons to be visible
 			expect(await allHidden(homePageBtns)).toBe(false);
 			const shuffle = await page.$$(SHUFFLEDCARDS);
