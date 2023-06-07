@@ -148,23 +148,6 @@ function bindGeneralButtons() {
  * @param {string} fortuneType - Displays elements for this fortune type
  */
 function displayGeneralUIElements(fortuneType =null) {
-	// Changes the general buttons (home, options, GitHub)
-	const generalBtns = document.getElementsByClassName("general");
-	for (let i = 0; i < generalBtns.length; i++) {
-		generalBtns[i].hidden = !generalBtns[i].hidden;
-	}
-
-	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i < 3; i++) {
-		const optionsBtn = document.getElementById(
-			consts.FORTUNELIST[i]+"Options");
-		optionsBtn.hidden = true;
-	}
-	if (fortuneType != null) {
-		const optionsBtn = document.getElementById(fortuneType + "Options");
-		optionsBtn.hidden = !optionsBtn.hidden;
-	}
-
 	// Hides/Displays the home page buttons as needed
 	const homeBtns = document.getElementsByClassName("home-page");
 	for (let i = 0; i < homeBtns.length; i++) {
@@ -474,21 +457,6 @@ function displayThreeOptions() {
 					default:
 						cardOption.value = tarotCard["futureDescription"];
 					}
-
-					// TODO: Find a better way to do this,
-					// apparently this can cause a memory leak
-					// but don't have time to make a better solution rn
-					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
-					// remove old on click events
-					/* cardOption.hidden = true;
-					const clonedCardOption = cardOption.cloneNode(true);
-					clonedCardOption.className = "responseCards21";
-					// const tempCardOption = cardOption;
-					cardOption.parentNode.replaceChild(
-						clonedCardOption, cardOption);
-					// tempCardOption.remove();
-					cardOption.hidden = false;
-					tarotDiv.appendChild(cardOption);*/
 				}
 			});
 		}
@@ -516,6 +484,7 @@ function resetCards() {
 	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
 }
+
 /**
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
@@ -551,24 +520,11 @@ function removeFogBackground() {
 }
 
 /**
- * Binds functionality to the burger bar.
- * @author Jason Bui
- * @date 5/26/2023
- */
-/* function bindBurgerBar() {
-	document.querySelector(".nav-toggle").addEventListener("click", () => {
-		const navLinks = document.querySelector(".nav-links");
-		navLinks.hidden = !navLinks.hidden;
-	});
-}*/
-
-/**
  * Initializes home page
  */
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	// bindBurgerBar();
 	createShuffleAndResetBtn();
 	createShuffleCards();
 }
@@ -582,16 +538,4 @@ init();
  */
 document.querySelector(".menu__box").addEventListener("mouseleave", function() {
 	document.querySelector("#menu__toggle").checked = false;
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menu__toggle");
-	if (menuToggle) {
-		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menu__item");
-			menuItems.forEach((item) => {
-				item.hidden = !item.hidden;
-			});
-		});
-	}
 });
