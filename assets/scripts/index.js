@@ -176,16 +176,13 @@ function createShuffleBtn() {
 	const shuffleBtn = document.createElement("button");
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
-	shuffleBtn.addEventListener("click", () => {
+	shuffleBtn.addEventListener("click", async () => {
 		shuffleBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
 		for (let card = 0; card < cards.length; card++) {
 			const cardOption = cards[card];
 			cardOption.hidden = false;
 		}
-		playShuffleAnimation(()=>{
-			playCardSpreadAnimation();
-		});
 	});
 	tarotDiv.append(shuffleBtn);
 }
@@ -230,30 +227,226 @@ function playShuffleAnimation(callback) {
 	});
 }
 
+
+/**
+ * Plays the card throw animation
+ * @date 6/6/2023 - 1:58:41 PM
+ * @author Victor Kim
+ *
+ * @async
+ * @return {None}
+ */
+async function playCardThrowAnimation() {
+	const cards = TarotCard.getAllCards();
+	// unhide, move, and make unclickable
+	cards.forEach((card) => {
+		card.cardElement.hidden = false;
+		card.setClickable(false);
+		card.moveInstantly(consts.preThrow_card_pos);
+	});
+	if (resetFlag) {
+		return;
+	}
+	await TarotCard.wait(200);
+	if (resetFlag) {
+		return;
+	}
+	await cards[cards.length - 1].movePromise(
+		cards[cards.length - 1].getPositionPoint(),
+		consts.preThrow_card_pos,
+		200
+	);
+	if (resetFlag) {
+		return;
+	}
+	await TarotCard.wait(100);
+	if (resetFlag) {
+		return;
+	}
+	// throw in random directions
+	for (let i = 0; i < cards.length - 1; i++) {
+		const pos = {
+			x: consts.afterThrow_card_X_min +
+				Math.random()*consts.afterThrow_card_X_max,
+			y: consts.afterThrow_card_Y_min +
+				Math.random()*consts.afterThrow_card_Y_max
+		};
+		const rot = consts.afterThrow_card_Rotation_min +
+						Math.random()*consts.afterThrow_card_Rotation_max;
+		cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
+		cards[i].rotatePromise(0, rot, 230);
+		if (resetFlag) {
+			return;
+		}
+		await TarotCard.wait(50);
+	}
+	if (resetFlag) {
+		return;
+	}
+	const pos = {
+		x: consts.afterThrow_card_X_min +
+			Math.random()*consts.afterThrow_card_X_max,
+		y: consts.afterThrow_card_Y_min +
+			Math.random()*consts.afterThrow_card_Y_max
+	};
+	const rot = consts.afterThrow_card_Rotation_min +
+					Math.random()*consts.afterThrow_card_Rotation_max;
+	cards[cards.length - 1].movePromise(
+		cards[cards.length - 1].getPositionPoint(),
+		pos,
+		200
+	);
+	if (resetFlag) {
+		return;
+	}
+	return cards[cards.length - 1].rotatePromise(0, rot, 230);
+}
+
+/**
+ * Will play the shuffle animation for the current cards
+ * @date 5/29/2023 - 9:20:17 PM
+ */
+async function playShuffleAnimation() {
+	const cards = TarotCard.getAllCards();
+	if (resetFlag) {
+		return;
+	}
+	// Move all to center and rotate in to deck
+	for (let i = 0; i < cards.length - 1; i++) {
+		const card = cards[i];
+		card.move(card.getPositionPoint(), consts.shuffle_deck_pos, 200);
+		card.rotate(card.getRotation(), 0, 200);
+		await TarotCard.wait(50);
+		if (resetFlag) {
+			return;
+		}
+	}
+	cards[cards.length - 1].move(
+		cards[cards.length - 1].getPositionPoint(),
+		consts.shuffle_deck_pos,
+		200
+	);
+	await cards[cards.length - 1].rotatePromise(
+		cards[cards.length - 1].getRotation(),
+		0,
+		200
+	);
+	if (resetFlag) {
+		return;
+	}
+
+	await TarotCard.wait(350);
+	if (resetFlag) {
+		return;
+	}
+
+	// make 3 shuffles
+	for (let i = 0; i < 3; i++) {
+		// pick random card
+		const randCard = cards[Math.floor(22 * Math.random())];
+		// move away
+		await randCard.movePromise(
+			consts.shuffle_deck_pos,
+			consts.shuffle_card_pos,
+			350
+		);
+		if (resetFlag) {
+			return;
+		}
+		const startZIndex = randCard.getZIndex();
+		randCard.setZIndex(100 + i);
+		// pause
+		await TarotCard.wait(30);
+		if (resetFlag) {
+			return;
+		}
+		// move back
+		await randCard.movePromise(
+			consts.shuffle_card_pos,
+			consts.shuffle_deck_pos,
+			350
+		);
+		if (resetFlag) {
+			return;
+		}
+		randCard.setZIndex(startZIndex);
+		// pause
+		await TarotCard.wait(50);
+		if (resetFlag) {
+			return;
+		}
+	}
+	return TarotCard.wait(350);
+}
+
 /**
  * Plays the card spread animation
  * @date 5/29/2023 - 10:18:49 PM
  * @param {Function} callback a callback function for end of animation
  */
-function playCardSpreadAnimation(callback) {
+function playCardSpreadAnimation() {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
-	let cardsFinished = 0;
-	console.log(tCards.length);
+	if (resetFlag) {
+		return;
+	}
 	tCards.forEach((tCard) => {
+		if (resetFlag) {
+			return;
+		}
 		tCard.setClickable(true);
-		tCard.move({x: consts.cardX, y: consts.cardY},
+		tCard.move(consts.shuffle_deck_pos,
 			{x: 10 + (80/tCards.length)*cardXoffset,
 				y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
-				if (cardsFinished >= tCards.length) {
-					callback();
-				}
-				cardsFinished++;
 			});
 		cardXoffset++;
 	});
+}
+
+/**
+ * Creates and displays the tarot cards that are selected. Cards will change
+ * in appearance if they are selected. 3 cards have to be selected.
+ * @authors Elvis Joa, Daniel Lee, and Kevin Wong
+ * @date 5/27/2023
+ */
+function createShuffleCards() {
+	for (let i = 0; i < 22; i++) {
+		const button = document.createElement("button");
+		button.id = "Option " + i;
+		button.className = "cardsBtnPreShuffle";
+		button.hidden = true;
+		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
+			consts.CARD_BACK+"\">";
+		button.style.backgroundColor = "white";
+		button.setAttribute("selected", false);
+		// Change appearance when selected/unselected
+		button.addEventListener("click", () =>{
+			if (cardsSelected) {
+				response.textContent = button.value;
+				return;
+			}
+
+			if (button.getAttribute("selected") === "true") {
+				button.setAttribute("selected", false);
+				button.style.backgroundColor = "white";
+				cardCounter--;
+			} else {
+				button.setAttribute("selected", true);
+				button.style.backgroundColor = "black";
+				cardCounter++;
+			}
+
+			if (cardCounter == 3) {
+				cardCounter = 0;
+				displayThreeOptions();
+			}
+		});
+		tarotDiv.appendChild(button);
+		// get all of the cards and make them into the TarotCard classes
+		new TarotCard(button);
+	}
 }
 
 /**
