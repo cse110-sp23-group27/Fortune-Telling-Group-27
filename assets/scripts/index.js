@@ -185,7 +185,7 @@ function createShuffleBtn() {
 		}
 
 		shuffleBtn.hidden = true;
-		
+
 		await playCardThrowAnimation();
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
