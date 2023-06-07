@@ -261,9 +261,9 @@ async function playCardThrowAnimation() {
  * @date 6/6/2023 - 7:51:33 PM
  * @author Victor Kim
  *
- * @returns {*}
+ * @return {*}
  */
-function cardThrowRandomRot(){
+function cardThrowRandomRot() {
 	return consts.afterThrow_card_Rotation_min +
 	Math.random()*consts.afterThrow_card_Rotation_max;
 }
@@ -275,7 +275,7 @@ function cardThrowRandomRot(){
  *
  * @returns {{ x: any; y: any; }}
  */
-function cardThrowRandomPos(){
+function cardThrowRandomPos() {
 	return {
 		x: consts.afterThrow_card_X_min +
 			Math.random()*consts.afterThrow_card_X_max,
