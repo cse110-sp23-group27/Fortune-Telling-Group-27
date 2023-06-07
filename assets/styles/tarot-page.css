@@ -1,3 +1,9 @@
+/* For changing the JSON files' text to the selected font*/
+@font-face {
+    font-family: 'cinzel';
+    src: url(../../fonts/CinzelDecorative-Regular.ttf);
+}
+
 #tarotDiv {
     justify-content: center;
     margin: 10vmin;
