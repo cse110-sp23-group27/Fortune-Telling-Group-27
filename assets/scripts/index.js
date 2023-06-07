@@ -55,7 +55,7 @@ function bindHomePageBtns() {
 		homePageBool = false;
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
-		document.getElementById("center-text").textContent =
+		document.getElementById("centerText").textContent =
             consts.FORTUNETYPES.egg;
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE EGG";
@@ -73,7 +73,7 @@ function bindHomePageBtns() {
 		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
-		document.getElementById("center-text").textContent =
+		document.getElementById("centerText").textContent =
             consts.FORTUNETYPES.bone;
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
@@ -95,9 +95,11 @@ function bindHomePageBtns() {
  * @author Victor Kim
  */
 function toHomeButtonClick() {
+	const resetBtn = document.getElementById("tarotResetBtn");
+	const shuffleBtn = document.getElementById("tarotShuffleBtn");
 	if (!homePageBool) {
 		displayGeneralUIElements();
-		document.getElementById("center-text").textContent = "";
+		document.getElementById("centerText").textContent = "";
 		document.getElementById("response").textContent = "";
 		const responseCards =
 			document.getElementsByClassName("responseCards");
@@ -108,6 +110,12 @@ function toHomeButtonClick() {
 		homePageBool = true;
 		resetCards();
 		removeFogBackground();
+	}
+	if (resetBtn !== null) {
+		resetBtn.hidden = true;
+	}
+	if (shuffleBtn !== null) {
+		shuffleBtn.hidden = true;
 	}
 }
 
@@ -149,7 +157,7 @@ function bindGeneralButtons() {
  */
 function displayGeneralUIElements(fortuneType =null) {
 	// Hides/Displays the home page buttons as needed
-	const homeBtns = document.getElementsByClassName("home-page");
+	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i < homeBtns.length; i++) {
 		homeBtns[i].hidden = !homeBtns[i].hidden;
 	}
@@ -190,7 +198,6 @@ function createShuffleAndResetBtn() {
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
 		toHomeButtonClick();
-		resetBtn.hidden = true;
 	}
 	);
 
@@ -538,4 +545,3 @@ init();
  */
 document.querySelector(".menu__box").addEventListener("mouseleave", function() {
 	document.querySelector("#menu__toggle").checked = false;
-});

@@ -12,6 +12,7 @@
    2. ```npm run docs``` runs JSDocs on the assets/scripts directory and the jest_tests directory, and generates documentation in specs/documentation/generated.(DO NOT RUN THIS COMMAND LOCALLY)
    3. ```npm run test``` runs all Jest unit tests and E2E tests
    4. ```npm run GHtest``` runs all the Jest Unit tests
+   5. Run `git pull` every time before you make a change to a branch that was recently checked out, and after every time you push to a remote branch run `git pull` to get the changes that the automated JSDocs generation or linters may have made to your code in GitHub actions.
 
 ## Notes:
 
@@ -24,6 +25,8 @@ When adding JSLint code, please add code only in the /assets directory or the /s
 Please refer to the code style [document](/specs/documentation/codestyle.md) when styling code
 
 Do not push changes in package-lock.json or package.json unless you are working on pipeline.
+
+MAKE SURE THE LIVESERVER PORT IS SET TO 5500, OTHERWISE THE E2E TESTS WILL NOT WORK UNLESS YOU REPLACE THE URL.
 
 ## Regarding config files in root
 
