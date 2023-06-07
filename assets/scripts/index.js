@@ -211,25 +211,13 @@ async function playCardThrowAnimation() {
 		card.setClickable(false);
 		card.moveInstantly(consts.preThrow_card_pos);
 	});
-	if (resetFlag) {
-		return;
-	}
 	await TarotCard.wait(200);
-	if (resetFlag) {
-		return;
-	}
 	await cards[cards.length - 1].movePromise(
 		cards[cards.length - 1].getPositionPoint(),
 		consts.preThrow_card_pos,
 		200
 	);
-	if (resetFlag) {
-		return;
-	}
 	await TarotCard.wait(100);
-	if (resetFlag) {
-		return;
-	}
 	// throw in random directions
 	for (let i = 0; i < cards.length - 1; i++) {
 		const pos = {
@@ -242,14 +230,10 @@ async function playCardThrowAnimation() {
 						Math.random()*consts.afterThrow_card_Rotation_max;
 		cards[i].movePromise(cards[i].getPositionPoint(), pos, 200);
 		cards[i].rotatePromise(0, rot, 230);
-		if (resetFlag) {
-			return;
-		}
+
 		await TarotCard.wait(50);
 	}
-	if (resetFlag) {
-		return;
-	}
+	
 	const pos = {
 		x: consts.afterThrow_card_X_min +
 			Math.random()*consts.afterThrow_card_X_max,
@@ -263,9 +247,7 @@ async function playCardThrowAnimation() {
 		pos,
 		200
 	);
-	if (resetFlag) {
-		return;
-	}
+	
 	return cards[cards.length - 1].rotatePromise(0, rot, 230);
 }
 
@@ -275,18 +257,13 @@ async function playCardThrowAnimation() {
  */
 async function playShuffleAnimation() {
 	const cards = TarotCard.getAllCards();
-	if (resetFlag) {
-		return;
-	}
+	
 	// Move all to center and rotate in to deck
 	for (let i = 0; i < cards.length - 1; i++) {
 		const card = cards[i];
 		card.move(card.getPositionPoint(), consts.shuffle_deck_pos, 200);
 		card.rotate(card.getRotation(), 0, 200);
 		await TarotCard.wait(50);
-		if (resetFlag) {
-			return;
-		}
 	}
 	cards[cards.length - 1].move(
 		cards[cards.length - 1].getPositionPoint(),
@@ -298,15 +275,7 @@ async function playShuffleAnimation() {
 		0,
 		200
 	);
-	if (resetFlag) {
-		return;
-	}
-
 	await TarotCard.wait(350);
-	if (resetFlag) {
-		return;
-	}
-
 	// make 3 shuffles
 	for (let i = 0; i < 3; i++) {
 		// pick random card
@@ -317,31 +286,21 @@ async function playShuffleAnimation() {
 			consts.shuffle_card_pos,
 			350
 		);
-		if (resetFlag) {
-			return;
-		}
+
 		const startZIndex = randCard.getZIndex();
 		randCard.setZIndex(100 + i);
 		// pause
 		await TarotCard.wait(30);
-		if (resetFlag) {
-			return;
-		}
+
 		// move back
 		await randCard.movePromise(
 			consts.shuffle_card_pos,
 			consts.shuffle_deck_pos,
 			350
 		);
-		if (resetFlag) {
-			return;
-		}
 		randCard.setZIndex(startZIndex);
 		// pause
 		await TarotCard.wait(50);
-		if (resetFlag) {
-			return;
-		}
 	}
 	return TarotCard.wait(350);
 }
@@ -354,13 +313,8 @@ async function playShuffleAnimation() {
 function playCardSpreadAnimation() {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
-	if (resetFlag) {
-		return;
-	}
+	
 	tCards.forEach((tCard) => {
-		if (resetFlag) {
-			return;
-		}
 		tCard.setClickable(true);
 		tCard.move(consts.shuffle_deck_pos,
 			{x: 10 + (80/tCards.length)*cardXoffset,
