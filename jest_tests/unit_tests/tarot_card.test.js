@@ -30,7 +30,7 @@ describe("Testing Moving and Rotating Tarot Card", () => {
 	const testCard = new TarotCard(testButton);
 
 	test("Before Moving Tarot Card", () => {
-		expect(testCard.getPositionPoint()).toStrictEqual({"x": NaN, "y": NaN});
+		expect(testCard.getPositionPoint()).toStrictEqual({"x": 0, "y": 0});
 		expect(testCard.cardElement.style.zIndex).toBe("");
 	});
 
