@@ -108,6 +108,8 @@ function toHomeButtonClick() {
 		homePageBool = true;
 		resetCards();
 		removeFogBackground();
+		const resetBtn = document.getElementById("tarotResetBtn");
+		resetBtn.hidden = true;
 	}
 }
 
@@ -207,7 +209,6 @@ function createShuffleAndResetBtn() {
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
 		toHomeButtonClick();
-		resetBtn.hidden = true;
 	}
 	);
 
