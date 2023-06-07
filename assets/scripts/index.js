@@ -336,22 +336,21 @@ async function playCardSpreadAnimation() {
 	for (let i = 0; i < cards.length; i++) {
 		const card = cards[i];
 		card.setClickable(true);
-		
+
 		const cardMovePromise = card.movePromise(
 			consts.shuffle_deck_pos,
-			{x: 10 + (80/cards.length)*i, y: consts.cardY}, 
+			{x: 10 + (80/cards.length)*i, y: consts.cardY},
 			300,
 			()=>{
-				if(i === cards.length - 1){
+				if (i === cards.length - 1) {
 					return card.setClickable(true);
 				}
 			}
 		);
-		if(i === cards.length - 1){
+		if (i === cards.length - 1) {
 			return cardMovePromise;
 		}
 		card.setClickable(true);
-		
 	}
 
 	cards.forEach((tCard) => {
