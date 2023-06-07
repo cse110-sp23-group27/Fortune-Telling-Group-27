@@ -250,7 +250,7 @@ async function playCardThrowAnimation() {
 
 		await TarotCard.wait(50);
 	}
-	
+
 	const pos = {
 		x: consts.afterThrow_card_X_min +
 			Math.random()*consts.afterThrow_card_X_max,
@@ -264,7 +264,7 @@ async function playCardThrowAnimation() {
 		pos,
 		200
 	);
-	
+
 	return cards[cards.length - 1].rotatePromise(0, rot, 230);
 }
 
@@ -274,7 +274,7 @@ async function playCardThrowAnimation() {
  */
 async function playShuffleAnimation() {
 	const cards = TarotCard.getAllCards();
-	
+
 	// Move all to center and rotate in to deck
 	for (let i = 0; i < cards.length - 1; i++) {
 		const card = cards[i];
@@ -330,7 +330,7 @@ async function playShuffleAnimation() {
 function playCardSpreadAnimation() {
 	const tCards = TarotCard.getAllCards();
 	let cardXoffset = 0;
-	
+
 	tCards.forEach((tCard) => {
 		tCard.setClickable(true);
 		tCard.move(consts.shuffle_deck_pos,
