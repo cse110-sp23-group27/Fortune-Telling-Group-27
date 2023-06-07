@@ -502,7 +502,7 @@ function resetCards() {
 		}
 		card.setZIndex(0);
 		card.rotateInstant(0);
-		//TODO will need to reset flip style when Kyle S adds that functionality
+		// TODO will need to reset flip style when Kyle S adds that functionality
 	}
 
 	cardCounter = 0; // reset the cardCounter when resetting cards
