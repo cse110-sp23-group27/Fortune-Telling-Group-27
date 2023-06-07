@@ -2,16 +2,9 @@
  * @jest-environment puppeteer
  */
 
-/**
- * Delays the execution for time amount of milliseconds
- * @param {number} time amount of time in milliseconds to wait
- * @return {Promise} returns a new promise when time is passed
- */
-function delay(time) {
-	return new Promise(function(resolve) {
-		setTimeout(resolve, time);
-	});
-}
+const helper = require("./E2EHelperFunctions");
+
+const HOMEPAGE = ".homePage";
 
 describe("Testing Homepage Buttons", () => {
 	// visit the fortune telling website
@@ -21,14 +14,14 @@ describe("Testing Homepage Buttons", () => {
 			localStorage.clear();
 		});
 		await page.reload();
-		await delay(1000);
+		await helper.delay(1000);
 	});
 
 	it("Initial Home Page - Check for 3 Buttons", async () => {
 		// console.log("Checking for 3 Main Buttons...");
 		// Query select all of the homepage button elements
 		// and return the length of that array
-		const numButtons = await page.$$eval(".home-page", (homePageBtns) => {
+		const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
 			return homePageBtns.length;
 		});
 		// Expect there that array from earlier to be of length 3
@@ -42,7 +35,7 @@ describe("Testing Homepage Buttons", () => {
 		// Start as true, if any don't have text values, swap to false
 		let allArePopulated = true;
 		// Query select all of the home page elements
-		const homePageBtns = await page.$$(".home-page");
+		const homePageBtns = await page.$$(HOMEPAGE);
 		for (let i = 0; i < homePageBtns.length; i++) {
 			// console.log(`Checking home page button ${i}/${homePageBtns.length}`);
 			const data = await page.evaluate((el) => el.textContent,
@@ -63,7 +56,7 @@ describe("Testing Homepage Buttons", () => {
 			let allChangeBackground = true;
 			const bdy = await page.waitForSelector("body");
 			// Query select all of the home page elements
-			const homePageBtns = await page.$$(".home-page");
+			const homePageBtns = await page.$$(HOMEPAGE);
 			for (let i = 0; i < homePageBtns.length; i++) {
 				const style = await bdy.getProperty("style");
 				const bg = await style.getProperty("backgroundColor");
@@ -78,6 +71,6 @@ describe("Testing Homepage Buttons", () => {
 				// Expect allArePopulated to still be true
 				expect(allChangeBackground).toBe(true);
 			}
-			await delay(500);
+			await helper.delay(500);
 		}, 10000);
 });
