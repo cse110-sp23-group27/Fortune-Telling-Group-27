@@ -205,7 +205,11 @@ function createShuffleAndResetBtn() {
 	resetBtn.id = "tarotResetBtn";
 	resetBtn.textContent = "RESET CARDS";
 	resetBtn.hidden = true;
-	resetBtn.addEventListener("click", async () => toHomeButtonClick());
+	resetBtn.addEventListener("click", async () => {
+		toHomeButtonClick();
+		resetBtn.hidden = true;
+	}
+	);
 
 	tarotDiv.append(shuffleBtn);
 	tarotDiv.append(resetBtn);
@@ -327,14 +331,33 @@ async function playShuffleAnimation() {
  * @date 5/29/2023 - 10:18:49 PM
  * @param {Function} callback a callback function for end of animation
  */
-function playCardSpreadAnimation() {
-	const tCards = TarotCard.getAllCards();
-	let cardXoffset = 0;
-	
-	tCards.forEach((tCard) => {
+async function playCardSpreadAnimation() {
+	const cards = TarotCard.getAllCards();
+	for (let i = 0; i < cards.length; i++) {
+		const card = cards[i];
+		card.setClickable(true);
+		
+		const cardMovePromise = card.movePromise(
+			consts.shuffle_deck_pos,
+			{x: 10 + (80/cards.length)*i, y: consts.cardY}, 
+			300,
+			()=>{
+				if(i === cards.length - 1){
+					return card.setClickable(true);
+				}
+			}
+		);
+		if(i === cards.length - 1){
+			return cardMovePromise;
+		}
+		card.setClickable(true);
+		
+	}
+
+	cards.forEach((tCard) => {
 		tCard.setClickable(true);
 		tCard.move(consts.shuffle_deck_pos,
-			{x: 10 + (80/tCards.length)*cardXoffset,
+			{x: 10 + (80/cards.length)*cardXoffset,
 				y: consts.cardY}
 			, 300, ()=>{
 				tCard.setClickable(true);
