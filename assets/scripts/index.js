@@ -55,7 +55,7 @@ function bindHomePageBtns() {
 		homePageBool = false;
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
-		document.getElementById("center-text").textContent =
+		document.getElementById("centerText").textContent =
             consts.FORTUNETYPES.egg;
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE EGG";
@@ -73,7 +73,7 @@ function bindHomePageBtns() {
 		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
-		document.getElementById("center-text").textContent =
+		document.getElementById("centerText").textContent =
             consts.FORTUNETYPES.bone;
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
@@ -95,9 +95,11 @@ function bindHomePageBtns() {
  * @author Victor Kim
  */
 function toHomeButtonClick() {
+	const resetBtn = document.getElementById("tarotResetBtn");
+	const shuffleBtn = document.getElementById("tarotResetBtn");
 	if (!homePageBool) {
 		displayGeneralUIElements();
-		document.getElementById("center-text").textContent = "";
+		document.getElementById("centerText").textContent = "";
 		document.getElementById("response").textContent = "";
 		const responseCards =
 			document.getElementsByClassName("responseCards");
@@ -108,8 +110,12 @@ function toHomeButtonClick() {
 		homePageBool = true;
 		resetCards();
 		removeFogBackground();
-		const resetBtn = document.getElementById("tarotResetBtn");
-		resetBtn.hidden = true;
+		if (resetBtn) {
+			resetBtn.hidden = true;
+		}
+		if (shuffleBtn) {
+			shuffleBtn.hidden = true;
+		}
 	}
 }
 
@@ -168,7 +174,7 @@ function displayGeneralUIElements(fortuneType =null) {
 	}
 
 	// Hides/Displays the home page buttons as needed
-	const homeBtns = document.getElementsByClassName("home-page");
+	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i < homeBtns.length; i++) {
 		homeBtns[i].hidden = !homeBtns[i].hidden;
 	}
@@ -581,15 +587,15 @@ init();
  * @author Kyle Ng
  * @date 6/5/2023
  */
-document.querySelector(".menu__box").addEventListener("mouseleave", function() {
-	document.querySelector("#menu__toggle").checked = false;
+document.querySelector(".menuBox").addEventListener("mouseleave", function() {
+	document.querySelector("#menuToggle").checked = false;
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menu__toggle");
+	const menuToggle = document.querySelector("#menuToggle");
 	if (menuToggle) {
 		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menu__item");
+			const menuItems = document.querySelectorAll(".menuItem");
 			menuItems.forEach((item) => {
 				item.hidden = !item.hidden;
 			});

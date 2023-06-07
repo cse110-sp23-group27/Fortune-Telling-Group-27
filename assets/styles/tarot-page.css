@@ -108,7 +108,7 @@ body {
     height: 100vh; /* Optional: Set container height to fit the viewport */
   }
   
-.button-wrapper {
+.buttonWrapper {
     display: flex;
     justify-content: center;
 }
