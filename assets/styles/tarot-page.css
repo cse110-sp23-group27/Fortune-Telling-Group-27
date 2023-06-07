@@ -90,12 +90,12 @@ html, body {
     padding: 0;
 }
 
-body {
+/* body {
     background: #000;
     background: rgba(0, 0, 0, 1);
     overflow-x: hidden; 
     color: white;
-}
+} */
 
 .cardsBtnPreShuffle:hover{
     box-shadow: 0 0 10px 5px #fff;
@@ -114,7 +114,7 @@ body {
 }
   
 button {
-    margin: 5px;
+    margin: 30px;
 }
 
 /* ---------- Fog ---------- */
