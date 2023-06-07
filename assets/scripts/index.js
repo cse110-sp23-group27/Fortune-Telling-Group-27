@@ -489,10 +489,8 @@ function displayThreeOptions() {
  * @date 5/29/2023
  */
 function resetCards() {
-	const cards = TarotCard.getAllCards();
-	for (let i = 0; i < cards.length; i++) {
-		const card = cards[i];
-		const cardOption = card.cardElement;
+	for (let card = 0; card < 22; card++) {
+		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
 			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
 		if (cardOption) {
@@ -500,9 +498,6 @@ function resetCards() {
 			cardOption.style.backgroundColor = "white";
 			cardOption.hidden = true;
 		}
-		card.setZIndex(0);
-		card.rotateInstant(0);
-		//TODO will need to reset flip style when Kyle S adds that functionality
 	}
 
 	cardCounter = 0; // reset the cardCounter when resetting cards
