@@ -241,7 +241,8 @@ async function playCardThrowAnimation() {
 	await TarotCard.wait(100);
 	// throw in random directions
 	for (let i = 0; i < cards.length - 1; i++) {
-		cards[i].movePromise(cards[i].getPositionPoint(), cardThrowRandomPos(), 200);
+		cards[i].movePromise(cards[i].getPositionPoint(),
+			cardThrowRandomPos(), 200);
 		cards[i].rotatePromise(0, cardThrowRandomRot(), 230);
 
 		await TarotCard.wait(50);
@@ -269,11 +270,11 @@ function cardThrowRandomRot() {
 }
 
 /**
- * Givs random position acording to card throw animation constants
+ * Gives random position acording to card throw animation constants
  * @date 6/6/2023 - 7:51:57 PM
  * @author Victor Kim
  *
- * @returns {{ x: any; y: any; }}
+ * @return {Object} { x: any; y: any; }
  */
 function cardThrowRandomPos() {
 	return {
