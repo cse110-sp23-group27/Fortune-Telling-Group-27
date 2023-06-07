@@ -184,8 +184,8 @@ function createShuffleBtn() {
 			cardOption.hidden = false;
 		}
 
-		startBtn.hidden = true;
-		resetBtn.hidden = false;
+		shuffleBtn.hidden = true;
+		
 		await playCardThrowAnimation();
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
@@ -370,50 +370,6 @@ function playCardSpreadAnimation() {
 			});
 		cardXoffset++;
 	});
-}
-
-/**
- * Creates and displays the tarot cards that are selected. Cards will change
- * in appearance if they are selected. 3 cards have to be selected.
- * @authors Elvis Joa, Daniel Lee, and Kevin Wong
- * @date 5/27/2023
- */
-function createShuffleCards() {
-	for (let i = 0; i < 22; i++) {
-		const button = document.createElement("button");
-		button.id = "Option " + i;
-		button.className = "cardsBtnPreShuffle";
-		button.hidden = true;
-		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
-			consts.CARD_BACK+"\">";
-		button.style.backgroundColor = "white";
-		button.setAttribute("selected", false);
-		// Change appearance when selected/unselected
-		button.addEventListener("click", () =>{
-			if (cardsSelected) {
-				response.textContent = button.value;
-				return;
-			}
-
-			if (button.getAttribute("selected") === "true") {
-				button.setAttribute("selected", false);
-				button.style.backgroundColor = "white";
-				cardCounter--;
-			} else {
-				button.setAttribute("selected", true);
-				button.style.backgroundColor = "black";
-				cardCounter++;
-			}
-
-			if (cardCounter == 3) {
-				cardCounter = 0;
-				displayThreeOptions();
-			}
-		});
-		tarotDiv.appendChild(button);
-		// get all of the cards and make them into the TarotCard classes
-		new TarotCard(button);
-	}
 }
 
 /**
