@@ -12,3 +12,6 @@ jobs:
       
       - name: Installing modules
         run: npm ci
+        
+      - name: Run Tests
+        run: npm run GHtest
