@@ -96,7 +96,7 @@ function bindHomePageBtns() {
  */
 function toHomeButtonClick() {
 	const resetBtn = document.getElementById("tarotResetBtn");
-	const shuffleBtn = document.getElementById("tarotResetBtn");
+	const shuffleBtn = document.getElementById("tarotShuffleBtn");
 	if (!homePageBool) {
 		displayGeneralUIElements();
 		document.getElementById("centerText").textContent = "";
