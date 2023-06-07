@@ -357,6 +357,7 @@ function displayThreeOptions() {
 					default:
 						cardOption.value = tarotCard["futureDescription"];
 					}
+					cardOption.style.fontFamily = 'cinzel';
 
 					// TODO: Find a better way to do this,
 					// apparently this can cause a memory leak
