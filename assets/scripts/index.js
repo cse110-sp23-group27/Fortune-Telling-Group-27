@@ -352,17 +352,6 @@ async function playCardSpreadAnimation() {
 		}
 		card.setClickable(true);
 	}
-
-	cards.forEach((tCard) => {
-		tCard.setClickable(true);
-		tCard.move(consts.shuffle_deck_pos,
-			{x: 10 + (80/cards.length)*cardXoffset,
-				y: consts.cardY}
-			, 300, ()=>{
-				tCard.setClickable(true);
-			});
-		cardXoffset++;
-	});
 }
 
 /**
