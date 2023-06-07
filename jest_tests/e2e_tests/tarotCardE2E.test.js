@@ -95,7 +95,7 @@ function getMultipleInts(num, max) {
 }
 
 describe("Testing Tarot Card Page", () => {
-	const randNums = getMultipleInts(3, 23); // get selected random cards
+	const randNums = getMultipleInts(3, 22); // get selected random cards
 	// visit the fortune telling website
 	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");

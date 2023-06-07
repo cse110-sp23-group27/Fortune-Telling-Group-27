@@ -78,5 +78,6 @@ describe("Testing Homepage Buttons", () => {
 				// Expect allArePopulated to still be true
 				expect(allChangeBackground).toBe(true);
 			}
+			await delay(500);
 		}, 10000);
 });

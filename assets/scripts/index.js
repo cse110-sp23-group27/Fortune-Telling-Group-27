@@ -120,9 +120,8 @@ function bindGeneralButtons() {
 	const githubBtn = document.getElementById("toGitHub");
 
 	docBtn.addEventListener("click", () => {
-		window.open(
-			"https://cse110-sp23-group27.github.io/" +
-			"Fortune-Telling-Group-27/specs/documentation/generated/index.html");
+		window.open("https://cse110-sp23-group27.github.io/" +
+		"Fortune-Telling-Group-27/specs/documentation/generated/index.html");
 	});
 	githubBtn.addEventListener("click", () => {
 		window.open("https://github.com/cse110-sp23-group27/" +
