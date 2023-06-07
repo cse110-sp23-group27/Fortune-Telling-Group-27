@@ -90,6 +90,28 @@ function bindHomePageBtns() {
 }
 
 /**
+ * What happens when you click the home button
+ * @date 6/6/2023 - 7:20:31 PM
+ * @author Victor Kim
+ */
+function toHomeButtonClick() {
+	if (!homePageBool) {
+		displayGeneralUIElements();
+		document.getElementById("center-text").textContent = "";
+		document.getElementById("response").textContent = "";
+		const responseCards =
+			document.getElementsByClassName("responseCards");
+		while (responseCards.length > 0) {
+			tarotDiv.removeChild(responseCards[0]);
+		}
+		tarotDiv.hidden = true;
+		homePageBool = true;
+		resetCards();
+		removeFogBackground();
+	}
+}
+
+/**
  * Binds the buttons that appear at the top left for
  * all consts.FORTUNE telling,
  * more specifically the home, options, and GitHub buttons.
@@ -99,22 +121,7 @@ function bindHomePageBtns() {
 function bindGeneralButtons() {
 	const homeBtn = document.getElementById("toHome");
 	// Added to reset cards on click
-	homeBtn.addEventListener("click", () => {
-		if (!homePageBool) {
-			displayGeneralUIElements();
-			document.getElementById("center-text").textContent = "";
-			document.getElementById("response").textContent = "";
-			const responseCards =
-				document.getElementsByClassName("responseCards");
-			while (responseCards.length > 0) {
-				tarotDiv.removeChild(responseCards[0]);
-			}
-			tarotDiv.hidden = true;
-			homePageBool = true;
-			resetCards();
-			removeFogBackground();
-		}
-	});
+	homeBtn.addEventListener("click", () => toHomeButtonClick());
 
 	const docBtn = document.getElementById("toDocumentation");
 	const githubBtn = document.getElementById("toGitHub");
@@ -167,17 +174,20 @@ function displayGeneralUIElements(fortuneType =null) {
 }
 
 /**
- * Creates and displays the shuffle button that should trigger the animation
+ * Creates and displays the shuffle and reset button that should control the animation
  * for the tarot cards.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
  * @date 5/27/2023
  */
-function createShuffleBtn() {
+function createShuffleAndResetBtn() {
 	const shuffleBtn = document.createElement("button");
+	const resetBtn = document.createElement("button");
+
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
 		shuffleBtn.hidden = true;
+		resetBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
 		for (let card = 0; card < cards.length; card++) {
 			const cardOption = cards[card];
@@ -191,7 +201,14 @@ function createShuffleBtn() {
 		await playShuffleAnimation();
 		playCardSpreadAnimation();
 	});
+
+	resetBtn.id = "tarotResetBtn";
+	resetBtn.textContent = "RESET CARDS";
+	resetBtn.hidden = true;
+	resetBtn.addEventListener("click", async () => toHomeButtonClick());
+
 	tarotDiv.append(shuffleBtn);
+	tarotDiv.append(resetBtn);
 }
 
 
@@ -381,6 +398,8 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
+	const resetBtn = document.getElementById("tarotResetBtn");
+	resetBtn.hidden = false;
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
 	for (let i = 0; i < 22; i++) {
@@ -525,7 +544,7 @@ function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
 	// bindBurgerBar();
-	createShuffleBtn();
+	createShuffleAndResetBtn();
 	createShuffleCards();
 }
 
