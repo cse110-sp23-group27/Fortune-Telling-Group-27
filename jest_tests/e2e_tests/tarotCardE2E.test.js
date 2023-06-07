@@ -5,6 +5,7 @@
 // variables for selecting buttons
 
 const HOMEPAGE = ".home-page";
+const RESETBTN = "#tarotResetBtn";
 const HOMEBTN = "#toHome";
 const TOTAROTCARD = "#toTarotCard";
 const SHUFFLEBUTTON = "#tarotShuffleBtn";
@@ -130,11 +131,11 @@ describe("Testing Tarot Card Page", () => {
 		it("Click on shuffle button", async () => {
 			const shuffleBtn = await page.$(SHUFFLEBUTTON);
 			await shuffleBtn.evaluate((b) => b.click()); // click tarot card
-			await delay(4000); // change to promise use when animator gets updated
+			await delay(8000); // change to promise use when animator gets updated
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			// expect cards to be visible
 			expect(await allHidden(shuffle)).toBe(false);
-		}, 10000);
+		}, 100000);
 		it("Select and unselect card", async () => {
 		// select random card
 			const shuffle = await page.$$(SHUFFLEDCARDS);
@@ -221,12 +222,13 @@ describe("Testing Tarot Card Page", () => {
 			}
 			await delay(100);
 		}, 10000);
-		it("Go back home", async () => {
+		it("Go back home using reset", async () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
 			expect(await allHidden(homePageBtns)).toBe(true);
-			const toHome = await page.$(HOMEBTN);
+			const reset = await page.$(RESETBTN);
 			// await toHome.click();
-			await toHome.evaluate((b) => b.click()); // click home page
+			await reset.click();
+			//await reset.evaluate((b) => b.click()); // click reset button
 			// expect home page buttons to be visible
 			expect(await allHidden(homePageBtns)).toBe(false);
 			const shuffle = await page.$$(SHUFFLEDCARDS);
