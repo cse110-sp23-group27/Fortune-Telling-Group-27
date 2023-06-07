@@ -6,11 +6,16 @@
   font-size: 20px;
 }
 
+main {
+  max-height: 90%;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Optional: Set container height to fit the viewport */
+    max-height: 90%;
   }
   
 .button-wrapper {
@@ -180,11 +185,15 @@ button {
 .menu__item {
   display: block;
   padding: 12px 24px;
+  text-align: left;
+  width: 20vh;
   color: #333;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
+  border: #ECEFF1;
+  background-color: #ECEFF1;
   transition-duration: .25s;
 }
 .menu__item:hover {
