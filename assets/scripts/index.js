@@ -110,12 +110,12 @@ function toHomeButtonClick() {
 		homePageBool = true;
 		resetCards();
 		removeFogBackground();
-		if (resetBtn !== null) {
-			resetBtn.hidden = true;
-		}
-		if (shuffleBtn !== null) {
-			shuffleBtn.hidden = true;
-		}
+	}
+	if (resetBtn !== null) {
+		resetBtn.hidden = true;
+	}
+	if (shuffleBtn !== null) {
+		shuffleBtn.hidden = true;
 	}
 }
 
