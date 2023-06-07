@@ -4,23 +4,9 @@
 }
   
 .cardsBtnPreShuffle{
-    margin: 10px;
-    border-color: #fff;
-    background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
+    border-color: black;
 
     border-radius: 5%;
-    border-color: #fff;
-    background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
 
     border-radius: 5%;
 
@@ -35,32 +21,20 @@
 
     justify-content: center;
 
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-
-
+    margin: 0px;
 }
 .chosenCards {
     height: 45vmin;
     width: 25vmin;
-    margin: 3px;
-
-    border-width: 2px;
+    margin: -6px;
     border-radius: 5%;
-    background-color: blanchedalmond;
+    border-color: black;
 }
 
 .responseCards {
     margin: 10px;
     border-color: #fff;
     background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10px;
-    padding-left: 0px;
 
     border-radius: 5%;
     height: 30vmin;
@@ -76,11 +50,6 @@
     margin: 10px;
     border-color: #fff;
     background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
 
     border-radius: 5%;
 }
