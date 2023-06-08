@@ -12,7 +12,8 @@
 	},
 	"templates": {
 		"cleverLinks": false,
-		"monospaceLinks": false
+		"monospaceLinks": false,
+		"includeDate": false
 	},
 	"opts": {
 		"destination": "./specs/documentation/generated/",
