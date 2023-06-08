@@ -64,8 +64,7 @@ html, body {
 }
 
 body {
-    background: #000;
-    background: rgba(0, 0, 0, 1);
+    overscroll-behavior: none;
     overflow-x: hidden; 
     color: white;
 }
@@ -75,7 +74,7 @@ body {
 }
 
 #container {
-    display: flex;
+    display: relative;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Optional: Set container height to fit the viewport */
@@ -90,9 +89,23 @@ button {
     margin: 5px;
 }
 
+#response {
+    position: absolute;
+    z-index: 2;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    inline-size: 60%;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+  }
+
 #tarotResetBtn {
-    margin-top: 620px;
-    padding: 10px 20px;
+    position: absolute;
+    z-index: 1;
+    bottom: 60px;
+    transform: translateX(-50%);
     font-size: 16px;
 }
 
