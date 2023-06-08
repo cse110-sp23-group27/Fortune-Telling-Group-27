@@ -1,5 +1,7 @@
 const {ElementHandle, Browser} = require("puppeteer");
 
+const MAXTIMEOUT = 15000;
+
 
 /**
  * Returns the hidden attribute of the element
@@ -122,5 +124,6 @@ module.exports = {
 	returnNewPromise,
 	delay,
 	getLeftVal,
-	allHidden
+	allHidden,
+	MAXTIMEOUT
 };

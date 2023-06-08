@@ -1,0 +1,21 @@
+name: JSDocs Generation
+run-name: ${{ github.actor }} is running Github Actions
+on:
+  pull_request:
+    branches:
+          - main     # Only runs on main
+permissions: write-all
+jobs:
+  JSDocs_Generation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Installing modules
+        run: npm ci
+        
+      - name: Generating JS Docs
+        run: npm run doc
+      
+      - name: Pushing changes
+        uses: stefanzweifel/git-auto-commit-action@v4
