@@ -152,6 +152,7 @@ describe("Testing Tarot Card Page", () => {
 			const reset = await page.$(RESETBTN);
 			// await toHome.click();
 			await reset.click();
+			await helper.delay(500);
 			// await reset.evaluate((b) => b.click()); // click reset button
 			// expect home page buttons to be visible
 			expect(await helper.allHidden(homePageBtns)).toBe(false);
