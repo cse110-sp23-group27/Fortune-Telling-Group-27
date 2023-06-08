@@ -24,17 +24,6 @@ function bindHomePageBtns() {
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
 
-	/**
-     * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
-     * @author Kevin Wong
-     * @date 5/24/2023
-     * @param {string} color - A parameter for what color the background
-     * should be.
-     */
-	// function changeBackgroundColor(color) {
-	// 	document.body.style.backgroundColor = color;
-	// }
-
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
@@ -42,14 +31,6 @@ function bindHomePageBtns() {
 		addFogBackground();
 		homePageBool = false;
 	});
-
-	// tarotCardBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("red");
-	// });
-
-	// tarotCardBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
 
 	eggBtn.addEventListener("click", () => {
 		homePageBool = false;
@@ -61,13 +42,6 @@ function bindHomePageBtns() {
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
-	// eggBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("blue");
-	// });
-
-	// eggBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
 
 	boneBtn.addEventListener("click", () => {
 		homePageBool = false;
@@ -78,15 +52,6 @@ function bindHomePageBtns() {
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
-
-
-	// boneBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("green");
-	// });
-
-	// boneBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
 }
 
 /**
@@ -233,7 +198,7 @@ function createShuffleAndResetBtn() {
  */
 async function playCardThrowAnimation() {
 	const cards = TarotCard.getAllCards();
-	// unhide, move, and make unclickable
+	// Reveal, move, and make unclickable
 	cards.forEach((card) => {
 		card.cardElement.hidden = false;
 		card.setClickable(false);
@@ -246,7 +211,7 @@ async function playCardThrowAnimation() {
 		200
 	);
 	await TarotCard.wait(100);
-	// throw in random directions
+	// Throw in random directions
 	for (let i = 0; i < cards.length - 1; i++) {
 		cards[i].movePromise(cards[i].getPositionPoint(),
 			cardThrowRandomPos(), 200);
@@ -265,7 +230,7 @@ async function playCardThrowAnimation() {
 
 
 /**
- * Givs random rotation acording to card throw animation constants
+ * Gives random rotation acording to card throw animation constants
  * @date 6/6/2023 - 7:51:33 PM
  * @author Victor Kim
  *
@@ -317,11 +282,11 @@ async function playShuffleAnimation() {
 		200
 	);
 	await TarotCard.wait(350);
-	// make 3 shuffles
+	// Make 3 shuffles
 	for (let i = 0; i < 3; i++) {
-		// pick random card
+		// Pick random card
 		const randCard = cards[Math.floor(22 * Math.random())];
-		// move away
+		// Move away
 		await randCard.movePromise(
 			consts.shuffle_deck_pos,
 			consts.shuffle_card_pos,
@@ -330,17 +295,17 @@ async function playShuffleAnimation() {
 
 		const startZIndex = randCard.getZIndex();
 		randCard.setZIndex(100 + i);
-		// pause
+		// Pause
 		await TarotCard.wait(30);
 
-		// move back
+		// Move back
 		await randCard.movePromise(
 			consts.shuffle_card_pos,
 			consts.shuffle_deck_pos,
 			350
 		);
 		randCard.setZIndex(startZIndex);
-		// pause
+		// Pause
 		await TarotCard.wait(50);
 	}
 	return TarotCard.wait(350);
@@ -415,7 +380,7 @@ function createShuffleCards() {
 		tarotDiv.appendChild(button);
 	}
 
-	// get all of the cards and make them into the TarotCard classes
+	// Get all of the cards and make them into the TarotCard classes
 	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		new TarotCard(cardOption);
@@ -481,21 +446,6 @@ function displayThreeOptions() {
 					default:
 						cardOption.value = tarotCard["futureDescription"];
 					}
-
-					// TODO: Find a better way to do this,
-					// apparently this can cause a memory leak
-					// but don't have time to make a better solution rn
-					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
-					// remove old on click events
-					/* cardOption.hidden = true;
-					const clonedCardOption = cardOption.cloneNode(true);
-					clonedCardOption.className = "responseCards21";
-					// const tempCardOption = cardOption;
-					cardOption.parentNode.replaceChild(
-						clonedCardOption, cardOption);
-					// tempCardOption.remove();
-					cardOption.hidden = false;
-					tarotDiv.appendChild(cardOption);*/
 				}
 			});
 		}
@@ -523,6 +473,7 @@ function resetCards() {
 	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
 }
+
 /**
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
@@ -558,18 +509,6 @@ function removeFogBackground() {
 }
 
 /**
- * Binds functionality to the burger bar.
- * @author Jason Bui
- * @date 5/26/2023
- */
-/* function bindBurgerBar() {
-	document.querySelector(".nav-toggle").addEventListener("click", () => {
-		const navLinks = document.querySelector(".nav-links");
-		navLinks.hidden = !navLinks.hidden;
-	});
-}*/
-
-/**
  * Initializes home page
  */
 function init() {
@@ -589,16 +528,4 @@ init();
  */
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menuToggle");
-	if (menuToggle) {
-		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menuItem");
-			menuItems.forEach((item) => {
-				item.hidden = !item.hidden;
-			});
-		});
-	}
 });
