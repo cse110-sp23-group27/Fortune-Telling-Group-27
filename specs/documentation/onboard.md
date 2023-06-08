@@ -28,6 +28,16 @@ Do not push changes in package-lock.json or package.json unless you are working 
 
 MAKE SURE THE LIVESERVER PORT IS SET TO 5500, OTHERWISE THE E2E TESTS WILL NOT WORK UNLESS YOU REPLACE THE URL.
 
+You can set the liveserver port for this repository by creating a .vscode folder in the root of this repository and creating a settings.json file inside of it. 
+
+Inside settings.json put:
+
+```
+{
+    "liveServer.settings.port": 5500
+}
+```
+
 ## Regarding config files in root
 
 .eslintignore is the equivalent of .gitignore but for ESLint, so ESLint ignores those directories
