@@ -30,6 +30,8 @@ MAKE SURE THE LIVESERVER PORT IS SET TO 5500, OTHERWISE THE E2E TESTS WILL NOT W
 
 You can set the liveserver port for this repository by creating a .vscode folder in the root of this repository and creating a settings.json file inside of it. 
 
+If you have two live server version opens (two different versions of the repo) then one of the versions will be of port 5501 (by default) and the other will be 5500. Please be sure to only have one live server version open when running `npm run test`.
+
 Inside settings.json put:
 
 ```
