@@ -1,30 +1,25 @@
 #tarotDiv {
-    justify-content: center;
-    margin: 10vmin;
+    /* justify-content: center; */
+    /* margin: 10vmin; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
   
 .cardsBtnPreShuffle{
-    margin: 10px;
-    border-color: #fff;
-    background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
-
+    border-color: black;
     border-radius: 5%;
-    border-color: #fff;
-    background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
-
-    border-radius: 5%;
-
     transform: translateX(-50%);
+}
+.chosenCards {
+    height: 45vmin;
+    width: 25vmin;
+    margin: -6px;
+    border-radius: 5%;
+    border-color: black;
+    /* right: 50%; */
 }
   
 .imagesPreShuffle {
@@ -35,32 +30,13 @@
 
     justify-content: center;
 
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-
-
-}
-.chosenCards {
-    height: 45vmin;
-    width: 25vmin;
-    margin: 3px;
-
-    border-width: 2px;
-    border-radius: 5%;
-    background-color: blanchedalmond;
+    margin: 0px;
 }
 
 .responseCards {
     margin: 10px;
     border-color: #fff;
     background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10px;
-    padding-left: 0px;
 
     border-radius: 5%;
     height: 30vmin;
@@ -76,11 +52,6 @@
     margin: 10px;
     border-color: #fff;
     background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
 
     border-radius: 5%;
 }
@@ -91,8 +62,7 @@ html, body {
 }
 
 body {
-    background: #000;
-    background: rgba(0, 0, 0, 1);
+    overscroll-behavior: none;
     overflow-x: hidden; 
     color: white;
 }
@@ -102,13 +72,13 @@ body {
 }
 
 #container {
-    display: flex;
+    display: relative;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Optional: Set container height to fit the viewport */
   }
   
-.button-wrapper {
+.buttonWrapper {
     display: flex;
     justify-content: center;
 }
@@ -117,6 +87,38 @@ button {
     margin: 5px;
 }
 
+#response {
+    position: absolute;
+    z-index: 2;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    inline-size: 60%;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+  }
+
+#tarotResetBtn {
+    position: absolute;
+    z-index: 1;
+    bottom: 60px;
+    transform: translateX(-50%);
+    font-size: 16px;
+}
+
+#tarotShuffleBtn, #tarotResetBtn {
+    box-shadow: 0 0 10px 5px #323270;
+    border: solid 1px #6a6aac;
+    border-radius: 5%;
+    background-color: transparent;
+    color: #9d9dd1;
+    padding: 17px;
+}
+
+#tarotShuffleBtn {
+    margin-top: 40vh;
+}
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;
@@ -170,94 +172,94 @@ button {
 
 /* ---------- Keyframe Layer 1 ---------- */
 @-webkit-keyframes foglayer_01_opacity {
-    0% { opacity: .1; }
-    22% { opacity: .5; }
-    40% { opacity: .28; }
-    58% { opacity: .4; }
-    80% { opacity: .16; }
-    100% { opacity: .1; }
+    0% { opacity: .3; }
+    22% { opacity: 0.8; }
+    40% { opacity: .48; }
+    58% { opacity: .6; }
+    80% { opacity: .36; }
+    100% { opacity: .4; }
 }
 @-moz-keyframes foglayer_01_opacity {
-    0% { opacity: .1; }
-    22% { opacity: .5; }
-    40% { opacity: .28; }
-    58% { opacity: .4; }
-    80% { opacity: .16; }
-    100% { opacity: .1; }
+    0% { opacity: .3; }
+    22% { opacity: 0.8; }
+    40% { opacity: .48; }
+    58% { opacity: .6; }
+    80% { opacity: .36; }
+    100% { opacity: .4; }
 }
 @-o-keyframes foglayer_01_opacity {
-    0% { opacity: .1; }
-    22% { opacity: .5; }
-    40% { opacity: .28; }
-    58% { opacity: .4; }
-    80% { opacity: .16; }
-    100% { opacity: .1; }
+    0% { opacity: .3; }
+    22% { opacity: 0.8; }
+    40% { opacity: .48; }
+    58% { opacity: .6; }
+    80% { opacity: .36; }
+    100% { opacity: .4; }
 }
 @keyframes foglayer_01_opacity {
-    0% { opacity: .1; }
-    22% { opacity: .5; }
-    40% { opacity: .28; }
-    58% { opacity: .4; }
-    80% { opacity: .16; }
-    100% { opacity: .1; }
+    0% { opacity: .3; }
+    22% { opacity: 0.8; }
+    40% { opacity: .48; }
+    58% { opacity: .6; }
+    80% { opacity: .36; }
+    100% { opacity: .4; }
 }
 /* ---------- Keyframe Layer 2 ---------- */
 @-webkit-keyframes foglayer_02_opacity {
-0% { opacity: .5; }
-25% { opacity: .2; }
-50% { opacity: .1; }
-80% { opacity: .3; }
-100% { opacity: .5; }
+0% { opacity: .7; }
+25% { opacity: .4; }
+50% { opacity: .3; }
+80% { opacity: .5; }
+100% { opacity: .7; }
 }
 @-moz-keyframes foglayer_02_opacity {
-0% { opacity: .5; }
-25% { opacity: .2; }
-50% { opacity: .1; }
-80% { opacity: .3; }
-100% { opacity: .5; }
+0% { opacity: .7; }
+25% { opacity: .4; }
+50% { opacity: .3; }
+80% { opacity: .5; }
+100% { opacity: .7; }
 }
 @-o-keyframes foglayer_02_opacity {
-0% { opacity: .5; }
-25% { opacity: .2; }
-50% { opacity: .1; }
-80% { opacity: .3; }
-100% { opacity: .5; }
+0% { opacity: .7; }
+25% { opacity: .4; }
+50% { opacity: .3; }
+80% { opacity: .5; }
+100% { opacity: .7; }
 }
 @keyframes foglayer_02_opacity {
-0% { opacity: .5; }
-25% { opacity: .2; }
-50% { opacity: .1; }
-80% { opacity: .3; }
-100% { opacity: .5; }
+0% { opacity: .7; }
+25% { opacity: .4; }
+50% { opacity: .3; }
+80% { opacity: .5; }
+100% { opacity: .7; }
 }
 /* ---------- Keyframe Layer 3 ---------- */
 @-webkit-keyframes foglayer_03_opacity {
-0% { opacity: .8 }
-27% { opacity: .2; }
-52% { opacity: .6; }
-68% { opacity: .3; }
-100% { opacity: .8; }
+0% { opacity: 1 }
+27% { opacity: .4; }
+52% { opacity: 0.8; }
+68% { opacity: .5; }
+100% { opacity: 1; }
 }
 @-moz-keyframes foglayer_03_opacity {
-0% { opacity: .8 }
-27% { opacity: .2; }
-52% { opacity: .6; }
-68% { opacity: .3; }
-100% { opacity: .8; }
+0% { opacity: 1 }
+27% { opacity: .4; }
+52% { opacity: 0.8; }
+68% { opacity: .5; }
+100% { opacity: 1; }
 }
 @-o-keyframes foglayer_03_opacity {
-0% { opacity: .8 }
-27% { opacity: .2; }
-52% { opacity: .6; }
-68% { opacity: .3; }
-100% { opacity: .8; }
+0% { opacity: 1 }
+27% { opacity: .4; }
+52% { opacity: 0.8; }
+68% { opacity: .5; }
+100% { opacity: 1; }
 }
 @keyframes foglayer_03_opacity {
-0% { opacity: .8; }
-27% { opacity: .2; }
-52% { opacity: .6; }
-68% { opacity: .3; }
-100% { opacity: .8; }
+0% { opacity: 1 }
+27% { opacity: .4; }
+52% { opacity: 0.8; }
+68% { opacity: .5; }
+100% { opacity: 1; }
 }
 /* ---------- Keyframe moveMe ---------- */
 @-webkit-keyframes foglayer_moveme {

@@ -31,9 +31,9 @@ function bindHomePageBtns() {
      * @param {string} color - A parameter for what color the background
      * should be.
      */
-	function changeBackgroundColor(color) {
-		document.body.style.backgroundColor = color;
-	}
+	// function changeBackgroundColor(color) {
+	// 	document.body.style.backgroundColor = color;
+	// }
 
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
@@ -43,50 +43,80 @@ function bindHomePageBtns() {
 		homePageBool = false;
 	});
 
-	tarotCardBtn.addEventListener("mouseover", () => {
-		changeBackgroundColor("red");
-	});
+	// tarotCardBtn.addEventListener("mouseover", () => {
+	// 	changeBackgroundColor("red");
+	// });
 
-	tarotCardBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("black");
-	});
+	// tarotCardBtn.addEventListener("mouseout", () => {
+	// 	changeBackgroundColor("black");
+	// });
 
 	eggBtn.addEventListener("click", () => {
 		homePageBool = false;
 		console.log(consts.FORTUNETYPES.egg);
 		displayGeneralUIElements(consts.FORTUNETYPES.egg);
-		document.getElementById("center-text").textContent =
+		document.getElementById("centerText").textContent =
             consts.FORTUNETYPES.egg;
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
-	eggBtn.addEventListener("mouseover", () => {
-		changeBackgroundColor("blue");
-	});
+	// eggBtn.addEventListener("mouseover", () => {
+	// 	changeBackgroundColor("blue");
+	// });
 
-	eggBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("black");
-	});
+	// eggBtn.addEventListener("mouseout", () => {
+	// 	changeBackgroundColor("black");
+	// });
 
 	boneBtn.addEventListener("click", () => {
 		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
 		displayGeneralUIElements(consts.FORTUNETYPES.bone);
-		document.getElementById("center-text").textContent =
+		document.getElementById("centerText").textContent =
             consts.FORTUNETYPES.bone;
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
 
 
-	boneBtn.addEventListener("mouseover", () => {
-		changeBackgroundColor("green");
-	});
+	// boneBtn.addEventListener("mouseover", () => {
+	// 	changeBackgroundColor("green");
+	// });
 
-	boneBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("black");
-	});
+	// boneBtn.addEventListener("mouseout", () => {
+	// 	changeBackgroundColor("black");
+	// });
+}
+
+/**
+ * What happens when you click the home button
+ * @date 6/6/2023 - 7:20:31 PM
+ * @author Victor Kim
+ */
+function toHomeButtonClick() {
+	const resetBtn = document.getElementById("tarotResetBtn");
+	const shuffleBtn = document.getElementById("tarotShuffleBtn");
+	if (!homePageBool) {
+		displayGeneralUIElements();
+		document.getElementById("centerText").textContent = "";
+		document.getElementById("response").textContent = "";
+		const responseCards =
+			document.getElementsByClassName("responseCards");
+		while (responseCards.length > 0) {
+			tarotDiv.removeChild(responseCards[0]);
+		}
+		tarotDiv.hidden = true;
+		homePageBool = true;
+		resetCards();
+		removeFogBackground();
+	}
+	if (resetBtn !== null) {
+		resetBtn.hidden = true;
+	}
+	if (shuffleBtn !== null) {
+		shuffleBtn.hidden = true;
+	}
 }
 
 /**
@@ -99,22 +129,7 @@ function bindHomePageBtns() {
 function bindGeneralButtons() {
 	const homeBtn = document.getElementById("toHome");
 	// Added to reset cards on click
-	homeBtn.addEventListener("click", () => {
-		if (!homePageBool) {
-			displayGeneralUIElements();
-			document.getElementById("center-text").textContent = "";
-			document.getElementById("response").textContent = "";
-			const responseCards =
-				document.getElementsByClassName("responseCards");
-			while (responseCards.length > 0) {
-				tarotDiv.removeChild(responseCards[0]);
-			}
-			tarotDiv.hidden = true;
-			homePageBool = true;
-			resetCards();
-			removeFogBackground();
-		}
-	});
+	homeBtn.addEventListener("click", () => toHomeButtonClick());
 
 	const docBtn = document.getElementById("toDocumentation");
 	const githubBtn = document.getElementById("toGitHub");
@@ -159,7 +174,7 @@ function displayGeneralUIElements(fortuneType =null) {
 	}
 
 	// Hides/Displays the home page buttons as needed
-	const homeBtns = document.getElementsByClassName("home-page");
+	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i < homeBtns.length; i++) {
 		homeBtns[i].hidden = !homeBtns[i].hidden;
 	}
@@ -167,67 +182,168 @@ function displayGeneralUIElements(fortuneType =null) {
 }
 
 /**
- * Creates and displays the shuffle button that should trigger the animation
+ * Creates and displays the shuffle and reset button that should control the animation
  * for the tarot cards.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
  * @date 5/27/2023
  */
-function createShuffleBtn() {
+function createShuffleAndResetBtn() {
 	const shuffleBtn = document.createElement("button");
+	const resetBtn = document.createElement("button");
+
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
-	shuffleBtn.addEventListener("click", () => {
+	shuffleBtn.addEventListener("click", async () => {
 		shuffleBtn.hidden = true;
+		resetBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
 		for (let card = 0; card < cards.length; card++) {
 			const cardOption = cards[card];
 			cardOption.hidden = false;
 		}
-		playShuffleAnimation(()=>{
-			playCardSpreadAnimation();
-		});
+
+		shuffleBtn.hidden = true;
+
+		await playCardThrowAnimation();
+		await TarotCard.wait(100);
+		await playShuffleAnimation();
+		playCardSpreadAnimation();
 	});
+
+	resetBtn.id = "tarotResetBtn";
+	resetBtn.textContent = "RESET CARDS";
+	resetBtn.hidden = true;
+	resetBtn.addEventListener("click", async () => {
+		toHomeButtonClick();
+	}
+	);
+
 	tarotDiv.append(shuffleBtn);
+	tarotDiv.append(resetBtn);
 }
 
 
 /**
+ * Plays the card throw animation
+ * @date 6/6/2023 - 1:58:41 PM
+ * @author Victor Kim
+ *
+ * @async
+ * @return {None}
+ */
+async function playCardThrowAnimation() {
+	const cards = TarotCard.getAllCards();
+	// unhide, move, and make unclickable
+	cards.forEach((card) => {
+		card.cardElement.hidden = false;
+		card.setClickable(false);
+		card.moveInstantly(consts.preThrow_card_pos);
+	});
+	await TarotCard.wait(200);
+	await cards[cards.length - 1].movePromise(
+		cards[cards.length - 1].getPositionPoint(),
+		consts.preThrow_card_pos,
+		200
+	);
+	await TarotCard.wait(100);
+	// throw in random directions
+	for (let i = 0; i < cards.length - 1; i++) {
+		cards[i].movePromise(cards[i].getPositionPoint(),
+			cardThrowRandomPos(), 200);
+		cards[i].rotatePromise(0, cardThrowRandomRot(), 230);
+
+		await TarotCard.wait(50);
+	}
+	cards[cards.length - 1].movePromise(
+		cards[cards.length - 1].getPositionPoint(),
+		cardThrowRandomPos(),
+		200
+	);
+
+	return cards[cards.length - 1].rotatePromise(0, cardThrowRandomRot(), 230);
+}
+
+
+/**
+ * Givs random rotation acording to card throw animation constants
+ * @date 6/6/2023 - 7:51:33 PM
+ * @author Victor Kim
+ *
+ * @return {*}
+ */
+function cardThrowRandomRot() {
+	return consts.afterThrow_card_Rotation_min +
+	Math.random()*consts.afterThrow_card_Rotation_max;
+}
+
+/**
+ * Gives random position acording to card throw animation constants
+ * @date 6/6/2023 - 7:51:57 PM
+ * @author Victor Kim
+ *
+ * @return {Object} { x: any; y: any; }
+ */
+function cardThrowRandomPos() {
+	return {
+		x: consts.afterThrow_card_X_min +
+			Math.random()*consts.afterThrow_card_X_max,
+		y: consts.afterThrow_card_Y_min +
+			Math.random()*consts.afterThrow_card_Y_max
+	};
+}
+
+/**
  * Will play the shuffle animation for the current cards
  * @date 5/29/2023 - 9:20:17 PM
- * @param {Function} callback a callback function for end of animation
  */
-function playShuffleAnimation(callback) {
-	const tCards = TarotCard.getAllCards();
-	// Move all to center
-	tCards.forEach((tCard) => {
-		// block clicks too
-		tCard.setClickable(false);
-		tCard.moveInstantly({x: consts.cardX, y: consts.cardY});
-	});
+async function playShuffleAnimation() {
+	const cards = TarotCard.getAllCards();
 
+	// Move all to center and rotate in to deck
+	for (let i = 0; i < cards.length - 1; i++) {
+		const card = cards[i];
+		card.move(card.getPositionPoint(), consts.shuffle_deck_pos, 200);
+		card.rotate(card.getRotation(), 0, 200);
+		await TarotCard.wait(50);
+	}
+	cards[cards.length - 1].move(
+		cards[cards.length - 1].getPositionPoint(),
+		consts.shuffle_deck_pos,
+		200
+	);
+	await cards[cards.length - 1].rotatePromise(
+		cards[cards.length - 1].getRotation(),
+		0,
+		200
+	);
+	await TarotCard.wait(350);
 	// make 3 shuffles
-	let shuffleCount = 0;
-	const shuffleSequence = (callback)=>{
+	for (let i = 0; i < 3; i++) {
 		// pick random card
-		const randCard = tCards[Math.floor(22 * Math.random())];
+		const randCard = cards[Math.floor(22 * Math.random())];
 		// move away
-		randCard.move({x: consts.cardX, y: consts.cardY},
-			{x: consts.cardX+2, y: consts.cardY}, 350, ()=>{
-				randCard.move({x: consts.cardX+2, y: consts.cardY},
-					{x: consts.cardX, y: consts.cardY}, 350, ()=>{
-						shuffleCount++;
-						if (shuffleCount < 3) {
-							shuffleSequence(callback);
-						} else {
-							callback();
-						}
-					});
-			});
-	};
-	shuffleSequence(()=>{
-		// finished shuffling
-		callback();
-	});
+		await randCard.movePromise(
+			consts.shuffle_deck_pos,
+			consts.shuffle_card_pos,
+			350
+		);
+
+		const startZIndex = randCard.getZIndex();
+		randCard.setZIndex(100 + i);
+		// pause
+		await TarotCard.wait(30);
+
+		// move back
+		await randCard.movePromise(
+			consts.shuffle_card_pos,
+			consts.shuffle_deck_pos,
+			350
+		);
+		randCard.setZIndex(startZIndex);
+		// pause
+		await TarotCard.wait(50);
+	}
+	return TarotCard.wait(350);
 }
 
 /**
@@ -235,25 +351,27 @@ function playShuffleAnimation(callback) {
  * @date 5/29/2023 - 10:18:49 PM
  * @param {Function} callback a callback function for end of animation
  */
-function playCardSpreadAnimation(callback) {
-	const tCards = TarotCard.getAllCards();
-	let cardXoffset = 0;
-	let cardsFinished = 0;
-	console.log(tCards.length);
-	tCards.forEach((tCard) => {
-		tCard.setClickable(true);
-		tCard.move({x: consts.cardX, y: consts.cardY},
-			{x: 10 + (80/tCards.length)*cardXoffset,
-				y: consts.cardY}
-			, 300, ()=>{
-				tCard.setClickable(true);
-				if (cardsFinished >= tCards.length) {
-					callback();
+async function playCardSpreadAnimation() {
+	const cards = TarotCard.getAllCards();
+	for (let i = 0; i < cards.length; i++) {
+		const card = cards[i];
+		card.setClickable(true);
+
+		const cardMovePromise = card.movePromise(
+			consts.shuffle_deck_pos,
+			{x: 10 + (80/cards.length)*i, y: consts.cardY},
+			300,
+			()=>{
+				if (i === cards.length - 1) {
+					return card.setClickable(true);
 				}
-				cardsFinished++;
-			});
-		cardXoffset++;
-	});
+			}
+		);
+		if (i === cards.length - 1) {
+			return cardMovePromise;
+		}
+		card.setClickable(true);
+	}
 }
 
 /**
@@ -311,6 +429,8 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
+	const resetBtn = document.getElementById("tarotResetBtn");
+	resetBtn.hidden = false;
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
 	for (let i = 0; i < 22; i++) {
@@ -392,13 +512,14 @@ function resetCards() {
 	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
-			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
+			"<img class = \"chosenCards\"src="+consts.cardBack +">";
 		if (cardOption) {
 			cardOption.setAttribute("selected", false);
 			cardOption.style.backgroundColor = "white";
 			cardOption.hidden = true;
 		}
 	}
+
 	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
 }
@@ -455,7 +576,7 @@ function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
 	// bindBurgerBar();
-	createShuffleBtn();
+	createShuffleAndResetBtn();
 	createShuffleCards();
 }
 
@@ -466,15 +587,15 @@ init();
  * @author Kyle Ng
  * @date 6/5/2023
  */
-document.querySelector(".menu__box").addEventListener("mouseleave", function() {
-	document.querySelector("#menu__toggle").checked = false;
+document.querySelector(".menuBox").addEventListener("mouseleave", function() {
+	document.querySelector("#menuToggle").checked = false;
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menu__toggle");
+	const menuToggle = document.querySelector("#menuToggle");
 	if (menuToggle) {
 		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menu__item");
+			const menuItems = document.querySelectorAll(".menuItem");
 			menuItems.forEach((item) => {
 				item.hidden = !item.hidden;
 			});
