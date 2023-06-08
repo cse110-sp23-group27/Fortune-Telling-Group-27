@@ -53,7 +53,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		// console.log(await allHidden(bBtns));
 		// expect btns to not be hidden
 		expect(await helper.allHidden(bBtns)).toBe(false);
-    await helper.delay(500);
+		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
 	it("Make sure Burger Bar button elements have text values", async () => {
 		// console.log("Checking to make sure buttons have text values...");
@@ -71,7 +71,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		}
 		// Expect allArePopulated to still be true
 		expect(allArePopulated).toBe(true);
-    await helper.delay(500);
+		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Documentation Button Test", async () => {
 		const toDocs = await page.$(DOCS);
