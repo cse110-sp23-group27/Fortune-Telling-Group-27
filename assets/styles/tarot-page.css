@@ -96,6 +96,10 @@ button {
     font-size: 16px;
 }
 
+#tarotShuffleBtn {
+    margin-top: 400px;
+}
+
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;
