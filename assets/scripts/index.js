@@ -543,5 +543,6 @@ init();
  * @author Kyle Ng
  * @date 6/5/2023
  */
-document.querySelector(".menu__box").addEventListener("mouseleave", function() {
-	document.querySelector("#menu__toggle").checked = false;
+document.querySelector(".menuBox").addEventListener("mouseleave", function() {
+	document.querySelector("#menuToggle").checked = false;
+});
