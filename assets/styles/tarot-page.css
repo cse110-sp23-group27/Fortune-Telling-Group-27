@@ -107,10 +107,18 @@ button {
     font-size: 16px;
 }
 
-#tarotShuffleBtn {
-    margin-top: 400px;
+#tarotShuffleBtn, #tarotResetBtn {
+    box-shadow: 0 0 10px 5px #323270;
+    border: solid 1px #6a6aac;
+    border-radius: 5%;
+    background-color: transparent;
+    color: #9d9dd1;
+    padding: 17px;
 }
 
+#tarotShuffleBtn {
+    margin-top: 40vh;
+}
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;
