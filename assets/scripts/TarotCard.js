@@ -167,7 +167,7 @@ class TarotCard {
      * @param {float} degrees Number of degrees to rotate object
      */
 	rotateInstantly(degrees) {
-		this.cardElement.style.transform = `rotate(${degrees}deg)`;
+		this.cardElement.style.transform = `translateX(-50%) rotate(${degrees}deg)`;
 	}
 
 	/**
