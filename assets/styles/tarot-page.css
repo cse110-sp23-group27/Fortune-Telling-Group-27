@@ -90,6 +90,12 @@ button {
     margin: 5px;
 }
 
+#tarotResetBtn {
+    margin-top: 620px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;
