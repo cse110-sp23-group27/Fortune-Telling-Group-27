@@ -154,6 +154,7 @@ describe("Testing Tarot Card Page", () => {
 			expect(await helper.allHidden(homePageBtns)).toBe(false);
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			expect(await helper.allHidden(shuffle)).toBe(true);
+			await helper.delay(1000);
 		}, 10000);
 	}
 });
