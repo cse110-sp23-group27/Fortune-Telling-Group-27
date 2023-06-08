@@ -41,7 +41,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		// make sure check box is checked
 		const checkedVal = await burgerBarCheckbox.getProperty("checked");
 		expect(await checkedVal.jsonValue()).toBe(true);
-	},  helper.MAXTIMEOUT);
+	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Check for 6 Burger Bar Buttons", async () => {
 		// console.log("Checking for 6 Burger Bar Buttons...");
 		// Query select all of the burger bar button elements
