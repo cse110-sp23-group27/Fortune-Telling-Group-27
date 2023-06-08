@@ -17,6 +17,7 @@ const RESPONSE = "#response";
 
 describe("Testing Tarot Card Page", () => {
 	const randNums = helper.getMultipleInts(3, 22); // get selected random cards
+	//const randNums = [16, 21, 0]
 	// visit the fortune telling website
 	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
@@ -47,6 +48,7 @@ describe("Testing Tarot Card Page", () => {
 			// after clicking on the tarot card button,
 			// expect home page buttons to be hidden
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
+			await helper.delay(500);
 		});
 		it("Click on shuffle button", async () => {
 			const shuffleBtn = await page.$(SHUFFLEBUTTON);
@@ -119,6 +121,7 @@ describe("Testing Tarot Card Page", () => {
 				}
 			}
 			expect(cardsInView).toBe(3);
+			await helper.delay(500);
 		}, 10000);
 		it("Click on cards in view", async () => {
 			const shuffle = await page.$$(SHUFFLEDCARDS);
@@ -141,7 +144,7 @@ describe("Testing Tarot Card Page", () => {
 				console.log("Current text: " + currTextVal);
 				pTextVal = currTextVal;
 			}
-			await helper.delay(100);
+			await helper.delay(500);
 		}, 10000);
 		it("Go back home using reset", async () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
