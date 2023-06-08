@@ -24,17 +24,6 @@ function bindHomePageBtns() {
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
 
-	/**
-     * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
-     * @author Kevin Wong
-     * @date 5/24/2023
-     * @param {string} color - A parameter for what color the background
-     * should be.
-     */
-	// function changeBackgroundColor(color) {
-	// 	document.body.style.backgroundColor = color;
-	// }
-
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
@@ -43,13 +32,6 @@ function bindHomePageBtns() {
 		homePageBool = false;
 	});
 
-	// tarotCardBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("red");
-	// });
-
-	// tarotCardBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
 
 	eggBtn.addEventListener("click", () => {
 		homePageBool = false;
@@ -61,14 +43,6 @@ function bindHomePageBtns() {
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
-	// eggBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("blue");
-	// });
-
-	// eggBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
-
 	boneBtn.addEventListener("click", () => {
 		homePageBool = false;
 		console.log(consts.FORTUNETYPES.bone);
@@ -78,15 +52,6 @@ function bindHomePageBtns() {
 		document.getElementById("response").textContent =
             "THIS IS THE RESPONSE FOR THE BONE TOSSING";
 	});
-
-
-	// boneBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("green");
-	// });
-
-	// boneBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
 }
 
 /**
@@ -486,21 +451,6 @@ function displayThreeOptions() {
 					default:
 						cardOption.value = tarotCard["futureDescription"];
 					}
-
-					// TODO: Find a better way to do this,
-					// apparently this can cause a memory leak
-					// but don't have time to make a better solution rn
-					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
-					// remove old on click events
-					/* cardOption.hidden = true;
-					const clonedCardOption = cardOption.cloneNode(true);
-					clonedCardOption.className = "responseCards21";
-					// const tempCardOption = cardOption;
-					cardOption.parentNode.replaceChild(
-						clonedCardOption, cardOption);
-					// tempCardOption.remove();
-					cardOption.hidden = false;
-					tarotDiv.appendChild(cardOption);*/
 				}
 			});
 		}
@@ -561,18 +511,6 @@ function removeFogBackground() {
 		fogWrapper.remove();
 	}
 }
-
-/**
- * Binds functionality to the burger bar.
- * @author Jason Bui
- * @date 5/26/2023
- */
-/* function bindBurgerBar() {
-	document.querySelector(".nav-toggle").addEventListener("click", () => {
-		const navLinks = document.querySelector(".nav-links");
-		navLinks.hidden = !navLinks.hidden;
-	});
-}*/
 
 /**
  * Initializes home page
