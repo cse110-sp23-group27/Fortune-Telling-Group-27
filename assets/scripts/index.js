@@ -394,6 +394,11 @@ function createShuffleCards() {
 		button.addEventListener("click", () =>{
 			if (cardsSelected) {
 				response.textContent = button.value;
+				let opacity = 0;
+				setInterval(() => {
+					response.style.opacity = opacity;
+					opacity += 0.01;
+				}, 10);
 				return;
 			}
 
