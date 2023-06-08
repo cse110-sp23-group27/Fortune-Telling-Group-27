@@ -18,9 +18,6 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
-      
-      - name: Run JSDocs
-        run: npm run doc
 
       - name: Running Tests
         if: success() || failure()
