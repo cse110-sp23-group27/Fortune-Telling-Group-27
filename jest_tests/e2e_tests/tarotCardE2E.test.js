@@ -17,7 +17,7 @@ const RESPONSE = "#response";
 
 describe("Testing Tarot Card Page", () => {
 	const randNums = helper.getMultipleInts(3, 22); // get selected random cards
-	//const randNums = [16, 21, 0]
+	// const randNums = [16, 21, 0]
 	// visit the fortune telling website
 	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
@@ -26,7 +26,7 @@ describe("Testing Tarot Card Page", () => {
 		});
 		await page.reload();
 		await helper.delay(1000);
-	});
+	}, helper.MAXTIMEOUT);
 	for (let increment = 0; increment < 2; increment++) {
 		it("Initial  - Click on Tarot Card Button", async () => {
 		// console.log("Checking for 3 Main Buttons...");
@@ -49,7 +49,7 @@ describe("Testing Tarot Card Page", () => {
 			// expect home page buttons to be hidden
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
 			await helper.delay(500);
-		});
+		}, helper.MAXTIMEOUT);
 		it("Click on shuffle button", async () => {
 			const shuffleBtn = await page.$(SHUFFLEBUTTON);
 			await shuffleBtn.evaluate((b) => b.click()); // click tarot card
@@ -57,7 +57,7 @@ describe("Testing Tarot Card Page", () => {
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			// expect cards to be visible
 			expect(await helper.allHidden(shuffle)).toBe(false);
-		}, 100000);
+		}, helper.MAXTIMEOUT);
 		it("Select and unselect card", async () => {
 		// select random card
 			const shuffle = await page.$$(SHUFFLEDCARDS);
@@ -80,7 +80,7 @@ describe("Testing Tarot Card Page", () => {
 			expect(await helper.getSelectedValue(selCard)).toBe("false");
 			expect(await helper.getBGColor(selCard)).toBe("white");
 			await helper.delay(1000);
-		}, 10000);
+		}, helper.MAXTIMEOUT);
 		it("Select 3 cards", async () => {
 			let cnt = 0;
 			const shuffle = await page.$$(SHUFFLEDCARDS);
@@ -98,7 +98,7 @@ describe("Testing Tarot Card Page", () => {
 				cnt++;
 			}
 			await helper.delay(500);
-		}, 10000);
+		}, helper.MAXTIMEOUT);
 		it("Check if 3 cards in view", async () => {
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			let cardsInView = 0;
@@ -122,7 +122,7 @@ describe("Testing Tarot Card Page", () => {
 			}
 			expect(cardsInView).toBe(3);
 			await helper.delay(500);
-		}, 10000);
+		}, helper.MAXTIMEOUT);
 		it("Click on cards in view", async () => {
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			// checking the response text val (should be "")
@@ -145,7 +145,7 @@ describe("Testing Tarot Card Page", () => {
 				pTextVal = currTextVal;
 			}
 			await helper.delay(500);
-		}, 10000);
+		}, helper.MAXTIMEOUT);
 		it("Go back home using reset", async () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
@@ -159,6 +159,6 @@ describe("Testing Tarot Card Page", () => {
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			expect(await helper.allHidden(shuffle)).toBe(true);
 			await helper.delay(1000);
-		}, 10000);
+		}, helper.MAXTIMEOUT);
 	}
 });

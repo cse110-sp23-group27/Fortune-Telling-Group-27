@@ -22,7 +22,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		});
 		await page.reload();
 		await helper.delay(1000);
-	});
+	}, helper.MAXTIMEOUT);
 	it("Clicking on Burger Bar Checkbox", async () => {
 		// select the burger bar checkbox
 		const burgerBarCheckbox = await page.$(BURGERBAR);
@@ -41,7 +41,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		// make sure check box is checked
 		const checkedVal = await burgerBarCheckbox.getProperty("checked");
 		expect(await checkedVal.jsonValue()).toBe(true);
-	}, 10000);
+	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Check for 6 Burger Bar Buttons", async () => {
 		// console.log("Checking for 6 Burger Bar Buttons...");
 		// Query select all of the burger bar button elements
@@ -54,7 +54,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		// expect btns to not be hidden
 		expect(await helper.allHidden(bBtns)).toBe(false);
 		await helper.delay(500);
-	}, 10000);
+	}, helper.MAXTIMEOUT);
 	it("Make sure Burger Bar button elements have text values", async () => {
 		// console.log("Checking to make sure buttons have text values...");
 		// Start as true, if any don't have text values, swap to false
@@ -72,7 +72,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		// Expect allArePopulated to still be true
 		expect(allArePopulated).toBe(true);
 		await helper.delay(500);
-	}, 10000);
+	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Documentation Button Test", async () => {
 		const toDocs = await page.$(DOCS);
 		const newPagePromise = helper.returnNewPromise(browser);
@@ -86,7 +86,7 @@ describe("Testing Burger Bar and Buttons", () => {
 			"/generated/index.html");
 		await newPage.close();
 		await helper.delay(1000);
-	}, 10000);
+	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Github Button Test", async () => {
 		const toGit = await page.$(GITHUB);
 		const newPagePromise = helper.returnNewPromise(browser);
@@ -99,7 +99,7 @@ describe("Testing Burger Bar and Buttons", () => {
 			"/tree/main");
 		await newPage.close();
 		await helper.delay(1000);
-	}, 50000);
+	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Home button test", async () => {
 		const toHome = await page.$(HOMEBTN);
 		const toTarot = await page.$(TAROTCARDBTN);
@@ -117,5 +117,5 @@ describe("Testing Burger Bar and Buttons", () => {
 		await toHome.evaluate((b) => b.click()); // click home button
 		expect(await helper.allHidden(homeBtns)).toBe(false);
 		await helper.delay(100);
-	}, 10000);
+	}, helper.MAXTIMEOUT);
 });
