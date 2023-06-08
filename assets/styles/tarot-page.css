@@ -1,6 +1,7 @@
 #tarotDiv {
     justify-content: center;
-    margin: 10vmin;
+    align-items: center;
+    height: 100%;
 }
   
 .cardsBtnPreShuffle{
@@ -62,12 +63,12 @@ html, body {
     padding: 0;
 }
 
-/* body {
+body {
     background: #000;
     background: rgba(0, 0, 0, 1);
     overflow-x: hidden; 
     color: white;
-} */
+}
 
 .cardsBtnPreShuffle:hover{
     box-shadow: 0 0 10px 5px #fff;
@@ -86,7 +87,17 @@ html, body {
 }
   
 button {
-    margin: 30px;
+    margin: 5px;
+}
+
+#tarotResetBtn {
+    margin-top: 620px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#tarotShuffleBtn {
+    margin-top: 400px;
 }
 
 /* ---------- Fog ---------- */
