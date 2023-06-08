@@ -64,8 +64,7 @@ html, body {
 }
 
 body {
-    background: #000;
-    background: rgba(0, 0, 0, 1);
+    overscroll-behavior: none;
     overflow-x: hidden; 
     color: white;
 }
