@@ -512,7 +512,7 @@ function resetCards() {
 	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
 		cardOption.innerHTML =
-			"<img class = \"imagesPreShuffle\"src="+consts.cardBack +">";
+			"<img class = \"chosenCards\"src="+consts.cardBack +">";
 		if (cardOption) {
 			cardOption.setAttribute("selected", false);
 			cardOption.style.backgroundColor = "white";

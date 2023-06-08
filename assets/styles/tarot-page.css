@@ -26,22 +26,7 @@
 
     transform: translateX(-50%);
 }
-  
-.imagesPreShuffle {
-    height: 45vmin;
-    width: 25vmin;
 
-    margin: 5px;
-
-    justify-content: center;
-
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-
-
-}
 .chosenCards {
     height: 45vmin;
     width: 25vmin;
