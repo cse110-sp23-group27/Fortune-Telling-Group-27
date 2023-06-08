@@ -31,9 +31,9 @@ function bindHomePageBtns() {
      * @param {string} color - A parameter for what color the background
      * should be.
      */
-	function changeBackgroundColor(color) {
-		document.body.style.backgroundColor = color;
-	}
+	// function changeBackgroundColor(color) {
+	// 	document.body.style.backgroundColor = color;
+	// }
 
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
@@ -43,13 +43,13 @@ function bindHomePageBtns() {
 		homePageBool = false;
 	});
 
-	tarotCardBtn.addEventListener("mouseover", () => {
-		changeBackgroundColor("red");
-	});
+	// tarotCardBtn.addEventListener("mouseover", () => {
+	// 	changeBackgroundColor("red");
+	// });
 
-	tarotCardBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("black");
-	});
+	// tarotCardBtn.addEventListener("mouseout", () => {
+	// 	changeBackgroundColor("black");
+	// });
 
 	eggBtn.addEventListener("click", () => {
 		homePageBool = false;
@@ -61,13 +61,13 @@ function bindHomePageBtns() {
             "THIS IS THE RESPONSE FOR THE EGG";
 	});
 
-	eggBtn.addEventListener("mouseover", () => {
-		changeBackgroundColor("blue");
-	});
+	// eggBtn.addEventListener("mouseover", () => {
+	// 	changeBackgroundColor("blue");
+	// });
 
-	eggBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("black");
-	});
+	// eggBtn.addEventListener("mouseout", () => {
+	// 	changeBackgroundColor("black");
+	// });
 
 	boneBtn.addEventListener("click", () => {
 		homePageBool = false;
@@ -80,13 +80,13 @@ function bindHomePageBtns() {
 	});
 
 
-	boneBtn.addEventListener("mouseover", () => {
-		changeBackgroundColor("green");
-	});
+	// boneBtn.addEventListener("mouseover", () => {
+	// 	changeBackgroundColor("green");
+	// });
 
-	boneBtn.addEventListener("mouseout", () => {
-		changeBackgroundColor("black");
-	});
+	// boneBtn.addEventListener("mouseout", () => {
+	// 	changeBackgroundColor("black");
+	// });
 }
 
 /**
