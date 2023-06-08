@@ -22,7 +22,6 @@ jobs:
       - name: Running Tests
         if: success() || failure()
         run: npm run GHtest
-
         
       - name: Check if there are any changes
         if: success() || failure()
