@@ -527,15 +527,3 @@ init();
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
 });
-
-document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menuToggle");
-	if (menuToggle) {
-		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menuItem");
-			menuItems.forEach((item) => {
-				item.hidden = !item.hidden;
-			});
-		});
-	}
-});
