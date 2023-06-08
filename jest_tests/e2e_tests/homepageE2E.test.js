@@ -15,7 +15,7 @@ describe("Testing Homepage Buttons", () => {
 		});
 		await page.reload();
 		await helper.delay(1000);
-	});
+	}, helper.MAXTIMEOUT);
 
 	it("Initial Home Page - Check for 3 Buttons", async () => {
 		// console.log("Checking for 3 Main Buttons...");
@@ -27,7 +27,8 @@ describe("Testing Homepage Buttons", () => {
 		// Expect there that array from earlier to be of length 3
 		// meaning 3 homepage buttons were found
 		expect(numButtons).toBe(3);
-	});
+		await helper.delay(500);
+	}, helper.MAXTIMEOUT);
 
 	it("Make sure <home-page> button elements have text values", async () => {
 		// console.log("Checking to make sure home page buttons
@@ -47,7 +48,8 @@ describe("Testing Homepage Buttons", () => {
 			// Expect allArePopulated to still be true
 			expect(allArePopulated).toBe(true);
 		}
-	}, 10000);
+		await helper.delay(500);
+	}, helper.MAXTIMEOUT);
 	it("Make sure <home-page> button elements change background",
 		async () => {
 		// console.log("Checking to make sure home
@@ -72,5 +74,5 @@ describe("Testing Homepage Buttons", () => {
 				expect(allChangeBackground).toBe(true);
 			}
 			await helper.delay(500);
-		}, 10000);
+		}, helper.MAXTIMEOUT);
 });

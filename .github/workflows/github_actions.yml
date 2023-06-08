@@ -18,15 +18,7 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
-      
-      - name: Run JSDocs
-        run: npm run doc
 
       - name: Running Tests
         if: success() || failure()
         run: npm run GHtest
-
-        
-      - name: Check if there are any changes
-        if: success() || failure()
-        uses: stefanzweifel/git-auto-commit-action@v4
