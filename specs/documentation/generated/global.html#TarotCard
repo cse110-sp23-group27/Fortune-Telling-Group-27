@@ -543,7 +543,8 @@
 
             
 
-            <td class="description last">End animation callbackpointA to pointB</td>
+            <td class="description last">End animation callback
+pointA to pointB</td>
         </tr>
 
     
@@ -886,7 +887,8 @@
 
             
 
-            <td class="description last">End animation callbackrotation</td>
+            <td class="description last">End animation callback
+rotation</td>
         </tr>
 
     
