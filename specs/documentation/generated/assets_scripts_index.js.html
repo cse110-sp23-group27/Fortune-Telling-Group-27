@@ -40,6 +40,12 @@ let cardCounter = 0;
 let cardsSelected = false;
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
+// Hover sound effect for the buttons
+const hoverSound = document.getElementById("mouseover-sound");
+// Sound effect "click" button
+const clickSound = document.getElementById("click-button");
+// Shuffling sound effect
+const shuffleSound = document.getElementById("shuffle-button");
 
 /**
  * Binds the home page buttons to change the type of
@@ -52,7 +58,13 @@ function bindHomePageBtns() {
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
 
+	tarotCardBtn.addEventListener("mouseover", () => {
+		hoverSound.play();
+	});
+
+
 	tarotCardBtn.addEventListener("click", () => {
+		clickSound.play();
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
@@ -60,11 +72,21 @@ function bindHomePageBtns() {
 		homePageBool = false;
 	});
 
+	eggBtn.addEventListener("mouseover", () => {
+		hoverSound.play();
+	});
+
 	eggBtn.addEventListener("click", () => {
+		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 
+	boneBtn.addEventListener("mouseover", () => {
+		hoverSound.play();
+	});
+
 	boneBtn.addEventListener("click", () => {
+		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 }
@@ -161,6 +183,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
+		shuffleSound.play();
 		homeBtn.disabled = true;
 		shuffleBtn.hidden = true;
 		resetBtn.hidden = true;
@@ -183,6 +206,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.textContent = "RESET CARDS";
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
+		clickSound.play();
 		toHomeButtonClick();
 	}
 	);
@@ -362,6 +386,7 @@ function createShuffleCards() {
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
+			clickSound.play();
 			if (cardsSelected) {
 				response.textContent = button.value;
 				return;
