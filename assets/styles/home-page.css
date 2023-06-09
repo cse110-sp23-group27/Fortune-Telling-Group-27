@@ -121,6 +121,10 @@ button {
   right: 0 !important;
 }
 
+#menuToggleTwo:checked + .menuBtnTwo #cardBook {
+  content: url('/assets/images/openBook.png');
+}
+
 .menuBtn, .menuBtnTwo {
   position: fixed;
   width: 26px;
@@ -134,6 +138,7 @@ button {
 }
 
 #cardBook {
+  display: block;
   width: 26px;
   height: 36px;
 }
