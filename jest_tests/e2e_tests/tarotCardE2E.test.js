@@ -131,7 +131,7 @@ describe("Testing Tarot Card Page", () => {
 			for (const i of randNums) {
 				await shuffle[i].evaluate((b) => b.click()); // click tarot
 				// check current text content of respones
-				await helper.delay(100);
+				await helper.delay(1000);
 				const currText = await p.getProperty("textContent");
 				const currTextVal = await currText.jsonValue();
 
