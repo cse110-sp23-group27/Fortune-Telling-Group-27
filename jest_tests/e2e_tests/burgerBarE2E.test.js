@@ -43,26 +43,22 @@ describe("Testing Burger Bar and Buttons", () => {
 		expect(await checkedVal.jsonValue()).toBe(true);
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Check for 3 Burger Bar Buttons", async () => {
-		// console.log("Checking for 3 Burger Bar Buttons...");
 		// Query select all of the burger bar button elements
 		// and return the length of that array
 		const bBtns = await page.$$(BURGERBTNS);
 		// Expect there that array from earlier to be of length 3,
 		// meaning 3 burger bar buttons were found
 		expect(bBtns.length).toBe(3);
-		// console.log(await allHidden(bBtns));
 		// expect btns to not be hidden
 		expect(await helper.allHidden(bBtns)).toBe(false);
 		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
 	it("Make sure Burger Bar button elements have text values", async () => {
-		// console.log("Checking to make sure buttons have text values...");
 		// Start as true, if any don't have text values, swap to false
 		let allArePopulated = true;
 		// Query select all of the home page elements
 		const bBtns = await page.$$(BURGERBTNS);
 		for (let i = 0; i < bBtns.length; i++) {
-			// console.log(`Checking button ${i}/${burgerBtns.length}`);
 			const data = await page.evaluate((el) => el.textContent, bBtns[i]);
 			// Make sure the text in the buttons exist
 			if (data.length === 0) {
