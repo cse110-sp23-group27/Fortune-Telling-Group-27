@@ -25,16 +25,12 @@
   height: 40vh;
 }
 
-.tarotButton {
-  font-family: 'Cinzel Decorative', cursive;
-}
-
 button {
   margin: 70px;
 }
 
 #toTarotCard {
-  font-family: cinzel;
+  font-family: cinzel, cursive;
   background: url('https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-card.png') no-repeat center;
   background-size: cover;
   width: 300px;
@@ -131,7 +127,7 @@ button {
   height: 26px;
   cursor: pointer;
   z-index: 151;
-  
+
   /* Below 3 needed to center the clickable area */
   display: flex;
   align-items: center;
