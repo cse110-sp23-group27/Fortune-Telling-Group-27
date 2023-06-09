@@ -85,6 +85,7 @@ function bindGeneralButtons() {
 
 	const docBtn = document.getElementById("toDocumentation");
 	const githubBtn = document.getElementById("toGitHub");
+	const introBtn = document.getElementById("toIntro");
 
 	docBtn.addEventListener("click", () => {
 		// eslint-disable-next-line max-len
@@ -95,10 +96,9 @@ function bindGeneralButtons() {
 		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
 	});
 
-	// githubBtn.addEventListener("click", () => {
-	// 	navigator.clipboard.writeText(
-	// 		"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
-	// });
+	introBtn.addEventListener("click", () => {
+		window.open("https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/specs/user-introduction.html");
+	});
 }
 
 /**
