@@ -82,7 +82,7 @@ button {
   
 .fade-in {
     animation: fadeIn 3s;
-  }
+}
 
 @keyframes fadeIn {
     0% { opacity: 0; }
