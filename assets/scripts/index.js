@@ -514,13 +514,11 @@ document.querySelector(".menuBox").addEventListener("mouseleave", function() {
  * @author Kevin Wong
  * @date 6/9/2023
  */
-let menus = document.querySelectorAll('.menuBox, .menuBoxTwo');
+const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
 menus.forEach(function(menu) {
-  menu.addEventListener('mouseleave', function() {
-    // remove "menuBox" from the class name and add "#menuToggle"
-    let toggleId = '#' + menu.className.replace('menuBox', 'menuToggle');
-    document.querySelector(toggleId).checked = false;
-  });
+	menu.addEventListener("mouseleave", function() {
+		// remove "menuBox" from the class name and add "#menuToggle"
+		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
+		document.querySelector(toggleId).checked = false;
+	});
 });
-
-
