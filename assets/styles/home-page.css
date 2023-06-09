@@ -99,16 +99,16 @@ button {
   opacity: 0;
 }
 
-#menuToggle:checked + .menuBtn > span, #menuToggleTwo:checked + .menuBtnTwo > span {
+#menuToggle:checked + .menuBtn > span {
   transform: rotate(45deg);
 }
 
-#menuToggle:checked + .menuBtn > span::before, #menuToggleTwo:checked + .menuBtnTwo > span::before {
+#menuToggle:checked + .menuBtn > span::before {
   top: 0;
   transform: rotate(0deg);
 }
 
-#menuToggle:checked + .menuBtn > span::after, #menuToggleTwo:checked + .menuBtnTwo > span::after {
+#menuToggle:checked + .menuBtn > span::after {
   top: 0;
   transform: rotate(90deg);
 }
@@ -134,6 +134,11 @@ button {
   justify-content: center;
 }
 
+#cardBook {
+  width: 26px;
+  height: 26px;
+}
+
 .menuBtn {
   top: 30px;
   left: 20px;
@@ -144,9 +149,9 @@ button {
   right: 50px;
 }
 
-.menuBtn > span, .menuBtnTwo > span,
-.menuBtn > span::before, .menuBtnTwo > span::before,
-.menuBtn > span::after, .menuBtnTwo > span::after {
+.menuBtn > span,
+.menuBtn > span::before,
+.menuBtn > span::after {
   display: block;
   position: absolute;
   width: 100%;
