@@ -120,23 +120,6 @@ function bindGeneralButtons() {
  * @param {string} fortuneType - Displays elements for this fortune type
  */
 function displayGeneralUIElements(fortuneType =null) {
-	// Changes the general buttons (home, options, GitHub)
-	const generalBtns = document.getElementsByClassName("general");
-	for (let i = 0; i < generalBtns.length; i++) {
-		generalBtns[i].hidden = !generalBtns[i].hidden;
-	}
-
-	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i < 3; i++) {
-		const optionsBtn = document.getElementById(
-			consts.FORTUNELIST[i]+"Options");
-		optionsBtn.hidden = true;
-	}
-	if (fortuneType != null) {
-		const optionsBtn = document.getElementById(fortuneType + "Options");
-		optionsBtn.hidden = !optionsBtn.hidden;
-	}
-
 	// Hides/Displays the home page buttons as needed
 	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i < homeBtns.length; i++) {
@@ -472,6 +455,7 @@ function resetCards() {
 	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
 }
+
 /**
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
@@ -512,7 +496,6 @@ function removeFogBackground() {
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	// bindBurgerBar();
 	createShuffleAndResetBtn();
 	createShuffleCards();
 }
