@@ -24,17 +24,6 @@ function bindHomePageBtns() {
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
 
-	/**
-     * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
-     * @author Kevin Wong
-     * @date 5/24/2023
-     * @param {string} color - A parameter for what color the background
-     * should be.
-     */
-	// function changeBackgroundColor(color) {
-	// 	document.body.style.backgroundColor = color;
-	// }
-
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
@@ -43,50 +32,13 @@ function bindHomePageBtns() {
 		homePageBool = false;
 	});
 
-	// tarotCardBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("red");
-	// });
-
-	// tarotCardBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
-
 	eggBtn.addEventListener("click", () => {
-		homePageBool = false;
-		console.log(consts.FORTUNETYPES.egg);
-		displayGeneralUIElements(consts.FORTUNETYPES.egg);
-		document.getElementById("centerText").textContent =
-            consts.FORTUNETYPES.egg;
-		document.getElementById("response").textContent =
-            "THIS IS THE RESPONSE FOR THE EGG";
+		alert("TO BE DEVELOPED");
 	});
-
-	// eggBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("blue");
-	// });
-
-	// eggBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
 
 	boneBtn.addEventListener("click", () => {
-		homePageBool = false;
-		console.log(consts.FORTUNETYPES.bone);
-		displayGeneralUIElements(consts.FORTUNETYPES.bone);
-		document.getElementById("centerText").textContent =
-            consts.FORTUNETYPES.bone;
-		document.getElementById("response").textContent =
-            "THIS IS THE RESPONSE FOR THE BONE TOSSING";
+		alert("TO BE DEVELOPED");
 	});
-
-
-	// boneBtn.addEventListener("mouseover", () => {
-	// 	changeBackgroundColor("green");
-	// });
-
-	// boneBtn.addEventListener("mouseout", () => {
-	// 	changeBackgroundColor("black");
-	// });
 }
 
 /**
@@ -135,12 +87,12 @@ function bindGeneralButtons() {
 	const githubBtn = document.getElementById("toGitHub");
 
 	docBtn.addEventListener("click", () => {
-		window.open("https://cse110-sp23-group27.github.io/" +
-		"Fortune-Telling-Group-27/specs/documentation/generated/index.html");
+		// eslint-disable-next-line max-len
+		window.open("https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/specs/documentation/generated/index.html");
 	});
 	githubBtn.addEventListener("click", () => {
-		window.open("https://github.com/cse110-sp23-group27/" +
-		"Fortune-Telling-Group-27/tree/main");
+		// eslint-disable-next-line max-len
+		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
 	});
 
 	// githubBtn.addEventListener("click", () => {
@@ -156,23 +108,6 @@ function bindGeneralButtons() {
  * @param {string} fortuneType - Displays elements for this fortune type
  */
 function displayGeneralUIElements(fortuneType =null) {
-	// Changes the general buttons (home, options, GitHub)
-	const generalBtns = document.getElementsByClassName("general");
-	for (let i = 0; i < generalBtns.length; i++) {
-		generalBtns[i].hidden = !generalBtns[i].hidden;
-	}
-
-	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i < 3; i++) {
-		const optionsBtn = document.getElementById(
-			consts.FORTUNELIST[i]+"Options");
-		optionsBtn.hidden = true;
-	}
-	if (fortuneType != null) {
-		const optionsBtn = document.getElementById(fortuneType + "Options");
-		optionsBtn.hidden = !optionsBtn.hidden;
-	}
-
 	// Hides/Displays the home page buttons as needed
 	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i < homeBtns.length; i++) {
@@ -183,17 +118,22 @@ function displayGeneralUIElements(fortuneType =null) {
 
 /**
  * Creates and displays the shuffle and reset button that should control the animation
- * for the tarot cards.
+ * for the tarot cards. Also creates Header text elements.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
  * @date 5/27/2023
  */
-function createShuffleAndResetBtn() {
+function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
-
+	const homeBtn = document.getElementById("toHome");
+	const shuffleHeader = document.createElement("h1");
+	shuffleHeader.id = "shuffleHeaderText";
+	shuffleHeader.textContent = "Select Your Fate";
+	shuffleHeader.hidden = true;
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
+		homeBtn.disabled = true;
 		shuffleBtn.hidden = true;
 		resetBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
@@ -202,12 +142,13 @@ function createShuffleAndResetBtn() {
 			cardOption.hidden = false;
 		}
 
-		shuffleBtn.hidden = true;
-
 		await playCardThrowAnimation();
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
-		playCardSpreadAnimation();
+		await playCardSpreadAnimation();
+		shuffleHeader.hidden = false;
+		homeBtn.disabled = false;
+		resetBtn.hidden = false;
 	});
 
 	resetBtn.id = "tarotResetBtn";
@@ -220,6 +161,7 @@ function createShuffleAndResetBtn() {
 
 	tarotDiv.append(shuffleBtn);
 	tarotDiv.append(resetBtn);
+	tarotDiv.append(shuffleHeader);
 }
 
 
@@ -429,8 +371,6 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
-	const resetBtn = document.getElementById("tarotResetBtn");
-	resetBtn.hidden = false;
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
 	for (let i = 0; i < 22; i++) {
@@ -442,6 +382,8 @@ function displayThreeOptions() {
 	}
 	cardsSelected = true;
 
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	shuffleHeader.hidden = true;
 	let selectedCardsFound = 0;
 	let cardsMoved = 0;
 	TarotCard.getAllCards().forEach((card) => {
@@ -464,7 +406,6 @@ function displayThreeOptions() {
 						cardsTypeSelected.push(card);
 					}
 				}
-
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
@@ -481,21 +422,6 @@ function displayThreeOptions() {
 					default:
 						cardOption.value = tarotCard["futureDescription"];
 					}
-
-					// TODO: Find a better way to do this,
-					// apparently this can cause a memory leak
-					// but don't have time to make a better solution rn
-					// https://stackoverflow.com/questions/9251837/how-to-remove-all-listeners-in-an-element
-					// remove old on click events
-					/* cardOption.hidden = true;
-					const clonedCardOption = cardOption.cloneNode(true);
-					clonedCardOption.className = "responseCards21";
-					// const tempCardOption = cardOption;
-					cardOption.parentNode.replaceChild(
-						clonedCardOption, cardOption);
-					// tempCardOption.remove();
-					cardOption.hidden = false;
-					tarotDiv.appendChild(cardOption);*/
 				}
 			});
 		}
@@ -523,6 +449,7 @@ function resetCards() {
 	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
 }
+
 /**
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
@@ -558,25 +485,12 @@ function removeFogBackground() {
 }
 
 /**
- * Binds functionality to the burger bar.
- * @author Jason Bui
- * @date 5/26/2023
- */
-/* function bindBurgerBar() {
-	document.querySelector(".nav-toggle").addEventListener("click", () => {
-		const navLinks = document.querySelector(".nav-links");
-		navLinks.hidden = !navLinks.hidden;
-	});
-}*/
-
-/**
  * Initializes home page
  */
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	// bindBurgerBar();
-	createShuffleAndResetBtn();
+	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
 }
 
@@ -589,16 +503,4 @@ init();
  */
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menuToggle");
-	if (menuToggle) {
-		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menuItem");
-			menuItems.forEach((item) => {
-				item.hidden = !item.hidden;
-			});
-		});
-	}
 });

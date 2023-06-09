@@ -11,8 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          node-version: '18.16.0'
+
       - name: Install modules
         run: npm ci
 
@@ -22,3 +21,31 @@ jobs:
       - name: Running Tests
         if: success() || failure()
         run: npm run GHtest
+
+  Linter:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Repo History
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v5
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          FILTER_REGEX_INCLUDE: .*assets/.*
+          FILTER_REGEX_EXCLUE: .*specs/.*
+          DEFAULT_WORKSPACE: assets/
+          DEFAULT_BRANCH: main
+          LINTER_RULES_PATH: /
+          CSS_FILE_NAME: .stylelintrc.json
+          VALIDATE_JAVASCRIPT_ES: false
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          IGNORE_GITIGNORED_FILES: true
+          IGNORE_GENERATED_FILES: true
+          VALIDATE_MARKDOWN: false
+          VALIDATE_NATURAL_LANGUAGE: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

@@ -18,7 +18,6 @@ describe("Testing Homepage Buttons", () => {
 	}, helper.MAXTIMEOUT);
 
 	it("Initial Home Page - Check for 3 Buttons", async () => {
-		// console.log("Checking for 3 Main Buttons...");
 		// Query select all of the homepage button elements
 		// and return the length of that array
 		const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
@@ -31,14 +30,11 @@ describe("Testing Homepage Buttons", () => {
 	}, helper.MAXTIMEOUT);
 
 	it("Make sure <home-page> button elements have text values", async () => {
-		// console.log("Checking to make sure home page buttons
-		// have text values...");
 		// Start as true, if any don't have text values, swap to false
 		let allArePopulated = true;
 		// Query select all of the home page elements
 		const homePageBtns = await page.$$(HOMEPAGE);
 		for (let i = 0; i < homePageBtns.length; i++) {
-			// console.log(`Checking home page button ${i}/${homePageBtns.length}`);
 			const data = await page.evaluate((el) => el.textContent,
 				homePageBtns[i]);
 			// Make the text in the buttons exist
@@ -52,10 +48,8 @@ describe("Testing Homepage Buttons", () => {
 	}, helper.MAXTIMEOUT);
 	it("Make sure <home-page> button elements change background",
 		async () => {
-			// console.log("Checking to make sure home
-			// page buttons change background...");
 			// Start as true, if any change the background color, set to false
-			let allChangeBackground = true;
+			let allChangeBackground = false;
 			const bdy = await page.waitForSelector("body");
 			// Query select all of the home page elements
 			const homePageBtns = await page.$$(HOMEPAGE);
@@ -63,20 +57,30 @@ describe("Testing Homepage Buttons", () => {
 				const style = await bdy.getProperty("style");
 				const bg = await (
 					await style.getProperty("backgroundColor")).jsonValue();
-				// console.log(`Checking home page button ${i}/${homePageBtns.length}`);
 				await homePageBtns[i].hover();
 				// Check if the backgrounds are same color after mouse hover
 				const bg2 = await (
 					await style.getProperty("backgroundColor")).jsonValue();
-				// console.log(`BG1: ${bg} BG2:${bg2}`);
 				if (bg2 !== bg) {
-					allChangeBackground = false;
+					allChangeBackground = true;
 				}
-				console.log(bg2);
-				console.log(bg);
 				// Expect allArePopulated to still be true
-				expect(allChangeBackground).toBe(true);
+				expect(allChangeBackground).toBe(false);
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
+	it("Testing alert for egg and bone button", async () => {
+		// select home page buttons
+		const homePageBtns = await page.$$(HOMEPAGE);
+		for (let i = 1; i < homePageBtns.length; i++) {
+			page.once("dialog", async (dialog) => {
+				// get alert message
+				console.log(dialog.message());
+				// accept alert
+				await dialog.accept();
+			});
+			await homePageBtns[i].click();
+			await helper.delay(100);
+		}
+	}, helper.MAXTIMEOUT);
 });
