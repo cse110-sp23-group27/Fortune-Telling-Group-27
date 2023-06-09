@@ -78,10 +78,9 @@ describe("Testing Homepage Buttons", () => {
 				console.log(dialog.message());
 				// accept alert
 				await dialog.accept();
-			},);
+			});
 			await homePageBtns[i].click();
 			await helper.delay(100);
-			
 		}
 	}, helper.MAXTIMEOUT);
 });

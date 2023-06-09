@@ -101,17 +101,16 @@ describe("Testing Homepage Buttons", () => {
 		// select home page buttons
 		const homePageBtns = await page.$$(HOMEPAGE);
 		for (let i = 1; i &lt; homePageBtns.length; i++) {
-			console.log(await (
-				await homePageBtns[i].getProperty("textContent")).jsonValue());
-			await homePageBtns[i].click();
-			page.on("dialog", async (dialog) => {
+			page.once("dialog", async (dialog) => {
 				// get alert message
 				console.log(dialog.message());
 				// accept alert
 				await dialog.accept();
 			});
+			await homePageBtns[i].click();
+			await helper.delay(100);
 		}
-	});
+	}, helper.MAXTIMEOUT);
 });</code></pre>
         </article>
     </section>
