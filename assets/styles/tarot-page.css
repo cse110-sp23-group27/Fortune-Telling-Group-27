@@ -113,6 +113,36 @@ button {
     text-shadow: 2px 2px 4px rgb(149, 148, 149);
 }
 
+#pastHeaderText{
+    color: white;
+    text-align: left;
+    font-size: 40px;
+    margin-top: 60vh;
+    margin-left: 32vh;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
+    position: absolute;
+}
+
+#presentHeaderText{
+    color: white;
+    text-align: left;
+    font-size: 40px;
+    margin-top: 60vh;
+    margin-left: 84vh;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
+    position: absolute;
+}
+
+#futureHeaderText{
+    color: white;
+    text-align: left;
+    font-size: 40px;
+    margin-top: 60vh;
+    margin-left: 139vh;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
+    position: absolute;
+}
+
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;

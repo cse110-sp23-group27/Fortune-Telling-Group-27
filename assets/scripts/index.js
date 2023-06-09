@@ -323,6 +323,7 @@ async function playCardSpreadAnimation() {
  * @date 5/27/2023
  */
 function createShuffleCards() {
+	//pastHeader.hidden = true;
 	for (let i = 0; i < 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
@@ -373,6 +374,18 @@ function createShuffleCards() {
 function displayThreeOptions() {
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
+	const pastHeader = document.createElement("h1");
+	const presentHeader = document.createElement("h1");
+	const futureHeader = document.createElement("h1");
+	pastHeader.id = "pastHeaderText";
+	pastHeader.textContent = "Past";
+	presentHeader.id = "presentHeaderText";
+	presentHeader.textContent = "Present";
+	futureHeader.id = "futureHeaderText";
+	futureHeader.textContent = "Future";
+	pastHeader.hidden = true;
+	presentHeader.hidden = true;
+	futureHeader.hidden = true;
 	for (let i = 0; i < 22; i++) {
 		const button = document.getElementById(`Option ${i}`);
 		if (button.getAttribute("selected") === "true") {
@@ -426,6 +439,12 @@ function displayThreeOptions() {
 			});
 		}
 	});
+	tarotDiv.appendChild(pastHeader);
+	tarotDiv.appendChild(presentHeader);
+	tarotDiv.appendChild(futureHeader);
+	pastHeader.hidden = false;
+	presentHeader.hidden = false;
+	futureHeader.hidden = false;
 }
 
 /**
