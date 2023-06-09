@@ -370,10 +370,14 @@ function createShuffleCards() {
 			if (button.getAttribute("selected") === "true") {
 				button.setAttribute("selected", false);
 				button.style.backgroundColor = "white";
+				button.style.transition = "top 0.5s";
+				button.style.top = (parseFloat(button.style.top) + 5)+ "vh";
 				cardCounter--;
 			} else {
 				button.setAttribute("selected", true);
 				button.style.backgroundColor = "black";
+				button.style.transition = "top 0.5s";
+				button.style.top = (parseFloat(button.style.top) - 5)+ "vh";
 				cardCounter++;
 			}
 
