@@ -118,11 +118,11 @@ function displayGeneralUIElements(fortuneType =null) {
 
 /**
  * Creates and displays the shuffle and reset button that should control the animation
- * for the tarot cards.
+ * for the tarot cards. Also creates Header text elements.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
  * @date 5/27/2023
  */
-function createShuffleAndResetBtn() {
+function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
 	const homeBtn = document.getElementById("toHome");
@@ -490,7 +490,7 @@ function removeFogBackground() {
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	createShuffleAndResetBtn();
+	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
 }
 
