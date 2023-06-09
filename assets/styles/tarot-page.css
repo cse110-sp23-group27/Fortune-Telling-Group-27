@@ -66,6 +66,7 @@ body {
   
 button {
     margin: 5px;
+    cursor: pointer;
 }
 
 #response {
@@ -96,6 +97,7 @@ button {
     background-color: transparent;
     color: #9d9dd1;
     padding: 17px;
+    cursor: pointer;
 }
 
 #tarotShuffleBtn {
