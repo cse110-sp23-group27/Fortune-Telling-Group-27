@@ -118,15 +118,18 @@ function displayGeneralUIElements(fortuneType =null) {
 
 /**
  * Creates and displays the shuffle and reset button that should control the animation
- * for the tarot cards.
+ * for the tarot cards. Also creates Header text elements.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
  * @date 5/27/2023
  */
-function createShuffleAndResetBtn() {
+function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
 	const homeBtn = document.getElementById("toHome");
-
+	const shuffleHeader = document.createElement("h1");
+	shuffleHeader.id = "shuffleHeaderText";
+	shuffleHeader.textContent = "Select Your Fate";
+	shuffleHeader.hidden = true;
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
@@ -143,6 +146,7 @@ function createShuffleAndResetBtn() {
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
 		await playCardSpreadAnimation();
+		shuffleHeader.hidden = false;
 		homeBtn.disabled = false;
 		resetBtn.hidden = false;
 	});
@@ -157,6 +161,7 @@ function createShuffleAndResetBtn() {
 
 	tarotDiv.append(shuffleBtn);
 	tarotDiv.append(resetBtn);
+	tarotDiv.append(shuffleHeader);
 }
 
 
@@ -377,6 +382,8 @@ function displayThreeOptions() {
 	}
 	cardsSelected = true;
 
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	shuffleHeader.hidden = true;
 	let selectedCardsFound = 0;
 	let cardsMoved = 0;
 	TarotCard.getAllCards().forEach((card) => {
@@ -399,7 +406,6 @@ function displayThreeOptions() {
 						cardsTypeSelected.push(card);
 					}
 				}
-
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
@@ -484,7 +490,7 @@ function removeFogBackground() {
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	createShuffleAndResetBtn();
+	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
 }
 

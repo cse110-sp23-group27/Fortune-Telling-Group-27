@@ -105,6 +105,14 @@ button {
     left: 45vw;
 }
 
+#shuffleHeaderText {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 50px;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
+}
+
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;
