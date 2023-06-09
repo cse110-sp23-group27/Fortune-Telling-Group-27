@@ -69,18 +69,19 @@ describe("Testing Homepage Buttons", () => {
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
-		it("Testing alert for egg and bone button", async () => {
-			// select home page buttons
-			const homePageBtns = await page.$$(HOMEPAGE);
-			for(let i = 1; i < homePageBtns.length; i++) {
-				console.log(await (await homePageBtns[i].getProperty("textContent")).jsonValue());
-				await homePageBtns[i].click();
-				page.on('dialog', async (dialog) => {
-					//get alert message
-					console.log(dialog.message());
-					//accept alert
-					await dialog.accept();
-				})
-			}
-		});
+	it("Testing alert for egg and bone button", async () => {
+		// select home page buttons
+		const homePageBtns = await page.$$(HOMEPAGE);
+		for (let i = 1; i < homePageBtns.length; i++) {
+			console.log(await (
+				await homePageBtns[i].getProperty("textContent")).jsonValue());
+			await homePageBtns[i].click();
+			page.on("dialog", async (dialog) => {
+				// get alert message
+				console.log(dialog.message());
+				// accept alert
+				await dialog.accept();
+			});
+		}
+	});
 });

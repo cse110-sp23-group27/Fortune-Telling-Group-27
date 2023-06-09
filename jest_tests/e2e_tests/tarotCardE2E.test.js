@@ -144,6 +144,16 @@ describe("Testing Tarot Card Page", () => {
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
+		it("Check localstorage for saved cards and ", async () => {
+			// get local storage value
+			const deck = await page.evaluate(
+				() => localStorage.getItem("deck"));
+			const deckVal = await JSON.parse(deck);
+			expect(deckVal.length >= 3);
+			await helper.delay(500);
+			// get burger bar for saved cards
+			// check if list in burger bar is the same as deck (or just same length)
+		}, helper.MAXTIMEOUT);
 		it("Go back home using reset", async () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
