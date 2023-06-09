@@ -510,14 +510,24 @@ init();
  * @author Kyle Ng
  * @date 6/5/2023
  */
+/*
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
 });
-
-// Save cards to localStorage
-localStorage.setItem("deck", JSON.stringify(savedCards));
-JSON.parse(localStorage.getItem("deck"));
-const savedCardsString = localStorage.getItem("deck");
-var savedCards = JSON.parse(savedCardsString);
-// check if card has been seen, if not, add to deck
-localStorage.setItem("deck", JSON.stringify(savedCards));
+*/
+/**
+ * Changed the functionality so that we don't have to copy paste.
+ * If for some reason someone wants to add more hamburger bars in the future,
+ * then they can add the same functionality by adding in the name.
+ * Uses global variable, so be careful!
+ * @author Kevin Wong
+ * @date 6/9/2023
+ */
+const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
+menus.forEach(function(menu) {
+	menu.addEventListener("mouseleave", function() {
+		// remove "menuBox" from the class name and add "#menuToggle"
+		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
+		document.querySelector(toggleId).checked = false;
+	});
+});
