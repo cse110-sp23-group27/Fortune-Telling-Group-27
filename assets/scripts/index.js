@@ -23,7 +23,7 @@ function bindHomePageBtns() {
 	const tarotCardBtn = document.getElementById("toTarotCard");
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
-  
+
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
