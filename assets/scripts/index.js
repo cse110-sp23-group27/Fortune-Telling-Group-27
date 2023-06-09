@@ -24,14 +24,6 @@ function bindHomePageBtns() {
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
 
-	/**
-     * Added changeBackgroundColor and the mouseOver and mouseOut listeners.
-     * @author Kevin Wong
-     * @date 5/24/2023
-     * @param {string} color - A parameter for what color the background
-     * should be.
-     */
-
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
@@ -116,23 +108,6 @@ function bindGeneralButtons() {
  * @param {string} fortuneType - Displays elements for this fortune type
  */
 function displayGeneralUIElements(fortuneType =null) {
-	// Changes the general buttons (home, options, GitHub)
-	const generalBtns = document.getElementsByClassName("general");
-	for (let i = 0; i < generalBtns.length; i++) {
-		generalBtns[i].hidden = !generalBtns[i].hidden;
-	}
-
-	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i < 3; i++) {
-		const optionsBtn = document.getElementById(
-			consts.FORTUNELIST[i]+"Options");
-		optionsBtn.hidden = true;
-	}
-	if (fortuneType != null) {
-		const optionsBtn = document.getElementById(fortuneType + "Options");
-		optionsBtn.hidden = !optionsBtn.hidden;
-	}
-
 	// Hides/Displays the home page buttons as needed
 	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i < homeBtns.length; i++) {
@@ -468,6 +443,7 @@ function resetCards() {
 	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
 }
+
 /**
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
@@ -503,24 +479,11 @@ function removeFogBackground() {
 }
 
 /**
- * Binds functionality to the burger bar.
- * @author Jason Bui
- * @date 5/26/2023
- */
-/* function bindBurgerBar() {
-	document.querySelector(".nav-toggle").addEventListener("click", () => {
-		const navLinks = document.querySelector(".nav-links");
-		navLinks.hidden = !navLinks.hidden;
-	});
-}*/
-
-/**
  * Initializes home page
  */
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	// bindBurgerBar();
 	createShuffleAndResetBtn();
 	createShuffleCards();
 }
@@ -534,16 +497,4 @@ init();
  */
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menuToggle");
-	if (menuToggle) {
-		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menuItem");
-			menuItems.forEach((item) => {
-				item.hidden = !item.hidden;
-			});
-		});
-	}
 });
