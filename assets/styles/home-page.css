@@ -203,7 +203,21 @@ button {
   text-align: left;
 }
 
-.menuItem:hover {
+.menuItemTwo {
+  display: block;
+  color: #333;
+  font-family: cinzel, cursive;
+  font-size: 1.0vw;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+  border: #ECEFF1;
+  background-color: #ECEFF1;
+  width: 13vw;
+  text-align: left;
+}
+
+.menuItem:hover, .menuItemTwo:hover {
   background-color: #CFD8DC;
 }
 
