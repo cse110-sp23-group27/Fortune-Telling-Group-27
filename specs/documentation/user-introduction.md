@@ -4,7 +4,7 @@
 The deck you will be exploring comprises 22 Major Arcana cards, which carry profound meanings and themes. They speak to universal experiences and life cycles we all go through in our journey, from innocence and growth to wisdom and self-realization. They represent powerful archetypes, emotional states, and life events, guiding you towards a deeper understanding of your existence.
 ​
 ## How to use Tarot Cards step-by-step
-​
+
 ### Step 1: Shuffling the Cards
 Before you begin your reading, you need to shuffle the cards. This is done by clicking the `Shuffle Button` located at the center of the your Tarot page's screen. This process is designed to randomize the deck and ensure that the cards you pick are guided by your intuition and the synchronicity of the universe.
 ​
