@@ -1,14 +1,15 @@
 #tarotDiv {
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* margin: 10vmin; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
 }
-  
+
 .cardsBtnPreShuffle{
-    margin: 10px;
-    border-color: #fff;
-    background-color: #fff;
-    padding-bottom: -10 px;
+    border-color: black;
     border-radius: 5%;
     transform: translateX(-50%);
 }
@@ -16,10 +17,9 @@
 .chosenCards {
     height: 45vmin;
     width: 25vmin;
-    margin: 3px;
-    border-width: 2px;
+    margin: -2.5px;
     border-radius: 5%;
-    background-color: blanchedalmond;
+    border-color: black;
 }
 
 .responseCards {
@@ -27,12 +27,12 @@
     /* margin: 10px; */
     /* background-color: #fff; */
     border-color: #fff;
-    padding-bottom: -10px;
     border-radius: 5%;
     height: 30vmin;
     width: 17vmin;
     margin: 3px;
-    border-width: 2px;
+    border-width: 10px;
+    border-radius: 5%;
     background-color: blanchedalmond;
 }
 
@@ -65,6 +65,7 @@ body {
   
 button {
     margin: 5px;
+    cursor: pointer;
 }
 
 #response {
@@ -82,15 +83,26 @@ button {
 #tarotResetBtn {
     position: absolute;
     z-index: 1;
-    bottom: 60px;
+    bottom: 5vh;
+    left: 50vw;
     transform: translateX(-50%);
     font-size: 16px;
 }
 
-#tarotShuffleBtn {
-    margin-top: 400px;
+#tarotShuffleBtn, #tarotResetBtn {
+    box-shadow: 0 0 10px 5px #323270;
+    border: solid 1px #6a6aac;
+    border-radius: 5%;
+    background-color: transparent;
+    color: #9d9dd1;
+    padding: 17px;
+    cursor: pointer;
 }
 
+#tarotShuffleBtn {
+    margin-top: 50vh;
+    margin-left: 45vw;
+}
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;
