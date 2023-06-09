@@ -23,7 +23,7 @@ function bindHomePageBtns() {
 	const tarotCardBtn = document.getElementById("toTarotCard");
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
-
+  
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
@@ -137,10 +137,12 @@ function displayGeneralUIElements(fortuneType =null) {
 function createShuffleAndResetBtn() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
+	const homeBtn = document.getElementById("toHome");
 
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
+		homeBtn.disabled = true;
 		shuffleBtn.hidden = true;
 		resetBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
@@ -149,12 +151,12 @@ function createShuffleAndResetBtn() {
 			cardOption.hidden = false;
 		}
 
-		shuffleBtn.hidden = true;
-
 		await playCardThrowAnimation();
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
-		playCardSpreadAnimation();
+		await playCardSpreadAnimation();
+		homeBtn.disabled = false;
+		resetBtn.hidden = false;
 	});
 
 	resetBtn.id = "tarotResetBtn";
@@ -376,8 +378,6 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
-	const resetBtn = document.getElementById("tarotResetBtn");
-	resetBtn.hidden = false;
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
 	for (let i = 0; i < 22; i++) {
