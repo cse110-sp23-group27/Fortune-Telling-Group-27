@@ -17,7 +17,6 @@ const RESPONSE = "#response";
 
 describe("Testing Tarot Card Page", () => {
 	const randNums = helper.getMultipleInts(3, 22); // get selected random cards
-	// const randNums = [16, 21, 0]
 	// visit the fortune telling website
 	beforeAll(async () => {
 		await page.goto("http://127.0.0.1:5500/index.html");
@@ -29,9 +28,8 @@ describe("Testing Tarot Card Page", () => {
 	}, helper.MAXTIMEOUT);
 	for (let increment = 0; increment < 2; increment++) {
 		it("Initial  - Click on Tarot Card Button", async () => {
-		// console.log("Checking for 3 Main Buttons...");
-		// Query select all of the homepage button elements
-		// and return the length of that array
+			// Query select all of the homepage button elements
+			// and return the length of that array
 			const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
 				return homePageBtns.length;
 			});
@@ -59,7 +57,7 @@ describe("Testing Tarot Card Page", () => {
 			expect(await helper.allHidden(shuffle)).toBe(false);
 		}, helper.MAXTIMEOUT);
 		it("Select and unselect card", async () => {
-		// select random card
+			// select random card
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			const randNum = await helper.getRandomInt(shuffle.length);
 			const selCard = shuffle[randNum];
@@ -150,10 +148,8 @@ describe("Testing Tarot Card Page", () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
 			const reset = await page.$(RESETBTN);
-			// await toHome.click();
 			await reset.click();
 			await helper.delay(500);
-			// await reset.evaluate((b) => b.click()); // click reset button
 			// expect home page buttons to be visible
 			expect(await helper.allHidden(homePageBtns)).toBe(false);
 			const shuffle = await page.$$(SHUFFLEDCARDS);
