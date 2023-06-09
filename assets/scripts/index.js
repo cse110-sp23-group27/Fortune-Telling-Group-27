@@ -97,7 +97,8 @@ function bindGeneralButtons() {
 	});
 
 	introBtn.addEventListener("click", () => {
-		window.open("https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/specs/user-introduction.html");
+		// eslint-disable-next-line max-len
+		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/user-introduction.md");
 	});
 }
 
