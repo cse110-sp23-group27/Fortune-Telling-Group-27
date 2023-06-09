@@ -124,7 +124,6 @@ button {
 .menuBtn, .menuBtnTwo {
   position: fixed;
   width: 26px;
-  height: 26px;
   cursor: pointer;
   z-index: 151;
 
@@ -136,17 +135,19 @@ button {
 
 #cardBook {
   width: 26px;
-  height: 26px;
+  height: 36px;
 }
 
 .menuBtn {
   top: 30px;
   left: 20px;
+  height: 26px
 }
 
 .menuBtnTwo {
   bottom: 30px;
   right: 50px;
+  height: 36px;
 }
 
 .menuBtn > span,
