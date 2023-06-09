@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'cinzel';
-  src: url(../../fonts/CinzelDecorative-Regular.ttf);
+  font-family: cinzel;
+  src: url("../../fonts/CinzelDecorative-Regular.ttf");
 }
 
 .header {
@@ -25,16 +25,12 @@
   height: 40vh;
 }
 
-.tarotButton {
-  font-family: 'Cinzel Decorative', cursive;
-}
-
 button {
   margin: 70px;
 }
 
 #toTarotCard {
-  font-family: 'cinzel';
+  font-family: cinzel, cursive;
   background: url('https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-card.png') no-repeat center;
   background-size: cover;
   width: 300px;
@@ -99,16 +95,20 @@ button {
   opacity: 0;
 }
 
-#menuToggle:checked + .menuBtn > span {
+#menuToggleTwo {
+  opacity: 0;
+}
+
+#menuToggle:checked + .menuBtn > span, #menuToggleTwo:checked + .menuBtnTwo > span {
   transform: rotate(45deg);
 }
 
-#menuToggle:checked + .menuBtn > span::before {
+#menuToggle:checked + .menuBtn > span::before, #menuToggleTwo:checked + .menuBtnTwo > span::before {
   top: 0;
   transform: rotate(0deg);
 }
 
-#menuToggle:checked + .menuBtn > span::after {
+#menuToggle:checked + .menuBtn > span::after, #menuToggleTwo:checked + .menuBtnTwo > span::after {
   top: 0;
   transform: rotate(90deg);
 }
@@ -117,29 +117,36 @@ button {
   left: 0 !important;
 }
 
-.menuBtn {
+#menuToggleTwo:checked ~ .menuBoxTwo {
+  right: 0 !important;
+}
+
+.menuBtn, .menuBtnTwo {
   position: fixed;
-  top: 30px;
-  left: 20px;
   width: 26px;
   height: 26px;
   cursor: pointer;
   z-index: 151;
+
+  /* Below 3 needed to center the clickable area */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* used to make whole menu clickable, but too much bottom padding */
-/* TODO: Fix bottom padding */
-.menuBtn::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -5px;
-  right: -5px;
+.menuBtn {
+  top: 30px;
+  left: 20px;
 }
 
-.menuBtn > span,
-.menuBtn > span::before,
-.menuBtn > span::after {
+.menuBtnTwo {
+  bottom: 30px;
+  right: 50px;
+}
+
+.menuBtn > span, .menuBtnTwo > span,
+.menuBtn > span::before, .menuBtnTwo > span::before,
+.menuBtn > span::after, .menuBtnTwo > span::after {
   display: block;
   position: absolute;
   width: 100%;
@@ -148,21 +155,20 @@ button {
   transition-duration: .3s;
 }
 
-.menuBtn > span::before {
+.menuBtn > span::before, .menuBtnTwo > span::before {
   content: '';
   top: -8px;
 }
 
-.menuBtn > span::after {
+.menuBtn > span::after, .menuBtnTwo > span::after {
   content: '';
   top: 8px;
 }
 
-.menuBox {
+.menuBox, .menuBoxTwo {
   display: block;
   position: fixed;
   top: 0;
-  left: -100%;
   width: 15vw;
   height: 100%;
   margin: 0;
@@ -172,6 +178,14 @@ button {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, "40%");
   transition-duration: .4s;
   z-index: 150;
+}
+
+.menuBox {
+  left: -100%;
+}
+
+.menuBoxTwo {
+  right: -100%;
 }
 
 .menuItem {
@@ -189,7 +203,21 @@ button {
   text-align: left;
 }
 
-.menuItem:hover {
+.menuItemTwo {
+  display: block;
+  color: #333;
+  font-family: cinzel, cursive;
+  font-size: 1.0vw;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+  border: #ECEFF1;
+  background-color: #ECEFF1;
+  width: 13vw;
+  text-align: left;
+}
+
+.menuItem:hover, .menuItemTwo:hover {
   background-color: #CFD8DC;
 }
 
