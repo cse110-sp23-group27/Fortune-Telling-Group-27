@@ -1,0 +1,7 @@
+specs/
+.vscode/
+.github/
+node_modules/
+assets/scripts/consts.js
+assets/scripts/service-worker.js
+.eslintrc.js

@@ -87,6 +87,7 @@ button {
 
 
 /* Added below from website: https://alvarotrigo.com/blog/hamburger-menu-css/ */
+
 /* From number 6: Snappy Sliding Hamburger Menu */
 #menuToggle {
   opacity: 0;
@@ -119,13 +120,13 @@ button {
   cursor: pointer;
   z-index: 151;
 }
+
 /* used to make whole menu clickable, but too much bottom padding */
 /* TODO: Fix bottom padding */
 .menuBtn::before {
   content: "";
   position: absolute;
   top: -10px;
-  bottom: 0px;
   left: -5px;
   right: -5px;
 }
@@ -140,14 +141,17 @@ button {
   background-color: #323270;
   transition-duration: .3s;
 }
+
 .menuBtn > span::before {
   content: '';
   top: -8px;
 }
+
 .menuBtn > span::after {
   content: '';
   top: 8px;
 }
+
 .menuBox {
   display: block;
   position: fixed;
@@ -159,15 +163,16 @@ button {
   padding: 80px 0;
   list-style: none;
   background-color: #ECEFF1;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, "40%");
   transition-duration: .4s;
   z-index: 150;
 }
+
 .menuItem {
   display: block;
   padding: 0.5vh 2vw 3vh 1vw;
   color: #333;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto, sans-serif;
   font-size: 1.5vw;
   font-weight: 600;
   text-decoration: none;
@@ -177,6 +182,7 @@ button {
   width: 13vw;
   text-align: left;
 }
+
 .menuItem:hover {
   background-color: #CFD8DC;
 }
