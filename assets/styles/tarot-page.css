@@ -100,8 +100,9 @@ button {
 }
 
 #tarotShuffleBtn {
-    margin-top: 50vh;
-    margin-left: 45vw;
+    position: absolute;
+    top: 50vh;
+    left: 45vw;
 }
 /* ---------- Fog ---------- */
 .fogwrapper {
