@@ -32,25 +32,12 @@ function bindHomePageBtns() {
 		homePageBool = false;
 	});
 
-
 	eggBtn.addEventListener("click", () => {
-		homePageBool = false;
-		console.log(consts.FORTUNETYPES.egg);
-		displayGeneralUIElements(consts.FORTUNETYPES.egg);
-		document.getElementById("centerText").textContent =
-            consts.FORTUNETYPES.egg;
-		document.getElementById("response").textContent =
-            "THIS IS THE RESPONSE FOR THE EGG";
+		alert("TO BE DEVELOPED");
 	});
 
 	boneBtn.addEventListener("click", () => {
-		homePageBool = false;
-		console.log(consts.FORTUNETYPES.bone);
-		displayGeneralUIElements(consts.FORTUNETYPES.bone);
-		document.getElementById("centerText").textContent =
-            consts.FORTUNETYPES.bone;
-		document.getElementById("response").textContent =
-            "THIS IS THE RESPONSE FOR THE BONE TOSSING";
+		alert("TO BE DEVELOPED");
 	});
 }
 
@@ -100,12 +87,12 @@ function bindGeneralButtons() {
 	const githubBtn = document.getElementById("toGitHub");
 
 	docBtn.addEventListener("click", () => {
-		window.open("https://cse110-sp23-group27.github.io/" +
-		"Fortune-Telling-Group-27/specs/documentation/generated/index.html");
+		// eslint-disable-next-line max-len
+		window.open("https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/specs/documentation/generated/index.html");
 	});
 	githubBtn.addEventListener("click", () => {
-		window.open("https://github.com/cse110-sp23-group27/" +
-		"Fortune-Telling-Group-27/tree/main");
+		// eslint-disable-next-line max-len
+		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
 	});
 
 	// githubBtn.addEventListener("click", () => {
@@ -121,23 +108,6 @@ function bindGeneralButtons() {
  * @param {string} fortuneType - Displays elements for this fortune type
  */
 function displayGeneralUIElements(fortuneType =null) {
-	// Changes the general buttons (home, options, GitHub)
-	const generalBtns = document.getElementsByClassName("general");
-	for (let i = 0; i < generalBtns.length; i++) {
-		generalBtns[i].hidden = !generalBtns[i].hidden;
-	}
-
-	// Hides/Displays the option button that is needed if any
-	for (let i = 0; i < 3; i++) {
-		const optionsBtn = document.getElementById(
-			consts.FORTUNELIST[i]+"Options");
-		optionsBtn.hidden = true;
-	}
-	if (fortuneType != null) {
-		const optionsBtn = document.getElementById(fortuneType + "Options");
-		optionsBtn.hidden = !optionsBtn.hidden;
-	}
-
 	// Hides/Displays the home page buttons as needed
 	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i < homeBtns.length; i++) {
@@ -148,17 +118,22 @@ function displayGeneralUIElements(fortuneType =null) {
 
 /**
  * Creates and displays the shuffle and reset button that should control the animation
- * for the tarot cards.
+ * for the tarot cards. Also creates Header text elements.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
  * @date 5/27/2023
  */
-function createShuffleAndResetBtn() {
+function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
-
+	const homeBtn = document.getElementById("toHome");
+	const shuffleHeader = document.createElement("h1");
+	shuffleHeader.id = "shuffleHeaderText";
+	shuffleHeader.textContent = "Select Your Fate";
+	shuffleHeader.hidden = true;
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
+		homeBtn.disabled = true;
 		shuffleBtn.hidden = true;
 		resetBtn.hidden = true;
 		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
@@ -167,12 +142,13 @@ function createShuffleAndResetBtn() {
 			cardOption.hidden = false;
 		}
 
-		shuffleBtn.hidden = true;
-
 		await playCardThrowAnimation();
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
-		playCardSpreadAnimation();
+		await playCardSpreadAnimation();
+		shuffleHeader.hidden = false;
+		homeBtn.disabled = false;
+		resetBtn.hidden = false;
 	});
 
 	resetBtn.id = "tarotResetBtn";
@@ -185,6 +161,7 @@ function createShuffleAndResetBtn() {
 
 	tarotDiv.append(shuffleBtn);
 	tarotDiv.append(resetBtn);
+	tarotDiv.append(shuffleHeader);
 }
 
 
@@ -358,12 +335,11 @@ function createShuffleCards() {
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
 			if (cardsSelected) {
+				response.classList.add("fade-in");
+				setTimeout(() => {
+					response.classList.remove("fade-in");
+				  }, 2500);
 				response.textContent = button.value;
-				let opacity = 0;
-				setInterval(() => {
-					response.style.opacity = opacity;
-					opacity += 0.01;
-				}, 10);
 				return;
 			}
 
@@ -399,8 +375,6 @@ function createShuffleCards() {
  * @date 5/27/2023
  */
 function displayThreeOptions() {
-	const resetBtn = document.getElementById("tarotResetBtn");
-	resetBtn.hidden = false;
 	// get html elements of selected cards
 	const selectedHTMLCards = [];
 	for (let i = 0; i < 22; i++) {
@@ -412,6 +386,8 @@ function displayThreeOptions() {
 	}
 	cardsSelected = true;
 
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	shuffleHeader.hidden = true;
 	let selectedCardsFound = 0;
 	let cardsMoved = 0;
 	TarotCard.getAllCards().forEach((card) => {
@@ -434,7 +410,6 @@ function displayThreeOptions() {
 						cardsTypeSelected.push(card);
 					}
 				}
-
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
@@ -478,6 +453,7 @@ function resetCards() {
 	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
 }
+
 /**
  * Adds a fog background to the tarot card page
  * @date 5/31/2023
@@ -518,8 +494,7 @@ function removeFogBackground() {
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	// bindBurgerBar();
-	createShuffleAndResetBtn();
+	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
 }
 
@@ -534,14 +509,10 @@ document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-	const menuToggle = document.querySelector("#menuToggle");
-	if (menuToggle) {
-		menuToggle.addEventListener("change", () => {
-			const menuItems = document.querySelectorAll(".menuItem");
-			menuItems.forEach((item) => {
-				item.hidden = !item.hidden;
-			});
-		});
-	}
-});
+// Save cards to localStorage
+localStorage.setItem("deck", JSON.stringify(savedCards));
+JSON.parse(localStorage.getItem("deck"));
+const savedCardsString = localStorage.getItem("deck");
+var savedCards = JSON.parse(savedCardsString);
+// check if card has been seen, if not, add to deck
+localStorage.setItem("deck", JSON.stringify(savedCards));

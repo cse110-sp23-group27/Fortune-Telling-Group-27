@@ -1,59 +1,36 @@
 #tarotDiv {
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* margin: 10vmin; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
 }
-  
+
 .cardsBtnPreShuffle{
-    margin: 10px;
-    border-color: #fff;
-    background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
-
+    border-color: black;
     border-radius: 5%;
-    border-color: #fff;
-    background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10 px;
-    padding-left: 0px;
-
-    border-radius: 5%;
-
     transform: translateX(-50%);
 }
 
 .chosenCards {
     height: 45vmin;
     width: 25vmin;
-    margin: 3px;
-
-    border-width: 2px;
+    margin: -2.5px;
     border-radius: 5%;
-    background-color: blanchedalmond;
+    border-color: black;
 }
 
 .responseCards {
-    margin: 10px;
+    /* TODO: Resolve duplicate background colors */ 
+    /* margin: 10px; */
+    /* background-color: #fff; */
     border-color: #fff;
-    background-color: #fff;
-    
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: -10px;
-    padding-left: 0px;
-
-    border-radius: 5%;
     height: 30vmin;
     width: 17vmin;
     margin: 3px;
-
-    border-width: 2px;
+    border-width: 10px;
     border-radius: 5%;
     background-color: blanchedalmond;
 }
@@ -87,9 +64,11 @@ body {
   
 button {
     margin: 5px;
+    cursor: pointer;
 }
 
 #response {
+    font-family: 'cinzel';
     position: absolute;
     z-index: 2;
     bottom: 130px;
@@ -97,20 +76,51 @@ button {
     transform: translateX(-50%);
     inline-size: 60%;
     text-align: center;
-    font-size: 20px;
+    font-size: 17px;
     color: white;
   }
+  
+.fade-in {
+    animation: fadeIn 3s;
+  }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 
 #tarotResetBtn {
     position: absolute;
     z-index: 1;
-    bottom: 60px;
+    bottom: 5vh;
+    left: 50vw;
     transform: translateX(-50%);
     font-size: 16px;
 }
 
+#tarotShuffleBtn, #tarotResetBtn {
+    box-shadow: 0 0 10px 5px #323270;
+    border: solid 1px #6a6aac;
+    border-radius: 5%;
+    background-color: transparent;
+    color: #9d9dd1;
+    padding: 17px;
+    cursor: pointer;
+}
+
 #tarotShuffleBtn {
-    margin-top: 400px;
+    position: absolute;
+    top: 50vh;
+    left: 45vw;
+}
+
+#shuffleHeaderText {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 50px;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
 }
 
 /* ---------- Fog ---------- */
@@ -126,11 +136,13 @@ button {
     filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
     z-index: -1;
 }
+
 #foglayer_01, #foglayer_02, #foglayer_03 {
     height: 100%;
     position: absolute;
     width: 200%;
 }
+
 #foglayer_01 .image01, #foglayer_01 .image02,
 #foglayer_02 .image01, #foglayer_02 .image02,
 #foglayer_03 .image01, #foglayer_03 .image02 {
@@ -138,11 +150,13 @@ button {
     height: 100%;
     width: 50%;
 }
+
 #foglayer_01 {
     -webkit-animation: foglayer_01_opacity 10s linear infinite, foglayer_moveme 15s linear infinite;
     -moz-animation: foglayer_01_opacity 10s linear infinite, foglayer_moveme 15s linear infinite;
     animation: foglayer_01_opacity 10s linear infinite, foglayer_moveme 15s linear infinite;
 }
+
 #foglayer_02, #foglayer_03 {
     -webkit-animation: foglayer_02_opacity 21s linear infinite, foglayer_moveme 13s linear infinite;
     -moz-animation: foglayer_02_opacity 21s linear infinite, foglayer_moveme 13s linear infinite;
@@ -159,8 +173,10 @@ button {
 #foglayer_01 .image01, #foglayer_01 .image02 {
     background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png") center center/cover no-repeat transparent;
 }
+
 #foglayer_02 .image01, #foglayer_02 .image02,
-#foglayer_03 .image01, #foglayer_03 .image02{
+
+#foglayer_03 .image01, #foglayer_03 .image02 {
     background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png") center center/cover no-repeat transparent;
 }
 
@@ -173,6 +189,7 @@ button {
     80% { opacity: .36; }
     100% { opacity: .4; }
 }
+
 @-moz-keyframes foglayer_01_opacity {
     0% { opacity: .3; }
     22% { opacity: 0.8; }
@@ -181,6 +198,7 @@ button {
     80% { opacity: .36; }
     100% { opacity: .4; }
 }
+
 @-o-keyframes foglayer_01_opacity {
     0% { opacity: .3; }
     22% { opacity: 0.8; }
@@ -189,6 +207,7 @@ button {
     80% { opacity: .36; }
     100% { opacity: .4; }
 }
+
 @keyframes foglayer_01_opacity {
     0% { opacity: .3; }
     22% { opacity: 0.8; }
@@ -197,6 +216,7 @@ button {
     80% { opacity: .36; }
     100% { opacity: .4; }
 }
+
 /* ---------- Keyframe Layer 2 ---------- */
 @-webkit-keyframes foglayer_02_opacity {
 0% { opacity: .7; }
@@ -205,6 +225,7 @@ button {
 80% { opacity: .5; }
 100% { opacity: .7; }
 }
+
 @-moz-keyframes foglayer_02_opacity {
 0% { opacity: .7; }
 25% { opacity: .4; }
@@ -212,6 +233,7 @@ button {
 80% { opacity: .5; }
 100% { opacity: .7; }
 }
+
 @-o-keyframes foglayer_02_opacity {
 0% { opacity: .7; }
 25% { opacity: .4; }
@@ -219,6 +241,7 @@ button {
 80% { opacity: .5; }
 100% { opacity: .7; }
 }
+
 @keyframes foglayer_02_opacity {
 0% { opacity: .7; }
 25% { opacity: .4; }
@@ -226,6 +249,7 @@ button {
 80% { opacity: .5; }
 100% { opacity: .7; }
 }
+
 /* ---------- Keyframe Layer 3 ---------- */
 @-webkit-keyframes foglayer_03_opacity {
 0% { opacity: 1 }
@@ -234,6 +258,7 @@ button {
 68% { opacity: .5; }
 100% { opacity: 1; }
 }
+
 @-moz-keyframes foglayer_03_opacity {
 0% { opacity: 1 }
 27% { opacity: .4; }
@@ -241,6 +266,7 @@ button {
 68% { opacity: .5; }
 100% { opacity: 1; }
 }
+
 @-o-keyframes foglayer_03_opacity {
 0% { opacity: 1 }
 27% { opacity: .4; }
@@ -248,6 +274,7 @@ button {
 68% { opacity: .5; }
 100% { opacity: 1; }
 }
+
 @keyframes foglayer_03_opacity {
 0% { opacity: 1 }
 27% { opacity: .4; }
@@ -255,19 +282,23 @@ button {
 68% { opacity: .5; }
 100% { opacity: 1; }
 }
+
 /* ---------- Keyframe moveMe ---------- */
 @-webkit-keyframes foglayer_moveme {
 0% { left: 0; }
 100% { left: -100%; }
 }
+
 @-moz-keyframes foglayer_moveme {
 0% { left: 0; }
 100% { left: -100%; }
 }
+
 @-o-keyframes foglayer_moveme {
 0% { left: 0; }
 100% { left: -100%; }
 }
+
 @keyframes foglayer_moveme {
 0% { left: 0; }
 100% { left: -100%; }
