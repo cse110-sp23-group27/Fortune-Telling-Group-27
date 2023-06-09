@@ -27,7 +27,6 @@
     /* margin: 10px; */
     /* background-color: #fff; */
     border-color: #fff;
-    border-radius: 5%;
     height: 30vmin;
     width: 17vmin;
     margin: 3px;
@@ -104,6 +103,7 @@ button {
     top: 50vh;
     left: 45vw;
 }
+
 /* ---------- Fog ---------- */
 .fogwrapper {
     height: 100%;
