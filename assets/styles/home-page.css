@@ -122,7 +122,7 @@ button {
 }
 
 #menuToggleTwo:checked + .menuBtnTwo #cardBook {
-  content: url('/assets/images/openBook.png');
+  content: url('https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/openBook.png');
 }
 
 .menuBtn, .menuBtnTwo {
