@@ -179,6 +179,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.addEventListener("click", async () => {
 		resetCards();
 		hideHeaders();
+		shuffleSound.play();
 		response.textContent = "";
 		shuffleCards();
 	}
