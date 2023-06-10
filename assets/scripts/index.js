@@ -153,10 +153,27 @@ function createShuffleAndResetBtnAndHeaders() {
 	});
 
 	resetBtn.id = "tarotResetBtn";
-	resetBtn.textContent = "RESET CARDS";
+	resetBtn.textContent = "RESHUFFLE";
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
-		toHomeButtonClick();
+		resetCards();
+		response.textContent = "";
+		homeBtn.disabled = true;
+		shuffleBtn.hidden = true;
+		resetBtn.hidden = true;
+		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+		for (let card = 0; card < cards.length; card++) {
+			const cardOption = cards[card];
+			cardOption.hidden = false;
+		}
+
+		await playCardThrowAnimation();
+		await TarotCard.wait(100);
+		await playShuffleAnimation();
+		await playCardSpreadAnimation();
+		shuffleHeader.hidden = false;
+		homeBtn.disabled = false;
+		resetBtn.hidden = false;
 	}
 	);
 
