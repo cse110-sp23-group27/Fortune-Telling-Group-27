@@ -73,13 +73,13 @@ function toHomeButtonClick() {
 		shuffleBtn.hidden = true;
 	}
 	if(pastHeader !== null){
-		pastHeader.hidden = true;
+		tarotDiv.removeChild(pastHeader);
 	}
 	if(presentHeader !== null){	
-		presentHeader.hidden = true;
-	}
+		tarotDiv.removeChild(presentHeader);
+		}
 	if(futureHeader !== null){
-		futureHeader.hidden = true;
+		tarotDiv.removeChild(futureHeader);
 	}	
 }
 
