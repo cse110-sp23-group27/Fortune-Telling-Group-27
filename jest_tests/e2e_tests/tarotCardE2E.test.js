@@ -14,6 +14,7 @@ const TOTAROTCARD = "#toTarotCard";
 const SHUFFLEBUTTON = "#tarotShuffleBtn";
 const SHUFFLEDCARDS = ".cardsBtnPreShuffle";
 const RESPONSE = "#response";
+const MENUBTNSTWO = ".menuItemTwo"
 
 describe("Testing Tarot Card Page", () => {
 	const randNums = helper.getMultipleInts(3, 22); // get selected random cards
@@ -43,6 +44,7 @@ describe("Testing Tarot Card Page", () => {
 			// expect home page buttons to be visible
 			expect(await helper.allHidden(homePageBtns)).toBe(false);
 			await tarotCardButton.click();
+			await helper.delay(100);
 			// after clicking on the tarot card button,
 			// expect home page buttons to be hidden
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
@@ -59,24 +61,34 @@ describe("Testing Tarot Card Page", () => {
 		it("Select and unselect card", async () => {
 			// select random card
 			const shuffle = await page.$$(SHUFFLEDCARDS);
-			const randNum = await helper.getRandomInt(shuffle.length);
+			const randNum = helper.getRandomInt(shuffle.length);
 			const selCard = shuffle[randNum];
+			const topVal = await helper.getTopValue(selCard);
+			console.log("top value of card: " + topVal);
 
 			// card should not be selected and have white bg color
 			expect(await helper.getSelectedValue(selCard)).toBe("false");
 			expect(await helper.getBGColor(selCard)).toBe("white");
 			await selCard.evaluate((b) => b.click()); // click tarot card
+			await helper.delay(200);
 
 			// card should be selected and have black bg color
+			// card top value should be greater than initial top value
 
 			expect(await helper.getSelectedValue(selCard)).toBe("true");
 			expect(await helper.getBGColor(selCard)).toBe("black");
+			//expect(await helper.getTopValue(selCard)).toBeGreaterThan(topVal); (will change when the cards change top value)
+
 			await selCard.evaluate((b) => b.click()); // click tarot card
+			await helper.delay(200);
 
 			// card should not be selected and have white bg color
+			// card top value should be the same as initial top value
 
 			expect(await helper.getSelectedValue(selCard)).toBe("false");
 			expect(await helper.getBGColor(selCard)).toBe("white");
+			expect(await helper.getTopValue(selCard)).toBe(topVal);
+
 			await helper.delay(1000);
 		}, helper.MAXTIMEOUT);
 		it("Select 3 cards", async () => {
@@ -144,7 +156,7 @@ describe("Testing Tarot Card Page", () => {
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
-		it("Check localstorage for saved cards and ", async () => {
+		it("Check localstorage for saved cards", async () => {
 			// get local storage value
 			const deck = await page.evaluate(
 				() => localStorage.getItem("deck"));
@@ -152,7 +164,19 @@ describe("Testing Tarot Card Page", () => {
 			expect(deckVal.length >= 3);
 			await helper.delay(500);
 			// get burger bar for saved cards
-			// check if list in burger bar is the same as deck (or just same length)
+			// check if list in burger bar is the same as deck
+			const inBar = await page.$$(MENUBTNSTWO);
+			for(let i = 0; i < inBar.length; i++) {
+				// if the ID is included in the deck, then the button should be visible (block display)
+				// otherwise it should be invisible (none display)
+				const display = await helper.getDisplayValue(inBar[i]);
+				const id = await page.evaluate(el => el.id, inBar[i]);
+				if(deckVal.indexOf(id) !== -1) {
+					expect(display).toBe("block");
+				} else {
+					expect(display).toBe("none");
+				}
+			}
 		}, helper.MAXTIMEOUT);
 		it("Go back home using reset", async () => {
 			const homePageBtns = await page.$$(HOMEPAGE);

@@ -1,7 +1,6 @@
 import * as consts from "./consts.js";
 import TarotCard from "./TarotCard.js";
 
-
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
@@ -157,8 +156,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
 		toHomeButtonClick();
-	}
-	);
+	});
 
 	tarotDiv.append(shuffleBtn);
 	tarotDiv.append(resetBtn);
@@ -336,7 +334,11 @@ function createShuffleCards() {
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
 			if (cardsSelected) {
+				// add to local storage
+				// set response value
 				response.textContent = button.value;
+				updateLocalStorage(button);
+				showCardsFound();
 				return;
 			}
 
@@ -363,6 +365,67 @@ function createShuffleCards() {
 		const cardOption = document.getElementById("Option " + card);
 		new TarotCard(cardOption);
 	}
+}
+
+/**
+ * Updates local storage with the names of the cards that have been found
+ * @param {button} button - the card button that was just clicked to reveal text
+ * @author Daniel Lee
+ * @date 6/10/2023
+ */
+function updateLocalStorage(button) {
+	// get local storage stuff and parse
+	const deck = window.localStorage.getItem("deck");
+	const deckArr = JSON.parse(deck);
+	const cardIndex = button.getAttribute("cardIndex");
+	const tarotCard = consts.CARDSJSON[cardIndex];
+	const name = toCamelCase(tarotCard["name"]);
+	if(deckArr !== null) {
+		console.log(deckArr);
+		if(deckArr.indexOf(name) === -1) {
+			deckArr.push(name);
+		}
+		localStorage.setItem("deck", JSON.stringify(deckArr));
+	} else {
+		const arr = JSON.stringify([name]);
+		console.log(arr);
+		localStorage.setItem("deck", arr);
+	}
+}
+
+/**
+ * Hides or shows the card names found in the cards found menu
+ * @author Daniel Lee
+ * @date 6/10/2023
+ */
+function showCardsFound() {
+	// select all card names in the second burger bar and get the deck values from local storage
+	const cardsInMenu = document.getElementsByClassName("menuItemTwo");
+	const deck = window.localStorage.getItem("deck");
+	const deckArr = JSON.parse(deck);
+	// if the deck array has the cardBtn ID, set display to none
+	// otherwise, set display to block
+	for(let i = 0; i < cardsInMenu.length; i++) {
+		if(deckArr !== null && 
+			deckArr.indexOf(cardsInMenu[i].id) !== -1) {
+			cardsInMenu[i].style.display = "block";
+		} else {
+			cardsInMenu[i].style.display = "none";
+		}
+	}
+}
+/**
+ * Converts any string to camel case.
+ * From https://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case
+ * 
+ * @param {String} str String to be converted
+ * @returns The String now follows camel case conventions (no spaces, capitalized words after space).
+ * @date 6/10/2023
+ */
+function toCamelCase(str) {
+	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+	  return index === 0 ? word.toLowerCase() : word.toUpperCase();
+	}).replace(/\s+/g, '');
 }
 
 /**
@@ -411,6 +474,7 @@ function displayThreeOptions() {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					const imageSrc = tarotCard["img"];
+					cardOption.setAttribute("cardIndex", cardsTypeSelected[i]);
 					cardOption.innerHTML =
 						"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
 					switch (i + 1) {
@@ -489,6 +553,7 @@ function removeFogBackground() {
  * Initializes home page
  */
 function init() {
+	showCardsFound();
 	bindHomePageBtns();
 	bindGeneralButtons();
 	createShuffleAndResetBtnAndHeaders();

@@ -196,6 +196,7 @@ button {
 }
 
 .menuBoxTwo {
+  padding: 20px 0;
   right: -100%;
 }
 
@@ -226,6 +227,21 @@ button {
   background-color: #ECEFF1;
   width: 13vw;
   text-align: left;
+}
+
+.menuHeader {
+  display: block;
+  top: 0;
+  color: blue;
+  font-family: cinzel, cursive;
+  font-size: 1.5vw;
+  font-weight: 600;
+  text-decoration: none;
+  border: #ECEFF1;
+  background-color: #ECEFF1;
+  width: 13vw;
+  text-align: center;
+  margin: auto;
 }
 
 .menuItem:hover, .menuItemTwo:hover {
