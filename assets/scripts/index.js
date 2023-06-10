@@ -610,52 +610,37 @@ function init() {
 	bindGeneralButtons();
 	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
+	bindMenuBtns();
 }
 
 init();
 
 /**
- * Hamburger bar closes when you hover off of it
- * @author Kyle Ng
- * @date 6/5/2023
+ * Binds the functionality of the menu buttons (the book and the burger bar checkboxes)
  */
-/*
-document.querySelector(".menuBox").addEventListener("mouseleave", function() {
-	document.querySelector("#menuToggle").checked = false;
-});
-
-*/
-/**
- * Changed the functionality so that we don't have to copy paste.
- * If for some reason someone wants to add more hamburger bars in the future,
- * then they can add the same functionality by adding in the name.
- * Uses global variable, so be careful!
- * @author Kevin Wong
- * @date 6/9/2023
- */
-// global variable menuButtons:
-const menuBtns = document.querySelectorAll(".menuBtn, .menuBtnTwo");
-menuBtns.forEach(function(menuBtns) {
-	menuBtns.addEventListener("click", function() {
-		menuSound.play();
+function bindMenuBtns() {
+	/**
+	 * Changed the functionality so that we don't have to copy paste.
+	 * If for some reason someone wants to add more hamburger bars in the future,
+	 * then they can add the same functionality by adding in the name.
+	 * @author Kevin Wong
+	 * @date 6/9/2023
+	 */
+	const menuBtns = document.querySelectorAll(".menuBtn, .menuBtnTwo");
+	const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
+	menuBtns.forEach(function(menuBtns) {
+		menuBtns.addEventListener("click", function() {
+			menuSound.play();
+		});
 	});
-});
-/**
- * Changed the functionality so that we don't have to copy paste.
- * If for some reason someone wants to add more hamburger bars in the future,
- * then they can add the same functionality by adding in the name.
- * Uses global variable, so be careful!
- * @author Kevin Wong
- * @date 6/9/2023
- */
-// global variable menus:
-const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
-menus.forEach(function(menu) {
-	menu.addEventListener("mouseleave", function() {
-		// remove "menuBox" from the class name and add "#menuToggle"
-		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
-		menuSound.play();
-		document.querySelector(toggleId).checked = false;
-		cardBook.src = consts.CARD_BOOK_IMG_URL; // Turn back to initial state
+	menus.forEach(function(menu) {
+		menu.addEventListener("mouseleave", function() {
+			// remove "menuBox" from the class name and add "#menuToggle"
+			const toggleId = "#" + menu.className.replace(
+				"menuBox", "menuToggle");
+			menuSound.play();
+			document.querySelector(toggleId).checked = false;
+			cardBook.src = consts.CARD_BOOK_IMG_URL; // Turn back to initial state
+		});
 	});
-});
+}
