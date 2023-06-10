@@ -412,7 +412,8 @@ function displayThreeOptions() {
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					const imageSrc = tarotCard["img"];
 					cardOption.innerHTML =
-						"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
+						"<img class = \"chosenCards\"src=\"" + imageSrc +
+						"\" alt = \"" + tarotCard["imgDescription"] + "\">";
 					switch (i + 1) {
 					case 1:
 						cardOption.value = tarotCard["pastDescription"];
