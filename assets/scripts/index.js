@@ -91,7 +91,7 @@ function toHomeButtonClick() {
  * @param {element} element The element in question
  */
 function ifNotNullHide(element) {
-	if(element !== null) {
+	if (element !== null) {
 		element.hidden = true;
 	}
 }
@@ -101,7 +101,7 @@ function ifNotNullHide(element) {
  * @param {element} element The element in question
  */
 function ifNotNullRemove(element) {
-	if(element !== null) {
+	if (element !== null) {
 		tarotDiv.removeChild(element);
 	}
 }
