@@ -49,6 +49,8 @@ function bindHomePageBtns() {
 function toHomeButtonClick() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	shuffleHeader.hidden = true;
 	if (!homePageBool) {
 		displayGeneralUIElements();
 		document.getElementById("centerText").textContent = "";
@@ -129,7 +131,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	const homeBtn = document.getElementById("toHome");
 	const shuffleHeader = document.createElement("h1");
 	shuffleHeader.id = "shuffleHeaderText";
-	shuffleHeader.textContent = "Select Your Fate";
+	shuffleHeader.textContent = "Select Three Cards";
 	shuffleHeader.hidden = true;
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
