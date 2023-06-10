@@ -14,8 +14,6 @@ let cardsSelected = false;
 let homePageBool = true;
 // Sound effect for burger bar sliding
 const menuSound = document.getElementById("menu-slider");
-// Sound effect "click" button
-const clickSound = document.getElementById("click-button");
 // Sound effect for shuffling cards
 const shuffleSound = document.getElementById("shuffle-button");
 // Sound effect for selecting cards
@@ -33,7 +31,6 @@ function bindHomePageBtns() {
 	const boneBtn = document.getElementById("toBoneTossing");
 
 	tarotCardBtn.addEventListener("click", () => {
-		clickSound.play();
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
@@ -42,12 +39,10 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("click", () => {
-		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 
 	boneBtn.addEventListener("click", () => {
-		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 }
@@ -182,7 +177,6 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.textContent = "RESHUFFLE";
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
-		clickSound.play();
 		resetCards();
 		hideHeaders();
 		response.textContent = "";
