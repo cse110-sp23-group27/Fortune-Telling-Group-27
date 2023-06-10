@@ -1,4 +1,5 @@
 import * as consts from "./consts.js";
+import { CARD_BOOK_IMG_URL, OPEN_BOOK_IMG_URL } from './consts.js';
 import TarotCard from "./TarotCard.js";
 
 
@@ -484,6 +485,34 @@ function removeFogBackground() {
 		fogWrapper.remove();
 	}
 }
+
+/**
+ * Event Listener for changing book png from closed to open on click.
+ * Uses another global variable, and the opacity stuff is so that on refresh
+ * the user doesn't see a non-loaded image icon
+ * @author Kevin Wong
+ * @@date 6/9/2023
+ */
+let cardBook = document.querySelector("#cardBook");
+cardBook.src = CARD_BOOK_IMG_URL; // Set the initial state
+
+cardBook.addEventListener('load', function() {
+  cardBook.style.opacity = 1;
+});
+
+document.querySelector("#menuToggleTwo").addEventListener('change', (event) => {
+	cardBook.style.opacity = 0;
+	if (event.target.checked) {
+	  document.querySelector("#cardBook").src = OPEN_BOOK_IMG_URL;
+	} else {
+	  document.querySelector("#cardBook").src = CARD_BOOK_IMG_URL;
+	}
+	cardBook.addEventListener('load', function() {
+		cardBook.style.opacity = 1;
+	  });
+  });
+  
+
 
 /**
  * Initializes home page
