@@ -28,7 +28,9 @@ const tarotCardsImgs = [
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/the-wheel-of-fortune.png",
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/the-world.png",
 	"https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png",
-	"https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png"
+	"https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png",
+	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/bookClosed.png",
+	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/openBook.png"
 ];
 
 // Run the init() function when the page has loaded

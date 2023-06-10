@@ -85,6 +85,7 @@ function bindGeneralButtons() {
 
 	const docBtn = document.getElementById("toDocumentation");
 	const githubBtn = document.getElementById("toGitHub");
+	const introBtn = document.getElementById("toIntro");
 
 	docBtn.addEventListener("click", () => {
 		// eslint-disable-next-line max-len
@@ -95,10 +96,10 @@ function bindGeneralButtons() {
 		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
 	});
 
-	// githubBtn.addEventListener("click", () => {
-	// 	navigator.clipboard.writeText(
-	// 		"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
-	// });
+	introBtn.addEventListener("click", () => {
+		// eslint-disable-next-line max-len
+		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/user-introduction.md");
+	});
 }
 
 /**
@@ -118,15 +119,18 @@ function displayGeneralUIElements(fortuneType =null) {
 
 /**
  * Creates and displays the shuffle and reset button that should control the animation
- * for the tarot cards.
+ * for the tarot cards. Also creates Header text elements.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
  * @date 5/27/2023
  */
-function createShuffleAndResetBtn() {
+function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
 	const homeBtn = document.getElementById("toHome");
-
+	const shuffleHeader = document.createElement("h1");
+	shuffleHeader.id = "shuffleHeaderText";
+	shuffleHeader.textContent = "Select Your Fate";
+	shuffleHeader.hidden = true;
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
@@ -143,6 +147,7 @@ function createShuffleAndResetBtn() {
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
 		await playCardSpreadAnimation();
+		shuffleHeader.hidden = false;
 		homeBtn.disabled = false;
 		resetBtn.hidden = false;
 	});
@@ -157,6 +162,7 @@ function createShuffleAndResetBtn() {
 
 	tarotDiv.append(shuffleBtn);
 	tarotDiv.append(resetBtn);
+	tarotDiv.append(shuffleHeader);
 }
 
 
@@ -377,6 +383,8 @@ function displayThreeOptions() {
 	}
 	cardsSelected = true;
 
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	shuffleHeader.hidden = true;
 	let selectedCardsFound = 0;
 	let cardsMoved = 0;
 	TarotCard.getAllCards().forEach((card) => {
@@ -399,7 +407,6 @@ function displayThreeOptions() {
 						cardsTypeSelected.push(card);
 					}
 				}
-
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
@@ -484,7 +491,7 @@ function removeFogBackground() {
 function init() {
 	bindHomePageBtns();
 	bindGeneralButtons();
-	createShuffleAndResetBtn();
+	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
 }
 
@@ -495,6 +502,24 @@ init();
  * @author Kyle Ng
  * @date 6/5/2023
  */
+/*
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
+});
+*/
+/**
+ * Changed the functionality so that we don't have to copy paste.
+ * If for some reason someone wants to add more hamburger bars in the future,
+ * then they can add the same functionality by adding in the name.
+ * Uses global variable, so be careful!
+ * @author Kevin Wong
+ * @date 6/9/2023
+ */
+const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
+menus.forEach(function(menu) {
+	menu.addEventListener("mouseleave", function() {
+		// remove "menuBox" from the class name and add "#menuToggle"
+		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
+		document.querySelector(toggleId).checked = false;
+	});
 });
