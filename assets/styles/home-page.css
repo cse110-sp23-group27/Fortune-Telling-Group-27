@@ -99,16 +99,16 @@ button {
   opacity: 0;
 }
 
-#menuToggle:checked + .menuBtn > span, #menuToggleTwo:checked + .menuBtnTwo > span {
+#menuToggle:checked + .menuBtn > span {
   transform: rotate(45deg);
 }
 
-#menuToggle:checked + .menuBtn > span::before, #menuToggleTwo:checked + .menuBtnTwo > span::before {
+#menuToggle:checked + .menuBtn > span::before {
   top: 0;
   transform: rotate(0deg);
 }
 
-#menuToggle:checked + .menuBtn > span::after, #menuToggleTwo:checked + .menuBtnTwo > span::after {
+#menuToggle:checked + .menuBtn > span::after {
   top: 0;
   transform: rotate(90deg);
 }
@@ -121,10 +121,13 @@ button {
   right: 0 !important;
 }
 
+#menuToggleTwo:checked + .menuBtnTwo #cardBook {
+  content: url('/assets/images/openBook.png');
+}
+
 .menuBtn, .menuBtnTwo {
   position: fixed;
   width: 26px;
-  height: 26px;
   cursor: pointer;
   z-index: 151;
 
@@ -134,19 +137,27 @@ button {
   justify-content: center;
 }
 
+#cardBook {
+  display: block;
+  width: 26px;
+  height: 36px;
+}
+
 .menuBtn {
   top: 30px;
   left: 20px;
+  height: 26px
 }
 
 .menuBtnTwo {
   bottom: 30px;
   right: 50px;
+  height: 36px;
 }
 
-.menuBtn > span, .menuBtnTwo > span,
-.menuBtn > span::before, .menuBtnTwo > span::before,
-.menuBtn > span::after, .menuBtnTwo > span::after {
+.menuBtn > span,
+.menuBtn > span::before,
+.menuBtn > span::after {
   display: block;
   position: absolute;
   width: 100%;
