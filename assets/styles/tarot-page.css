@@ -68,7 +68,7 @@ button {
 }
 
 #response {
-    font-family: 'cinzel';
+    font-family: cinzel;
     position: absolute;
     z-index: 2;
     bottom: 130px;
