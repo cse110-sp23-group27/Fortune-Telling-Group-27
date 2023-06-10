@@ -173,6 +173,7 @@ describe("Testing Tarot Card Page", () => {
 				const id = await page.evaluate((el) => el.id, inBar[i]);
 				if (deckVal.indexOf(id) !== -1) {
 					expect(display).toBe("block");
+					console.log("Card in localStorage: " + id);
 				} else {
 					expect(display).toBe("none");
 				}

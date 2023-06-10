@@ -626,10 +626,19 @@ document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 
 */
 /**
- * Menu button sliding effect
+ * Changed the functionality so that we don't have to copy paste.
+ * If for some reason someone wants to add more hamburger bars in the future,
+ * then they can add the same functionality by adding in the name.
+ * Uses global variable, so be careful!
+ * @author Kevin Wong
+ * @date 6/9/2023
  */
-document.querySelector(".menuBtn").addEventListener("click", function() {
-    menuSound.play();
+// global variable menuButtons:
+const menuBtns = document.querySelectorAll(".menuBtn, .menuBtnTwo");
+menuBtns.forEach(function(menuBtns) {
+	menuBtns.addEventListener("click", function() {
+		menuSound.play();
+	});
 });
 /**
  * Changed the functionality so that we don't have to copy paste.
