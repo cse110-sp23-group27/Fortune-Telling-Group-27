@@ -6,6 +6,10 @@ export const FORTUNETYPES = {
 
 export const FORTUNELIST = ["tarot", "egg", "bone"];
 
+// Second burger bar consts
+export const CARD_BOOK_IMG_URL = 'https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/bookClosed.png';
+export const OPEN_BOOK_IMG_URL = 'https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/openBook.png';
+
 
 // card animation consts
 
