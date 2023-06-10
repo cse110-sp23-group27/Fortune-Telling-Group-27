@@ -431,6 +431,9 @@ function createShuffleCards() {
 	}
 }
 
+/**
+ * Generates the card headers for past, present and future in selection screen
+ */
 function generateCardHeaders() {
 	const pastHeader = document.createElement("h1");
 	const presentHeader = document.createElement("h1");
@@ -449,6 +452,9 @@ function generateCardHeaders() {
 	tarotDiv.appendChild(futureHeader);
 }
 
+/**
+ * Shows all card headers
+ */
 function showCardHeaders() {
 	const pastHeader = document.getElementById("pastHeaderText");
 	const presentHeader = document.getElementById("presentHeaderText");

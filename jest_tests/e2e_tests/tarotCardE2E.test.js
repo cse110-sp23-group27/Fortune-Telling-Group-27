@@ -12,6 +12,7 @@ const HOMEPAGE = ".homePage";
 const RESHUFFLEBTN = "#tarotResetBtn";
 const TOTAROTCARD = "#toTarotCard";
 const SHUFFLEBUTTON = "#tarotShuffleBtn";
+const HOMEBTN = "#toHome";
 const SHUFFLEDCARDS = ".cardsBtnPreShuffle";
 const RESPONSE = "#response";
 
@@ -133,7 +134,7 @@ describe("Testing Tarot Card Page", () => {
 			for (const i of randNums) {
 				await shuffle[i].evaluate((b) => b.click()); // click tarot
 				// check current text content of respones
-				await helper.delay(100);
+				await helper.delay(1000);
 				const currText = await p.getProperty("textContent");
 				const currTextVal = await currText.jsonValue();
 
@@ -143,6 +144,7 @@ describe("Testing Tarot Card Page", () => {
 				// print current text content
 				console.log("Current text: " + currTextVal);
 				pTextVal = currTextVal;
+				await helper.delay(1000);
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
@@ -160,13 +162,23 @@ describe("Testing Tarot Card Page", () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
 			const reset = await page.$(RESHUFFLEBTN);
-			await reset.click();
-			await helper.delay(500);
-			// expect home page buttons to be visible
-			expect(await helper.allHidden(homePageBtns)).toBe(true);
-			const shuffle = await page.$$(SHUFFLEDCARDS);
-			expect(await helper.allHidden(shuffle)).toBe(false);
-			await helper.delay(1000);
+			const home = await page.$(HOMEBTN);
+			if (increment === 0) {
+				await reset.click(); // click reset button
+				await helper.delay(500);
+				// expect home page buttons to be visible
+				expect(await helper.allHidden(homePageBtns)).toBe(true);
+				const shuffle = await page.$$(SHUFFLEDCARDS);
+				expect(await helper.allHidden(shuffle)).toBe(false);
+				await helper.delay(1000);
+			} else {
+				await home.evaluate((b) => b.click()); // click home button
+				await helper.delay(500);
+				expect(await helper.allHidden(homePageBtns)).toBe(false);
+				const shuffle = await page.$$(SHUFFLEDCARDS);
+				expect(await helper.allHidden(shuffle)).toBe(true);
+				await helper.delay(1000);
+			}
 		}, helper.MAXTIMEOUT);
 	}
 });
