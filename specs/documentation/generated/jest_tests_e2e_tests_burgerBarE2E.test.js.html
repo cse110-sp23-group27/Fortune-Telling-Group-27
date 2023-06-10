@@ -112,6 +112,9 @@ describe("Testing Burger Bar and Buttons", () => {
 		await helper.delay(1000);
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Github Button Test", async () => {
+		const burgerBarCheckbox = await page.$(BURGERBAR);
+		await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		await helper.delay(500);
 		const toGit = await page.$(GITHUB);
 		const newPagePromise = helper.returnNewPromise(browser);
 		await toGit.evaluate((b) => b.click()); // click github button
@@ -125,6 +128,9 @@ describe("Testing Burger Bar and Buttons", () => {
 		await helper.delay(1000);
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Home button test", async () => {
+		const burgerBarCheckbox = await page.$(BURGERBAR);
+		await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		await helper.delay(500);
 		const toHome = await page.$(HOMEBTN);
 		const toTarot = await page.$(TAROTCARDBTN);
 
