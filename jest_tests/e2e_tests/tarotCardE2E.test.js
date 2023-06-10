@@ -9,12 +9,15 @@ const helper = require("./E2EHelperFunctions");
 // variables for selecting buttons
 
 const HOMEPAGE = ".homePage";
-const RESETBTN = "#tarotResetBtn";
+const RESHUFFLEBTN = "#tarotResetBtn";
 const TOTAROTCARD = "#toTarotCard";
 const SHUFFLEBUTTON = "#tarotShuffleBtn";
+const HOMEBTN = "#toHome";
 const SHUFFLEDCARDS = ".cardsBtnPreShuffle";
 const RESPONSE = "#response";
 const MENUBTNSTWO = ".menuItemTwo";
+const BURGERBARCHECK = "#menuToggle";
+
 
 describe("Testing Tarot Card Page", () => {
 	const randNums = helper.getMultipleInts(3, 22); // get selected random cards
@@ -27,32 +30,34 @@ describe("Testing Tarot Card Page", () => {
 		await page.reload();
 		await helper.delay(1000);
 	}, helper.MAXTIMEOUT);
-	for (let increment = 0; increment < 2; increment++) {
-		it("Initial  - Click on Tarot Card Button", async () => {
-			// Query select all of the homepage button elements
-			// and return the length of that array
-			const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
-				return homePageBtns.length;
-			});
+	it("Initial  - Click on Tarot Card Button", async () => {
+		// Query select all of the homepage button elements
+		// and return the length of that array
+		const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
+			return homePageBtns.length;
+		});
 			// Expect there that array from earlier to be of length 3
 			// meaning 3 homepage buttons were found
-			expect(numButtons).toBe(3);
-			const tarotCardButton = await page.$(TOTAROTCARD);
-			const homePageBtns = await page.$$(HOMEPAGE);
-			const shuffle = await page.$$(SHUFFLEDCARDS);
-			expect(await helper.allHidden(shuffle)).toBe(true);
-			// expect home page buttons to be visible
-			expect(await helper.allHidden(homePageBtns)).toBe(false);
-			await tarotCardButton.click();
-			await helper.delay(100);
-			// after clicking on the tarot card button,
-			// expect home page buttons to be hidden
-			expect(await helper.allHidden(homePageBtns)).toBe(true);
-			await helper.delay(500);
-		}, helper.MAXTIMEOUT);
-		it("Click on shuffle button", async () => {
-			const shuffleBtn = await page.$(SHUFFLEBUTTON);
-			await shuffleBtn.evaluate((b) => b.click()); // click tarot card
+		expect(numButtons).toBe(3);
+		const tarotCardButton = await page.$(TOTAROTCARD);
+		const homePageBtns = await page.$$(HOMEPAGE);
+		const shuffle = await page.$$(SHUFFLEDCARDS);
+		expect(await helper.allHidden(shuffle)).toBe(true);
+		// expect home page buttons to be visible
+		expect(await helper.allHidden(homePageBtns)).toBe(false);
+		await tarotCardButton.click();
+		await helper.delay(100);
+		// after clicking on the tarot card button,
+		// expect home page buttons to be hidden
+		expect(await helper.allHidden(homePageBtns)).toBe(true);
+		await helper.delay(500);
+	}, helper.MAXTIMEOUT);
+	it("Click on shuffle button", async () => {
+		const shuffleBtn = await page.$(SHUFFLEBUTTON);
+		await shuffleBtn.click();
+	}, helper.MAXTIMEOUT);
+	for (let increment = 0; increment < 2; increment++) {
+		it("Check cards are visible after shuffle", async () => {
 			await helper.delay(8000); // change to promise use when animator gets updated
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			// expect cards to be visible
@@ -153,6 +158,7 @@ describe("Testing Tarot Card Page", () => {
 				// print current text content
 				console.log("Current text: " + currTextVal);
 				pTextVal = currTextVal;
+				await helper.delay(2000);
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
@@ -179,17 +185,30 @@ describe("Testing Tarot Card Page", () => {
 				}
 			}
 		}, helper.MAXTIMEOUT);
-		it("Go back home using reset", async () => {
+		it("Reshuffle using the RESHUFFLE button", async () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
-			const reset = await page.$(RESETBTN);
-			await reset.click();
-			await helper.delay(500);
-			// expect home page buttons to be visible
-			expect(await helper.allHidden(homePageBtns)).toBe(false);
-			const shuffle = await page.$$(SHUFFLEDCARDS);
-			expect(await helper.allHidden(shuffle)).toBe(true);
-			await helper.delay(1000);
+			const reset = await page.$(RESHUFFLEBTN);
+			const burgerBarCheckbox = await page.$(BURGERBARCHECK);
+			const home = await page.$(HOMEBTN);
+			if (increment === 0) {
+				await reset.click(); // click reset button
+				await helper.delay(500);
+				// expect home page buttons to be visible
+				expect(await helper.allHidden(homePageBtns)).toBe(true);
+				const shuffle = await page.$$(SHUFFLEDCARDS);
+				expect(await helper.allHidden(shuffle)).toBe(false);
+				await helper.delay(1000);
+			} else {
+				await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+				await helper.delay(500);
+				await home.evaluate((b) => b.click()); // click home button
+				await helper.delay(500);
+				expect(await helper.allHidden(homePageBtns)).toBe(false);
+				const shuffle = await page.$$(SHUFFLEDCARDS);
+				expect(await helper.allHidden(shuffle)).toBe(true);
+				await helper.delay(1000);
+			}
 		}, helper.MAXTIMEOUT);
 	}
 });

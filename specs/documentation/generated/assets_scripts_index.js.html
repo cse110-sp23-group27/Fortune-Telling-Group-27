@@ -41,8 +41,6 @@ let cardsSelected = false;
 let homePageBool = true;
 // Sound effect for burger bar sliding
 const menuSound = document.getElementById("menu-slider");
-// Sound effect "click" button
-const clickSound = document.getElementById("click-button");
 // Sound effect for shuffling cards
 const shuffleSound = document.getElementById("shuffle-button");
 // Sound effect for selecting cards
@@ -60,7 +58,6 @@ function bindHomePageBtns() {
 	const boneBtn = document.getElementById("toBoneTossing");
 
 	tarotCardBtn.addEventListener("click", () => {
-		clickSound.play();
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
@@ -69,12 +66,10 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("click", () => {
-		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 
 	boneBtn.addEventListener("click", () => {
-		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 }
@@ -87,8 +82,7 @@ function bindHomePageBtns() {
 function toHomeButtonClick() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
-	const shuffleHeader = document.getElementById("shuffleHeaderText");
-	shuffleHeader.hidden = true;
+
 	if (!homePageBool) {
 		displayGeneralUIElements();
 		document.getElementById("centerText").textContent = "";
@@ -96,18 +90,48 @@ function toHomeButtonClick() {
 		const responseCards =
 			document.getElementsByClassName("responseCards");
 		while (responseCards.length > 0) {
-			tarotDiv.removeChild(responseCards[0]);
+			ifNotNullRemove(responseCards[0]);
 		}
 		tarotDiv.hidden = true;
 		homePageBool = true;
 		resetCards();
 		removeFogBackground();
 	}
-	if (resetBtn !== null) {
-		resetBtn.hidden = true;
+	hideHeaders();
+	ifNotNullHide(resetBtn);
+	ifNotNullHide(shuffleBtn);
+}
+
+/**
+ * Hides past present and future headers for the cards
+ */
+function hideHeaders() {
+	const pastHeader = document.getElementById("pastHeaderText");
+	const presentHeader = document.getElementById("presentHeaderText");
+	const futureHeader = document.getElementById("futureHeaderText");
+	pastHeader.hidden = true;
+	presentHeader.hidden = true;
+	futureHeader.hidden = true;
+}
+
+
+/**
+ * Hides the element if the element is not null
+ * @param {element} element The element in question
+ */
+function ifNotNullHide(element) {
+	if (element !== null) {
+		element.hidden = true;
 	}
-	if (shuffleBtn !== null) {
-		shuffleBtn.hidden = true;
+}
+
+/**
+ * Removes the element from tarotDiv if the element is not null
+ * @param {element} element The element in question
+ */
+function ifNotNullRemove(element) {
+	if (element !== null) {
+		tarotDiv.removeChild(element);
 	}
 }
 
@@ -165,7 +189,6 @@ function displayGeneralUIElements(fortuneType =null) {
 function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
-	const homeBtn = document.getElementById("toHome");
 	const shuffleHeader = document.createElement("h1");
 	shuffleHeader.id = "shuffleHeaderText";
 	shuffleHeader.textContent = "Select Three Cards";
@@ -174,15 +197,50 @@ function createShuffleAndResetBtnAndHeaders() {
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
 		shuffleSound.play();
-		homeBtn.disabled = true;
-		shuffleBtn.hidden = true;
-		resetBtn.hidden = true;
-		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
-		for (let card = 0; card &lt; cards.length; card++) {
-			const cardOption = cards[card];
-			cardOption.hidden = false;
-		}
+		shuffleCards();
+	});
 
+	resetBtn.id = "tarotResetBtn";
+	resetBtn.textContent = "RESHUFFLE";
+	resetBtn.hidden = true;
+	resetBtn.addEventListener("click", async () => {
+		resetCards();
+		hideHeaders();
+		shuffleSound.play();
+		response.textContent = "";
+		shuffleCards();
+	}
+	);
+
+	tarotDiv.append(shuffleBtn);
+	tarotDiv.append(resetBtn);
+	tarotDiv.append(shuffleHeader);
+}
+
+/**
+ * Start shuffle animation
+ */
+async function shuffleCards() {
+	const shuffleBtn = document.getElementById("tarotShuffleBtn");
+	const resetBtn = document.getElementById("tarotResetBtn");
+	const homeBtn = document.getElementById("toHome");
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	homeBtn.disabled = true;
+	shuffleBtn.hidden = true;
+	resetBtn.hidden = true;
+	const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+	for (let card = 0; card &lt; cards.length; card++) {
+		const cardOption = cards[card];
+		cardOption.hidden = false;
+	}
+
+	await playCardThrowAnimation();
+	await TarotCard.wait(100);
+	await playShuffleAnimation();
+	await playCardSpreadAnimation();
+	shuffleHeader.hidden = false;
+	homeBtn.disabled = false;
+	resetBtn.hidden = false;
 		await playCardThrowAnimation();
 		await TarotCard.wait(100);
 		await playShuffleAnimation();
@@ -204,7 +262,6 @@ function createShuffleAndResetBtnAndHeaders() {
 	tarotDiv.append(resetBtn);
 	tarotDiv.append(shuffleHeader);
 }
-
 
 /**
  * Plays the card throw animation
@@ -364,6 +421,7 @@ async function playCardSpreadAnimation() {
  * @date 5/27/2023
  */
 function createShuffleCards() {
+	// pastHeader.hidden = true;
 	for (let i = 0; i &lt; 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
@@ -418,6 +476,39 @@ function createShuffleCards() {
 		const cardOption = document.getElementById("Option " + card);
 		new TarotCard(cardOption);
 	}
+}
+
+/**
+ * Generates the card headers for past, present and future in selection screen
+ */
+function generateCardHeaders() {
+	const pastHeader = document.createElement("h1");
+	const presentHeader = document.createElement("h1");
+	const futureHeader = document.createElement("h1");
+	pastHeader.id = "pastHeaderText";
+	pastHeader.textContent = "Past";
+	presentHeader.id = "presentHeaderText";
+	presentHeader.textContent = "Present";
+	futureHeader.id = "futureHeaderText";
+	futureHeader.textContent = "Future";
+	pastHeader.hidden = true;
+	presentHeader.hidden = true;
+	futureHeader.hidden = true;
+	tarotDiv.appendChild(pastHeader);
+	tarotDiv.appendChild(presentHeader);
+	tarotDiv.appendChild(futureHeader);
+}
+
+/**
+ * Shows all card headers
+ */
+function showCardHeaders() {
+	const pastHeader = document.getElementById("pastHeaderText");
+	const presentHeader = document.getElementById("presentHeaderText");
+	const futureHeader = document.getElementById("futureHeaderText");
+	pastHeader.hidden = false;
+	presentHeader.hidden = false;
+	futureHeader.hidden = false;
 }
 
 /**
@@ -529,7 +620,8 @@ function displayThreeOptions() {
 					const imageSrc = tarotCard["img"];
 					cardOption.setAttribute("cardIndex", cardsTypeSelected[i]);
 					cardOption.innerHTML =
-						"&lt;img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
+						"&lt;img class = \"chosenCards\"src=\"" + imageSrc +
+						"\" alt = \"" + tarotCard["imgDescription"] + "\">";
 					switch (i + 1) {
 					case 1:
 						cardOption.value = tarotCard["pastDescription"];
@@ -544,6 +636,7 @@ function displayThreeOptions() {
 			});
 		}
 	});
+	showCardHeaders();
 }
 
 /**
@@ -638,6 +731,7 @@ function init() {
 	bindGeneralButtons();
 	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
+	generateCardHeaders();
 }
 
 init();
@@ -696,7 +790,7 @@ menus.forEach(function(menu) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#cardBook">cardBook</a></li><li><a href="global.html#cardThrowRandomPos">cardThrowRandomPos</a></li><li><a href="global.html#cardThrowRandomRot">cardThrowRandomRot</a></li><li><a href="global.html#createShuffleAndResetBtnAndHeaders">createShuffleAndResetBtnAndHeaders</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getDisplayValue">getDisplayValue</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#getTopValue">getTopValue</a></li><li><a href="global.html#helper">helper</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#menuBtns">menuBtns</a></li><li><a href="global.html#menus">menus</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playCardThrowAnimation">playCardThrowAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li><li><a href="global.html#returnNewPromise">returnNewPromise</a></li><li><a href="global.html#showCardsFound">showCardsFound</a></li><li><a href="global.html#toCamelCase">toCamelCase</a></li><li><a href="global.html#toHomeButtonClick">toHomeButtonClick</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#cardBook">cardBook</a></li><li><a href="global.html#cardThrowRandomPos">cardThrowRandomPos</a></li><li><a href="global.html#cardThrowRandomRot">cardThrowRandomRot</a></li><li><a href="global.html#createShuffleAndResetBtnAndHeaders">createShuffleAndResetBtnAndHeaders</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#generateCardHeaders">generateCardHeaders</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getDisplayValue">getDisplayValue</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#getTopValue">getTopValue</a></li><li><a href="global.html#helper">helper</a></li><li><a href="global.html#hideHeaders">hideHeaders</a></li><li><a href="global.html#ifNotNullHide">ifNotNullHide</a></li><li><a href="global.html#ifNotNullRemove">ifNotNullRemove</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeServiceWorker">initializeServiceWorker</a></li><li><a href="global.html#menuBtns">menuBtns</a></li><li><a href="global.html#menus">menus</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playCardThrowAnimation">playCardThrowAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li><li><a href="global.html#returnNewPromise">returnNewPromise</a></li><li><a href="global.html#showCardsFound">showCardsFound</a></li><li><a href="global.html#toCamelCase">toCamelCase</a></li><li><a href="global.html#showCardHeaders">showCardHeaders</a></li><li><a href="global.html#shuffleCards">shuffleCards</a></li><li><a href="global.html#toHomeButtonClick">toHomeButtonClick</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
 </nav>
 
 <br class="clear">

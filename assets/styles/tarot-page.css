@@ -68,7 +68,7 @@ button {
 }
 
 #response {
-    font-family: cinzel;
+    font-family: cinzel, sans-serif;
     position: absolute;
     z-index: 2;
     bottom: 130px;
@@ -81,7 +81,7 @@ button {
   }
   
 .fade-in {
-    animation: fadeIn 1.5s;
+    animation: fadeIn 0.5s;
 }
 
 @keyframes fadeIn {
@@ -121,6 +121,36 @@ button {
     font-size: 40px;
     margin-top: 50px;
     text-shadow: 2px 2px 4px rgb(149, 148, 149);
+}
+
+#pastHeaderText{
+    color: white;
+    text-align: left;
+    font-size: 40px;
+    margin-top: 35px;
+    margin-left: 18vw;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
+    position: absolute;
+}
+
+#presentHeaderText{
+    color: white;
+    text-align: left;
+    font-size: 40px;
+    margin-top: 35px;
+    margin-left: 46vw;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
+    position: absolute;
+}
+
+#futureHeaderText{
+    color: white;
+    text-align: left;
+    font-size: 40px;
+    margin-top: 35px;
+    margin-left: 76vw;
+    text-shadow: 2px 2px 4px rgb(149, 148, 149);
+    position: absolute;
 }
 
 /* ---------- Fog ---------- */
