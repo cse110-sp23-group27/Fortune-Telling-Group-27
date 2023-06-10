@@ -84,6 +84,8 @@ describe("Testing Burger Bar and Buttons", () => {
 		await helper.delay(1000);
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Documentation Button Test", async () => {
+		const burgerBarCheckbox = await page.$(BURGERBAR);
+		await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
 		const toDocs = await page.$(DOCS);
 		const newPagePromise = helper.returnNewPromise(browser);
 		await toDocs.evaluate((b) => b.click()); // click docs button
