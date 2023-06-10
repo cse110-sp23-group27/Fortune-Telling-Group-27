@@ -12,6 +12,14 @@ let cardCounter = 0;
 let cardsSelected = false;
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
+// Sound effect for burger bar sliding
+const menuSound = document.getElementById("menu-slider");
+// Sound effect "click" button
+const clickSound = document.getElementById("click-button");
+// Sound effect for shuffling cards
+const shuffleSound = document.getElementById("shuffle-button");
+// Sound effect for selecting cards
+const selectedCardSound = document.getElementById("card-selecting");
 
 /**
  * Binds the home page buttons to change the type of
@@ -25,6 +33,7 @@ function bindHomePageBtns() {
 	const boneBtn = document.getElementById("toBoneTossing");
 
 	tarotCardBtn.addEventListener("click", () => {
+		clickSound.play();
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
@@ -33,10 +42,12 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("click", () => {
+		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 
 	boneBtn.addEventListener("click", () => {
+		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 }
@@ -49,6 +60,8 @@ function bindHomePageBtns() {
 function toHomeButtonClick() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	shuffleHeader.hidden = true;
 	if (!homePageBool) {
 		displayGeneralUIElements();
 		document.getElementById("centerText").textContent = "";
@@ -95,7 +108,6 @@ function bindGeneralButtons() {
 		// eslint-disable-next-line max-len
 		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
 	});
-
 	introBtn.addEventListener("click", () => {
 		// eslint-disable-next-line max-len
 		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/user-introduction.md");
@@ -129,11 +141,12 @@ function createShuffleAndResetBtnAndHeaders() {
 	const homeBtn = document.getElementById("toHome");
 	const shuffleHeader = document.createElement("h1");
 	shuffleHeader.id = "shuffleHeaderText";
-	shuffleHeader.textContent = "Select Your Fate";
+	shuffleHeader.textContent = "Select Three Cards";
 	shuffleHeader.hidden = true;
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
+		shuffleSound.play();
 		homeBtn.disabled = true;
 		shuffleBtn.hidden = true;
 		resetBtn.hidden = true;
@@ -156,6 +169,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.textContent = "RESET CARDS";
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
+		clickSound.play();
 		toHomeButtonClick();
 	}
 	);
@@ -335,6 +349,7 @@ function createShuffleCards() {
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
+			selectedCardSound.play();
 			if (cardsSelected) {
 				// Response should only change when the text is completely revealed,
 				// or response is empty
@@ -542,6 +557,7 @@ init();
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
 });
+
 */
 /**
  * Changed the functionality so that we don't have to copy paste.
@@ -557,5 +573,9 @@ menus.forEach(function(menu) {
 		// remove "menuBox" from the class name and add "#menuToggle"
 		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
 		document.querySelector(toggleId).checked = false;
+	});
+	menu.addEventListener("click", function() {
+		// Menu sliding sound effect
+		menuSound.play();
 	});
 });
