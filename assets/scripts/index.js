@@ -545,8 +545,8 @@ menus.forEach(function(menu) {
 		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
 		document.querySelector(toggleId).checked = false;
 	});
-  menu.addEventListener("click", function() {
-    // Menu sliding sound effect
-    menuSound.play();
-  });
+	menu.addEventListener("click", function() {
+		// Menu sliding sound effect
+		menuSound.play();
+	});
 });
