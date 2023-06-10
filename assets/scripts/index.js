@@ -60,8 +60,7 @@ function bindHomePageBtns() {
 function toHomeButtonClick() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
-	const shuffleHeader = document.getElementById("shuffleHeaderText");
-	shuffleHeader.hidden = true;
+
 	if (!homePageBool) {
 		displayGeneralUIElements();
 		document.getElementById("centerText").textContent = "";
@@ -69,18 +68,48 @@ function toHomeButtonClick() {
 		const responseCards =
 			document.getElementsByClassName("responseCards");
 		while (responseCards.length > 0) {
-			tarotDiv.removeChild(responseCards[0]);
+			ifNotNullRemove(responseCards[0]);
 		}
 		tarotDiv.hidden = true;
 		homePageBool = true;
 		resetCards();
 		removeFogBackground();
 	}
-	if (resetBtn !== null) {
-		resetBtn.hidden = true;
+	hideHeaders();
+	ifNotNullHide(resetBtn);
+	ifNotNullHide(shuffleBtn);
+}
+
+/**
+ * Hides past present and future headers for the cards
+ */
+function hideHeaders() {
+	const pastHeader = document.getElementById("pastHeaderText");
+	const presentHeader = document.getElementById("presentHeaderText");
+	const futureHeader = document.getElementById("futureHeaderText");
+	pastHeader.hidden = true;
+	presentHeader.hidden = true;
+	futureHeader.hidden = true;
+}
+
+
+/**
+ * Hides the element if the element is not null
+ * @param {element} element The element in question
+ */
+function ifNotNullHide(element) {
+	if (element !== null) {
+		element.hidden = true;
 	}
-	if (shuffleBtn !== null) {
-		shuffleBtn.hidden = true;
+}
+
+/**
+ * Removes the element from tarotDiv if the element is not null
+ * @param {element} element The element in question
+ */
+function ifNotNullRemove(element) {
+	if (element !== null) {
+		tarotDiv.removeChild(element);
 	}
 }
 
@@ -155,6 +184,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.addEventListener("click", async () => {
 		clickSound.play();
 		resetCards();
+		hideHeaders();
 		response.textContent = "";
 		shuffleCards();
 	}
@@ -349,6 +379,7 @@ async function playCardSpreadAnimation() {
  * @date 5/27/2023
  */
 function createShuffleCards() {
+	// pastHeader.hidden = true;
 	for (let i = 0; i < 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
@@ -398,6 +429,33 @@ function createShuffleCards() {
 		const cardOption = document.getElementById("Option " + card);
 		new TarotCard(cardOption);
 	}
+}
+
+function generateCardHeaders() {
+	const pastHeader = document.createElement("h1");
+	const presentHeader = document.createElement("h1");
+	const futureHeader = document.createElement("h1");
+	pastHeader.id = "pastHeaderText";
+	pastHeader.textContent = "Past";
+	presentHeader.id = "presentHeaderText";
+	presentHeader.textContent = "Present";
+	futureHeader.id = "futureHeaderText";
+	futureHeader.textContent = "Future";
+	pastHeader.hidden = true;
+	presentHeader.hidden = true;
+	futureHeader.hidden = true;
+	tarotDiv.appendChild(pastHeader);
+	tarotDiv.appendChild(presentHeader);
+	tarotDiv.appendChild(futureHeader);
+}
+
+function showCardHeaders() {
+	const pastHeader = document.getElementById("pastHeaderText");
+	const presentHeader = document.getElementById("presentHeaderText");
+	const futureHeader = document.getElementById("futureHeaderText");
+	pastHeader.hidden = false;
+	presentHeader.hidden = false;
+	futureHeader.hidden = false;
 }
 
 /**
@@ -463,6 +521,7 @@ function displayThreeOptions() {
 			});
 		}
 	});
+	showCardHeaders();
 }
 
 /**
@@ -556,6 +615,7 @@ function init() {
 	bindGeneralButtons();
 	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
+	generateCardHeaders();
 }
 
 init();
