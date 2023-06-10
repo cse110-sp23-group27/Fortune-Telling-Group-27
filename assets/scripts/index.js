@@ -49,6 +49,9 @@ function bindHomePageBtns() {
 function toHomeButtonClick() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
+	const pastHeader = document.getElementById("pastHeaderText");
+	const presentHeader = document.getElementById("presentHeaderText");
+	const futureHeader = document.getElementById("futureHeaderText");
 	if (!homePageBool) {
 		displayGeneralUIElements();
 		document.getElementById("centerText").textContent = "";
@@ -69,6 +72,15 @@ function toHomeButtonClick() {
 	if (shuffleBtn !== null) {
 		shuffleBtn.hidden = true;
 	}
+	if(pastHeader !== null){
+		pastHeader.hidden = true;
+	}
+	if(presentHeader !== null){	
+		presentHeader.hidden = true;
+	}
+	if(futureHeader !== null){
+		futureHeader.hidden = true;
+	}	
 }
 
 /**
@@ -439,12 +451,12 @@ function displayThreeOptions() {
 			});
 		}
 	});
-	tarotDiv.appendChild(pastHeader);
-	tarotDiv.appendChild(presentHeader);
-	tarotDiv.appendChild(futureHeader);
 	pastHeader.hidden = false;
 	presentHeader.hidden = false;
 	futureHeader.hidden = false;
+	tarotDiv.appendChild(pastHeader);
+	tarotDiv.appendChild(presentHeader);
+	tarotDiv.appendChild(futureHeader);
 }
 
 /**
