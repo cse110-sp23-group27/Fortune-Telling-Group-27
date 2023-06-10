@@ -629,7 +629,7 @@ document.querySelector(".menuBox").addEventListener("mouseleave", function() {
  * Menu button sliding effect
  */
 document.querySelector(".menuBtn").addEventListener("click", function() {
-    menuSound.play();
+	menuSound.play();
 });
 /**
  * Changed the functionality so that we don't have to copy paste.
