@@ -416,16 +416,24 @@ function createShuffleCards() {
 			}
 
 			if (button.getAttribute("selected") === "true") {
+				button.classList.remove("cardBtnPreShuffleShadow");
 				button.setAttribute("selected", false);
 				button.style.backgroundColor = "white";
 				cardCounter--;
 			} else {
+				button.classList.add("cardBtnPreShuffleShadow");
 				button.setAttribute("selected", true);
 				button.style.backgroundColor = "black";
 				cardCounter++;
 			}
 
 			if (cardCounter == 3) {
+				for (let i = 0; i &lt; 22; i++) {
+					const btn = document.getElementById("Option " + i);
+					if (btn.getAttribute("selected") === "true") {
+						btn.classList.remove("cardBtnPreShuffleShadow");
+					}
+				}
 				cardCounter = 0;
 				displayThreeOptions();
 			}
