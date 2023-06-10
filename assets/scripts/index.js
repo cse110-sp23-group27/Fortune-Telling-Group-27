@@ -12,12 +12,14 @@ let cardCounter = 0;
 let cardsSelected = false;
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
-// Hover sound effect for the buttons
-const hoverSound = document.getElementById("mouseover-sound");
+// Sound effect for burger bar sliding
+const menuSound = document.getElementById("menu-slider");
 // Sound effect "click" button
 const clickSound = document.getElementById("click-button");
-// Shuffling sound effect
+// Sound effect for shuffling cards
 const shuffleSound = document.getElementById("shuffle-button");
+// Sound effect for selecting cards
+const selectedCardSound = document.getElementById("card-selecting");
 
 /**
  * Binds the home page buttons to change the type of
@@ -30,11 +32,6 @@ function bindHomePageBtns() {
 	const eggBtn = document.getElementById("toEgg");
 	const boneBtn = document.getElementById("toBoneTossing");
 
-	tarotCardBtn.addEventListener("mouseover", () => {
-		hoverSound.play();
-	});
-
-
 	tarotCardBtn.addEventListener("click", () => {
 		clickSound.play();
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
@@ -44,17 +41,9 @@ function bindHomePageBtns() {
 		homePageBool = false;
 	});
 
-	eggBtn.addEventListener("mouseover", () => {
-		hoverSound.play();
-	});
-
 	eggBtn.addEventListener("click", () => {
 		clickSound.play();
 		alert("TO BE DEVELOPED");
-	});
-
-	boneBtn.addEventListener("mouseover", () => {
-		hoverSound.play();
 	});
 
 	boneBtn.addEventListener("click", () => {
@@ -116,11 +105,6 @@ function bindGeneralButtons() {
 		// eslint-disable-next-line max-len
 		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
 	});
-
-	// githubBtn.addEventListener("click", () => {
-	// 	navigator.clipboard.writeText(
-	// 		"https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27");
-	// });
 }
 
 /**
@@ -358,7 +342,7 @@ function createShuffleCards() {
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
-			clickSound.play();
+			selectedCardSound.play();
 			if (cardsSelected) {
 				response.textContent = button.value;
 				return;
@@ -528,4 +512,10 @@ init();
  */
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
+});
+/**
+ * Menu sliding sound effect
+ */
+document.querySelector(".menuBtn").addEventListener("click", function() {
+	menuSound.play();
 });
