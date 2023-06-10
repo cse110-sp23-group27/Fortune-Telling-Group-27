@@ -347,7 +347,16 @@ function createShuffleCards() {
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
 			if (cardsSelected) {
-				response.textContent = button.value;
+				// Response should only change when the text is completely revealed,
+				// or response is empty
+				if (response.textContent === "" ||
+					getComputedStyle(response).opacity == 1) {
+					response.classList.add("fade-in");
+					setTimeout(() => {
+						response.classList.remove("fade-in");
+					}, 2500);
+					response.textContent = button.value;
+				}
 				return;
 			}
 
