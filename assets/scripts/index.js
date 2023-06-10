@@ -84,15 +84,15 @@ function toHomeButtonClick() {
 	if (shuffleBtn !== null) {
 		shuffleBtn.hidden = true;
 	}
-	if(pastHeader !== null){
+	if (pastHeader !== null) {
 		tarotDiv.removeChild(pastHeader);
 	}
-	if(presentHeader !== null){	
+	if (presentHeader !== null) {
 		tarotDiv.removeChild(presentHeader);
-		}
-	if(futureHeader !== null){
+	}
+	if (futureHeader !== null) {
 		tarotDiv.removeChild(futureHeader);
-	}	
+	}
 }
 
 /**
@@ -349,7 +349,7 @@ async function playCardSpreadAnimation() {
  * @date 5/27/2023
  */
 function createShuffleCards() {
-	//pastHeader.hidden = true;
+	// pastHeader.hidden = true;
 	for (let i = 0; i < 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
