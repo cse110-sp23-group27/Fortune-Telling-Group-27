@@ -96,6 +96,7 @@ function bindGeneralButtons() {
 
 	const docBtn = document.getElementById("toDocumentation");
 	const githubBtn = document.getElementById("toGitHub");
+	const introBtn = document.getElementById("toIntro");
 
 	docBtn.addEventListener("click", () => {
 		// eslint-disable-next-line max-len
@@ -104,6 +105,10 @@ function bindGeneralButtons() {
 	githubBtn.addEventListener("click", () => {
 		// eslint-disable-next-line max-len
 		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
+	});
+	introBtn.addEventListener("click", () => {
+		// eslint-disable-next-line max-len
+		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/user-introduction.md");
 	});
 }
 
@@ -344,7 +349,16 @@ function createShuffleCards() {
 		button.addEventListener("click", () =>{
 			selectedCardSound.play();
 			if (cardsSelected) {
-				response.textContent = button.value;
+				// Response should only change when the text is completely revealed,
+				// or response is empty
+				if (response.textContent === "" ||
+					getComputedStyle(response).opacity == 1) {
+					response.classList.add("fade-in");
+					setTimeout(() => {
+						response.classList.remove("fade-in");
+					}, 2500);
+					response.textContent = button.value;
+				}
 				return;
 			}
 
@@ -510,12 +524,29 @@ init();
  * @author Kyle Ng
  * @date 6/5/2023
  */
+/*
 document.querySelector(".menuBox").addEventListener("mouseleave", function() {
 	document.querySelector("#menuToggle").checked = false;
 });
+
+*/
 /**
- * Menu sliding sound effect
+ * Changed the functionality so that we don't have to copy paste.
+ * If for some reason someone wants to add more hamburger bars in the future,
+ * then they can add the same functionality by adding in the name.
+ * Uses global variable, so be careful!
+ * @author Kevin Wong
+ * @date 6/9/2023
  */
-document.querySelector(".menuBtn").addEventListener("click", function() {
-	menuSound.play();
+const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
+menus.forEach(function(menu) {
+	menu.addEventListener("mouseleave", function() {
+		// remove "menuBox" from the class name and add "#menuToggle"
+		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
+		document.querySelector(toggleId).checked = false;
+	});
+  menu.addEventListener("click", function() {
+    // Menu sliding sound effect
+    menuSound.play();
+  });
 });
