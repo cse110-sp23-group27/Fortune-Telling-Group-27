@@ -134,22 +134,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
-		homeBtn.disabled = true;
-		shuffleBtn.hidden = true;
-		resetBtn.hidden = true;
-		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
-		for (let card = 0; card < cards.length; card++) {
-			const cardOption = cards[card];
-			cardOption.hidden = false;
-		}
-
-		await playCardThrowAnimation();
-		await TarotCard.wait(100);
-		await playShuffleAnimation();
-		await playCardSpreadAnimation();
-		shuffleHeader.hidden = false;
-		homeBtn.disabled = false;
-		resetBtn.hidden = false;
+		shuffleCards();
 	});
 
 	resetBtn.id = "tarotResetBtn";
@@ -158,22 +143,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.addEventListener("click", async () => {
 		resetCards();
 		response.textContent = "";
-		homeBtn.disabled = true;
-		shuffleBtn.hidden = true;
-		resetBtn.hidden = true;
-		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
-		for (let card = 0; card < cards.length; card++) {
-			const cardOption = cards[card];
-			cardOption.hidden = false;
-		}
-
-		await playCardThrowAnimation();
-		await TarotCard.wait(100);
-		await playShuffleAnimation();
-		await playCardSpreadAnimation();
-		shuffleHeader.hidden = false;
-		homeBtn.disabled = false;
-		resetBtn.hidden = false;
+		shuffleCards();
 	}
 	);
 
@@ -182,6 +152,31 @@ function createShuffleAndResetBtnAndHeaders() {
 	tarotDiv.append(shuffleHeader);
 }
 
+/**
+ * Start shuffle animation
+ */
+async function shuffleCards() {
+	const shuffleBtn = document.getElementById("shuffleHeaderText");
+	const resetBtn = document.getElementById("tarotResetBtn");
+	const homeBtn = document.getElementById("toHome");
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	homeBtn.disabled = true;
+	shuffleBtn.hidden = true;
+	resetBtn.hidden = true;
+	const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+	for (let card = 0; card < cards.length; card++) {
+		const cardOption = cards[card];
+		cardOption.hidden = false;
+	}
+
+	await playCardThrowAnimation();
+	await TarotCard.wait(100);
+	await playShuffleAnimation();
+	await playCardSpreadAnimation();
+	shuffleHeader.hidden = false;
+	homeBtn.disabled = false;
+	resetBtn.hidden = false;
+}
 
 /**
  * Plays the card throw animation
