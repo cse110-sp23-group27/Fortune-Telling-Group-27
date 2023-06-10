@@ -15,6 +15,8 @@ const SHUFFLEBUTTON = "#tarotShuffleBtn";
 const HOMEBTN = "#toHome";
 const SHUFFLEDCARDS = ".cardsBtnPreShuffle";
 const RESPONSE = "#response";
+const BURGERBARCHECK = "#menuToggle";
+
 
 describe("Testing Tarot Card Page", () => {
 	const randNums = helper.getMultipleInts(3, 22); // get selected random cards
@@ -144,7 +146,7 @@ describe("Testing Tarot Card Page", () => {
 				// print current text content
 				console.log("Current text: " + currTextVal);
 				pTextVal = currTextVal;
-				await helper.delay(1000);
+				await helper.delay(2000);
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
@@ -162,6 +164,7 @@ describe("Testing Tarot Card Page", () => {
 			const homePageBtns = await page.$$(HOMEPAGE);
 			expect(await helper.allHidden(homePageBtns)).toBe(true);
 			const reset = await page.$(RESHUFFLEBTN);
+			const burgerBarCheckbox = await page.$(BURGERBARCHECK);
 			const home = await page.$(HOMEBTN);
 			if (increment === 0) {
 				await reset.click(); // click reset button
@@ -172,6 +175,8 @@ describe("Testing Tarot Card Page", () => {
 				expect(await helper.allHidden(shuffle)).toBe(false);
 				await helper.delay(1000);
 			} else {
+				await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+				await helper.delay(500);
 				await home.evaluate((b) => b.click()); // click home button
 				await helper.delay(500);
 				expect(await helper.allHidden(homePageBtns)).toBe(false);
