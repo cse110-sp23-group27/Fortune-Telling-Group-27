@@ -14,7 +14,7 @@ const TOTAROTCARD = "#toTarotCard";
 const SHUFFLEBUTTON = "#tarotShuffleBtn";
 const SHUFFLEDCARDS = ".cardsBtnPreShuffle";
 const RESPONSE = "#response";
-const MENUBTNSTWO = ".menuItemTwo"
+const MENUBTNSTWO = ".menuItemTwo";
 
 describe("Testing Tarot Card Page", () => {
 	const randNums = helper.getMultipleInts(3, 22); // get selected random cards
@@ -77,7 +77,7 @@ describe("Testing Tarot Card Page", () => {
 
 			expect(await helper.getSelectedValue(selCard)).toBe("true");
 			expect(await helper.getBGColor(selCard)).toBe("black");
-			//expect(await helper.getTopValue(selCard)).toBeGreaterThan(topVal); (will change when the cards change top value)
+			// expect(await helper.getTopValue(selCard)).toBeGreaterThan(topVal); (will change when the cards change top value)
 
 			await selCard.evaluate((b) => b.click()); // click tarot card
 			await helper.delay(200);
@@ -166,12 +166,12 @@ describe("Testing Tarot Card Page", () => {
 			// get burger bar for saved cards
 			// check if list in burger bar is the same as deck
 			const inBar = await page.$$(MENUBTNSTWO);
-			for(let i = 0; i < inBar.length; i++) {
+			for (let i = 0; i < inBar.length; i++) {
 				// if the ID is included in the deck, then the button should be visible (block display)
 				// otherwise it should be invisible (none display)
 				const display = await helper.getDisplayValue(inBar[i]);
-				const id = await page.evaluate(el => el.id, inBar[i]);
-				if(deckVal.indexOf(id) !== -1) {
+				const id = await page.evaluate((el) => el.id, inBar[i]);
+				if (deckVal.indexOf(id) !== -1) {
 					expect(display).toBe("block");
 				} else {
 					expect(display).toBe("none");

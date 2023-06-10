@@ -380,9 +380,9 @@ function updateLocalStorage(button) {
 	const cardIndex = button.getAttribute("cardIndex");
 	const tarotCard = consts.CARDSJSON[cardIndex];
 	const name = toCamelCase(tarotCard["name"]);
-	if(deckArr !== null) {
+	if (deckArr !== null) {
 		console.log(deckArr);
-		if(deckArr.indexOf(name) === -1) {
+		if (deckArr.indexOf(name) === -1) {
 			deckArr.push(name);
 		}
 		localStorage.setItem("deck", JSON.stringify(deckArr));
@@ -405,8 +405,8 @@ function showCardsFound() {
 	const deckArr = JSON.parse(deck);
 	// if the deck array has the cardBtn ID, set display to none
 	// otherwise, set display to block
-	for(let i = 0; i < cardsInMenu.length; i++) {
-		if(deckArr !== null && 
+	for (let i = 0; i < cardsInMenu.length; i++) {
+		if (deckArr !== null &&
 			deckArr.indexOf(cardsInMenu[i].id) !== -1) {
 			cardsInMenu[i].style.display = "block";
 		} else {
@@ -417,15 +417,15 @@ function showCardsFound() {
 /**
  * Converts any string to camel case.
  * From https://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case
- * 
+ *
  * @param {String} str String to be converted
- * @returns The String now follows camel case conventions (no spaces, capitalized words after space).
+ * @return {String} The String now follows camel case conventions (no spaces, capitalized words after space).
  * @date 6/10/2023
  */
 function toCamelCase(str) {
 	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
-	  return index === 0 ? word.toLowerCase() : word.toUpperCase();
-	}).replace(/\s+/g, '');
+		return index === 0 ? word.toLowerCase() : word.toUpperCase();
+	}).replace(/\s+/g, "");
 }
 
 /**
