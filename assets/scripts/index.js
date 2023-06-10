@@ -145,7 +145,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
-    shuffleSound.play();
+		shuffleSound.play();
 		shuffleCards();
 	});
 
@@ -153,7 +153,7 @@ function createShuffleAndResetBtnAndHeaders() {
 	resetBtn.textContent = "RESHUFFLE";
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
-    clickSound.play();
+		clickSound.play();
 		resetCards();
 		response.textContent = "";
 		shuffleCards();
