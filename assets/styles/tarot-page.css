@@ -81,7 +81,7 @@ button {
   }
   
 .fade-in {
-    animation: fadeIn 1.5s;
+    animation: fadeIn 0.5s;
 }
 
 @keyframes fadeIn {

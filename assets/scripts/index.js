@@ -71,27 +71,38 @@ function toHomeButtonClick() {
 		const responseCards =
 			document.getElementsByClassName("responseCards");
 		while (responseCards.length > 0) {
-			tarotDiv.removeChild(responseCards[0]);
+			ifNotNullRemove(responseCards[0]);
 		}
 		tarotDiv.hidden = true;
 		homePageBool = true;
 		resetCards();
 		removeFogBackground();
 	}
-	if (resetBtn !== null) {
-		resetBtn.hidden = true;
+	ifNotNullHide(resetBtn);
+	ifNotNullHide(shuffleBtn);
+	ifNotNullRemove(pastHeader);
+	ifNotNullRemove(presentHeader);
+	ifNotNullRemove(futureHeader);
+}
+
+
+/**
+ * Hides the element if the element is not null
+ * @param {element} element The element in question
+ */
+function ifNotNullHide(element) {
+	if(element !== null) {
+		element.hidden = true;
 	}
-	if (shuffleBtn !== null) {
-		shuffleBtn.hidden = true;
-	}
-	if (pastHeader !== null) {
-		tarotDiv.removeChild(pastHeader);
-	}
-	if (presentHeader !== null) {
-		tarotDiv.removeChild(presentHeader);
-	}
-	if (futureHeader !== null) {
-		tarotDiv.removeChild(futureHeader);
+}
+
+/**
+ * Removes the element from tarotDiv if the element is not null
+ * @param {element} element The element in question
+ */
+function ifNotNullRemove(element) {
+	if(element !== null) {
+		tarotDiv.removeChild(element);
 	}
 }
 
