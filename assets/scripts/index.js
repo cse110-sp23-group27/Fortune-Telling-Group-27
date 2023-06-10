@@ -654,6 +654,7 @@ menus.forEach(function(menu) {
 	menu.addEventListener("mouseleave", function() {
 		// remove "menuBox" from the class name and add "#menuToggle"
 		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
+		menuSound.play();
 		document.querySelector(toggleId).checked = false;
 		cardBook.src = consts.CARD_BOOK_IMG_URL; // Turn back to initial state
 	});
