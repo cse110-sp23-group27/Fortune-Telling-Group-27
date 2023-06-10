@@ -126,7 +126,6 @@ function displayGeneralUIElements(fortuneType =null) {
 function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
-	const homeBtn = document.getElementById("toHome");
 	const shuffleHeader = document.createElement("h1");
 	shuffleHeader.id = "shuffleHeaderText";
 	shuffleHeader.textContent = "Select Your Fate";
@@ -156,7 +155,7 @@ function createShuffleAndResetBtnAndHeaders() {
  * Start shuffle animation
  */
 async function shuffleCards() {
-	const shuffleBtn = document.getElementById("shuffleHeaderText");
+	const shuffleBtn = document.getElementById("tarotShuffleBtn");
 	const resetBtn = document.getElementById("tarotResetBtn");
 	const homeBtn = document.getElementById("toHome");
 	const shuffleHeader = document.getElementById("shuffleHeaderText");
