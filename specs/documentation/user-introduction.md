@@ -4,7 +4,7 @@
 The deck you will be exploring comprises 22 Major Arcana cards, which carry profound meanings and themes. They speak to universal experiences and life cycles we all go through in our journey, from innocence and growth to wisdom and self-realization. They represent powerful archetypes, emotional states, and life events, guiding you towards a deeper understanding of your existence.
 ​
 
-The bar on the left with the book icon keeps track of the cards you have encountered so far. Try to find all 21 tarot cards!
+The bar on the left with the book icon keeps track of the cards you have encountered so far. Try to find all 22 tarot cards!
 ​
 ## How to use Tarot Cards step-by-step
 
