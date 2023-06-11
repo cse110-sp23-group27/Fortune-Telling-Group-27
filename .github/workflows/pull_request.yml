@@ -23,8 +23,7 @@ jobs:
       - name: Generating JS Docs
         run: npm run doc
       
-      - name: Pushing changes
-   
+      - name: Pushing change
         uses: stefanzweifel/git-auto-commit-action@v4
 
   Test Coverage:
