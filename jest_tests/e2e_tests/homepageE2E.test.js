@@ -35,6 +35,7 @@ describe("Testing Homepage Buttons", () => {
 		// Query select all of the home page elements
 		const homePageBtns = await page.$$(HOMEPAGE);
 		for (let i = 0; i < homePageBtns.length; i++) {
+			// this will only run once because there is only one home button
 			const data = await page.evaluate((el) => el.textContent,
 				homePageBtns[i]);
 			// Make the text in the buttons exist
@@ -53,6 +54,8 @@ describe("Testing Homepage Buttons", () => {
 		// Query select all of the home page elements
 		const homePageBtns = await page.$$(HOMEPAGE);
 		for (let i = 0; i < homePageBtns.length; i++) {
+			// also only runs once because one home button
+			// See the design change ADR on why we got rid of the other home buttons
 			const style = await bdy.getProperty("style");
 			const bg = await (
 				await style.getProperty("backgroundColor")).jsonValue();
