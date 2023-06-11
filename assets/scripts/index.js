@@ -364,19 +364,31 @@ async function playCardSpreadAnimation() {
  */
 function createShuffleCards() {
 	// pastHeader.hidden = true;
+	const deckArr = getDeck();
+
 	for (let i = 0; i < 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
 		button.className = "cardsBtnPreShuffle";
 		button.hidden = true;
-		button.innerHTML = "<img class = \"chosenCards\"src=\"" +
-			consts.cardBack+"\">";
+		button.innerHTML = "<img class = \"chosenCards front\"src=\"" +
+		consts.cardBack+"\">";
+
 		button.style.backgroundColor = "white";
 		button.setAttribute("selected", false);
 		// Change appearance when selected/unselected
 		button.addEventListener("click", () =>{
 			selectedCardSound.play();
 			if (cardsSelected) {
+				const deckArr = getDeck();
+				const cardIndex = button.getAttribute("cardIndex");
+				const tarotCard = consts.CARDSJSON[cardIndex];
+				const name = toCamelCase(tarotCard["name"]);
+				const imageSrc = tarotCard["img"];
+				button.innerHTML = "<img class = \"chosenCards back\"src=\"" +
+				imageSrc+"\">";
+				button.classList.toggle("flipCard");
+
 				// Response should only change when the text is completely revealed,
 				// or response is empty
 				if (response.textContent === "" ||
@@ -584,9 +596,12 @@ function displayThreeOptions() {
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					const imageSrc = tarotCard["img"];
 					cardOption.setAttribute("cardIndex", cardsTypeSelected[i]);
+					// NOTE: Don't assign card image until clicked, deal face down
+					/*
 					cardOption.innerHTML =
 						"<img class = \"chosenCards\"src=\"" + imageSrc +
 						"\" alt = \"" + tarotCard["imgDescription"] + "\">";
+						*/
 					switch (i + 1) {
 					case 1:
 						cardOption.value = tarotCard["pastDescription"];

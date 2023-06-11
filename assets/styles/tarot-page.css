@@ -12,6 +12,8 @@
     border-color: black;
     border-radius: 5%;
     transform: translateX(-50%);
+    transform-style: preserve-3d;
+    transition: all 0.8s ease;
 }
 
 .chosenCards {
@@ -20,6 +22,21 @@
     margin: -2.5px;
     border-radius: 5%;
     border-color: black;
+}
+
+.front {
+    backface-visibility: hidden;
+    text-align: center;
+}
+
+.back {
+    backface-visibility: hidden;
+    text-align: center;
+    transform: rotateY(180deg);
+}
+
+.flipCard {
+    transform: rotateY(180deg) translateX(50%) !important;
 }
 
 .responseCards {
