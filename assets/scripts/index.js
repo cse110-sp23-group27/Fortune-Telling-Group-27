@@ -498,15 +498,15 @@ function showCardsFound() {
 	// select all card names in the second burger bar and get the deck values from local storage
 	const cardsInMenu = document.getElementsByClassName("menuItemTwo");
 	const deck = window.localStorage.getItem("deck");
-	let deckArr = []
-	if(deck !== null) {
+	let deckArr = [];
+	if (deck !== null) {
 		deckArr = JSON.parse(deck);
 	}
 	// if the deck array has the cardBtn ID, set display to none
 	// otherwise, set display to block
 	// Uses short circuit evaluation to check for deckArr
 	for (let i = 0; i < cardsInMenu.length; i++) {
-		if (deckArr !== null && deckArr.length > 0 && 
+		if (deckArr !== null && deckArr.length > 0 &&
 			deckArr.indexOf(cardsInMenu[i].id) !== -1) {
 			cardsInMenu[i].style.display = "block";
 		} else {
