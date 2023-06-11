@@ -1,7 +1,6 @@
 import * as consts from "./consts.js";
 import TarotCard from "./TarotCard.js";
 
-
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
@@ -14,8 +13,6 @@ let cardsSelected = false;
 let homePageBool = true;
 // Sound effect for burger bar sliding
 const menuSound = document.getElementById("menu-slider");
-// Sound effect "click" button
-const clickSound = document.getElementById("click-button");
 // Sound effect for shuffling cards
 const shuffleSound = document.getElementById("shuffle-button");
 // Sound effect for selecting cards
@@ -33,7 +30,6 @@ function bindHomePageBtns() {
 	const boneBtn = document.getElementById("toBoneTossing");
 
 	tarotCardBtn.addEventListener("click", () => {
-		clickSound.play();
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
@@ -42,12 +38,10 @@ function bindHomePageBtns() {
 	});
 
 	eggBtn.addEventListener("click", () => {
-		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 
 	boneBtn.addEventListener("click", () => {
-		clickSound.play();
 		alert("TO BE DEVELOPED");
 	});
 }
@@ -60,9 +54,6 @@ function bindHomePageBtns() {
 function toHomeButtonClick() {
 	const resetBtn = document.getElementById("tarotResetBtn");
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
-	const pastHeader = document.getElementById("pastHeaderText");
-	const presentHeader = document.getElementById("presentHeaderText");
-	const futureHeader = document.getElementById("futureHeaderText");
 
 	if (!homePageBool) {
 		displayGeneralUIElements();
@@ -78,11 +69,21 @@ function toHomeButtonClick() {
 		resetCards();
 		removeFogBackground();
 	}
+	hideHeaders();
 	ifNotNullHide(resetBtn);
 	ifNotNullHide(shuffleBtn);
-	ifNotNullRemove(pastHeader);
-	ifNotNullRemove(presentHeader);
-	ifNotNullRemove(futureHeader);
+}
+
+/**
+ * Hides past present and future headers for the cards
+ */
+function hideHeaders() {
+	const pastHeader = document.getElementById("pastHeaderText");
+	const presentHeader = document.getElementById("presentHeaderText");
+	const futureHeader = document.getElementById("futureHeaderText");
+	pastHeader.hidden = true;
+	presentHeader.hidden = true;
+	futureHeader.hidden = true;
 }
 
 
@@ -160,7 +161,6 @@ function displayGeneralUIElements(fortuneType =null) {
 function createShuffleAndResetBtnAndHeaders() {
 	const shuffleBtn = document.createElement("button");
 	const resetBtn = document.createElement("button");
-	const homeBtn = document.getElementById("toHome");
 	const shuffleHeader = document.createElement("h1");
 	shuffleHeader.id = "shuffleHeaderText";
 	shuffleHeader.textContent = "Select Three Cards";
@@ -169,30 +169,18 @@ function createShuffleAndResetBtnAndHeaders() {
 	shuffleBtn.textContent = "SHUFFLE CARDS";
 	shuffleBtn.addEventListener("click", async () => {
 		shuffleSound.play();
-		homeBtn.disabled = true;
-		shuffleBtn.hidden = true;
-		resetBtn.hidden = true;
-		const cards = document.getElementsByClassName("cardsBtnPreShuffle");
-		for (let card = 0; card < cards.length; card++) {
-			const cardOption = cards[card];
-			cardOption.hidden = false;
-		}
-
-		await playCardThrowAnimation();
-		await TarotCard.wait(100);
-		await playShuffleAnimation();
-		await playCardSpreadAnimation();
-		shuffleHeader.hidden = false;
-		homeBtn.disabled = false;
-		resetBtn.hidden = false;
+		shuffleCards();
 	});
 
 	resetBtn.id = "tarotResetBtn";
-	resetBtn.textContent = "RESET CARDS";
+	resetBtn.textContent = "RESHUFFLE";
 	resetBtn.hidden = true;
 	resetBtn.addEventListener("click", async () => {
-		clickSound.play();
-		toHomeButtonClick();
+		resetCards();
+		hideHeaders();
+		shuffleSound.play();
+		response.textContent = "";
+		shuffleCards();
 	}
 	);
 
@@ -201,6 +189,31 @@ function createShuffleAndResetBtnAndHeaders() {
 	tarotDiv.append(shuffleHeader);
 }
 
+/**
+ * Start shuffle animation
+ */
+async function shuffleCards() {
+	const shuffleBtn = document.getElementById("tarotShuffleBtn");
+	const resetBtn = document.getElementById("tarotResetBtn");
+	const homeBtn = document.getElementById("toHome");
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
+	homeBtn.disabled = true;
+	shuffleBtn.hidden = true;
+	resetBtn.hidden = true;
+	const cards = document.getElementsByClassName("cardsBtnPreShuffle");
+	for (let card = 0; card < cards.length; card++) {
+		const cardOption = cards[card];
+		cardOption.hidden = false;
+	}
+
+	await playCardThrowAnimation();
+	await TarotCard.wait(100);
+	await playShuffleAnimation();
+	await playCardSpreadAnimation();
+	shuffleHeader.hidden = false;
+	homeBtn.disabled = false;
+	resetBtn.hidden = false;
+}
 
 /**
  * Plays the card throw animation
@@ -384,6 +397,11 @@ function createShuffleCards() {
 					}, 2500);
 					response.textContent = button.value;
 				}
+				response.textContent = button.value;
+				// add to local storage
+				// set response value
+				updateLocalStorage(button);
+				showCardsFound();
 				return;
 			}
 
@@ -424,14 +442,9 @@ function createShuffleCards() {
 }
 
 /**
- * After selecting three cards, 3 cards will appear, and from left to right,
- * the cards represent the past, present and future descriptions.
- * @authors Elvis Joa, Daniel Lee, and Kevin Wong
- * @date 5/27/2023
+ * Generates the card headers for past, present and future in selection screen
  */
-function displayThreeOptions() {
-	// get html elements of selected cards
-	const selectedHTMLCards = [];
+function generateCardHeaders() {
 	const pastHeader = document.createElement("h1");
 	const presentHeader = document.createElement("h1");
 	const futureHeader = document.createElement("h1");
@@ -444,6 +457,93 @@ function displayThreeOptions() {
 	pastHeader.hidden = true;
 	presentHeader.hidden = true;
 	futureHeader.hidden = true;
+	tarotDiv.appendChild(pastHeader);
+	tarotDiv.appendChild(presentHeader);
+	tarotDiv.appendChild(futureHeader);
+}
+
+/**
+ * Shows all card headers
+ */
+function showCardHeaders() {
+	const pastHeader = document.getElementById("pastHeaderText");
+	const presentHeader = document.getElementById("presentHeaderText");
+	const futureHeader = document.getElementById("futureHeaderText");
+	pastHeader.hidden = false;
+	presentHeader.hidden = false;
+	futureHeader.hidden = false;
+}
+
+/**
+ * Updates local storage with the names of the cards that have been found
+ * @param {button} button - the card button that was just clicked to reveal text
+ * @author Daniel Lee
+ * @date 6/10/2023
+ */
+function updateLocalStorage(button) {
+	// get local storage stuff and parse
+	const deck = window.localStorage.getItem("deck");
+	const deckArr = JSON.parse(deck);
+	const cardIndex = button.getAttribute("cardIndex");
+	const tarotCard = consts.CARDSJSON[cardIndex];
+	const name = toCamelCase(tarotCard["name"]);
+	if (deckArr !== null) {
+		console.log(deckArr);
+		if (deckArr.indexOf(name) === -1) {
+			deckArr.push(name);
+		}
+		localStorage.setItem("deck", JSON.stringify(deckArr));
+	} else {
+		const arr = JSON.stringify([name]);
+		console.log(arr);
+		localStorage.setItem("deck", arr);
+	}
+}
+
+/**
+ * Hides or shows the card names found in the cards found menu
+ * @author Daniel Lee
+ * @date 6/10/2023
+ */
+function showCardsFound() {
+	// select all card names in the second burger bar and get the deck values from local storage
+	const cardsInMenu = document.getElementsByClassName("menuItemTwo");
+	const deck = window.localStorage.getItem("deck");
+	const deckArr = JSON.parse(deck);
+	// if the deck array has the cardBtn ID, set display to none
+	// otherwise, set display to block
+	for (let i = 0; i < cardsInMenu.length; i++) {
+		if (deckArr !== null &&
+			deckArr.indexOf(cardsInMenu[i].id) !== -1) {
+			cardsInMenu[i].style.display = "block";
+		} else {
+			cardsInMenu[i].style.display = "none";
+		}
+	}
+}
+/**
+ * Converts any string to camel case.
+ * From https://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case
+ *
+ * @param {String} str String to be converted
+ * @return {String} The String now follows camel case conventions (no spaces, capitalized words after space).
+ * @date 6/10/2023
+ */
+function toCamelCase(str) {
+	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+		return index === 0 ? word.toLowerCase() : word.toUpperCase();
+	}).replace(/\s+/g, "");
+}
+
+/**
+ * After selecting three cards, 3 cards will appear, and from left to right,
+ * the cards represent the past, present and future descriptions.
+ * @authors Elvis Joa, Daniel Lee, and Kevin Wong
+ * @date 5/27/2023
+ */
+function displayThreeOptions() {
+	// get html elements of selected cards
+	const selectedHTMLCards = [];
 	for (let i = 0; i < 22; i++) {
 		const button = document.getElementById(`Option ${i}`);
 		if (button.getAttribute("selected") === "true") {
@@ -481,8 +581,10 @@ function displayThreeOptions() {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					const imageSrc = tarotCard["img"];
+					cardOption.setAttribute("cardIndex", cardsTypeSelected[i]);
 					cardOption.innerHTML =
-						"<img class = \"chosenCards\"src=\"" +imageSrc+"\"/>";
+						"<img class = \"chosenCards\"src=\"" + imageSrc +
+						"\" alt = \"" + tarotCard["imgDescription"] + "\">";
 					switch (i + 1) {
 					case 1:
 						cardOption.value = tarotCard["pastDescription"];
@@ -497,12 +599,7 @@ function displayThreeOptions() {
 			});
 		}
 	});
-	pastHeader.hidden = false;
-	presentHeader.hidden = false;
-	futureHeader.hidden = false;
-	tarotDiv.appendChild(pastHeader);
-	tarotDiv.appendChild(presentHeader);
-	tarotDiv.appendChild(futureHeader);
+	showCardHeaders();
 }
 
 /**
@@ -592,42 +689,43 @@ document.querySelector("#menuToggleTwo").addEventListener("change", (event) => {
  * Initializes home page
  */
 function init() {
+	showCardsFound();
 	bindHomePageBtns();
 	bindGeneralButtons();
 	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
+	generateCardHeaders();
+	bindMenuBtns();
 }
 
 init();
 
 /**
- * Hamburger bar closes when you hover off of it
- * @author Kyle Ng
- * @date 6/5/2023
+ * Binds the functionality of the menu buttons (the book and the burger bar checkboxes)
  */
-/*
-document.querySelector(".menuBox").addEventListener("mouseleave", function() {
-	document.querySelector("#menuToggle").checked = false;
-});
-
-*/
-/**
- * Changed the functionality so that we don't have to copy paste.
- * If for some reason someone wants to add more hamburger bars in the future,
- * then they can add the same functionality by adding in the name.
- * Uses global variable, so be careful!
- * @author Kevin Wong
- * @date 6/9/2023
- */
-const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
-menus.forEach(function(menu) {
-	menu.addEventListener("mouseleave", function() {
-		// remove "menuBox" from the class name and add "#menuToggle"
-		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
-		document.querySelector(toggleId).checked = false;
+function bindMenuBtns() {
+	/**
+	 * Changed the functionality so that we don't have to copy paste.
+	 * If for some reason someone wants to add more hamburger bars in the future,
+	 * then they can add the same functionality by adding in the name.
+	 * @author Kevin Wong
+	 * @date 6/9/2023
+	 */
+	const menuBtns = document.querySelectorAll(".menuBtn, .menuBtnTwo");
+	const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
+	menuBtns.forEach(function(menuBtns) {
+		menuBtns.addEventListener("click", function() {
+			menuSound.play();
+		});
 	});
-	menu.addEventListener("click", function() {
-		// Menu sliding sound effect
-		menuSound.play();
+	menus.forEach(function(menu) {
+		menu.addEventListener("mouseleave", function() {
+			// remove "menuBox" from the class name and add "#menuToggle"
+			const toggleId = "#" + menu.className.replace(
+				"menuBox", "menuToggle");
+			menuSound.play();
+			document.querySelector(toggleId).checked = false;
+			cardBook.src = consts.CARD_BOOK_IMG_URL; // Turn back to initial state
+		});
 	});
-});
+}
