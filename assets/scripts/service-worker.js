@@ -3,7 +3,7 @@
 // main.js
 
 // CONSTANTS
-const tarotCardsImgs = [
+export const CACHE_IMAGES = [
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/card-back.png",
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/death.png",
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/tarot-cards/judgement.png",
@@ -30,7 +30,8 @@ const tarotCardsImgs = [
 	"https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png",
 	"https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png",
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/bookClosed.png",
-	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/openBook.png"
+	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/openBook.png",
+	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/home-background.png"
 ];
 
 // Run the init() function when the page has loaded
