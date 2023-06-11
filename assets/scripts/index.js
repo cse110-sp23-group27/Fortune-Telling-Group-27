@@ -67,14 +67,15 @@ function toHomeButtonClick() {
  * Hides past present and future headers for the cards
  */
 function hideHeaders() {
+	const shuffleHeader = document.getElementById("shuffleHeaderText");
 	const pastHeader = document.getElementById("pastHeaderText");
 	const presentHeader = document.getElementById("presentHeaderText");
 	const futureHeader = document.getElementById("futureHeaderText");
+	shuffleHeader.hidden = true;
 	pastHeader.hidden = true;
 	presentHeader.hidden = true;
 	futureHeader.hidden = true;
 }
-
 
 /**
  * Hides the element if the element is not null
@@ -412,8 +413,8 @@ function createShuffleCards() {
 				for (let i = 0; i < 22; i++) {
 					const btn = document.getElementById("Option " + i);
 					if (btn.getAttribute("selected") === "true") {
-						btn.classList.toggle("cardsBtnPreShuffle");
 						btn.classList.remove("cardBtnPreShuffleShadow");
+						btn.classList.toggle("cardsBtnPreShuffle");
 					}
 				}
 				cardCounter = 0;
@@ -612,6 +613,11 @@ function displayThreeOptions() {
 function resetCards() {
 	for (let card = 0; card < 22; card++) {
 		const cardOption = document.getElementById("Option " + card);
+		const btn = document.getElementById("Option " + card);
+		if (btn.getAttribute("selected") === "true") {
+			btn.classList.toggle("cardsBtnPreShuffle");
+			btn.classList.remove("cardBtnPreShuffleShadow");
+		}
 		cardOption.innerHTML =
 			"<img class = \"chosenCards\"src="+consts.cardBack +">";
 		if (cardOption) {
