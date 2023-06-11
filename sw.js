@@ -51,7 +51,7 @@ self.addEventListener("fetch", function(event) {
 			if (cachedResponse) {
 				return cachedResponse;
 			}
-			return fetch(event.request).then((fetchedResponse) => {
+			return fetch(event.request, {cache: "no-store"}).then((fetchedResponse) => {
 				cache.put(event.request, fetchedResponse.clone());
 				return fetchedResponse;
 			});

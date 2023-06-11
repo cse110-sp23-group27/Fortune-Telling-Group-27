@@ -2,9 +2,6 @@
 /* eslint-disable max-len */
 // main.js
 
-// CONSTANTS
-const CACHE_NAME = "fortune-telling";
-
 // Run the init() function when the page has loaded
 window.addEventListener("DOMContentLoaded", init);
 
