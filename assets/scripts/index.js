@@ -388,11 +388,13 @@ function createShuffleCards() {
 			}
 
 			if (button.getAttribute("selected") === "true") {
+				button.classList.toggle("cardsBtnPreShuffle");
 				button.classList.remove("cardBtnPreShuffleShadow");
 				button.setAttribute("selected", false);
 				button.style.backgroundColor = "white";
 				cardCounter--;
 			} else {
+				button.classList.toggle("cardsBtnPreShuffle");
 				button.classList.add("cardBtnPreShuffleShadow");
 				button.setAttribute("selected", true);
 				button.style.backgroundColor = "black";
@@ -403,6 +405,7 @@ function createShuffleCards() {
 				for (let i = 0; i < 22; i++) {
 					const btn = document.getElementById("Option " + i);
 					if (btn.getAttribute("selected") === "true") {
+						btn.classList.toggle("cardsBtnPreShuffle");
 						btn.classList.remove("cardBtnPreShuffleShadow");
 					}
 				}
