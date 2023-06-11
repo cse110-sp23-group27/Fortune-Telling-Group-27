@@ -1,7 +1,6 @@
 import * as consts from "./consts.js";
 import TarotCard from "./TarotCard.js";
 
-
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
@@ -398,6 +397,11 @@ function createShuffleCards() {
 					}, 2500);
 					response.textContent = button.value;
 				}
+				response.textContent = button.value;
+				// add to local storage
+				// set response value
+				updateLocalStorage(button);
+				showCardsFound();
 				return;
 			}
 
@@ -460,6 +464,67 @@ function showCardHeaders() {
 }
 
 /**
+ * Updates local storage with the names of the cards that have been found
+ * @param {button} button - the card button that was just clicked to reveal text
+ * @author Daniel Lee
+ * @date 6/10/2023
+ */
+function updateLocalStorage(button) {
+	// get local storage stuff and parse
+	const deck = window.localStorage.getItem("deck");
+	const deckArr = JSON.parse(deck);
+	const cardIndex = button.getAttribute("cardIndex");
+	const tarotCard = consts.CARDSJSON[cardIndex];
+	const name = toCamelCase(tarotCard["name"]);
+	if (deckArr !== null) {
+		console.log(deckArr);
+		if (deckArr.indexOf(name) === -1) {
+			deckArr.push(name);
+		}
+		localStorage.setItem("deck", JSON.stringify(deckArr));
+	} else {
+		const arr = JSON.stringify([name]);
+		console.log(arr);
+		localStorage.setItem("deck", arr);
+	}
+}
+
+/**
+ * Hides or shows the card names found in the cards found menu
+ * @author Daniel Lee
+ * @date 6/10/2023
+ */
+function showCardsFound() {
+	// select all card names in the second burger bar and get the deck values from local storage
+	const cardsInMenu = document.getElementsByClassName("menuItemTwo");
+	const deck = window.localStorage.getItem("deck");
+	const deckArr = JSON.parse(deck);
+	// if the deck array has the cardBtn ID, set display to none
+	// otherwise, set display to block
+	for (let i = 0; i < cardsInMenu.length; i++) {
+		if (deckArr !== null &&
+			deckArr.indexOf(cardsInMenu[i].id) !== -1) {
+			cardsInMenu[i].style.display = "block";
+		} else {
+			cardsInMenu[i].style.display = "none";
+		}
+	}
+}
+/**
+ * Converts any string to camel case.
+ * From https://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case
+ *
+ * @param {String} str String to be converted
+ * @return {String} The String now follows camel case conventions (no spaces, capitalized words after space).
+ * @date 6/10/2023
+ */
+function toCamelCase(str) {
+	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+		return index === 0 ? word.toLowerCase() : word.toUpperCase();
+	}).replace(/\s+/g, "");
+}
+
+/**
  * After selecting three cards, 3 cards will appear, and from left to right,
  * the cards represent the past, present and future descriptions.
  * @authors Elvis Joa, Daniel Lee, and Kevin Wong
@@ -505,6 +570,7 @@ function displayThreeOptions() {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					const imageSrc = tarotCard["img"];
+					cardOption.setAttribute("cardIndex", cardsTypeSelected[i]);
 					cardOption.innerHTML =
 						"<img class = \"chosenCards\"src=\"" + imageSrc +
 						"\" alt = \"" + tarotCard["imgDescription"] + "\">";
@@ -612,43 +678,43 @@ document.querySelector("#menuToggleTwo").addEventListener("change", (event) => {
  * Initializes home page
  */
 function init() {
+	showCardsFound();
 	bindHomePageBtns();
 	bindGeneralButtons();
 	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
 	generateCardHeaders();
+	bindMenuBtns();
 }
 
 init();
 
 /**
- * Hamburger bar closes when you hover off of it
- * @author Kyle Ng
- * @date 6/5/2023
+ * Binds the functionality of the menu buttons (the book and the burger bar checkboxes)
  */
-/*
-document.querySelector(".menuBox").addEventListener("mouseleave", function() {
-	document.querySelector("#menuToggle").checked = false;
-});
-
-*/
-/**
- * Changed the functionality so that we don't have to copy paste.
- * If for some reason someone wants to add more hamburger bars in the future,
- * then they can add the same functionality by adding in the name.
- * Uses global variable, so be careful!
- * @author Kevin Wong
- * @date 6/9/2023
- */
-const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
-menus.forEach(function(menu) {
-	menu.addEventListener("mouseleave", function() {
-		// remove "menuBox" from the class name and add "#menuToggle"
-		const toggleId = "#" + menu.className.replace("menuBox", "menuToggle");
-		document.querySelector(toggleId).checked = false;
+function bindMenuBtns() {
+	/**
+	 * Changed the functionality so that we don't have to copy paste.
+	 * If for some reason someone wants to add more hamburger bars in the future,
+	 * then they can add the same functionality by adding in the name.
+	 * @author Kevin Wong
+	 * @date 6/9/2023
+	 */
+	const menuBtns = document.querySelectorAll(".menuBtn, .menuBtnTwo");
+	const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
+	menuBtns.forEach(function(menuBtns) {
+		menuBtns.addEventListener("click", function() {
+			menuSound.play();
+		});
 	});
-	menu.addEventListener("click", function() {
-		// Menu sliding sound effect
-		menuSound.play();
+	menus.forEach(function(menu) {
+		menu.addEventListener("mouseleave", function() {
+			// remove "menuBox" from the class name and add "#menuToggle"
+			const toggleId = "#" + menu.className.replace(
+				"menuBox", "menuToggle");
+			menuSound.play();
+			document.querySelector(toggleId).checked = false;
+			cardBook.src = consts.CARD_BOOK_IMG_URL; // Turn back to initial state
+		});
 	});
-});
+}

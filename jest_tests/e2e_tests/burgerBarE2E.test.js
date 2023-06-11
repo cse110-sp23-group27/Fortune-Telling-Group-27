@@ -7,6 +7,7 @@ const helper = require("./E2EHelperFunctions");
 const HOMEPAGE = ".homePage";
 const HOMEBTN = "#toHome";
 const DOCS = "#toDocumentation";
+const INTRO = "#toIntro";
 const GITHUB = "#toGitHub";
 const TAROTCARDBTN = "#toTarotCard";
 const BURGERBAR = "#menuToggle";
@@ -69,7 +70,22 @@ describe("Testing Burger Bar and Buttons", () => {
 		expect(allArePopulated).toBe(true);
 		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
+	it("Initial Burger Bar - Instructions Button Test", async () => {
+		const toInstructions = await page.$(INTRO);
+		const newPagePromise = helper.returnNewPromise(browser);
+		await toInstructions.evaluate((b) => b.click()); // click intro button
+		// get new page
+		const newPage = await newPagePromise;
+		// check if last page opened is the introduction
+		expect(newPage.url()).toBe("https://github.com/cse110-sp23-group27/" +
+			"Fortune-Telling-Group-27/blob/main/specs/" +
+			"documentation/user-introduction.md");
+		await newPage.close();
+		await helper.delay(1000);
+	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Documentation Button Test", async () => {
+		const burgerBarCheckbox = await page.$(BURGERBAR);
+		await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
 		const toDocs = await page.$(DOCS);
 		const newPagePromise = helper.returnNewPromise(browser);
 		await toDocs.evaluate((b) => b.click()); // click docs button
