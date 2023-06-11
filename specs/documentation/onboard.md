@@ -16,6 +16,10 @@
 
 ## Notes:
 
+`npm run test` runs all E2E tests in headless mode. If a test fails or you want to see the process of the E2E test, change the headless property from true to false in jest-puppeteer.config.js.
+
+Make sure that you have the browser that the (false headless) mode for E2E tests opens being the current open window on your screen, otherwise some tests may fail. Essentially, you need to watch the E2E tests do their magic on your screen (the focus of your screen should be the puppeteer browser) if you open it in headless=false mode. 
+
 All scripts ignore files in the root directory and the .github folder and node modules folder
 
 If you have folders generated from libraries after running `npm ci`, then make sure you do not push them (they should be in .gitignore file at the root)
