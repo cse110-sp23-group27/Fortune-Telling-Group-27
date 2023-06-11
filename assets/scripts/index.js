@@ -17,7 +17,7 @@ const menuSound = document.getElementById("menu-slider");
 const shuffleSound = document.getElementById("shuffle-button");
 // Sound effect for selecting cards
 const selectedCardSound = document.getElementById("card-selecting");
-
+// keeps track of which cards are face up
 let cardsFaceUp = [];
 
 /**
@@ -394,7 +394,8 @@ function createShuffleCards() {
 
 				if(!cardsFaceUp.includes(button)){
 					for(let i = 0; i < cardsFaceUp.length; i++){
-						cardsFaceUp[i].innerHTML = "<img class = \"chosenCards\"src=\"" +
+						cardsFaceUp[i].innerHTML = 
+						"<img class = \"chosenCards\"src=\""+ 
 						consts.cardBack+"\">";
 					}
 					cardsFaceUp = [];
@@ -402,7 +403,8 @@ function createShuffleCards() {
 					const tarotCard = consts.CARDSJSON[cardIndex];
 					const imageSrc = tarotCard["img"];
 
-					button.innerHTML = "<img class = \"chosenCards\"src=\"" + imageSrc+"\">";
+					button.innerHTML = "<img class = \"chosenCards\"src=\""
+					 + imageSrc+"\">";
 					cardsFaceUp.push(button);
 				}
 
@@ -601,11 +603,8 @@ function displayThreeOptions() {
 				for (let i = 2; i >= 0; i--) {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
-					// const imageSrc = tarotCard["img"];
 					cardOption.setAttribute("cardIndex", cardsTypeSelected[i]);
-					// cardOption.innerHTML =
-					// 	"<img class = \"chosenCards\"src=\"" + imageSrc +
-					// 	"\" alt = \"" + tarotCard["imgDescription"] + "\">";
+			
 					switch (i + 1) {
 					case 1:
 						cardOption.value = tarotCard["pastDescription"];
