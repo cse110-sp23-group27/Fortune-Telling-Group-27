@@ -506,7 +506,7 @@ function showCardsFound() {
 	// otherwise, set display to block
 	// Uses short circuit evaluation to check for deckArr
 	for (let i = 0; i < cardsInMenu.length; i++) {
-		if (deckArr !== null && deckArr.length > 0 &&
+		if (deckArr.length > 0 &&
 			deckArr.indexOf(cardsInMenu[i].id) !== -1) {
 			cardsInMenu[i].style.display = "block";
 		} else {
