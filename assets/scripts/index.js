@@ -499,7 +499,7 @@ function showCardsFound() {
 	const cardsInMenu = document.getElementsByClassName("menuItemTwo");
 	const deck = window.localStorage.getItem("deck");
 	let deckArr = [];
-	if (deck !== null) {
+	if (deck !== null && deck !== undefined) {
 		deckArr = JSON.parse(deck);
 	}
 	// if the deck array has the cardBtn ID, set display to none
