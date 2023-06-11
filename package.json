@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"scripts": {
 		"test": "jest --detectOpenHandles",
-		"GHtest": "jest -c jest.unit.config.js --testPathPattern=jest_tests/unit_tests",
+		"GHtest": "jest -c jest.unit.config.js --testPathPattern=jest_tests/unit_tests --collectCoverage",
 		"lint": "eslint ./assets/scripts ./jest_tests --fix --ext .js  -c ./.eslintrc.js",
 		"doc": "jsdoc -c ./conf.json"
 	},
