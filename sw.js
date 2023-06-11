@@ -28,7 +28,8 @@ const CACHE_IMAGES = [
 	"https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png",
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/bookClosed.png",
 	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/openBook.png",
-	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/home-background.png"
+	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/home-background.png",
+	"https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/team-logo-27.png"
 ];
 
 self.addEventListener("install", function(event) {

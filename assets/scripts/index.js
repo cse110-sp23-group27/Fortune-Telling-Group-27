@@ -477,14 +477,12 @@ function updateLocalStorage(button) {
 	const tarotCard = consts.CARDSJSON[cardIndex];
 	const name = toCamelCase(tarotCard["name"]);
 	if (deckArr !== null) {
-		console.log(deckArr);
 		if (deckArr.indexOf(name) === -1) {
 			deckArr.push(name);
 		}
 		localStorage.setItem("deck", JSON.stringify(deckArr));
 	} else {
 		const arr = JSON.stringify([name]);
-		console.log(arr);
 		localStorage.setItem("deck", arr);
 	}
 }
@@ -561,7 +559,6 @@ function displayThreeOptions() {
 	let cardsMoved = 0;
 	TarotCard.getAllCards().forEach((card) => {
 		if (selectedHTMLCards.includes(card.cardElement)) {
-			console.log(card.getPositionPoint());
 			card.move(card.getPositionPoint(),
 				{x: 20+(selectedCardsFound*(60/2)), y: 10}, 350);
 			selectedCardsFound++;
