@@ -388,22 +388,20 @@ function createShuffleCards() {
 						response.classList.remove("fade-in");
 					}, 2500);
 					response.textContent = button.value;
-
-					
 				}
 
-				if(!cardsFaceUp.includes(button)){
-					for(let i = 0; i < cardsFaceUp.length; i++){
-						cardsFaceUp[i].innerHTML = 
-						"<img class = \"chosenCards\"src=\""+ 
+				if (!cardsFaceUp.includes(button)) {
+					for (let i = 0; i < cardsFaceUp.length; i++) {
+						cardsFaceUp[i].innerHTML =
+						"<img class = \"chosenCards\"src=\""+
 						consts.cardBack+"\">";
 					}
 					cardsFaceUp = [];
 					const cardIndex = button.getAttribute("cardIndex");
 					const tarotCard = consts.CARDSJSON[cardIndex];
 					const imageSrc = tarotCard["img"];
-					button.innerHTML = "<img class = \"chosenCards\"src=\""
-					+ imageSrc+"\">";
+					button.innerHTML = "<img class = \"chosenCards\"src=\"" +
+					imageSrc+"\">";
 					cardsFaceUp.push(button);
 				}
 
@@ -603,7 +601,7 @@ function displayThreeOptions() {
 					const cardOption = selectedHTMLCards[i];
 					const tarotCard = consts.CARDSJSON[cardsTypeSelected[i]];
 					cardOption.setAttribute("cardIndex", cardsTypeSelected[i]);
-			
+
 					switch (i + 1) {
 					case 1:
 						cardOption.value = tarotCard["pastDescription"];
