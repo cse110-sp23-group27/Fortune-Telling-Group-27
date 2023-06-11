@@ -471,8 +471,7 @@ function showCardHeaders() {
  */
 function updateLocalStorage(button) {
 	// get local storage stuff and parse
-	const deck = window.localStorage.getItem("deck");
-	const deckArr = JSON.parse(deck);
+	const deckArr = getDeck();
 	const cardIndex = button.getAttribute("cardIndex");
 	const tarotCard = consts.CARDSJSON[cardIndex];
 	const name = toCamelCase(tarotCard["name"]);
@@ -490,6 +489,19 @@ function updateLocalStorage(button) {
 }
 
 /**
+ * Gets the deck array in localstorage. If the deck is undefined, returns an empty array
+ * @return {String[]} The list of strings in the deck localstorage or an empty array if deck is null or undefined.
+ */
+function getDeck() {
+	const deck = window.localStorage.getItem("deck");
+	let deckArr = [];
+	if (deck !== null && deck !== undefined) {
+		deckArr = JSON.parse(deck);
+	}
+	return deckArr;
+}
+
+/**
  * Hides or shows the card names found in the cards found menu
  * @author Daniel Lee
  * @date 6/10/2023
@@ -497,11 +509,7 @@ function updateLocalStorage(button) {
 function showCardsFound() {
 	// select all card names in the second burger bar and get the deck values from local storage
 	const cardsInMenu = document.getElementsByClassName("menuItemTwo");
-	const deck = window.localStorage.getItem("deck");
-	let deckArr = [];
-	if (deck !== null && deck !== undefined) {
-		deckArr = JSON.parse(deck);
-	}
+	const deckArr = getDeck();
 	// if the deck array has the cardBtn ID, set display to none
 	// otherwise, set display to block
 	// Uses short circuit evaluation to check for deckArr
