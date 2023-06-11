@@ -402,9 +402,8 @@ function createShuffleCards() {
 					const cardIndex = button.getAttribute("cardIndex");
 					const tarotCard = consts.CARDSJSON[cardIndex];
 					const imageSrc = tarotCard["img"];
-
 					button.innerHTML = "<img class = \"chosenCards\"src=\""
-					 + imageSrc+"\">";
+					+ imageSrc+"\">";
 					cardsFaceUp.push(button);
 				}
 
