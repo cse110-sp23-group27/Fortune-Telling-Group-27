@@ -452,8 +452,8 @@ function createShuffleCards() {
 				for (let i = 0; i &lt; 22; i++) {
 					const btn = document.getElementById("Option " + i);
 					if (btn.getAttribute("selected") === "true") {
-						btn.classList.toggle("cardsBtnPreShuffle");
 						btn.classList.remove("cardBtnPreShuffleShadow");
+						btn.classList.toggle("cardsBtnPreShuffle");
 					}
 				}
 				cardCounter = 0;
