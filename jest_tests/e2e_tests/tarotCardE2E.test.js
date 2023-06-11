@@ -199,7 +199,8 @@ describe("Testing Tarot Card Page", () => {
 			} else {
 				await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
 				await helper.delay(500);
-				await home.evaluate((b) => b.click()); // click home button
+				await home.click();
+				//await home.evaluate((b) => b.click()); // click home button
 				await helper.delay(500);
 				expect(await helper.allHidden(homePageBtns)).toBe(false);
 				const shuffle = await page.$$(SHUFFLEDCARDS);
