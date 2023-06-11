@@ -23,9 +23,9 @@ describe("Testing Homepage Buttons", () => {
 		const numButtons = await page.$$eval(HOMEPAGE, (homePageBtns) => {
 			return homePageBtns.length;
 		});
-		// Expect there that array from earlier to be of length 3
-		// meaning 3 homepage buttons were found
-		expect(numButtons).toBe(3);
+		// Expect there that array from earlier to be of length 1
+		// meaning 1 homepage button was found
+		expect(numButtons).toBe(1);
 		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
 
@@ -35,6 +35,7 @@ describe("Testing Homepage Buttons", () => {
 		// Query select all of the home page elements
 		const homePageBtns = await page.$$(HOMEPAGE);
 		for (let i = 0; i < homePageBtns.length; i++) {
+			// this will only run once because there is only one home button
 			const data = await page.evaluate((el) => el.textContent,
 				homePageBtns[i]);
 			// Make the text in the buttons exist
@@ -46,41 +47,28 @@ describe("Testing Homepage Buttons", () => {
 		}
 		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
-	it("Make sure <home-page> button elements change background",
-		async () => {
-			// Start as true, if any change the background color, set to false
-			let allChangeBackground = false;
-			const bdy = await page.waitForSelector("body");
-			// Query select all of the home page elements
-			const homePageBtns = await page.$$(HOMEPAGE);
-			for (let i = 0; i < homePageBtns.length; i++) {
-				const style = await bdy.getProperty("style");
-				const bg = await (
-					await style.getProperty("backgroundColor")).jsonValue();
-				await homePageBtns[i].hover();
-				// Check if the backgrounds are same color after mouse hover
-				const bg2 = await (
-					await style.getProperty("backgroundColor")).jsonValue();
-				if (bg2 !== bg) {
-					allChangeBackground = true;
-				}
-				// Expect allArePopulated to still be true
-				expect(allChangeBackground).toBe(false);
-			}
-			await helper.delay(500);
-		}, helper.MAXTIMEOUT);
-	it("Testing alert for egg and bone button", async () => {
-		// select home page buttons
+	it("Make sure home page doesn't change bg", async () => {
+		// Start as true, if any change the background color, set to false
+		let allChangeBackground = false;
+		const bdy = await page.waitForSelector("body");
+		// Query select all of the home page elements
 		const homePageBtns = await page.$$(HOMEPAGE);
-		for (let i = 1; i < homePageBtns.length; i++) {
-			page.once("dialog", async (dialog) => {
-				// get alert message
-				console.log(dialog.message());
-				// accept alert
-				await dialog.accept();
-			});
-			await homePageBtns[i].click();
-			await helper.delay(100);
+		for (let i = 0; i < homePageBtns.length; i++) {
+			// also only runs once because one home button
+			// See the design change ADR on why we got rid of the other home buttons
+			const style = await bdy.getProperty("style");
+			const bg = await (
+				await style.getProperty("backgroundColor")).jsonValue();
+			await homePageBtns[i].hover();
+			// Check if the backgrounds are same color after mouse hover
+			const bg2 = await (
+				await style.getProperty("backgroundColor")).jsonValue();
+			if (bg2 !== bg) {
+				allChangeBackground = true;
+			}
+			// Expect allArePopulated to still be true
+			expect(allChangeBackground).toBe(false);
 		}
+		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
 });

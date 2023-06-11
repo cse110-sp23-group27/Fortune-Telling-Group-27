@@ -26,8 +26,6 @@ const selectedCardSound = document.getElementById("card-selecting");
  */
 function bindHomePageBtns() {
 	const tarotCardBtn = document.getElementById("toTarotCard");
-	const eggBtn = document.getElementById("toEgg");
-	const boneBtn = document.getElementById("toBoneTossing");
 
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
@@ -35,14 +33,6 @@ function bindHomePageBtns() {
 		document.getElementById("tarotShuffleBtn").hidden = false;
 		addFogBackground();
 		homePageBool = false;
-	});
-
-	eggBtn.addEventListener("click", () => {
-		alert("TO BE DEVELOPED");
-	});
-
-	boneBtn.addEventListener("click", () => {
-		alert("TO BE DEVELOPED");
 	});
 }
 
@@ -57,7 +47,6 @@ function toHomeButtonClick() {
 
 	if (!homePageBool) {
 		displayGeneralUIElements();
-		document.getElementById("centerText").textContent = "";
 		document.getElementById("response").textContent = "";
 		const responseCards =
 			document.getElementsByClassName("responseCards");
@@ -483,8 +472,7 @@ function showCardHeaders() {
  */
 function updateLocalStorage(button) {
 	// get local storage stuff and parse
-	const deck = window.localStorage.getItem("deck");
-	const deckArr = JSON.parse(deck);
+	const deckArr = getDeck();
 	const cardIndex = button.getAttribute("cardIndex");
 	const tarotCard = consts.CARDSJSON[cardIndex];
 	const name = toCamelCase(tarotCard["name"]);
@@ -502,6 +490,19 @@ function updateLocalStorage(button) {
 }
 
 /**
+ * Gets the deck array in localstorage. If the deck is undefined, returns an empty array
+ * @return {String[]} The list of strings in the deck localstorage or an empty array if deck is null or undefined.
+ */
+function getDeck() {
+	const deck = window.localStorage.getItem("deck");
+	let deckArr = [];
+	if (deck !== null && deck !== undefined) {
+		deckArr = JSON.parse(deck);
+	}
+	return deckArr;
+}
+
+/**
  * Hides or shows the card names found in the cards found menu
  * @author Daniel Lee
  * @date 6/10/2023
@@ -509,12 +510,12 @@ function updateLocalStorage(button) {
 function showCardsFound() {
 	// select all card names in the second burger bar and get the deck values from local storage
 	const cardsInMenu = document.getElementsByClassName("menuItemTwo");
-	const deck = window.localStorage.getItem("deck");
-	const deckArr = JSON.parse(deck);
+	const deckArr = getDeck();
 	// if the deck array has the cardBtn ID, set display to none
 	// otherwise, set display to block
+	// Uses short circuit evaluation to check for deckArr
 	for (let i = 0; i < cardsInMenu.length; i++) {
-		if (deckArr !== null &&
+		if (deckArr.length > 0 &&
 			deckArr.indexOf(cardsInMenu[i].id) !== -1) {
 			cardsInMenu[i].style.display = "block";
 		} else {

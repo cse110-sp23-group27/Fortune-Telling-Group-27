@@ -116,18 +116,6 @@ async function getBGColor(card) {
 }
 
 /**
- * Returns the top css value of the card
- * @param {ElementHandle} card the elementhandle of the card
- * @return {number} the top value (as an int)
- */
-async function getTopValue(card) {
-	const style = await card.getProperty("style");
-	const top = await style.getProperty("top");
-	const topVal = await parseInt(await top.jsonValue(), 10);
-	return topVal;
-}
-
-/**
  * Returns the display css value of the given element
  * @param {ElementHandle} element the elementHandle you want to get the display value of
  * @return {String} the display value of the card (as a string)
@@ -150,7 +138,6 @@ module.exports = {
 	delay,
 	getLeftVal,
 	allHidden,
-	getTopValue,
 	getDisplayValue,
 	MAXTIMEOUT
 };

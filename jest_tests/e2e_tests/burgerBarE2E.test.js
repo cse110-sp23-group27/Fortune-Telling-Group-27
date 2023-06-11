@@ -4,7 +4,6 @@
 
 const helper = require("./E2EHelperFunctions");
 
-const HOMEPAGE = ".homePage";
 const HOMEBTN = "#toHome";
 const DOCS = "#toDocumentation";
 const INTRO = "#toIntro";
@@ -12,6 +11,7 @@ const GITHUB = "#toGitHub";
 const TAROTCARDBTN = "#toTarotCard";
 const BURGERBAR = "#menuToggle";
 const BURGERBOX = ".menuBox";
+const BOOKCHECKBOX = "#menuToggleTwo";
 const BURGERBTNS = ".menuItem";
 
 describe("Testing Burger Bar and Buttons", () => {
@@ -73,7 +73,7 @@ describe("Testing Burger Bar and Buttons", () => {
 	it("Initial Burger Bar - Instructions Button Test", async () => {
 		const toInstructions = await page.$(INTRO);
 		const newPagePromise = helper.returnNewPromise(browser);
-		await toInstructions.evaluate((b) => b.click()); // click intro button
+		await toInstructions.click();
 		// get new page
 		const newPage = await newPagePromise;
 		// check if last page opened is the introduction
@@ -85,10 +85,14 @@ describe("Testing Burger Bar and Buttons", () => {
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Documentation Button Test", async () => {
 		const burgerBarCheckbox = await page.$(BURGERBAR);
-		await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		const checkedVal = await burgerBarCheckbox.getProperty("checked");
+		if (!(await checkedVal.jsonValue())) {
+			await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		}
+		await helper.delay(500);
 		const toDocs = await page.$(DOCS);
 		const newPagePromise = helper.returnNewPromise(browser);
-		await toDocs.evaluate((b) => b.click()); // click docs button
+		await toDocs.click();
 		// get new page
 		const newPage = await newPagePromise;
 		// check if last page opened is the docs
@@ -101,11 +105,14 @@ describe("Testing Burger Bar and Buttons", () => {
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Github Button Test", async () => {
 		const burgerBarCheckbox = await page.$(BURGERBAR);
-		await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		const checkedVal = await burgerBarCheckbox.getProperty("checked");
+		if (!(await checkedVal.jsonValue())) {
+			await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		}
 		await helper.delay(500);
 		const toGit = await page.$(GITHUB);
 		const newPagePromise = helper.returnNewPromise(browser);
-		await toGit.evaluate((b) => b.click()); // click github button
+		await toGit.click();
 		// get new page
 		const newPage = await newPagePromise;
 		expect(newPage.url()).toBe(
@@ -117,23 +124,34 @@ describe("Testing Burger Bar and Buttons", () => {
 	}, helper.MAXTIMEOUT);
 	it("Initial Burger Bar - Home button test", async () => {
 		const burgerBarCheckbox = await page.$(BURGERBAR);
-		await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		const checkedVal = await burgerBarCheckbox.getProperty("checked");
+		// check if burger bar is checked
+		if (!(await checkedVal.jsonValue())) {
+			await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
+		}
 		await helper.delay(500);
-		const toHome = await page.$(HOMEBTN);
-		const toTarot = await page.$(TAROTCARDBTN);
+		const toHome = await page.$(HOMEBTN); // the home button on burger bar
+		const toTarot = await page.$(TAROTCARDBTN); // the tarot card button on the homepage
 
-		const homeBtns = await page.$$(HOMEPAGE);
+		expect(await helper.getHiddenVal(toTarot)).toBe(false); // check if tarot card is hidden
+		await toHome.click();
+		// await toHome.evaluate((b) => b.click()); // click home button
+		expect(await helper.getHiddenVal(toTarot)).toBe(false); // check if tarot card is hidden
 
-		expect(await helper.allHidden(homeBtns)).toBe(false);
-		await toHome.evaluate((b) => b.click()); // click home button
-		expect(await helper.allHidden(homeBtns)).toBe(false);
-
-		await toTarot.evaluate((b) => b.click()); // click home button
+		await toTarot.evaluate((b) => b.click()); // click tarot button
 		await helper.delay(100);
-		expect(await helper.allHidden(homeBtns)).toBe(true);
+		expect(await helper.getHiddenVal(toTarot)).toBe(true); // tarot card is hidden
+		await helper.delay(500);
 
-		await toHome.evaluate((b) => b.click()); // click home button
-		expect(await helper.allHidden(homeBtns)).toBe(false);
-		await helper.delay(100);
+		await toHome.click();
+		// await toHome.evaluate((b) => b.click()); // click home button
+		expect(await helper.getHiddenVal(toTarot)).toBe(false); // tarot card no longer hidden
+		await helper.delay(500);
+	}, helper.MAXTIMEOUT);
+	it("Book Burger Bar - Open and Close test", async () => {
+		const bookCheckbox = await page.$(BOOKCHECKBOX);
+		await bookCheckbox.evaluate((b) => b.click()); // Click book checkbox
+		await helper.delay(500);
+		await bookCheckbox.evaluate((b) => b.click()); // Click book checkbox again
 	}, helper.MAXTIMEOUT);
 });
