@@ -12,6 +12,7 @@ const GITHUB = "#toGitHub";
 const TAROTCARDBTN = "#toTarotCard";
 const BURGERBAR = "#menuToggle";
 const BURGERBOX = ".menuBox";
+const BOOKCHECKBOX = "#menuToggleTwo";
 const BURGERBTNS = ".menuItem";
 
 describe("Testing Burger Bar and Buttons", () => {
@@ -135,5 +136,11 @@ describe("Testing Burger Bar and Buttons", () => {
 		await toHome.evaluate((b) => b.click()); // click home button
 		expect(await helper.allHidden(homeBtns)).toBe(false);
 		await helper.delay(100);
+	}, helper.MAXTIMEOUT);
+	it("Book Burger Bar - Open and Close test", async () => {
+		const bookCheckbox = await page.$(BOOKCHECKBOX);
+		await bookCheckbox.evaluate((b) => b.click()); // Click book checkbox
+		await helper.delay(500);
+		await bookCheckbox.evaluate((b) => b.click()); // Click book checkbox again
 	}, helper.MAXTIMEOUT);
 });

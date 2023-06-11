@@ -26,8 +26,6 @@ const selectedCardSound = document.getElementById("card-selecting");
  */
 function bindHomePageBtns() {
 	const tarotCardBtn = document.getElementById("toTarotCard");
-	const eggBtn = document.getElementById("toEgg");
-	const boneBtn = document.getElementById("toBoneTossing");
 
 	tarotCardBtn.addEventListener("click", () => {
 		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
@@ -35,14 +33,6 @@ function bindHomePageBtns() {
 		document.getElementById("tarotShuffleBtn").hidden = false;
 		addFogBackground();
 		homePageBool = false;
-	});
-
-	eggBtn.addEventListener("click", () => {
-		alert("TO BE DEVELOPED");
-	});
-
-	boneBtn.addEventListener("click", () => {
-		alert("TO BE DEVELOPED");
 	});
 }
 
@@ -57,7 +47,6 @@ function toHomeButtonClick() {
 
 	if (!homePageBool) {
 		displayGeneralUIElements();
-		document.getElementById("centerText").textContent = "";
 		document.getElementById("response").textContent = "";
 		const responseCards =
 			document.getElementsByClassName("responseCards");

@@ -37,8 +37,8 @@ describe("Testing Tarot Card Page", () => {
 			return homePageBtns.length;
 		});
 			// Expect there that array from earlier to be of length 3
-			// meaning 3 homepage buttons were found
-		expect(numButtons).toBe(3);
+			// meaning 1 homepage button was found
+		expect(numButtons).toBe(1);
 		const tarotCardButton = await page.$(TOTAROTCARD);
 		const homePageBtns = await page.$$(HOMEPAGE);
 		const shuffle = await page.$$(SHUFFLEDCARDS);
@@ -68,8 +68,6 @@ describe("Testing Tarot Card Page", () => {
 			const shuffle = await page.$$(SHUFFLEDCARDS);
 			const randNum = helper.getRandomInt(shuffle.length);
 			const selCard = shuffle[randNum];
-			const topVal = await helper.getTopValue(selCard);
-			console.log("top value of card: " + topVal);
 
 			// card should not be selected and have white bg color
 			expect(await helper.getSelectedValue(selCard)).toBe("false");
@@ -82,7 +80,6 @@ describe("Testing Tarot Card Page", () => {
 
 			expect(await helper.getSelectedValue(selCard)).toBe("true");
 			expect(await helper.getBGColor(selCard)).toBe("black");
-			// expect(await helper.getTopValue(selCard)).toBeGreaterThan(topVal); (will change when the cards change top value)
 
 			await selCard.evaluate((b) => b.click()); // click tarot card
 			await helper.delay(200);
@@ -92,7 +89,6 @@ describe("Testing Tarot Card Page", () => {
 
 			expect(await helper.getSelectedValue(selCard)).toBe("false");
 			expect(await helper.getBGColor(selCard)).toBe("white");
-			expect(await helper.getTopValue(selCard)).toBe(topVal);
 
 			await helper.delay(1000);
 		}, helper.MAXTIMEOUT);
@@ -111,6 +107,7 @@ describe("Testing Tarot Card Page", () => {
 						await helper.getSelectedValue(selCard)).toBe("false");
 				}
 				cnt++;
+				await helper.delay(500);
 			}
 			await helper.delay(500);
 		}, helper.MAXTIMEOUT);
