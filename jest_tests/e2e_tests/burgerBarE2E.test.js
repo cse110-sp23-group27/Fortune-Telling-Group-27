@@ -86,7 +86,7 @@ describe("Testing Burger Bar and Buttons", () => {
 	it("Initial Burger Bar - Documentation Button Test", async () => {
 		const burgerBarCheckbox = await page.$(BURGERBAR);
 		const checkedVal = await burgerBarCheckbox.getProperty("checked");
-		if(!(await checkedVal.jsonValue())) {
+		if (!(await checkedVal.jsonValue())) {
 			await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
 		}
 		await helper.delay(500);
@@ -106,7 +106,7 @@ describe("Testing Burger Bar and Buttons", () => {
 	it("Initial Burger Bar - Github Button Test", async () => {
 		const burgerBarCheckbox = await page.$(BURGERBAR);
 		const checkedVal = await burgerBarCheckbox.getProperty("checked");
-		if(!(await checkedVal.jsonValue())) {
+		if (!(await checkedVal.jsonValue())) {
 			await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
 		}
 		await helper.delay(500);
@@ -126,7 +126,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		const burgerBarCheckbox = await page.$(BURGERBAR);
 		const checkedVal = await burgerBarCheckbox.getProperty("checked");
 		// check if burger bar is checked
-		if(!(await checkedVal.jsonValue())) {
+		if (!(await checkedVal.jsonValue())) {
 			await burgerBarCheckbox.evaluate((b) => b.click()); // click burger bar button
 		}
 		await helper.delay(500);
@@ -135,7 +135,7 @@ describe("Testing Burger Bar and Buttons", () => {
 
 		expect(await helper.getHiddenVal(toTarot)).toBe(false); // check if tarot card is hidden
 		await toHome.click();
-		//await toHome.evaluate((b) => b.click()); // click home button
+		// await toHome.evaluate((b) => b.click()); // click home button
 		expect(await helper.getHiddenVal(toTarot)).toBe(false); // check if tarot card is hidden
 
 		await toTarot.evaluate((b) => b.click()); // click tarot button
@@ -144,7 +144,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		await helper.delay(500);
 
 		await toHome.click();
-		//await toHome.evaluate((b) => b.click()); // click home button
+		// await toHome.evaluate((b) => b.click()); // click home button
 		expect(await helper.getHiddenVal(toTarot)).toBe(false); // tarot card no longer hidden
 		await helper.delay(500);
 	}, helper.MAXTIMEOUT);
