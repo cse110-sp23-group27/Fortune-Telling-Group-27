@@ -50,6 +50,16 @@ body {
     box-shadow: 0 0 10px 5px #fff;
 }
 
+.cardBtnPreShuffleShadow {
+    box-shadow: 0 0 10px #8000ff,
+                0 0 15px #8000ff,
+                0 0 30px #8000ff,
+                0 0 40px #8000ff;
+    filter: brightness(1.2);
+    color: white; 
+    transform: scale(1.1);
+}
+
 #container {
     display: relative;
     justify-content: center;
