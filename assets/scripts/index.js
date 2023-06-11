@@ -88,7 +88,6 @@ function hideHeaders() {
 	futureHeader.hidden = true;
 }
 
-
 /**
  * Hides the element if the element is not null
  * @param {element} element The element in question
