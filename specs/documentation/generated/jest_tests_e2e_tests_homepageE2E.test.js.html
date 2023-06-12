@@ -43,7 +43,7 @@ describe("Testing Homepage Buttons", () => {
 		});
 		await page.reload();
 		await helper.delay(1000);
-	}, helper.MAXTIMEOUT);
+	}, 20000);
 
 	it("Initial Home Page - Check for 3 Buttons", async () => {
 		// Query select all of the homepage button elements
