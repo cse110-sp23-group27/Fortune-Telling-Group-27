@@ -6,6 +6,8 @@ import * as TarotAnimation from "./tarotCardAnimation.js";
 const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
 const response = document.getElementById("response");
+// Global cardCounter variable, moved because couldn't reset the cards. DANGER!
+let cardCounter = 0;
 // Global variable that shows if 3 cards have been selected
 let cardsSelected = false;
 // Global homepage varible for checking if on homepage
@@ -244,7 +246,6 @@ function createShuffleCards() {
 	let cardsFaceUp = [];
 	// Sound effect for selecting cards
 	const selectedCardSound = document.getElementById("card-selecting");
-	let cardCounter = 0;
 
 	for (let i = 0; i < 22; i++) {
 		const button = document.createElement("button");
@@ -518,7 +519,7 @@ function resetCards() {
 			cardOption.hidden = true;
 		}
 	}
-
+	cardCounter = 0;
 	cardsSelected = false;
 }
 
