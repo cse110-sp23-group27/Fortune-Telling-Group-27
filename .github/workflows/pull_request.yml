@@ -1,9 +1,6 @@
 name: JSDocs Generation And Test Coverage
 run-name: ${{ github.actor }} is running Github Actions
 on:
-  push:
-    branches:
-          - main     # Only runs on main
   pull_request:
     branches:
           - main     # Only runs on main
