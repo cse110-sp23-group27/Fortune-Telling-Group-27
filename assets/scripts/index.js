@@ -470,7 +470,7 @@ function displayThreeOptions() {
 				}
 				const cardsTypeSelected = [];
 				while (cardsTypeSelected.length < 3) {
-					const card = Math.floor(Math.random()*21);
+					const card = Math.floor(Math.random()*22);
 					if (cardsTypeSelected.indexOf(card) === -1) {
 						cardsTypeSelected.push(card);
 					}
