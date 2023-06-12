@@ -216,7 +216,7 @@ button {
 
 body {
   /* transition: background-color 0.5s ease;  */
-  background-image: url('/assets/images/home-background.png');
+  background-image: url('https://raw.githubusercontent.com/cse110-sp23-group27/Fortune-Telling-Group-27/main/assets/images/home-background.png');
   background-repeat: no-repeat;
   background-size: cover;
   overflow-x: hidden; 
