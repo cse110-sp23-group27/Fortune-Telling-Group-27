@@ -28,25 +28,16 @@
         <article>
             <pre class="prettyprint source linenums"><code>import * as consts from "./consts.js";
 import TarotCard from "./TarotCard.js";
+import * as TarotAnimation from "./tarotCardAnimation.js";
 
 // Div that contains all tarot card page elements
 const tarotDiv = document.getElementById("tarotDiv");
 // Response texts
 const response = document.getElementById("response");
-// Global cardCounter variable, moved because couldn't reset the cards. DANGER!
-let cardCounter = 0;
 // Global variable that shows if 3 cards have been selected
 let cardsSelected = false;
 // Global homepage varible for checking if on homepage
 let homePageBool = true;
-// Sound effect for burger bar sliding
-const menuSound = document.getElementById("menu-slider");
-// Sound effect for shuffling cards
-const shuffleSound = document.getElementById("shuffle-button");
-// Sound effect for selecting cards
-const selectedCardSound = document.getElementById("card-selecting");
-// keeps track of which cards are face up
-let cardsFaceUp = [];
 
 /**
  * Binds the home page buttons to change the type of
@@ -58,13 +49,77 @@ function bindHomePageBtns() {
 	const tarotCardBtn = document.getElementById("toTarotCard");
 
 	tarotCardBtn.addEventListener("click", () => {
-		displayGeneralUIElements(consts.FORTUNETYPES.tarotCard);
+		changeUIVisibility();
 		tarotDiv.hidden = false;
 		document.getElementById("tarotShuffleBtn").hidden = false;
-		addFogBackground();
+		TarotAnimation.addFogBackground();
 		homePageBool = false;
 	});
 }
+
+/**
+ * Binds the functionality of the menu buttons (the book and the burger bar checkboxes)
+ */
+function bindMenuBtns() {
+	/**
+	 * Changed the functionality so that we don't have to copy paste.
+	 * If for some reason someone wants to add more hamburger bars in the future,
+	 * then they can add the same functionality by adding in the name.
+	 * @author Kevin Wong
+	 * @date 6/9/2023
+	 */
+	const menuBtns = document.querySelectorAll(".menuBtn, .menuBtnTwo");
+	const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
+	// Sound effect for burger bar sliding
+	const menuSound = document.getElementById("menu-slider");
+	menuBtns.forEach(function(menuBtns) {
+		menuBtns.addEventListener("click", function() {
+			menuSound.play();
+		});
+	});
+	menus.forEach(function(menu) {
+		menu.addEventListener("mouseleave", function() {
+			// remove "menuBox" from the class name and add "#menuToggle"
+			const toggleId = "#" + menu.className.replace(
+				"menuBox", "menuToggle");
+			menuSound.play();
+			document.querySelector(toggleId).checked = false;
+			cardBook.src = consts.CARD_BOOK_IMG_URL; // Turn back to initial state
+		});
+	});
+}
+
+
+/**
+ * Binds the buttons that appear at the top left for
+ * all consts.FORTUNE telling,
+ * more specifically the home, options, and GitHub buttons.
+ * @author Elvis Joa
+ * @date 5/21/2023
+ */
+function bindGeneralButtons() {
+	const homeBtn = document.getElementById("toHome");
+	// Added to reset cards on click
+	homeBtn.addEventListener("click", () => toHomeButtonClick());
+
+	const docBtn = document.getElementById("toDocumentation");
+	const githubBtn = document.getElementById("toGitHub");
+	const introBtn = document.getElementById("toIntro");
+
+	docBtn.addEventListener("click", () => {
+		// eslint-disable-next-line max-len
+		window.open("https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/specs/documentation/generated/index.html");
+	});
+	githubBtn.addEventListener("click", () => {
+		// eslint-disable-next-line max-len
+		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
+	});
+	introBtn.addEventListener("click", () => {
+		// eslint-disable-next-line max-len
+		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/user-introduction.md");
+	});
+}
+
 
 /**
  * What happens when you click the home button
@@ -76,7 +131,7 @@ function toHomeButtonClick() {
 	const shuffleBtn = document.getElementById("tarotShuffleBtn");
 
 	if (!homePageBool) {
-		displayGeneralUIElements();
+		changeUIVisibility();
 		document.getElementById("response").textContent = "";
 		const responseCards =
 			document.getElementsByClassName("responseCards");
@@ -86,7 +141,7 @@ function toHomeButtonClick() {
 		tarotDiv.hidden = true;
 		homePageBool = true;
 		resetCards();
-		removeFogBackground();
+		TarotAnimation.removeFogBackground();
 	}
 	hideHeaders();
 	ifNotNullHide(resetBtn);
@@ -128,42 +183,11 @@ function ifNotNullRemove(element) {
 }
 
 /**
- * Binds the buttons that appear at the top left for
- * all consts.FORTUNE telling,
- * more specifically the home, options, and GitHub buttons.
- * @author Elvis Joa
- * @date 5/21/2023
- */
-function bindGeneralButtons() {
-	const homeBtn = document.getElementById("toHome");
-	// Added to reset cards on click
-	homeBtn.addEventListener("click", () => toHomeButtonClick());
-
-	const docBtn = document.getElementById("toDocumentation");
-	const githubBtn = document.getElementById("toGitHub");
-	const introBtn = document.getElementById("toIntro");
-
-	docBtn.addEventListener("click", () => {
-		// eslint-disable-next-line max-len
-		window.open("https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/specs/documentation/generated/index.html");
-	});
-	githubBtn.addEventListener("click", () => {
-		// eslint-disable-next-line max-len
-		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/tree/main");
-	});
-	introBtn.addEventListener("click", () => {
-		// eslint-disable-next-line max-len
-		window.open("https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/user-introduction.md");
-	});
-}
-
-/**
  * Displays the UI elements that are needed and wanted
  * @author Elvis Joa
  * @date 5/21/2023
- * @param {string} fortuneType - Displays elements for this fortune type
  */
-function displayGeneralUIElements(fortuneType =null) {
+function changeUIVisibility() {
 	// Hides/Displays the home page buttons as needed
 	const homeBtns = document.getElementsByClassName("homePage");
 	for (let i = 0; i &lt; homeBtns.length; i++) {
@@ -187,6 +211,9 @@ function createShuffleAndResetBtnAndHeaders() {
 	shuffleHeader.hidden = true;
 	shuffleBtn.id = "tarotShuffleBtn";
 	shuffleBtn.textContent = "SHUFFLE CARDS";
+	// Sound effect for shuffling cards
+	const shuffleSound = document.getElementById("shuffle-button");
+
 	shuffleBtn.addEventListener("click", async () => {
 		shuffleSound.play();
 		shuffleCards();
@@ -226,164 +253,13 @@ async function shuffleCards() {
 		cardOption.hidden = false;
 	}
 
-	await playCardThrowAnimation();
+	await TarotAnimation.playCardThrowAnimation();
 	await TarotCard.wait(100);
-	await playShuffleAnimation();
-	await playCardSpreadAnimation();
+	await TarotAnimation.playShuffleAnimation();
+	await TarotAnimation.playCardSpreadAnimation();
 	shuffleHeader.hidden = false;
 	homeBtn.disabled = false;
 	resetBtn.hidden = false;
-}
-
-/**
- * Plays the card throw animation
- * @date 6/6/2023 - 1:58:41 PM
- * @author Victor Kim
- *
- * @async
- * @return {None}
- */
-async function playCardThrowAnimation() {
-	const cards = TarotCard.getAllCards();
-	// unhide, move, and make unclickable
-	cards.forEach((card) => {
-		card.cardElement.hidden = false;
-		card.setClickable(false);
-		card.moveInstantly(consts.preThrow_card_pos);
-	});
-	await TarotCard.wait(200);
-	await cards[cards.length - 1].movePromise(
-		cards[cards.length - 1].getPositionPoint(),
-		consts.preThrow_card_pos,
-		200
-	);
-	await TarotCard.wait(100);
-	// throw in random directions
-	for (let i = 0; i &lt; cards.length - 1; i++) {
-		cards[i].movePromise(cards[i].getPositionPoint(),
-			cardThrowRandomPos(), 200);
-		cards[i].rotatePromise(0, cardThrowRandomRot(), 230);
-
-		await TarotCard.wait(50);
-	}
-	cards[cards.length - 1].movePromise(
-		cards[cards.length - 1].getPositionPoint(),
-		cardThrowRandomPos(),
-		200
-	);
-
-	return cards[cards.length - 1].rotatePromise(0, cardThrowRandomRot(), 230);
-}
-
-
-/**
- * Givs random rotation acording to card throw animation constants
- * @date 6/6/2023 - 7:51:33 PM
- * @author Victor Kim
- *
- * @return {*}
- */
-function cardThrowRandomRot() {
-	return consts.afterThrow_card_Rotation_min +
-	Math.random()*consts.afterThrow_card_Rotation_max;
-}
-
-/**
- * Gives random position acording to card throw animation constants
- * @date 6/6/2023 - 7:51:57 PM
- * @author Victor Kim
- *
- * @return {Object} { x: any; y: any; }
- */
-function cardThrowRandomPos() {
-	return {
-		x: consts.afterThrow_card_X_min +
-			Math.random()*consts.afterThrow_card_X_max,
-		y: consts.afterThrow_card_Y_min +
-			Math.random()*consts.afterThrow_card_Y_max
-	};
-}
-
-/**
- * Will play the shuffle animation for the current cards
- * @date 5/29/2023 - 9:20:17 PM
- */
-async function playShuffleAnimation() {
-	const cards = TarotCard.getAllCards();
-
-	// Move all to center and rotate in to deck
-	for (let i = 0; i &lt; cards.length - 1; i++) {
-		const card = cards[i];
-		card.move(card.getPositionPoint(), consts.shuffle_deck_pos, 200);
-		card.rotate(card.getRotation(), 0, 200);
-		await TarotCard.wait(50);
-	}
-	cards[cards.length - 1].move(
-		cards[cards.length - 1].getPositionPoint(),
-		consts.shuffle_deck_pos,
-		200
-	);
-	await cards[cards.length - 1].rotatePromise(
-		cards[cards.length - 1].getRotation(),
-		0,
-		200
-	);
-	await TarotCard.wait(350);
-	// make 3 shuffles
-	for (let i = 0; i &lt; 3; i++) {
-		// pick random card
-		const randCard = cards[Math.floor(22 * Math.random())];
-		// move away
-		await randCard.movePromise(
-			consts.shuffle_deck_pos,
-			consts.shuffle_card_pos,
-			350
-		);
-
-		const startZIndex = randCard.getZIndex();
-		randCard.setZIndex(100 + i);
-		// pause
-		await TarotCard.wait(30);
-
-		// move back
-		await randCard.movePromise(
-			consts.shuffle_card_pos,
-			consts.shuffle_deck_pos,
-			350
-		);
-		randCard.setZIndex(startZIndex);
-		// pause
-		await TarotCard.wait(50);
-	}
-	return TarotCard.wait(350);
-}
-
-/**
- * Plays the card spread animation
- * @date 5/29/2023 - 10:18:49 PM
- * @param {Function} callback a callback function for end of animation
- */
-async function playCardSpreadAnimation() {
-	const cards = TarotCard.getAllCards();
-	for (let i = 0; i &lt; cards.length; i++) {
-		const card = cards[i];
-		card.setClickable(true);
-
-		const cardMovePromise = card.movePromise(
-			consts.shuffle_deck_pos,
-			{x: 10 + (80/cards.length)*i, y: consts.cardY},
-			300,
-			()=>{
-				if (i === cards.length - 1) {
-					return card.setClickable(true);
-				}
-			}
-		);
-		if (i === cards.length - 1) {
-			return cardMovePromise;
-		}
-		card.setClickable(true);
-	}
 }
 
 /**
@@ -393,7 +269,11 @@ async function playCardSpreadAnimation() {
  * @date 5/27/2023
  */
 function createShuffleCards() {
-	// pastHeader.hidden = true;
+	let cardsFaceUp = [];
+	// Sound effect for selecting cards
+	const selectedCardSound = document.getElementById("card-selecting");
+	let cardCounter = 0;
+
 	for (let i = 0; i &lt; 22; i++) {
 		const button = document.createElement("button");
 		button.id = "Option " + i;
@@ -429,7 +309,7 @@ function createShuffleCards() {
 					const tarotCard = consts.CARDSJSON[cardIndex];
 					const imageSrc = tarotCard["img"];
 					button.innerHTML = "&lt;img class = \"chosenCards\"src=\"" +
-					imageSrc+"\">";
+					imageSrc+"\" alt = \"" + tarotCard["imgDescription"]+ "\">";
 					cardsFaceUp.push(button);
 				}
 
@@ -667,42 +547,7 @@ function resetCards() {
 		}
 	}
 
-	cardCounter = 0; // reset the cardCounter when resetting cards
 	cardsSelected = false;
-}
-
-/**
- * Adds a fog background to the tarot card page
- * @date 5/31/2023
- */
-function addFogBackground() {
-	const fog = document.createElement("div");
-	fog.className = "fogwrapper";
-	fog.innerHTML = `&lt;div id="foglayer_01" class="fog">
-							&lt;div class="image01">&lt;/div>
-							&lt;div class="image02">&lt;/div>
-						&lt;/div>
-						&lt;div id="foglayer_02" class="fog">
-							&lt;div class="image01">&lt;/div>
-							&lt;div class="image02">&lt;/div>
-						&lt;/div>
-						&lt;div id="foglayer_03" class="fog">
-							&lt;div class="image01">&lt;/div>
-							&lt;div class="image02">&lt;/div>
-						&lt;/div>`;
-	tarotDiv.append(fog);
-	document.body.style.backgroundColor = "black";
-}
-
-/**
- * Removes the fog background from the tarot card page
- * @date 5/31/2023
- */
-function removeFogBackground() {
-	const fogWrapper = document.getElementsByClassName("fogwrapper")[0];
-	if (fogWrapper) {
-		fogWrapper.remove();
-	}
 }
 
 /**
@@ -736,46 +581,16 @@ document.querySelector("#menuToggleTwo").addEventListener("change", (event) => {
  * Initializes home page
  */
 function init() {
-	showCardsFound();
 	bindHomePageBtns();
+	bindMenuBtns();
 	bindGeneralButtons();
+	showCardsFound();
 	createShuffleAndResetBtnAndHeaders();
 	createShuffleCards();
 	generateCardHeaders();
-	bindMenuBtns();
 }
 
-init();
-
-/**
- * Binds the functionality of the menu buttons (the book and the burger bar checkboxes)
- */
-function bindMenuBtns() {
-	/**
-	 * Changed the functionality so that we don't have to copy paste.
-	 * If for some reason someone wants to add more hamburger bars in the future,
-	 * then they can add the same functionality by adding in the name.
-	 * @author Kevin Wong
-	 * @date 6/9/2023
-	 */
-	const menuBtns = document.querySelectorAll(".menuBtn, .menuBtnTwo");
-	const menus = document.querySelectorAll(".menuBox, .menuBoxTwo");
-	menuBtns.forEach(function(menuBtns) {
-		menuBtns.addEventListener("click", function() {
-			menuSound.play();
-		});
-	});
-	menus.forEach(function(menu) {
-		menu.addEventListener("mouseleave", function() {
-			// remove "menuBox" from the class name and add "#menuToggle"
-			const toggleId = "#" + menu.className.replace(
-				"menuBox", "menuToggle");
-			menuSound.play();
-			document.querySelector(toggleId).checked = false;
-			cardBook.src = consts.CARD_BOOK_IMG_URL; // Turn back to initial state
-		});
-	});
-}</code></pre>
+init();</code></pre>
         </article>
     </section>
 
@@ -785,7 +600,7 @@ function bindMenuBtns() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#bindMenuBtns">bindMenuBtns</a></li><li><a href="global.html#cardBook">cardBook</a></li><li><a href="global.html#cardThrowRandomPos">cardThrowRandomPos</a></li><li><a href="global.html#cardThrowRandomRot">cardThrowRandomRot</a></li><li><a href="global.html#createShuffleAndResetBtnAndHeaders">createShuffleAndResetBtnAndHeaders</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayGeneralUIElements">displayGeneralUIElements</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#generateCardHeaders">generateCardHeaders</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getDeck">getDeck</a></li><li><a href="global.html#getDisplayValue">getDisplayValue</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#helper">helper</a></li><li><a href="global.html#hideHeaders">hideHeaders</a></li><li><a href="global.html#ifNotNullHide">ifNotNullHide</a></li><li><a href="global.html#ifNotNullRemove">ifNotNullRemove</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playCardThrowAnimation">playCardThrowAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li><li><a href="global.html#returnNewPromise">returnNewPromise</a></li><li><a href="global.html#showCardHeaders">showCardHeaders</a></li><li><a href="global.html#showCardsFound">showCardsFound</a></li><li><a href="global.html#shuffleCards">shuffleCards</a></li><li><a href="global.html#toCamelCase">toCamelCase</a></li><li><a href="global.html#toHomeButtonClick">toHomeButtonClick</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Animator">Animator</a></li><li><a href="global.html#TarotCard">TarotCard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFogBackground">addFogBackground</a></li><li><a href="global.html#allHidden">allHidden</a></li><li><a href="global.html#bindGeneralButtons">bindGeneralButtons</a></li><li><a href="global.html#bindHomePageBtns">bindHomePageBtns</a></li><li><a href="global.html#bindMenuBtns">bindMenuBtns</a></li><li><a href="global.html#cardBook">cardBook</a></li><li><a href="global.html#cardThrowRandomPos">cardThrowRandomPos</a></li><li><a href="global.html#cardThrowRandomRot">cardThrowRandomRot</a></li><li><a href="global.html#changeUIVisibility">changeUIVisibility</a></li><li><a href="global.html#createShuffleAndResetBtnAndHeaders">createShuffleAndResetBtnAndHeaders</a></li><li><a href="global.html#createShuffleCards">createShuffleCards</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#displayThreeOptions">displayThreeOptions</a></li><li><a href="global.html#generateCardHeaders">generateCardHeaders</a></li><li><a href="global.html#getBGColor">getBGColor</a></li><li><a href="global.html#getDeck">getDeck</a></li><li><a href="global.html#getDisplayValue">getDisplayValue</a></li><li><a href="global.html#getHiddenVal">getHiddenVal</a></li><li><a href="global.html#getLeftVal">getLeftVal</a></li><li><a href="global.html#getMultipleInts">getMultipleInts</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#getSelectedValue">getSelectedValue</a></li><li><a href="global.html#helper">helper</a></li><li><a href="global.html#hideHeaders">hideHeaders</a></li><li><a href="global.html#ifNotNullHide">ifNotNullHide</a></li><li><a href="global.html#ifNotNullRemove">ifNotNullRemove</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#playCardSpreadAnimation">playCardSpreadAnimation</a></li><li><a href="global.html#playCardThrowAnimation">playCardThrowAnimation</a></li><li><a href="global.html#playShuffleAnimation">playShuffleAnimation</a></li><li><a href="global.html#removeFogBackground">removeFogBackground</a></li><li><a href="global.html#resetCards">resetCards</a></li><li><a href="global.html#returnNewPromise">returnNewPromise</a></li><li><a href="global.html#showCardHeaders">showCardHeaders</a></li><li><a href="global.html#showCardsFound">showCardsFound</a></li><li><a href="global.html#shuffleCards">shuffleCards</a></li><li><a href="global.html#toCamelCase">toCamelCase</a></li><li><a href="global.html#toHomeButtonClick">toHomeButtonClick</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
 </nav>
 
 <br class="clear">
