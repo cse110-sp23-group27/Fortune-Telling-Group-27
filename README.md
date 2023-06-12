@@ -1,6 +1,6 @@
 # Fortune-Telling-Group-27
 [![Maintainability](https://api.codeclimate.com/v1/badges/87f25017229aa77c661a/maintainability)](https://codeclimate.com/github/cse110-sp23-group27/Fortune-Telling-Group-27/maintainability)
-
+[![Test Coverage](https://api.codeclimate.com/v1/badges/87f25017229aa77c661a/test_coverage)](https://codeclimate.com/github/cse110-sp23-group27/Fortune-Telling-Group-27/test_coverage)
 
 GitHub Pages link:
 
