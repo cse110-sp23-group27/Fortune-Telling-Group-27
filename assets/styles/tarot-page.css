@@ -1,6 +1,4 @@
 #tarotDiv {
-    /* justify-content: center; */
-    /* margin: 10vmin; */
     position: absolute;
     top: 0;
     left: 0;
@@ -23,9 +21,6 @@
 }
 
 .responseCards {
-    /* TODO: Resolve duplicate background colors */ 
-    /* margin: 10px; */
-    /* background-color: #fff; */
     border-color: #fff;
     height: 30vmin;
     width: 17vmin;
@@ -64,7 +59,7 @@ body {
     display: relative;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Optional: Set container height to fit the viewport */
+    height: 100vh;
   }
   
 .buttonWrapper {
