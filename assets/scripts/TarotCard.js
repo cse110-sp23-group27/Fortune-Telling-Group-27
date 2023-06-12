@@ -193,26 +193,6 @@ class TarotCard {
 	}
 
 	/**
-     * Flips object over
-     *
-     * @param {boolean} faceUp Determines whether the card is face up or not
-     * @param {Float} time Time in milliseconds it takes object to complete
-     * @param {Function} callback End of animation callback
-     */
-	setFlip(faceUp, time, callback) {
-		//
-	}
-
-	/**
-     * Performs the flip function after a duration of time
-     *
-     * @param {boolean} faceUp Determines whether the card is face up or not
-     */
-	setFlipInstantly(faceUp) {
-		//
-	}
-
-	/**
      * Performs the flip function after a duration of time
      *
      * @param {int} zIndex z index of the card

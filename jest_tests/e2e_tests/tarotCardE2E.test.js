@@ -29,7 +29,7 @@ describe("Testing Tarot Card Page", () => {
 		});
 		await page.reload();
 		await helper.delay(1000);
-	}, helper.MAXTIMEOUT);
+	}, 20000);
 	it("Initial  - Click on Tarot Card Button", async () => {
 		// Query select all of the homepage button elements
 		// and return the length of that array

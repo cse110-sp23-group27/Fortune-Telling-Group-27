@@ -23,7 +23,7 @@ describe("Testing Burger Bar and Buttons", () => {
 		});
 		await page.reload();
 		await helper.delay(1000);
-	}, helper.MAXTIMEOUT);
+	}, 20000);
 	it("Clicking on Burger Bar Checkbox", async () => {
 		// select the burger bar checkbox
 		const burgerBarCheckbox = await page.$(BURGERBAR);
