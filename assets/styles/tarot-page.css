@@ -12,6 +12,8 @@
     transform: translateX(-50%);
 }
 
+.htmlClassEmpty {}
+
 .chosenCards {
     height: 45vmin;
     width: 25vmin;

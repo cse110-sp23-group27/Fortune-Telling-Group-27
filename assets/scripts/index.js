@@ -49,6 +49,7 @@ function bindMenuBtns() {
 	menuBtns.forEach(function(menuBtns) {
 		menuBtns.addEventListener("click", function() {
 			menuSound.play();
+			// add console.log
 		});
 	});
 	menus.forEach(function(menu) {
