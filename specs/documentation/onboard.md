@@ -20,27 +20,28 @@
 
 1. Pull latest changes from main branch and the branch you are working on
 2. Resolve merge conflicts with the branch if necessary
-4. Run the defined commands in the package.json file locally (```npm run lint```, `npm run test`), and if errors occur regarding linter syntax try to fix them if they are not automatically fixed (Note: do not run ```npm run docs``` locally, let GitHub Actions handle that).
-5. Make sure liveserver of index.html is running and the port is set to 5500 when running `npm run test`
-6. Add unit tests if necessary for your code (at your own discretion), as well as necessary inline comments
-7. Add E2E tests for your code if necessary (if your code implements a new feature that has not been tested yet).
-8. Push to the repo when ESLint (`npm run lint`) and the tests (`npm run test`) all pass
+3. Run the defined commands in the package.json file locally (```npm run lint```, `npm run test`), and if errors occur regarding linter syntax try to fix them if they are not automatically fixed (Note: do not run ```npm run docs``` locally, let GitHub Actions handle that).
+4. Make sure liveserver of index.html is running and the port is set to 5500 when running `npm run test`
+5. Add unit tests if necessary for your code (at your own discretion), as well as necessary inline comments
+6. Add E2E tests for your code if necessary (if your code implements a new feature that has not been tested yet).
+7. Push to the repo when ESLint (`npm run lint`) and the tests (`npm run test`) all pass
    1. If the build run by GitHub Actions fails, try to fix the errors in your local repo and restart this process again.
    2. GitHub Actions on push runs ESLint, Super Linter (regarding css styling), and Jest Unit Tests.
    3. Make sure to pull from your branch as well in case GitHub Actions made any changes to your repo (regarding style syntax)
-9. Create a pull request to merge into the main branch when all GitHub Actions pass
+8. Create a pull request to merge into the main branch when all GitHub Actions pass
    1. Assign the pull request to the issue it resolves (if it was meant to resolve an issue)
    2. Another GitHub actions will run on the pull request that generates documentation using JSDocs and reports unit test coverage to CodeClimate 
    3. CodeClimate will also check your code for duplication or code complexity, try to resolve any issues it finds
    5. Assign a reviewer to your code in the pull request
    6. Resolve merge issues with main if needed
-10. The reviewer will manually checkout to your branch and check your changes (using liveserver to run through the project, and running `npm run test`).
-11. They will also merge the code with main locally to see if the code breaks with any pre-existing code in main.
-12. If there are merge conflicts the reviewer cannot fix, they will have you resolve those merge conflicts.
-13. Reviewers will finish reviewing code by approving it by using the GitHub approve pull request feature, or requesting a change through GitHub.
-14. Another GitHub action will run (the testing GitHub action) that only runs Jest Unit Tests on the main branch.
-15. Deployment - Github Pages will automatically deploy index.html as a GitHub Action.
-16. The reviewer will remove the working branch that was merged with main (pruning) unless you let them know that you want to keep working on that branch.
+9. The reviewer will manually checkout to your branch and check your changes (using liveserver to run through the project, and running `npm run test`).
+10. They will also merge the code with main locally to see if the code breaks with any pre-existing code in main.
+11. If there are merge conflicts the reviewer cannot fix, they will have you resolve those merge conflicts.
+12. Reviewers will finish reviewing code by approving it by using the GitHub approve pull request feature, or requesting a change through GitHub.
+13. Another GitHub action will run (the testing GitHub action) that only runs Jest Unit Tests on the main branch.
+14. Deployment - Github Pages will automatically deploy index.html as a GitHub Action.
+15. The reviewer will remove the working branch that was merged with main (pruning) unless you let them know that you want to keep working on that branch.
+16. Upon a pull request being successfully merged into the main branch, another GitHub Action will run a unit test coverage tool `Istanbul` and the `Code Climate` reporter program to gather information on unit test coverage information from running `Jest` and code maintainability information and send this information to the `Code Climate` dashboard.  This reporting will be useful to help our development team refactor code and improve unit test coverage across the codebase.
 
 ## Notes:
 
