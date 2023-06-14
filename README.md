@@ -17,8 +17,8 @@ https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/
 * "Flip" animation for the cards
 * Text display effect
 
- ## Our main repo with our ADRs, CI/CD pipeline information, and brainstorming documents
- https://github.com/cse110-sp23-group27/cse110-sp23-group27
+## Our main repo with our ADRs, CI/CD pipeline information, and brainstorming documents
+[Main Repo](https://github.com/cse110-sp23-group27/cse110-sp23-group27)
 
 ## Sources for our images and sound effects are
-https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/images-and-sounds-sources.md
+[Sources](https://github.com/cse110-sp23-group27/Fortune-Telling-Group-27/blob/main/specs/documentation/images-and-sounds-sources.md)
