@@ -21,7 +21,7 @@
 1. Pull latest changes from main branch and the branch you are working on
 2. Resolve merge conflicts with the branch if necessary
 4. Run the defined commands in the package.json file locally (```npm run lint```, `npm run test`), and if errors occur regarding linter syntax try to fix them if they are not automatically fixed (Note: do not run ```npm run docs``` locally, let GitHub Actions handle that).
-5. Make sure liveserver of index.html is running and the port is set to 5500 when running `npm run test`. Basically make sure your liveserver url is set to "http://127.0.0.1:5500/index.html" and if it's not check the path of your IDE and make sure you are in the root of the project repo.
+5. Make sure liveserver of index.html is running and the port is set to 5500 when running `npm run test`. Basically make sure your liveserver url is set to `http://127.0.0.1:5500/index.html` and if it's not check the path of your IDE and make sure you are in the root of the project repo.
 6. Add unit tests if necessary for your code (at your own discretion), as well as necessary inline comments
 7. Add E2E tests for your code if necessary (if your code implements a new feature that has not been tested yet).
 8. Push to the repo when ESLint (`npm run lint`) and the tests (`npm run test`) all pass
