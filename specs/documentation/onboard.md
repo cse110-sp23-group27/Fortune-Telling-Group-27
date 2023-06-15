@@ -25,15 +25,15 @@
 6. Add unit tests if necessary for your code (at your own discretion), as well as necessary inline comments
 7. Add E2E tests for your code if necessary (if your code implements a new feature that has not been tested yet).
 8. Push to the repo when ESLint (`npm run lint`) and the tests (`npm run test`) all pass
-   1. If the build run by GitHub Actions fails, try to fix the errors in your local repo and restart this process again.
-   2. GitHub Actions on push runs ESLint, Super Linter (regarding css styling), and Jest Unit Tests.
-   3. Make sure to pull from your branch as well in case GitHub Actions made any changes to your repo (regarding style syntax)
+   i. If the build run by GitHub Actions fails, try to fix the errors in your local repo and restart this process again.
+   ii. GitHub Actions on push runs ESLint, Super Linter (regarding css styling), and Jest Unit Tests.
+   iii. Make sure to pull from your branch as well in case GitHub Actions made any changes to your repo (regarding style syntax)
 8. Create a pull request to merge into the main branch when all GitHub Actions pass
-   1. Assign the pull request to the issue it resolves (if it was meant to resolve an issue)
-   2. Another GitHub actions will run on the pull request that generates documentation using JSDocs and reports unit test coverage to CodeClimate 
-   3. CodeClimate will also check your code for duplication or code complexity, try to resolve any issues it finds
-   5. Assign a reviewer to your code in the pull request
-   6. Resolve merge issues with main if needed
+   i. Assign the pull request to the issue it resolves (if it was meant to resolve an issue)
+   ii. Another GitHub actions will run on the pull request that generates documentation using JSDocs and reports unit test coverage to CodeClimate 
+   iii. CodeClimate will also check your code for duplication or code complexity, try to resolve any issues it finds
+   iv. Assign a reviewer to your code in the pull request
+   v. Resolve merge issues with main if needed
 9. The reviewer will manually checkout to your branch and check your changes (using liveserver to run through the project, and running `npm run test`).
 10. They will also merge the code with main locally to see if the code breaks with any pre-existing code in main.
 11. If there are merge conflicts the reviewer cannot fix, they will have you resolve those merge conflicts.
