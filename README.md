@@ -8,10 +8,10 @@
 
 ## Table of Contents
 - [GitHub Pages Deployment](#live)
-- [Current Features](#currentFeatures)
+- [Current Features](#features)
 - [Installation](#install)
 - [Onboarding Document](#onboarding)
-- [Main Project Repo](#mainRepo)
+- [Main Project Repo](#main)
 - [Image and Audio Sources](#sources)
 
 
@@ -19,7 +19,7 @@
 
 https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/
 
-## <a name="currentFeatures"></a> Current features
+## <a name="features"></a> Current features
 * Shuffle animation
 * Three different responses for each tarot card
 * Local storage that displays what cards have been found/seen
@@ -49,7 +49,7 @@ https://cse110-sp23-group27.github.io/Fortune-Telling-Group-27/
 [Onboarding](/specs/documentation/onboard.md)
 
 
-## <a name="mainRepo"></a> Main Project Repo
+## <a name="main"></a> Main Project Repo
 - This repository contains our ADRs, CI/CD pipeline information, brainstorming documents, meeting notes and other important internal documents.
 
 [Main Repo](https://github.com/cse110-sp23-group27/cse110-sp23-group27)
