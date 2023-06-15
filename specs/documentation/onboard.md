@@ -20,11 +20,11 @@
 
 1. Pull latest changes from main branch and the branch you are working on
 2. Resolve merge conflicts with the branch if necessary
-3. Run the defined commands in the package.json file locally (```npm run lint```, `npm run test`), and if errors occur regarding linter syntax try to fix them if they are not automatically fixed (Note: do not run ```npm run docs``` locally, let GitHub Actions handle that).
-4. Make sure liveserver of index.html is running and the port is set to 5500 when running `npm run test`
-5. Add unit tests if necessary for your code (at your own discretion), as well as necessary inline comments
-6. Add E2E tests for your code if necessary (if your code implements a new feature that has not been tested yet).
-7. Push to the repo when ESLint (`npm run lint`) and the tests (`npm run test`) all pass
+4. Run the defined commands in the package.json file locally (```npm run lint```, `npm run test`), and if errors occur regarding linter syntax try to fix them if they are not automatically fixed (Note: do not run ```npm run docs``` locally, let GitHub Actions handle that).
+5. Make sure liveserver of index.html is running and the port is set to 5500 when running `npm run test`. Basically make sure your liveserver url is set to `http://127.0.0.1:5500/index.html` and if it's not check the path of your IDE and make sure you are in the root of the project repo.
+6. Add unit tests if necessary for your code (at your own discretion), as well as necessary inline comments
+7. Add E2E tests for your code if necessary (if your code implements a new feature that has not been tested yet).
+8. Push to the repo when ESLint (`npm run lint`) and the tests (`npm run test`) all pass
    1. If the build run by GitHub Actions fails, try to fix the errors in your local repo and restart this process again.
    2. GitHub Actions on push runs ESLint, Super Linter (regarding css styling), and Jest Unit Tests.
    3. Make sure to pull from your branch as well in case GitHub Actions made any changes to your repo (regarding style syntax)
